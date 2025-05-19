@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://qyvue.nntitestserver.com/api/getPcRedRainIsOpenConfig",
+    "method": "POST",
+    "domain": "qyvue.nntitestserver.com",
+    "path": "/api/getPcRedRainIsOpenConfig",
+    "status_code": 200,
+    "headers": {
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Headers": "Origin, Power-By, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Credentials, token,token_x",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Expose-Headers": "token",
+      "Access-Control-Max-Age": "3600",
+      "Content-Length": "70",
+      "Content-Type": "application/json;charset=UTF-8",
+      "Date": "Tue, 06 May 2025 09:35:16 GMT",
+      "Server": "nginx",
+      "Set-Cookie": "JSESSIONID=4C761C6C507BF53CA234A2831E5ECAEA; Path=/; Secure; HttpOnly",
+      "X-Cache": "BYPASS"
+    },
+    "response_time": 0.440352,
+    "total_time": 0.44579195976257324,
+    "response_size": 70,
+    "response_content": "{\"code\":\"101\",\"data\":{},\"message\":\"系统繁忙，请稍候重试！\"}",
+    "json_response": {
+      "code": "101",
+      "data": {},
+      "message": "系统繁忙，请稍候重试！"
+    },
+    "timestamp": "2025-05-06T17:35:16.212416"
+  },
+  {
+    "url": "https://qyvue.nntitestserver.com/api/getSmsCodeSwitch",
+    "method": "POST",
+    "domain": "qyvue.nntitestserver.com",
+    "path": "/api/getSmsCodeSwitch",
+    "status_code": 200,
+    "headers": {
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Headers": "Origin, Power-By, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Credentials, token,token_x",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Expose-Headers": "token",
+      "Access-Control-Max-Age": "3600",
+      "Content-Length": "46",
+      "Content-Type": "application/json;charset=UTF-8",
+      "Date": "Tue, 06 May 2025 09:35:16 GMT",
+      "Server": "nginx",
+      "Set-Cookie": "JSESSIONID=C0620B599B013EDB5F2D87DB3EFC6993; Path=/; Secure; HttpOnly",
+      "X-Cache": "BYPASS"
+    },
+    "response_time": 0.411002,
+    "total_time": 0.4119231700897217,
+    "response_size": 46,
+    "response_content": "{\"code\":\"10000\",\"data\":\"0\",\"message\":\"成功\"}",
+    "json_response": {
+      "code": "10000",
+      "data": "0",
+      "message": "成功"
+    },
+    "timestamp": "2025-05-06T17:35:16.625572"
+  },
+  {
+    "url": "https://qyvue.nntitestserver.com/api/mobilefindCouponNum",
+    "method": "POST",
+    "domain": "qyvue.nntitestserver.com",
+    "path": "/api/mobilefindCouponNum",
+    "status_code": 200,
+    "headers": {
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Headers": "Origin, Power-By, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Credentials, token,token_x",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Expose-Headers": "token",
+      "Access-Control-Max-Age": "3600",
+      "Content-Length": "45",
+      "Content-Type": "application/json;charset=UTF-8",
+      "Date": "Tue, 06 May 2025 09:35:17 GMT",
+      "Server": "nginx",
+      "Set-Cookie": "JSESSIONID=FC8B78CEB9C7F51A2754C5C47FF4950B; Path=/; Secure; HttpOnly",
+      "X-Cache": "BYPASS"
+    },
+    "response_time": 0.429446,
+    "total_time": 0.43026208877563477,
+    "response_size": 45,
+    "response_content": "{\"code\":\"60000\",\"data\":{},\"message\":\"成功\"}",
+    "json_response": {
+      "code": "60000",
+      "data": {},
+      "message": "成功"
+    },
+    "timestamp": "2025-05-06T17:35:17.056038"
+  }
+]

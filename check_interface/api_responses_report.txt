@@ -1,0 +1,2029 @@
+=== API响应数据收集报告 ===
+生成时间: 2025-05-08 15:11:47
+共收集 161 个接口
+
+
+【状态码统计】
+状态码 200: 120 个接口
+状态码 404: 41 个接口
+
+成功(200)接口: 120 个
+未找到(404)接口: 41 个
+其他状态码接口: 0 个
+
+==================================================
+
+【接口 1】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getBanner
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 2】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getAllNews
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 3】 => 200 
+URL: https://qyvue.nntitestserver.com/api/newMessageCenter
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 4】 => 200 
+URL: https://qyvue.nntitestserver.com/api/querySystemConfig
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 5】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getPcRedRainIsOpenConfig
+
+【响应内容】
+{
+  "code": "101",
+  "data": {},
+  "message": "系统繁忙，请稍候重试！"
+}
+
+==================================================
+
+【接口 6】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getSmsCodeSwitch
+
+【响应内容】
+{
+  "code": "10000",
+  "data": "0",
+  "message": "成功"
+}
+
+==================================================
+
+【接口 7】 => 200 
+URL: https://qyvue.nntitestserver.com/api/mobilefindCouponNum
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 8】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryPoints
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 9】 => 200 
+URL: https://qyvue.nntitestserver.com/api/fetchPopData
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 10】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getCsUrl
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 11】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryAgentDownLoadAddress
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 12】 => 200 
+URL: https://qyvue.nntitestserver.com/api/querySystemConfig
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 13】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getNewUserRedCoupon
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 14】 => 200 
+URL: https://qyvue.nntitestserver.com/api/transferInforRedCoupon
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 15】 => 200 
+URL: https://qyvue.nntitestserver.com/api/mobileSendSmsCodeForUser
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 16】 => 200 
+URL: https://qyvue.nntitestserver.com/api/sendSmsCodeForUserByCashout
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 17】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getUsdtRedCoupon
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 18】 => 200 
+URL: https://qyvue.nntitestserver.com/api/enterGameHall
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 19】 => 200 
+URL: https://qyvue.nntitestserver.com/api/appPayOnline
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 20】 => 404 
+URL: https://qyvue.nntitestserver.com/api/newLogin
+
+【响应内容】
+{
+  "timestamp": 1746688263376,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/newLogin"
+}
+
+==================================================
+
+【接口 21】 => 200 
+URL: https://qyvue.nntitestserver.com/api/logout
+
+【响应内容】
+{
+  "code": "10000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 22】 => 404 
+URL: https://qyvue.nntitestserver.com/api/newMobileLogin
+
+【响应内容】
+{
+  "timestamp": 1746688264070,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/newMobileLogin"
+}
+
+==================================================
+
+【接口 23】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getLoginWrongTime
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 24】 => 404 
+URL: https://qyvue.nntitestserver.com/api/newRegistration
+
+【响应内容】
+{
+  "timestamp": 1746688264652,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/newRegistration"
+}
+
+==================================================
+
+【接口 25】 => 200 
+URL: https://qyvue.nntitestserver.com/api/validateSmsCodebyPwd
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 26】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getbackAcc
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 27】 => 200 
+URL: https://qyvue.nntitestserver.com/api/unlockAccountByInfo
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 28】 => 404 
+URL: https://qyvue.nntitestserver.com/api/change_pws
+
+【响应内容】
+{
+  "timestamp": 1746688266033,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/change_pws"
+}
+
+==================================================
+
+【接口 29】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getMessageByUser
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 30】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getGuestbookUnReadNum
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 31】 => 200 
+URL: https://qyvue.nntitestserver.com/api/readMsg
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 32】 => 200 
+URL: https://qyvue.nntitestserver.com/api/mobileBatchReadTopic
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 33】 => 200 
+URL: https://qyvue.nntitestserver.com/api/deleteMsg
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 34】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getGameMoney
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 35】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryList
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 36】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryChessList
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 37】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryGameCollect
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 38】 => 200 
+URL: https://qyvue.nntitestserver.com/api/selectLastPlayGame
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 39】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getTokenPc
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 40】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNewIMLogin
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 41】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNewSBLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 42】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameFBLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 43】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameOBLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 44】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNEWAGLiveLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 45】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gamePMLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 46】 => 200 
+URL: https://qyvue.nntitestserver.com/api/bbinLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 47】 => 404 
+URL: https://qyvue.nntitestserver.com/api/gameFBLIVELogin
+
+【响应内容】
+{
+  "timestamp": 1746688271649,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/gameFBLIVELogin"
+}
+
+==================================================
+
+【接口 48】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNewPgLoginHtml
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 49】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameDTLogin
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 50】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameDBSLOTLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 51】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gamePPLogin
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 52】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNewCq9Login
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 53】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNEWMGLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 54】 => 404 
+URL: https://qyvue.nntitestserver.com/api/gamePtBDH5Login
+
+【响应内容】
+{
+  "timestamp": 1746688273811,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/gamePtBDH5Login"
+}
+
+==================================================
+
+【接口 55】 => 404 
+URL: https://qyvue.nntitestserver.com/api/gameLoginPtSky
+
+【响应内容】
+{
+  "timestamp": 1746688274090,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/gameLoginPtSky"
+}
+
+==================================================
+
+【接口 56】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNEWAGLogin
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 57】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameIMDJLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 58】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameDBDJLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 59】 => 404 
+URL: https://qyvue.nntitestserver.com/api/gameTFLogin
+
+【响应内容】
+{
+  "timestamp": 1746688275384,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/gameTFLogin"
+}
+
+==================================================
+
+【接口 60】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameKSLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 61】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameDBCPLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 62】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNKYQPLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 63】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameHLQPLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 64】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameIGLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 65】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameDBCPLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 66】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameSYLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 67】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameKSLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 68】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameNEWAGLiveLogin
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 69】 => 404 
+URL: https://qyvue.nntitestserver.com/api/gameLoginPtSky
+
+【响应内容】
+{
+  "timestamp": 1746688278510,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/gameLoginPtSky"
+}
+
+==================================================
+
+【接口 70】 => 404 
+URL: https://qyvue.nntitestserver.com/api/gamePtBDAPPLogin
+
+【响应内容】
+{
+  "timestamp": 1746688278870,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/gamePtBDAPPLogin"
+}
+
+==================================================
+
+【接口 71】 => 404 
+URL: https://qyvue.nntitestserver.com/api/gamePGAPPLogin
+
+【响应内容】
+{
+  "timestamp": 1746688279180,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/gamePGAPPLogin"
+}
+
+==================================================
+
+【接口 72】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryLatestPreferentialList
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 73】 => 404 
+URL: https://qyvue.nntitestserver.com/api/queryLatestPreferential
+
+【响应内容】
+{
+  "timestamp": 1746688279820,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/queryLatestPreferential"
+}
+
+==================================================
+
+【接口 74】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getAllPointsPresents
+
+【响应内容】
+{
+  "timestamp": 1746688280153,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getAllPointsPresents"
+}
+
+==================================================
+
+【接口 75】 => 404 
+URL: https://qyvue.nntitestserver.com/api/pointsRecord
+
+【响应内容】
+{
+  "timestamp": 1746688280430,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/pointsRecord"
+}
+
+==================================================
+
+【接口 76】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getRecordType
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 77】 => 200 
+URL: https://qyvue.nntitestserver.com/api/optLosePromo
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 78】 => 200 
+URL: https://qyvue.nntitestserver.com/api/doXima
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 79】 => 404 
+URL: https://qyvue.nntitestserver.com/api/handleAddress
+
+【响应内容】
+{
+  "timestamp": 1746688281691,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/handleAddress"
+}
+
+==================================================
+
+【接口 80】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getBetListRecordV2
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 81】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getRecords
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 82】 => 200 
+URL: https://qyvue.nntitestserver.com/api/checkUpgrade
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 83】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryPTLosePromo
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 84】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryPTLosePromoReccords
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 85】 => 200 
+URL: https://qyvue.nntitestserver.com/api/mobileCouponPageList
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 86】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getAutoXimaSlotObject
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 87】 => 200 
+URL: https://qyvue.nntitestserver.com/api/mobileNewEditUserInfoV2
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 88】 => 200 
+URL: https://qyvue.nntitestserver.com/api/validateEmailisActivation
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 89】 => 200 
+URL: https://qyvue.nntitestserver.com/api/showList
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 90】 => 200 
+URL: https://qyvue.nntitestserver.com/api/showListV4
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 91】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getChannel
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 92】 => 200 
+URL: https://qyvue.nntitestserver.com/api/submitThirdV4
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 93】 => 404 
+URL: https://qyvue.nntitestserver.com/api/switchChannel
+
+【响应内容】
+{
+  "timestamp": 1746688286690,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/switchChannel"
+}
+
+==================================================
+
+【接口 94】 => 404 
+URL: https://qyvue.nntitestserver.com/api/bankList
+
+【响应内容】
+{
+  "timestamp": 1746688287007,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/bankList"
+}
+
+==================================================
+
+【接口 95】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getNewDeposit
+
+【响应内容】
+{
+  "timestamp": 1746688287340,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getNewDeposit"
+}
+
+==================================================
+
+【接口 96】 => 404 
+URL: https://qyvue.nntitestserver.com/api/invalidDeposit
+
+【响应内容】
+{
+  "timestamp": 1746688287660,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/invalidDeposit"
+}
+
+==================================================
+
+【接口 97】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryDepositBank
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 98】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getCurrencyPayUrl
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 99】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getCurrencyExchangeRateV2
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 100】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getC2CDeposit
+
+【响应内容】
+{
+  "timestamp": 1746688288982,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getC2CDeposit"
+}
+
+==================================================
+
+【接口 101】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getEbc2cDeposit
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 102】 => 200 
+URL: https://qyvue.nntitestserver.com/api/cancelEbc2c
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 103】 => 200 
+URL: https://qyvue.nntitestserver.com/api/uploadProofEbc2c
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 104】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getYbC2cmethods
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 105】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getPayWayTutorial
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 106】 => 404 
+URL: https://qyvue.nntitestserver.com/api/confirmPayWayTutorial
+
+【响应内容】
+{
+  "timestamp": 1746688290850,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/confirmPayWayTutorial"
+}
+
+==================================================
+
+【接口 107】 => 200 
+URL: https://qyvue.nntitestserver.com/api/checkBrushOrderLimit
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 108】 => 200 
+URL: https://qyvue.nntitestserver.com/api/checkUserWhiteList
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 109】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getBindedBankinfos
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 110】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getPayWayStatus
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 111】 => 404 
+URL: https://qyvue.nntitestserver.com/api/createPostscriptDepositOrder
+
+【响应内容】
+{
+  "timestamp": 1746688292482,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/createPostscriptDepositOrder"
+}
+
+==================================================
+
+【接口 112】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getPayAdvert
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 113】 => 404 
+URL: https://qyvue.nntitestserver.com/api/ebPay
+
+【响应内容】
+{
+  "timestamp": 1746688293162,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/ebPay"
+}
+
+==================================================
+
+【接口 114】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getBindedBankinfos
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 115】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getUserAllWthdrawAmount
+
+【响应内容】
+{
+  "code": "30000",
+  "data": {},
+  "message": "您尚未登录，请先登录后再进行操作"
+}
+
+==================================================
+
+【接口 116】 => 200 
+URL: https://qyvue.nntitestserver.com/api/withdrawfee
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 117】 => 404 
+URL: https://qyvue.nntitestserver.com/api/withdrawNew
+
+【响应内容】
+{
+  "timestamp": 1746688294400,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/withdrawNew"
+}
+
+==================================================
+
+【接口 118】 => 200 
+URL: https://qyvue.nntitestserver.com/api/currencyWithdraw
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 119】 => 200 
+URL: https://qyvue.nntitestserver.com/api/currencyWithdrawV2
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 120】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getUserCreditCurrencyBussiness
+
+【响应内容】
+{
+  "timestamp": 1746688295333,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getUserCreditCurrencyBussiness"
+}
+
+==================================================
+
+【接口 121】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getWithdSmsCodeSwitch
+
+【响应内容】
+{
+  "timestamp": 1746688295671,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getWithdSmsCodeSwitch"
+}
+
+==================================================
+
+【接口 122】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getEbC2CProposal
+
+【响应内容】
+{
+  "timestamp": 1746688295991,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getEbC2CProposal"
+}
+
+==================================================
+
+【接口 123】 => 200 
+URL: https://qyvue.nntitestserver.com/api/confirmEbc2c
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 124】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getC2CProposal
+
+【响应内容】
+{
+  "timestamp": 1746688296671,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getC2CProposal"
+}
+
+==================================================
+
+【接口 125】 => 200 
+URL: https://qyvue.nntitestserver.com/api/bindUserBank
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 126】 => 200 
+URL: https://qyvue.nntitestserver.com/api/unBindBankinfo
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 127】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getBankInfo
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 128】 => 200 
+URL: https://qyvue.nntitestserver.com/api/checkWithdrawNew
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 129】 => 404 
+URL: https://qyvue.nntitestserver.com/api/change_pwsPayAjax
+
+【响应内容】
+{
+  "timestamp": 1746688298212,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/change_pwsPayAjax"
+}
+
+==================================================
+
+【接口 130】 => 200 
+URL: https://qyvue.nntitestserver.com/api/unDigitalWallet
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 131】 => 200 
+URL: https://qyvue.nntitestserver.com/api/gameTransfer
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 132】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getTotalGameBalance
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 133】 => 200 
+URL: https://qyvue.nntitestserver.com/api/updateSwitchStatus
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 134】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getGameBalance
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 135】 => 200 
+URL: https://qyvue.nntitestserver.com/api/updateGameMoney
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 136】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getAllGameBalance
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 137】 => 200 
+URL: https://qyvue.nntitestserver.com/api/newRegisterAgent
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 138】 => 200 
+URL: https://qyvue.nntitestserver.com/api/newMobileAgentLogin
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 139】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getAgentsOfflineNew
+
+【响应内容】
+{
+  "code": "116",
+  "data": {},
+  "message": "参数错误"
+}
+
+==================================================
+
+【接口 140】 => 200 
+URL: https://qyvue.nntitestserver.com/api/createSubAgentNew
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 141】 => 200 
+URL: https://qyvue.nntitestserver.com/api/searchAgentCreditLog
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 142】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryPtCommissions
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 143】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryAgentFinancialReport
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 144】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryAgentWithdrawReccords
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 145】 => 200 
+URL: https://qyvue.nntitestserver.com/api/queryAgentSubUserInfoNew
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 146】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getUsersRecordsByLoginname
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 147】 => 200 
+URL: https://qyvue.nntitestserver.com/api/getAgentComparisonInfo
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 148】 => 200 
+URL: https://qyvue.nntitestserver.com/api/searchPtCommissionsReport
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 149】 => 200 
+URL: https://qyvue.nntitestserver.com/api/searchAgentMultiReport
+
+【响应内容】
+{
+  "code": "60000",
+  "data": {},
+  "message": "成功"
+}
+
+==================================================
+
+【接口 150】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getAgentLevelNew
+
+【响应内容】
+{
+  "timestamp": 1746688304700,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getAgentLevelNew"
+}
+
+==================================================
+
+【接口 151】 => 404 
+URL: https://qyvue.nntitestserver.com/api/searchPtCommissionsMultiDetail
+
+【响应内容】
+{
+  "timestamp": 1746688305020,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/searchPtCommissionsMultiDetail"
+}
+
+==================================================
+
+【接口 152】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getAgentAddressById
+
+【响应内容】
+{
+  "timestamp": 1746688305334,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getAgentAddressById"
+}
+
+==================================================
+
+【接口 153】 => 404 
+URL: https://qyvue.nntitestserver.com/api/addAgentAddress
+
+【响应内容】
+{
+  "timestamp": 1746688305621,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/addAgentAddress"
+}
+
+==================================================
+
+【接口 154】 => 404 
+URL: https://qyvue.nntitestserver.com/api/addAgentAddressCollection
+
+【响应内容】
+{
+  "timestamp": 1746688305926,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/addAgentAddressCollection"
+}
+
+==================================================
+
+【接口 155】 => 404 
+URL: https://qyvue.nntitestserver.com/api/queryAgentAddressList
+
+【响应内容】
+{
+  "timestamp": 1746688306241,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/queryAgentAddressList"
+}
+
+==================================================
+
+【接口 156】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getAgentAddressConfig
+
+【响应内容】
+{
+  "timestamp": 1746688306511,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getAgentAddressConfig"
+}
+
+==================================================
+
+【接口 157】 => 404 
+URL: https://qyvue.nntitestserver.com/api/updateAgentFyAccount
+
+【响应内容】
+{
+  "timestamp": 1746688306852,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/updateAgentFyAccount"
+}
+
+==================================================
+
+【接口 158】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getAgentPromotionalMaterial
+
+【响应内容】
+{
+  "timestamp": 1746688307160,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getAgentPromotionalMaterial"
+}
+
+==================================================
+
+【接口 159】 => 404 
+URL: https://qyvue.nntitestserver.com/api/getAgentContactUsConfig
+
+【响应内容】
+{
+  "timestamp": 1746688307469,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/getAgentContactUsConfig"
+}
+
+==================================================
+
+【接口 160】 => 404 
+URL: https://qyvue.nntitestserver.com/api/agentModifyPassword
+
+【响应内容】
+{
+  "timestamp": 1746688307752,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/agentModifyPassword"
+}
+
+==================================================
+
+【接口 161】 => 404 
+URL: https://qyvue.nntitestserver.com/api/modifyAgentPayPwd
+
+【响应内容】
+{
+  "timestamp": 1746688308032,
+  "status": 404,
+  "error": "Not Found",
+  "message": "No message available",
+  "path": "/api/modifyAgentPayPwd"
+}
+
+==================================================
+
