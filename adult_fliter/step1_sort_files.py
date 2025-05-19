@@ -94,8 +94,8 @@ class FileOrganizer:
         return True
 
     def move_subdirectories(self, source_dir, output_dir):
-        """移动子目录到 output/Others 目录下"""
-        others_dir = os.path.join(output_dir, "Others")
+        """移动子目录到 output/Main 目录下"""
+        others_dir = os.path.join(output_dir, "Main")
         os.makedirs(others_dir, exist_ok=True)
 
         for item in os.listdir(source_dir):
