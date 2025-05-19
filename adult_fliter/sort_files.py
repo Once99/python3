@@ -8,8 +8,8 @@ import magic
 from collections import defaultdict
 
 # 設定來源資料夾和輸出目錄
-SOURCE_DIR = "/path/to/your/downloads"  # 替換成你的圖片/影片資料夾
-OUTPUT_DIR = "/path/to/sorted"          # 整理後的輸出目錄
+SOURCE_DIR = "/Users/oncechen/Library/CloudStorage/GoogleDrive-howard123702002@gmail.com/我的雲端硬碟/new"  # 替換成你的圖片/影片資料夾
+OUTPUT_DIR = "/Users/oncechen/Downloads/output"          # 整理後的輸出目錄
 
 # 確保輸出目錄存在
 os.makedirs(OUTPUT_DIR, exist_ok=True)
