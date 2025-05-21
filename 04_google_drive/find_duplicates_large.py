@@ -61,8 +61,8 @@ def find_duplicates_and_largest(folder):
     return duplicates, top_20_largest, stats
 
 def write_output(duplicates, largest_files, stats, timestamp):
-    dup_file = f'duplicates_files_{timestamp}.txt'
-    size_file = f'largest_files_{timestamp}.txt'
+    dup_file = f'{timestamp}_duplicates_files.txt'
+    size_file = f'{timestamp}_largest_files.txt'
 
     with open(dup_file, 'w', encoding='utf-8') as f:
         for original, duplicate, size in duplicates:
@@ -85,6 +85,6 @@ if __name__ == "__main__":
     if not os.path.isdir(folder_to_scan):
         print("❌ 指定的路徑不存在或不是資料夾。")
     else:
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M')
+        timestamp = datetime.now().strftime('%m%d_%H%M')
         dup_files, largest_files, stats = find_duplicates_and_largest(folder_to_scan)
         write_output(dup_files, largest_files, stats, timestamp)
