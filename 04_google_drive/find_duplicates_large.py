@@ -2,6 +2,7 @@ import os
 import hashlib
 from tqdm import tqdm
 from datetime import datetime
+from tkinter import Tk, filedialog
 
 # 支援的圖片與影片副檔名
 IMAGE_EXTS = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'}
@@ -64,9 +65,22 @@ def write_output(duplicates, largest_files, stats, timestamp):
     dup_file = f'{timestamp}_duplicates_files.txt'
     size_file = f'{timestamp}_largest_files.txt'
 
+    # 將重複檔案依照 hash 分組
+    grouped = {}
+    for original, duplicate, size in duplicates:
+        key = original  # 用原始檔案當作分組 key
+        if key not in grouped:
+            grouped[key] = []
+        grouped[key].append((duplicate, size))
+
     with open(dup_file, 'w', encoding='utf-8') as f:
-        for original, duplicate, size in duplicates:
-            f.write(f"原始檔案: {original}\n重複檔案: {duplicate}\n檔案大小: {size / (1024 * 1024):.2f} MB\n\n")
+        f.write("📁 重複檔案清單：\n\n")
+        for original, dup_list in grouped.items():
+            f.write(f"🟡 原始檔案: {original}\n")
+            for duplicate, size in dup_list:
+                f.write(f"    🔁 重複檔案: {duplicate}\n")
+                f.write(f"       檔案大小: {size / (1024 * 1024):.2f} MB\n")
+            f.write("------------------------------------------------------------\n")
     print(f"✅ 已寫入 {len(duplicates)} 筆重複資料到 {dup_file}")
 
     with open(size_file, 'w', encoding='utf-8') as f:
@@ -81,7 +95,8 @@ def write_output(duplicates, largest_files, stats, timestamp):
     print(f"✅ 已寫入前 20 大檔案與統計資訊到 {size_file}")
 
 if __name__ == "__main__":
-    folder_to_scan = input("请输入要搜索的文件夹路径: ").strip()
+    folder_to_scan = filedialog.askdirectory(title="請選擇要掃描的資料夾")
+
     if not os.path.isdir(folder_to_scan):
         print("❌ 指定的路徑不存在或不是資料夾。")
     else:
