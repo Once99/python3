@@ -1,5 +1,5 @@
 === API响应数据收集报告 ===
-生成时间: 2025-05-08 15:11:47
+生成时间: 2025-05-21 10:55:41
 共收集 161 个接口
 
 
@@ -20,7 +20,7 @@ URL: https://qyvue.nntitestserver.com/api/getBanner
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -32,7 +32,7 @@ URL: https://qyvue.nntitestserver.com/api/getAllNews
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -44,7 +44,7 @@ URL: https://qyvue.nntitestserver.com/api/newMessageCenter
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -56,7 +56,7 @@ URL: https://qyvue.nntitestserver.com/api/querySystemConfig
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -68,7 +68,7 @@ URL: https://qyvue.nntitestserver.com/api/getPcRedRainIsOpenConfig
 {
   "code": "101",
   "data": {},
-  "message": "系统繁忙，请稍候重试！"
+  "message": "Sistema ocupado, por favor, tente novamente mais tarde"
 }
 
 ==================================================
@@ -80,7 +80,7 @@ URL: https://qyvue.nntitestserver.com/api/getSmsCodeSwitch
 {
   "code": "10000",
   "data": "0",
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -92,7 +92,7 @@ URL: https://qyvue.nntitestserver.com/api/mobilefindCouponNum
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -104,7 +104,7 @@ URL: https://qyvue.nntitestserver.com/api/queryPoints
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -116,7 +116,7 @@ URL: https://qyvue.nntitestserver.com/api/fetchPopData
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -128,7 +128,7 @@ URL: https://qyvue.nntitestserver.com/api/getCsUrl
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -140,7 +140,7 @@ URL: https://qyvue.nntitestserver.com/api/queryAgentDownLoadAddress
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -152,7 +152,7 @@ URL: https://qyvue.nntitestserver.com/api/querySystemConfig
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -164,7 +164,7 @@ URL: https://qyvue.nntitestserver.com/api/getNewUserRedCoupon
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -176,7 +176,7 @@ URL: https://qyvue.nntitestserver.com/api/transferInforRedCoupon
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -188,7 +188,7 @@ URL: https://qyvue.nntitestserver.com/api/mobileSendSmsCodeForUser
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -200,7 +200,7 @@ URL: https://qyvue.nntitestserver.com/api/sendSmsCodeForUserByCashout
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -212,7 +212,7 @@ URL: https://qyvue.nntitestserver.com/api/getUsdtRedCoupon
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -224,7 +224,7 @@ URL: https://qyvue.nntitestserver.com/api/enterGameHall
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -236,7 +236,7 @@ URL: https://qyvue.nntitestserver.com/api/appPayOnline
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -246,7 +246,7 @@ URL: https://qyvue.nntitestserver.com/api/newLogin
 
 【响应内容】
 {
-  "timestamp": 1746688263376,
+  "timestamp": 1747796116177,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -262,7 +262,7 @@ URL: https://qyvue.nntitestserver.com/api/logout
 {
   "code": "10000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -272,7 +272,7 @@ URL: https://qyvue.nntitestserver.com/api/newMobileLogin
 
 【响应内容】
 {
-  "timestamp": 1746688264070,
+  "timestamp": 1747796116644,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -288,7 +288,7 @@ URL: https://qyvue.nntitestserver.com/api/getLoginWrongTime
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -298,7 +298,7 @@ URL: https://qyvue.nntitestserver.com/api/newRegistration
 
 【响应内容】
 {
-  "timestamp": 1746688264652,
+  "timestamp": 1747796116944,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -314,7 +314,7 @@ URL: https://qyvue.nntitestserver.com/api/validateSmsCodebyPwd
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -326,7 +326,7 @@ URL: https://qyvue.nntitestserver.com/api/getbackAcc
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -338,7 +338,7 @@ URL: https://qyvue.nntitestserver.com/api/unlockAccountByInfo
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -348,7 +348,7 @@ URL: https://qyvue.nntitestserver.com/api/change_pws
 
 【响应内容】
 {
-  "timestamp": 1746688266033,
+  "timestamp": 1747796117720,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -364,7 +364,7 @@ URL: https://qyvue.nntitestserver.com/api/getMessageByUser
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -376,7 +376,7 @@ URL: https://qyvue.nntitestserver.com/api/getGuestbookUnReadNum
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -388,7 +388,7 @@ URL: https://qyvue.nntitestserver.com/api/readMsg
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -400,7 +400,7 @@ URL: https://qyvue.nntitestserver.com/api/mobileBatchReadTopic
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -412,7 +412,7 @@ URL: https://qyvue.nntitestserver.com/api/deleteMsg
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -424,7 +424,7 @@ URL: https://qyvue.nntitestserver.com/api/getGameMoney
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -436,7 +436,7 @@ URL: https://qyvue.nntitestserver.com/api/queryList
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -448,7 +448,7 @@ URL: https://qyvue.nntitestserver.com/api/queryChessList
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -460,7 +460,7 @@ URL: https://qyvue.nntitestserver.com/api/queryGameCollect
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -472,7 +472,7 @@ URL: https://qyvue.nntitestserver.com/api/selectLastPlayGame
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -484,7 +484,7 @@ URL: https://qyvue.nntitestserver.com/api/getTokenPc
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -496,7 +496,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNewIMLogin
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -508,7 +508,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNewSBLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -520,7 +520,7 @@ URL: https://qyvue.nntitestserver.com/api/gameFBLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -532,7 +532,7 @@ URL: https://qyvue.nntitestserver.com/api/gameOBLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -544,7 +544,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNEWAGLiveLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -556,7 +556,7 @@ URL: https://qyvue.nntitestserver.com/api/gamePMLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -568,7 +568,7 @@ URL: https://qyvue.nntitestserver.com/api/bbinLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -578,7 +578,7 @@ URL: https://qyvue.nntitestserver.com/api/gameFBLIVELogin
 
 【响应内容】
 {
-  "timestamp": 1746688271649,
+  "timestamp": 1747796121803,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -594,7 +594,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNewPgLoginHtml
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -606,7 +606,7 @@ URL: https://qyvue.nntitestserver.com/api/gameDTLogin
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -618,7 +618,7 @@ URL: https://qyvue.nntitestserver.com/api/gameDBSLOTLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -630,7 +630,7 @@ URL: https://qyvue.nntitestserver.com/api/gamePPLogin
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -642,7 +642,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNewCq9Login
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -654,7 +654,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNEWMGLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -664,7 +664,7 @@ URL: https://qyvue.nntitestserver.com/api/gamePtBDH5Login
 
 【响应内容】
 {
-  "timestamp": 1746688273811,
+  "timestamp": 1747796123009,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -678,7 +678,7 @@ URL: https://qyvue.nntitestserver.com/api/gameLoginPtSky
 
 【响应内容】
 {
-  "timestamp": 1746688274090,
+  "timestamp": 1747796123191,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -694,7 +694,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNEWAGLogin
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -706,7 +706,7 @@ URL: https://qyvue.nntitestserver.com/api/gameIMDJLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -718,7 +718,7 @@ URL: https://qyvue.nntitestserver.com/api/gameDBDJLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -728,7 +728,7 @@ URL: https://qyvue.nntitestserver.com/api/gameTFLogin
 
 【响应内容】
 {
-  "timestamp": 1746688275384,
+  "timestamp": 1747796123975,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -744,7 +744,7 @@ URL: https://qyvue.nntitestserver.com/api/gameKSLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -756,7 +756,7 @@ URL: https://qyvue.nntitestserver.com/api/gameDBCPLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -768,7 +768,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNKYQPLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -780,7 +780,7 @@ URL: https://qyvue.nntitestserver.com/api/gameHLQPLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -792,7 +792,7 @@ URL: https://qyvue.nntitestserver.com/api/gameIGLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -804,7 +804,7 @@ URL: https://qyvue.nntitestserver.com/api/gameDBCPLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -816,7 +816,7 @@ URL: https://qyvue.nntitestserver.com/api/gameSYLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -828,7 +828,7 @@ URL: https://qyvue.nntitestserver.com/api/gameKSLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -840,7 +840,7 @@ URL: https://qyvue.nntitestserver.com/api/gameNEWAGLiveLogin
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -850,7 +850,7 @@ URL: https://qyvue.nntitestserver.com/api/gameLoginPtSky
 
 【响应内容】
 {
-  "timestamp": 1746688278510,
+  "timestamp": 1747796125598,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -864,7 +864,7 @@ URL: https://qyvue.nntitestserver.com/api/gamePtBDAPPLogin
 
 【响应内容】
 {
-  "timestamp": 1746688278870,
+  "timestamp": 1747796125757,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -878,7 +878,7 @@ URL: https://qyvue.nntitestserver.com/api/gamePGAPPLogin
 
 【响应内容】
 {
-  "timestamp": 1746688279180,
+  "timestamp": 1747796125920,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -894,7 +894,7 @@ URL: https://qyvue.nntitestserver.com/api/queryLatestPreferentialList
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -904,7 +904,7 @@ URL: https://qyvue.nntitestserver.com/api/queryLatestPreferential
 
 【响应内容】
 {
-  "timestamp": 1746688279820,
+  "timestamp": 1747796126251,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -918,7 +918,7 @@ URL: https://qyvue.nntitestserver.com/api/getAllPointsPresents
 
 【响应内容】
 {
-  "timestamp": 1746688280153,
+  "timestamp": 1747796126395,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -932,7 +932,7 @@ URL: https://qyvue.nntitestserver.com/api/pointsRecord
 
 【响应内容】
 {
-  "timestamp": 1746688280430,
+  "timestamp": 1747796126539,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -948,7 +948,7 @@ URL: https://qyvue.nntitestserver.com/api/getRecordType
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -960,7 +960,7 @@ URL: https://qyvue.nntitestserver.com/api/optLosePromo
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -972,7 +972,7 @@ URL: https://qyvue.nntitestserver.com/api/doXima
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -982,7 +982,7 @@ URL: https://qyvue.nntitestserver.com/api/handleAddress
 
 【响应内容】
 {
-  "timestamp": 1746688281691,
+  "timestamp": 1747796127271,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -998,7 +998,7 @@ URL: https://qyvue.nntitestserver.com/api/getBetListRecordV2
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1010,7 +1010,7 @@ URL: https://qyvue.nntitestserver.com/api/getRecords
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1022,7 +1022,7 @@ URL: https://qyvue.nntitestserver.com/api/checkUpgrade
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1034,7 +1034,7 @@ URL: https://qyvue.nntitestserver.com/api/queryPTLosePromo
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1046,7 +1046,7 @@ URL: https://qyvue.nntitestserver.com/api/queryPTLosePromoReccords
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1058,7 +1058,7 @@ URL: https://qyvue.nntitestserver.com/api/mobileCouponPageList
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1070,7 +1070,7 @@ URL: https://qyvue.nntitestserver.com/api/getAutoXimaSlotObject
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1082,7 +1082,7 @@ URL: https://qyvue.nntitestserver.com/api/mobileNewEditUserInfoV2
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -1094,7 +1094,7 @@ URL: https://qyvue.nntitestserver.com/api/validateEmailisActivation
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1106,7 +1106,7 @@ URL: https://qyvue.nntitestserver.com/api/showList
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1118,7 +1118,7 @@ URL: https://qyvue.nntitestserver.com/api/showListV4
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1130,7 +1130,7 @@ URL: https://qyvue.nntitestserver.com/api/getChannel
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1142,7 +1142,7 @@ URL: https://qyvue.nntitestserver.com/api/submitThirdV4
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1152,7 +1152,7 @@ URL: https://qyvue.nntitestserver.com/api/switchChannel
 
 【响应内容】
 {
-  "timestamp": 1746688286690,
+  "timestamp": 1747796129519,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1166,7 +1166,7 @@ URL: https://qyvue.nntitestserver.com/api/bankList
 
 【响应内容】
 {
-  "timestamp": 1746688287007,
+  "timestamp": 1747796129663,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1180,7 +1180,7 @@ URL: https://qyvue.nntitestserver.com/api/getNewDeposit
 
 【响应内容】
 {
-  "timestamp": 1746688287340,
+  "timestamp": 1747796129807,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1194,7 +1194,7 @@ URL: https://qyvue.nntitestserver.com/api/invalidDeposit
 
 【响应内容】
 {
-  "timestamp": 1746688287660,
+  "timestamp": 1747796129991,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1210,7 +1210,7 @@ URL: https://qyvue.nntitestserver.com/api/queryDepositBank
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1222,7 +1222,7 @@ URL: https://qyvue.nntitestserver.com/api/getCurrencyPayUrl
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1234,7 +1234,7 @@ URL: https://qyvue.nntitestserver.com/api/getCurrencyExchangeRateV2
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1244,7 +1244,7 @@ URL: https://qyvue.nntitestserver.com/api/getC2CDeposit
 
 【响应内容】
 {
-  "timestamp": 1746688288982,
+  "timestamp": 1747796130695,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1260,7 +1260,7 @@ URL: https://qyvue.nntitestserver.com/api/getEbc2cDeposit
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1272,7 +1272,7 @@ URL: https://qyvue.nntitestserver.com/api/cancelEbc2c
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1284,7 +1284,7 @@ URL: https://qyvue.nntitestserver.com/api/uploadProofEbc2c
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1296,7 +1296,7 @@ URL: https://qyvue.nntitestserver.com/api/getYbC2cmethods
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1308,7 +1308,7 @@ URL: https://qyvue.nntitestserver.com/api/getPayWayTutorial
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1318,7 +1318,7 @@ URL: https://qyvue.nntitestserver.com/api/confirmPayWayTutorial
 
 【响应内容】
 {
-  "timestamp": 1746688290850,
+  "timestamp": 1747796131681,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1334,7 +1334,7 @@ URL: https://qyvue.nntitestserver.com/api/checkBrushOrderLimit
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1346,7 +1346,7 @@ URL: https://qyvue.nntitestserver.com/api/checkUserWhiteList
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1358,7 +1358,7 @@ URL: https://qyvue.nntitestserver.com/api/getBindedBankinfos
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1370,7 +1370,7 @@ URL: https://qyvue.nntitestserver.com/api/getPayWayStatus
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1380,7 +1380,7 @@ URL: https://qyvue.nntitestserver.com/api/createPostscriptDepositOrder
 
 【响应内容】
 {
-  "timestamp": 1746688292482,
+  "timestamp": 1747796132523,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1396,7 +1396,7 @@ URL: https://qyvue.nntitestserver.com/api/getPayAdvert
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1406,7 +1406,7 @@ URL: https://qyvue.nntitestserver.com/api/ebPay
 
 【响应内容】
 {
-  "timestamp": 1746688293162,
+  "timestamp": 1747796132811,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1422,7 +1422,7 @@ URL: https://qyvue.nntitestserver.com/api/getBindedBankinfos
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1434,7 +1434,7 @@ URL: https://qyvue.nntitestserver.com/api/getUserAllWthdrawAmount
 {
   "code": "30000",
   "data": {},
-  "message": "您尚未登录，请先登录后再进行操作"
+  "message": "Você ainda não fez login, faça login primeiro antes de continuar."
 }
 
 ==================================================
@@ -1446,7 +1446,7 @@ URL: https://qyvue.nntitestserver.com/api/withdrawfee
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1456,7 +1456,7 @@ URL: https://qyvue.nntitestserver.com/api/withdrawNew
 
 【响应内容】
 {
-  "timestamp": 1746688294400,
+  "timestamp": 1747796133527,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1472,7 +1472,7 @@ URL: https://qyvue.nntitestserver.com/api/currencyWithdraw
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1484,7 +1484,7 @@ URL: https://qyvue.nntitestserver.com/api/currencyWithdrawV2
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1494,7 +1494,7 @@ URL: https://qyvue.nntitestserver.com/api/getUserCreditCurrencyBussiness
 
 【响应内容】
 {
-  "timestamp": 1746688295333,
+  "timestamp": 1747796133960,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1508,7 +1508,7 @@ URL: https://qyvue.nntitestserver.com/api/getWithdSmsCodeSwitch
 
 【响应内容】
 {
-  "timestamp": 1746688295671,
+  "timestamp": 1747796134103,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1522,7 +1522,7 @@ URL: https://qyvue.nntitestserver.com/api/getEbC2CProposal
 
 【响应内容】
 {
-  "timestamp": 1746688295991,
+  "timestamp": 1747796134252,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1538,7 +1538,7 @@ URL: https://qyvue.nntitestserver.com/api/confirmEbc2c
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1548,7 +1548,7 @@ URL: https://qyvue.nntitestserver.com/api/getC2CProposal
 
 【响应内容】
 {
-  "timestamp": 1746688296671,
+  "timestamp": 1747796134684,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1564,7 +1564,7 @@ URL: https://qyvue.nntitestserver.com/api/bindUserBank
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1576,7 +1576,7 @@ URL: https://qyvue.nntitestserver.com/api/unBindBankinfo
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1588,7 +1588,7 @@ URL: https://qyvue.nntitestserver.com/api/getBankInfo
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1600,7 +1600,7 @@ URL: https://qyvue.nntitestserver.com/api/checkWithdrawNew
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1610,7 +1610,7 @@ URL: https://qyvue.nntitestserver.com/api/change_pwsPayAjax
 
 【响应内容】
 {
-  "timestamp": 1746688298212,
+  "timestamp": 1747796135499,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1626,7 +1626,7 @@ URL: https://qyvue.nntitestserver.com/api/unDigitalWallet
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1638,7 +1638,7 @@ URL: https://qyvue.nntitestserver.com/api/gameTransfer
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1650,7 +1650,7 @@ URL: https://qyvue.nntitestserver.com/api/getTotalGameBalance
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1662,7 +1662,7 @@ URL: https://qyvue.nntitestserver.com/api/updateSwitchStatus
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1674,7 +1674,7 @@ URL: https://qyvue.nntitestserver.com/api/getGameBalance
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1686,7 +1686,7 @@ URL: https://qyvue.nntitestserver.com/api/updateGameMoney
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1698,7 +1698,7 @@ URL: https://qyvue.nntitestserver.com/api/getAllGameBalance
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1710,7 +1710,7 @@ URL: https://qyvue.nntitestserver.com/api/newRegisterAgent
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1722,7 +1722,7 @@ URL: https://qyvue.nntitestserver.com/api/newMobileAgentLogin
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1734,7 +1734,7 @@ URL: https://qyvue.nntitestserver.com/api/getAgentsOfflineNew
 {
   "code": "116",
   "data": {},
-  "message": "参数错误"
+  "message": "Erro de parâmetro"
 }
 
 ==================================================
@@ -1746,7 +1746,7 @@ URL: https://qyvue.nntitestserver.com/api/createSubAgentNew
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1758,7 +1758,7 @@ URL: https://qyvue.nntitestserver.com/api/searchAgentCreditLog
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1770,7 +1770,7 @@ URL: https://qyvue.nntitestserver.com/api/queryPtCommissions
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1782,7 +1782,7 @@ URL: https://qyvue.nntitestserver.com/api/queryAgentFinancialReport
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1794,7 +1794,7 @@ URL: https://qyvue.nntitestserver.com/api/queryAgentWithdrawReccords
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1806,7 +1806,7 @@ URL: https://qyvue.nntitestserver.com/api/queryAgentSubUserInfoNew
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1818,7 +1818,7 @@ URL: https://qyvue.nntitestserver.com/api/getUsersRecordsByLoginname
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1830,7 +1830,7 @@ URL: https://qyvue.nntitestserver.com/api/getAgentComparisonInfo
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1842,7 +1842,7 @@ URL: https://qyvue.nntitestserver.com/api/searchPtCommissionsReport
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1854,7 +1854,7 @@ URL: https://qyvue.nntitestserver.com/api/searchAgentMultiReport
 {
   "code": "60000",
   "data": {},
-  "message": "成功"
+  "message": "sucesso"
 }
 
 ==================================================
@@ -1864,7 +1864,7 @@ URL: https://qyvue.nntitestserver.com/api/getAgentLevelNew
 
 【响应内容】
 {
-  "timestamp": 1746688304700,
+  "timestamp": 1747796139020,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1878,7 +1878,7 @@ URL: https://qyvue.nntitestserver.com/api/searchPtCommissionsMultiDetail
 
 【响应内容】
 {
-  "timestamp": 1746688305020,
+  "timestamp": 1747796139161,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1892,7 +1892,7 @@ URL: https://qyvue.nntitestserver.com/api/getAgentAddressById
 
 【响应内容】
 {
-  "timestamp": 1746688305334,
+  "timestamp": 1747796139379,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1906,7 +1906,7 @@ URL: https://qyvue.nntitestserver.com/api/addAgentAddress
 
 【响应内容】
 {
-  "timestamp": 1746688305621,
+  "timestamp": 1747796139596,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1920,7 +1920,7 @@ URL: https://qyvue.nntitestserver.com/api/addAgentAddressCollection
 
 【响应内容】
 {
-  "timestamp": 1746688305926,
+  "timestamp": 1747796139739,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1934,7 +1934,7 @@ URL: https://qyvue.nntitestserver.com/api/queryAgentAddressList
 
 【响应内容】
 {
-  "timestamp": 1746688306241,
+  "timestamp": 1747796139928,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1948,7 +1948,7 @@ URL: https://qyvue.nntitestserver.com/api/getAgentAddressConfig
 
 【响应内容】
 {
-  "timestamp": 1746688306511,
+  "timestamp": 1747796140248,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1962,7 +1962,7 @@ URL: https://qyvue.nntitestserver.com/api/updateAgentFyAccount
 
 【响应内容】
 {
-  "timestamp": 1746688306852,
+  "timestamp": 1747796140587,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1976,7 +1976,7 @@ URL: https://qyvue.nntitestserver.com/api/getAgentPromotionalMaterial
 
 【响应内容】
 {
-  "timestamp": 1746688307160,
+  "timestamp": 1747796140892,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -1990,7 +1990,7 @@ URL: https://qyvue.nntitestserver.com/api/getAgentContactUsConfig
 
 【响应内容】
 {
-  "timestamp": 1746688307469,
+  "timestamp": 1747796141232,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -2004,7 +2004,7 @@ URL: https://qyvue.nntitestserver.com/api/agentModifyPassword
 
 【响应内容】
 {
-  "timestamp": 1746688307752,
+  "timestamp": 1747796141547,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",
@@ -2018,7 +2018,7 @@ URL: https://qyvue.nntitestserver.com/api/modifyAgentPayPwd
 
 【响应内容】
 {
-  "timestamp": 1746688308032,
+  "timestamp": 1747796141799,
   "status": 404,
   "error": "Not Found",
   "message": "No message available",

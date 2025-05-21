@@ -137,11 +137,11 @@ def batch_collect_api_responses(api_list):
 # 示例API列表配置
 api_list = [
     {
-        "url": "https://qyvue.nntitestserver.com/api/getBanner",
+        "url": "https://qyvue.itomtest.com/api/getBanner",
         "method": "POST",
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getAllNews",
+        "url": "https://qyvue.itomtest.com/api/getAllNews",
         "method": "POST",
         "data": {
             "key1": "value1",
@@ -149,632 +149,632 @@ api_list = [
         }
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/newMessageCenter",
+        "url": "https://qyvue.itomtest.com/api/newMessageCenter",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/querySystemConfig",
+        "url": "https://qyvue.itomtest.com/api/querySystemConfig",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getPcRedRainIsOpenConfig",
+        "url": "https://qyvue.itomtest.com/api/getPcRedRainIsOpenConfig",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getSmsCodeSwitch",
+        "url": "https://qyvue.itomtest.com/api/getSmsCodeSwitch",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/mobilefindCouponNum",
+        "url": "https://qyvue.itomtest.com/api/mobilefindCouponNum",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/queryPoints",
+        "url": "https://qyvue.itomtest.com/api/queryPoints",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/fetchPopData",
+        "url": "https://qyvue.itomtest.com/api/fetchPopData",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getCsUrl",
+        "url": "https://qyvue.itomtest.com/api/getCsUrl",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/queryAgentDownLoadAddress",
+        "url": "https://qyvue.itomtest.com/api/queryAgentDownLoadAddress",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/querySystemConfig",
+        "url": "https://qyvue.itomtest.com/api/querySystemConfig",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getNewUserRedCoupon",
+        "url": "https://qyvue.itomtest.com/api/getNewUserRedCoupon",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/transferInforRedCoupon",
+        "url": "https://qyvue.itomtest.com/api/transferInforRedCoupon",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/mobileSendSmsCodeForUser",
+        "url": "https://qyvue.itomtest.com/api/mobileSendSmsCodeForUser",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/sendSmsCodeForUserByCashout",
+        "url": "https://qyvue.itomtest.com/api/sendSmsCodeForUserByCashout",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getUsdtRedCoupon",
+        "url": "https://qyvue.itomtest.com/api/getUsdtRedCoupon",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/enterGameHall",
+        "url": "https://qyvue.itomtest.com/api/enterGameHall",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/appPayOnline",
+        "url": "https://qyvue.itomtest.com/api/appPayOnline",
         "method": "POST"
     },
 
     {
-        "url": "https://qyvue.nntitestserver.com/api/newLogin",
+        "url": "https://qyvue.itomtest.com/api/newLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/logout",
+        "url": "https://qyvue.itomtest.com/api/logout",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/newMobileLogin",
+        "url": "https://qyvue.itomtest.com/api/newMobileLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getLoginWrongTime",
+        "url": "https://qyvue.itomtest.com/api/getLoginWrongTime",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/newRegistration",
+        "url": "https://qyvue.itomtest.com/api/newRegistration",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/validateSmsCodebyPwd",
+        "url": "https://qyvue.itomtest.com/api/validateSmsCodebyPwd",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getbackAcc",
+        "url": "https://qyvue.itomtest.com/api/getbackAcc",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/unlockAccountByInfo",
+        "url": "https://qyvue.itomtest.com/api/unlockAccountByInfo",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/change_pws",
+        "url": "https://qyvue.itomtest.com/api/change_pws",
         "method": "POST"
     }
 
     ,
     {
-        "url": "https://qyvue.nntitestserver.com/api/getMessageByUser",
+        "url": "https://qyvue.itomtest.com/api/getMessageByUser",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getGuestbookUnReadNum",
+        "url": "https://qyvue.itomtest.com/api/getGuestbookUnReadNum",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/readMsg",
+        "url": "https://qyvue.itomtest.com/api/readMsg",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/mobileBatchReadTopic",
+        "url": "https://qyvue.itomtest.com/api/mobileBatchReadTopic",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/deleteMsg",
-        "method": "POST"
-    },
-
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getGameMoney",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/queryList",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/queryChessList",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/queryGameCollect",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/selectLastPlayGame",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getTokenPc",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameNewIMLogin",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameNewSBLogin",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameFBLogin",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameOBLogin",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameNEWAGLiveLogin",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gamePMLogin",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/bbinLogin",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameFBLIVELogin",
+        "url": "https://qyvue.itomtest.com/api/deleteMsg",
         "method": "POST"
     },
 
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameNewPgLoginHtml",
+        "url": "https://qyvue.itomtest.com/api/getGameMoney",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameDTLogin",
+        "url": "https://qyvue.itomtest.com/api/queryList",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameDBSLOTLogin",
+        "url": "https://qyvue.itomtest.com/api/queryChessList",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gamePPLogin",
+        "url": "https://qyvue.itomtest.com/api/queryGameCollect",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameNewCq9Login",
+        "url": "https://qyvue.itomtest.com/api/selectLastPlayGame",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameNEWMGLogin",
+        "url": "https://qyvue.itomtest.com/api/getTokenPc",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gamePtBDH5Login",
+        "url": "https://qyvue.itomtest.com/api/gameNewIMLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameLoginPtSky",
+        "url": "https://qyvue.itomtest.com/api/gameNewSBLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameNEWAGLogin",
-        "method": "POST"
-    },
-
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameIMDJLogin",
+        "url": "https://qyvue.itomtest.com/api/gameFBLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameDBDJLogin",
+        "url": "https://qyvue.itomtest.com/api/gameOBLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameTFLogin",
-        "method": "POST"
-    },
-
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameKSLogin",
+        "url": "https://qyvue.itomtest.com/api/gameNEWAGLiveLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameDBCPLogin",
+        "url": "https://qyvue.itomtest.com/api/gamePMLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameNKYQPLogin",
+        "url": "https://qyvue.itomtest.com/api/bbinLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameHLQPLogin",
+        "url": "https://qyvue.itomtest.com/api/gameFBLIVELogin",
         "method": "POST"
     },
 
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameIGLogin",
+        "url": "https://qyvue.itomtest.com/api/gameNewPgLoginHtml",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameDBCPLogin",
+        "url": "https://qyvue.itomtest.com/api/gameDTLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameSYLogin",
-        "method": "POST"
-    },
-
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gameKSLogin",
+        "url": "https://qyvue.itomtest.com/api/gameDBSLOTLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameNEWAGLiveLogin",
+        "url": "https://qyvue.itomtest.com/api/gamePPLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameLoginPtSky",
-        "method": "POST"
-    },
-
-    {
-        "url": "https://qyvue.nntitestserver.com/api/gamePtBDAPPLogin",
+        "url": "https://qyvue.itomtest.com/api/gameNewCq9Login",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/gamePGAPPLogin",
-        "method": "POST"
-    },
-
-    {
-        "url": "https://qyvue.nntitestserver.com/api/queryLatestPreferentialList",
+        "url": "https://qyvue.itomtest.com/api/gameNEWMGLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/queryLatestPreferential",
+        "url": "https://qyvue.itomtest.com/api/gamePtBDH5Login",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/gameLoginPtSky",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/gameNEWAGLogin",
         "method": "POST"
     },
 
     {
-        "url": "https://qyvue.nntitestserver.com/api/getAllPointsPresents",
+        "url": "https://qyvue.itomtest.com/api/gameIMDJLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/pointsRecord",
-        "method": "POST"
-    },
-
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getRecordType",
+        "url": "https://qyvue.itomtest.com/api/gameDBDJLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/optLosePromo",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/doXima",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/handleAddress",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getBetListRecordV2",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getRecords",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/checkUpgrade",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/queryPTLosePromo",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/queryPTLosePromoReccords",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/mobileCouponPageList",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getAutoXimaSlotObject",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/mobileNewEditUserInfoV2",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/validateEmailisActivation",
+        "url": "https://qyvue.itomtest.com/api/gameTFLogin",
         "method": "POST"
     },
 
     {
-        "url": "https://qyvue.nntitestserver.com/api/showList",
+        "url": "https://qyvue.itomtest.com/api/gameKSLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/showListV4",
+        "url": "https://qyvue.itomtest.com/api/gameDBCPLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getChannel",
+        "url": "https://qyvue.itomtest.com/api/gameNKYQPLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/submitThirdV4",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/switchChannel",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/bankList",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getNewDeposit",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/invalidDeposit",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/queryDepositBank",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getCurrencyPayUrl",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getCurrencyExchangeRateV2",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getC2CDeposit",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getEbc2cDeposit",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/cancelEbc2c",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/uploadProofEbc2c",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getYbC2cmethods",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getPayWayTutorial",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/confirmPayWayTutorial",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/checkBrushOrderLimit",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/checkUserWhiteList",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getBindedBankinfos",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getPayWayStatus",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/createPostscriptDepositOrder",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getPayAdvert",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/ebPay",
+        "url": "https://qyvue.itomtest.com/api/gameHLQPLogin",
         "method": "POST"
     },
 
-
-
     {
-        "url": "https://qyvue.nntitestserver.com/api/getBindedBankinfos",
+        "url": "https://qyvue.itomtest.com/api/gameIGLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/getUserAllWthdrawAmount",
+        "url": "https://qyvue.itomtest.com/api/gameDBCPLogin",
         "method": "POST"
     },
     {
-        "url": "https://qyvue.nntitestserver.com/api/withdrawfee",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/withdrawNew",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/currencyWithdraw",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/currencyWithdrawV2",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getUserCreditCurrencyBussiness",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getWithdSmsCodeSwitch",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getEbC2CProposal",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/confirmEbc2c",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getC2CProposal",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/bindUserBank",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/unBindBankinfo",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/getBankInfo",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/checkWithdrawNew",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/change_pwsPayAjax",
-        "method": "POST"
-    },
-    {
-        "url": "https://qyvue.nntitestserver.com/api/unDigitalWallet",
+        "url": "https://qyvue.itomtest.com/api/gameSYLogin",
         "method": "POST"
     },
 
+    {
+        "url": "https://qyvue.itomtest.com/api/gameKSLogin",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/gameNEWAGLiveLogin",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/gameLoginPtSky",
+        "method": "POST"
+    },
 
     {
-        "url": "https://qyvue.nntitestserver.com/api/gameTransfer",
+        "url": "https://qyvue.itomtest.com/api/gamePtBDAPPLogin",
         "method": "POST"
-    },{
-        "url": "https://qyvue.nntitestserver.com/api/getTotalGameBalance",
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/gamePGAPPLogin",
         "method": "POST"
-    },{
-        "url": "https://qyvue.nntitestserver.com/api/updateSwitchStatus",
+    },
+
+    {
+        "url": "https://qyvue.itomtest.com/api/queryLatestPreferentialList",
         "method": "POST"
-    },{
-        "url": "https://qyvue.nntitestserver.com/api/getGameBalance",
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/queryLatestPreferential",
         "method": "POST"
-    },{
-        "url": "https://qyvue.nntitestserver.com/api/updateGameMoney",
+    },
+
+    {
+        "url": "https://qyvue.itomtest.com/api/getAllPointsPresents",
         "method": "POST"
-    },{
-        "url": "https://qyvue.nntitestserver.com/api/getAllGameBalance",
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/pointsRecord",
+        "method": "POST"
+    },
+
+    {
+        "url": "https://qyvue.itomtest.com/api/getRecordType",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/optLosePromo",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/doXima",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/handleAddress",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getBetListRecordV2",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getRecords",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/checkUpgrade",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/queryPTLosePromo",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/queryPTLosePromoReccords",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/mobileCouponPageList",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getAutoXimaSlotObject",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/mobileNewEditUserInfoV2",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/validateEmailisActivation",
+        "method": "POST"
+    },
+
+    {
+        "url": "https://qyvue.itomtest.com/api/showList",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/showListV4",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getChannel",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/submitThirdV4",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/switchChannel",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/bankList",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getNewDeposit",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/invalidDeposit",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/queryDepositBank",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getCurrencyPayUrl",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getCurrencyExchangeRateV2",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getC2CDeposit",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getEbc2cDeposit",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/cancelEbc2c",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/uploadProofEbc2c",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getYbC2cmethods",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getPayWayTutorial",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/confirmPayWayTutorial",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/checkBrushOrderLimit",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/checkUserWhiteList",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getBindedBankinfos",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getPayWayStatus",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/createPostscriptDepositOrder",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getPayAdvert",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/ebPay",
         "method": "POST"
     },
 
 
 
     {
-        "url": "https://qyvue.nntitestserver.com/api/newRegisterAgent",
+        "url": "https://qyvue.itomtest.com/api/getBindedBankinfos",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getUserAllWthdrawAmount",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/withdrawfee",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/withdrawNew",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/currencyWithdraw",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/currencyWithdrawV2",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getUserCreditCurrencyBussiness",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getWithdSmsCodeSwitch",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getEbC2CProposal",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/confirmEbc2c",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getC2CProposal",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/bindUserBank",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/unBindBankinfo",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/getBankInfo",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/checkWithdrawNew",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/change_pwsPayAjax",
+        "method": "POST"
+    },
+    {
+        "url": "https://qyvue.itomtest.com/api/unDigitalWallet",
+        "method": "POST"
+    },
+
+
+    {
+        "url": "https://qyvue.itomtest.com/api/gameTransfer",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/newMobileAgentLogin",
+        "url": "https://qyvue.itomtest.com/api/getTotalGameBalance",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/getAgentsOfflineNew",
+        "url": "https://qyvue.itomtest.com/api/updateSwitchStatus",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/createSubAgentNew",
+        "url": "https://qyvue.itomtest.com/api/getGameBalance",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/searchAgentCreditLog",
+        "url": "https://qyvue.itomtest.com/api/updateGameMoney",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/queryPtCommissions",
+        "url": "https://qyvue.itomtest.com/api/getAllGameBalance",
+        "method": "POST"
+    },
+
+
+
+    {
+        "url": "https://qyvue.itomtest.com/api/newRegisterAgent",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/queryAgentFinancialReport",
+        "url": "https://qyvue.itomtest.com/api/newMobileAgentLogin",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/queryAgentWithdrawReccords",
+        "url": "https://qyvue.itomtest.com/api/getAgentsOfflineNew",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/queryAgentSubUserInfoNew",
+        "url": "https://qyvue.itomtest.com/api/createSubAgentNew",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/getUsersRecordsByLoginname",
+        "url": "https://qyvue.itomtest.com/api/searchAgentCreditLog",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/getAgentComparisonInfo",
+        "url": "https://qyvue.itomtest.com/api/queryPtCommissions",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/searchPtCommissionsReport",
+        "url": "https://qyvue.itomtest.com/api/queryAgentFinancialReport",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/searchAgentMultiReport",
+        "url": "https://qyvue.itomtest.com/api/queryAgentWithdrawReccords",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/getAgentLevelNew",
+        "url": "https://qyvue.itomtest.com/api/queryAgentSubUserInfoNew",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/searchPtCommissionsMultiDetail",
+        "url": "https://qyvue.itomtest.com/api/getUsersRecordsByLoginname",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/getAgentAddressById",
+        "url": "https://qyvue.itomtest.com/api/getAgentComparisonInfo",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/addAgentAddress",
+        "url": "https://qyvue.itomtest.com/api/searchPtCommissionsReport",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/addAgentAddressCollection",
+        "url": "https://qyvue.itomtest.com/api/searchAgentMultiReport",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/queryAgentAddressList",
+        "url": "https://qyvue.itomtest.com/api/getAgentLevelNew",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/getAgentAddressConfig",
+        "url": "https://qyvue.itomtest.com/api/searchPtCommissionsMultiDetail",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/updateAgentFyAccount",
+        "url": "https://qyvue.itomtest.com/api/getAgentAddressById",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/getAgentPromotionalMaterial",
+        "url": "https://qyvue.itomtest.com/api/addAgentAddress",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/getAgentContactUsConfig",
+        "url": "https://qyvue.itomtest.com/api/addAgentAddressCollection",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/agentModifyPassword",
+        "url": "https://qyvue.itomtest.com/api/queryAgentAddressList",
         "method": "POST"
     },{
-        "url": "https://qyvue.nntitestserver.com/api/modifyAgentPayPwd",
+        "url": "https://qyvue.itomtest.com/api/getAgentAddressConfig",
+        "method": "POST"
+    },{
+        "url": "https://qyvue.itomtest.com/api/updateAgentFyAccount",
+        "method": "POST"
+    },{
+        "url": "https://qyvue.itomtest.com/api/getAgentPromotionalMaterial",
+        "method": "POST"
+    },{
+        "url": "https://qyvue.itomtest.com/api/getAgentContactUsConfig",
+        "method": "POST"
+    },{
+        "url": "https://qyvue.itomtest.com/api/agentModifyPassword",
+        "method": "POST"
+    },{
+        "url": "https://qyvue.itomtest.com/api/modifyAgentPayPwd",
         "method": "POST"
     }
 ]
@@ -784,7 +784,7 @@ if __name__ == "__main__":
     results = batch_collect_api_responses(api_list)
 
     # 保存到TXT文件
-    txt_filename = "api_responses_report.txt"
+    txt_filename = "qyvue_itomtest_api_responses_report.txt"
     save_to_txt(results, txt_filename)
 
     # 在控制台也显示统计信息
