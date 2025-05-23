@@ -22,13 +22,14 @@ def get_file_hash(file_path, chunk_size=4096):
         return None
 
 def find_duplicates_and_largest(folder):
-    """尋找重複的檔案，並同時找出檔案最大的20個與統計資訊"""
     hashes = {}
-    duplicates = []
+    size_groups = {}  # ➜ 先依大小分組
     file_list = []
     total_size = 0
     duplicate_size = 0
+    duplicates = []
 
+    # 收集所有檔案
     for root, _, files in os.walk(folder):
         for filename in files:
             ext = os.path.splitext(filename)[1].lower()
@@ -38,18 +39,24 @@ def find_duplicates_and_largest(folder):
                     size = os.path.getsize(full_path)
                     total_size += size
                     file_list.append((full_path, size))
+                    size_groups.setdefault(size, []).append(full_path)  # 分組
                 except Exception as e:
                     print(f"❌ 無法取得大小 {full_path}: {e}")
 
-    for full_path, size in tqdm(file_list, desc="處理進度"):
-        file_hash = get_file_hash(full_path)
-        if file_hash:
-            if file_hash in hashes:
-                duplicates.append((hashes[file_hash], full_path, size))
-                duplicate_size += size
-            else:
-                hashes[file_hash] = full_path
+    # 對同大小的檔案群組進行雜湊比對
+    for size, paths in tqdm(size_groups.items(), desc="處理進度"):
+        if len(paths) < 2:
+            continue  # 不可能重複
+        for path in paths:
+            file_hash = get_file_hash(path)
+            if file_hash:
+                if file_hash in hashes:
+                    duplicates.append((hashes[file_hash], path, size))
+                    duplicate_size += size
+                else:
+                    hashes[file_hash] = path
 
+    # 找出前 20 大檔案
     top_20_largest = sorted(file_list, key=lambda x: x[1], reverse=True)[:20]
 
     stats = {
@@ -60,6 +67,7 @@ def find_duplicates_and_largest(folder):
     }
 
     return duplicates, top_20_largest, stats
+
 
 def write_output(duplicates, largest_files, stats, timestamp):
     dup_file = f'{timestamp}_duplicates_files.txt'

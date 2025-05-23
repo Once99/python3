@@ -22,19 +22,31 @@ def get_file_hash(file_path, chunk_size=4096):
         return None
 
 def find_duplicates(folder):
-    """尋找重複檔案"""
+    """先以檔案大小分組，再計算 hash 以提高效能"""
+    size_map = {}
     hashes = {}
     duplicates = []
-    file_list = []
+
+    print("📦 掃描檔案中...")
 
     for root, _, files in os.walk(folder):
         for filename in files:
             ext = os.path.splitext(filename)[1].lower()
             if ext in ALL_EXTS:
                 full_path = os.path.join(root, filename)
-                file_list.append(full_path)
+                try:
+                    size = os.path.getsize(full_path)
+                    size_map.setdefault(size, []).append(full_path)
+                except Exception as e:
+                    print(f"❌ 無法取得檔案大小：{full_path} - {e}")
 
-    for path in tqdm(file_list, desc="掃描中"):
+    candidate_files = []
+    for size, paths in size_map.items():
+        if len(paths) > 1:  # 僅對同大小檔案進行 hash
+            candidate_files.extend(paths)
+
+    print(f"🔍 預計檢查 {len(candidate_files)} 筆可能重複檔案")
+    for path in tqdm(candidate_files, desc="🔑 計算檔案雜湊"):
         file_hash = get_file_hash(path)
         if file_hash:
             if file_hash in hashes:
@@ -43,6 +55,7 @@ def find_duplicates(folder):
                 hashes[file_hash] = path
 
     return duplicates
+
 
 def write_duplicates(duplicates, timestamp):
     output_file = f"{timestamp}_duplicates_files.txt"
