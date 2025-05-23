@@ -51,12 +51,29 @@ def find_duplicates_and_largest(folder):
             file_hash = get_file_hash(path)
             if file_hash:
                 if file_hash in hashes:
-                    duplicates.append((hashes[file_hash], path, size))
+                    existing_path = hashes[file_hash]
+
+                    # 比較修改時間
+                    try:
+                        existing_mtime = os.path.getmtime(existing_path)
+                        current_mtime = os.path.getmtime(path)
+                    except Exception as e:
+                        print(f"⚠️ 無法取得 mtime：{e}")
+                        continue
+
+                    if current_mtime > existing_mtime:
+                        # 現在的比較新 → 是重複檔案
+                        duplicates.append((existing_path, path, size))
+                    else:
+                        # 現在的比較舊 → 換原始檔案，舊的為基準
+                        duplicates.append((path, existing_path, size))
+                        hashes[file_hash] = path  # 更新為新的原始基準
                     duplicate_size += size
                 else:
                     hashes[file_hash] = path
 
-    # 找出前 20 大檔案
+
+# 找出前 20 大檔案
     top_20_largest = sorted(file_list, key=lambda x: x[1], reverse=True)[:20]
 
     stats = {

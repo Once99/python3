@@ -22,7 +22,7 @@ def get_file_hash(file_path, chunk_size=4096):
         return None
 
 def find_duplicates(folder):
-    """先以檔案大小分組，再計算 hash 以提高效能"""
+    """先以檔案大小分組，再以 hash 與 mtime 判定原始與重複檔案"""
     size_map = {}
     hashes = {}
     duplicates = []
@@ -42,7 +42,7 @@ def find_duplicates(folder):
 
     candidate_files = []
     for size, paths in size_map.items():
-        if len(paths) > 1:  # 僅對同大小檔案進行 hash
+        if len(paths) > 1:
             candidate_files.extend(paths)
 
     print(f"🔍 預計檢查 {len(candidate_files)} 筆可能重複檔案")
@@ -50,12 +50,25 @@ def find_duplicates(folder):
         file_hash = get_file_hash(path)
         if file_hash:
             if file_hash in hashes:
-                duplicates.append((hashes[file_hash], path))
+                existing = hashes[file_hash]
+                try:
+                    existing_mtime = os.path.getmtime(existing)
+                    current_mtime = os.path.getmtime(path)
+                except Exception as e:
+                    print(f"⚠️ 無法取得修改時間：{e}")
+                    continue
+
+                if current_mtime > existing_mtime:
+                    print(f"⚠️ 找到重複：\n   原始：{existing}\n   重複：{path}")
+                    duplicates.append((existing, path))
+                else:
+                    print(f"⚠️ 找到重複：\n   原始：{path}\n   重複：{existing}")
+                    duplicates.append((path, existing))
+                    hashes[file_hash] = path  # 更新為較舊的檔案為原始
             else:
                 hashes[file_hash] = path
 
     return duplicates
-
 
 def write_duplicates(duplicates, timestamp):
     output_file = f"{timestamp}_duplicates_files.txt"

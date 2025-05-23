@@ -41,7 +41,7 @@ def find_duplicates(folder):
 
     candidate_files = []
     for size, paths in size_map.items():
-        if len(paths) > 1:  # 只有大小相同的才有可能重複
+        if len(paths) > 1:
             candidate_files.extend(paths)
 
     print(f"🔍 檢查可能重複的檔案，共 {len(candidate_files)} 筆")
@@ -49,13 +49,25 @@ def find_duplicates(folder):
         file_hash = get_file_hash(path)
         if file_hash:
             if file_hash in hashes:
-                print(f"⚠️ 找到重複：\n   原始：{hashes[file_hash]}\n   重複：{path}")
-                duplicates.append((hashes[file_hash], path))
+                original = hashes[file_hash]
+                try:
+                    original_mtime = os.path.getmtime(original)
+                    current_mtime = os.path.getmtime(path)
+                except Exception as e:
+                    print(f"⚠️ 無法取得修改時間：{e}")
+                    continue
+
+                if current_mtime > original_mtime:
+                    print(f"⚠️ 找到重複：\n   原始：{original}\n   重複：{path}")
+                    duplicates.append((original, path))
+                else:
+                    print(f"⚠️ 找到重複：\n   原始：{path}\n   重複：{original}")
+                    duplicates.append((path, original))
+                    hashes[file_hash] = path  # 更新為較舊檔案為原始基準
             else:
                 hashes[file_hash] = path
 
     return duplicates
-
 
 def move_duplicates(duplicates, base_folder, timestamp):
     output_base = os.path.join(base_folder, f"{timestamp}_duplicates_output")
