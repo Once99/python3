@@ -3,6 +3,7 @@ import hashlib
 import shutil
 from tqdm import tqdm
 from datetime import datetime
+from tkinter import filedialog
 
 # 支援副檔名
 IMAGE_EXTS = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'}
@@ -70,7 +71,7 @@ def move_duplicates(duplicates, base_folder, timestamp):
     print(f"\n✅ 完成！搬移記錄已寫入：{moved_log}")
 
 if __name__ == "__main__":
-    folder = input("📁 請輸入要掃描的資料夾路徑：").strip()
+    folder = filedialog.askdirectory(title="請選擇要掃描的資料夾")
 
     if not folder or not os.path.isdir(folder):
         print("❌ 無效路徑")

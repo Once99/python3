@@ -1,4 +1,5 @@
 import os
+import subprocess
 import tkinter as tk
 from tkinter import messagebox
 
@@ -39,12 +40,25 @@ def create_desktop_shortcut(target_path, alias_name="My Passport"):
         print(f"建立捷徑失敗：{e}")
         return False
 
+def open_in_finder(path):
+    try:
+        subprocess.run(["open", path])
+    except Exception as e:
+        print(f"無法開啟 Finder：{e}")
+
 def main():
     disk_path = find_mounted_passport("My Passport")
     if disk_path:
         success = create_desktop_shortcut(disk_path, "My Passport")
+        open_in_finder(disk_path)  # 👉 自動打開 Finder 指向該磁碟
+
         if success:
-            show_message("My Passport 狀態", f"✅ 『My Passport』已掛載，捷徑已建立在桌面。\n路徑：{disk_path}")
+            show_message(
+                "My Passport 狀態",
+                f"✅ 『My Passport』已掛載，桌面捷徑已建立。\n\n👉 請執行以下操作：\n"
+                f"1. Finder 已為你開啟『My Passport』位置。\n"
+                f"2. 請將該資料夾或桌面捷徑拖曳到 Finder 側邊欄的『喜愛項目』區域。\n\n磁碟位置：{disk_path}"
+            )
         else:
             show_error("捷徑建立失敗", f"⚠️ 『My Passport』已掛載，但無法建立桌面捷徑。\n請手動確認權限或磁碟狀態。")
     else:
