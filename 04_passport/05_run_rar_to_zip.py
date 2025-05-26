@@ -20,6 +20,17 @@ def find_rar_files(base_dir):
                 rar_files.append(os.path.join(root, file))
     return rar_files
 
+def find_folders_to_zip(base_dir):
+    folders_to_zip = []
+    for root, dirs, _ in os.walk(base_dir):
+        for dir_name in dirs:
+            folder_path = os.path.join(root, dir_name)
+            zip_path = os.path.join(root, dir_name + ".zip")
+            if not os.path.exists(zip_path):
+                folders_to_zip.append(folder_path)
+        break  # 只處理第一層資料夾
+    return folders_to_zip
+
 def extract_rar(rar_path, extract_to, password):
     with rarfile.RarFile(rar_path) as rf:
         if rf.needs_password():
@@ -35,11 +46,20 @@ def compress_to_zip(source_folder, zip_path):
                 rel_path = os.path.relpath(full_path, source_folder)
                 zipf.write(full_path, arcname=rel_path)
 
-def show_preview_in_terminal(rar_files):
-    print("🔍 將轉換以下 .rar 檔案為 .zip：\n")
+def show_preview_in_terminal(rar_files, folders_to_zip):
+    print("🔍 將轉換以下 .rar 檔案為 .zip：")
     for path in rar_files:
         print(f"  - {os.path.relpath(path)}")
+
+    print("\n🗂️ 將壓縮以下未壓縮的資料夾為 .zip：")
+    for folder in folders_to_zip:
+        print(f"  - {os.path.relpath(folder)}")
+
     print("\n⚠️ 是否要繼續？ (y/n): ", end="")
+    return input().strip().lower() == "y"
+
+def ask_user_delete_after_zip():
+    print("\n🧹 壓縮後是否要刪除原始資料夾？ (y/n): ", end="")
     return input().strip().lower() == "y"
 
 def process_rar_files(rar_files):
@@ -52,7 +72,7 @@ def process_rar_files(rar_files):
         try:
             extract_rar(rar_file, extract_dir, RAR_PASSWORD)
             compress_to_zip(extract_dir, zip_file_path)
-            os.remove(rar_file)            # 註解這行可保留原始 rar
+            os.remove(rar_file)            # 註解這行可保留原始 .rar
             shutil.rmtree(extract_dir)    # 註解這行可保留解壓資料夾
         except rarfile.BadRarFile:
             print(f"❌ 無法開啟 RAR 檔案：{rar_file}")
@@ -61,14 +81,32 @@ def process_rar_files(rar_files):
         except Exception as e:
             print(f"❌ 其他錯誤：{rar_file} -> {e}")
 
+def process_folders_to_zip(folders_to_zip, delete_original=False):
+    for folder in tqdm(folders_to_zip, desc="壓縮未壓縮的資料夾"):
+        zip_path = folder + ".zip"
+        try:
+            compress_to_zip(folder, zip_path)
+            if delete_original:
+                shutil.rmtree(folder)
+        except Exception as e:
+            print(f"❌ 壓縮失敗：{folder} -> {e}")
+
 if __name__ == "__main__":
     target_dir = select_directory()
     if target_dir:
         rar_files = find_rar_files(target_dir)
-        if not rar_files:
-            print("⚠️ 未找到任何 .rar 檔案")
-        elif show_preview_in_terminal(rar_files):
-            process_rar_files(rar_files)
-            print("\n✅ 所有可處理檔案已完成。")
+        folders_to_zip = find_folders_to_zip(target_dir)
+
+        if not rar_files and not folders_to_zip:
+            print("⚠️ 沒有 .rar 或未壓縮資料夾可處理")
+        elif show_preview_in_terminal(rar_files, folders_to_zip):
+            delete_after_zip = ask_user_delete_after_zip()
+
+            if rar_files:
+                process_rar_files(rar_files)
+            if folders_to_zip:
+                process_folders_to_zip(folders_to_zip, delete_after_zip)
+
+            print("\n✅ 所有可處理項目已完成。")
         else:
             print("❎ 已取消執行")
