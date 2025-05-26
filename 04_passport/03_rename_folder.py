@@ -1,5 +1,6 @@
 import os
 import re
+import string
 
 def select_directory():
     import tkinter as tk
@@ -9,15 +10,24 @@ def select_directory():
     return filedialog.askdirectory(title="選擇目標資料夾")
 
 def extract_clean_name(name):
-    """從【xx、yy】中擷取 yy，並移除空白與全形空白"""
-    match = re.match(r"^【[^、]*、([^】]+)】$", name)
-    if match:
-        new_name = match.group(1)
-        return new_name.replace('\u3000', '').replace(' ', '')
-    return None
+    """
+    從【xxx、yyy】中取出 yyy，或【xxx】中取出 xxx，並清除空白與標點
+    """
+    match = re.match(r"^【([^】]+)】$", name)
+    if not match:
+        return None
+
+    content = match.group(1)
+    # 如果有頓號，取其後內容，否則取全部
+    parts = content.split('、')
+    target = parts[1] if len(parts) > 1 else parts[0]
+
+    # 去除標點與空白（包含全形空白）
+    cleaned = target.translate(str.maketrans('', '', string.punctuation))
+    cleaned = cleaned.replace(' ', '').replace('\u3000', '')
+    return cleaned
 
 def preview_renames(base_dir):
-    """找出符合條件的目錄與預期的新名稱"""
     rename_plan = {}
     for name in os.listdir(base_dir):
         old_path = os.path.join(base_dir, name)
