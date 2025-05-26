@@ -3,15 +3,6 @@ import zipfile
 from tkinter import Tk, filedialog
 from tqdm import tqdm
 import shutil
-import subprocess
-
-def empty_trash():
-    """清空 macOS 垃圾桶"""
-    try:
-        subprocess.run(['osascript', '-e', 'tell app "Finder" to empty the trash'], check=True)
-        print("🗑️ 已清空垃圾桶")
-    except subprocess.CalledProcessError as e:
-        print(f"❌ 清空垃圾桶時發生錯誤：{e}")
 
 def select_directory():
     """開啟視窗讓使用者選擇目標目錄"""
@@ -60,8 +51,6 @@ def zip_and_delete_subdirectories(base_dir, plan):
     print("\n✅ 所有子目錄處理完成！")
 
 def main():
-    empty_trash()
-
     target_folder = select_directory()
     if not target_folder:
         print("❌ 未選擇目錄。")
