@@ -3,6 +3,7 @@ import requests
 from datetime import datetime
 import subprocess
 import re
+import tkinter.messagebox as msgbox  # 頂部新增
 
 # 配置
 DEST_DIR = "/Users/oncechen/IdeaProjects/feiyu-site/apk"
@@ -64,6 +65,13 @@ def git_commit(version):
     subprocess.run(["git", "add", APK_NAME])
     subprocess.run(["git", "add", INDEX_JS_PATH])
 
+    # 檢查是否有變化
+    result = subprocess.run(["git", "diff", "--cached", "--quiet"])
+    if result.returncode == 0:
+        msgbox.showinfo("無更新", "沒有可需要的更新")
+        print("⚠️ 沒有可需要的更新，已跳過提交")
+        return
+
     today = datetime.now().strftime("%Y-%m-%d")
     message = f"{today} update apk {version}"
     subprocess.run(["git", "commit", "-m", message])
@@ -73,7 +81,8 @@ def git_commit(version):
     tag = f"v{datetime.now().strftime('%Y.%m.%d.%H%M')}"
     subprocess.run(["git", "tag", tag])
     subprocess.run(["git", "push", "origin", tag])
-    print(f"🏷️ 已打 tag：{tag} 并推送成功")
+    print(f"🏷️ 已打 tag：{tag} 並推送成功")
+
 
 def main():
     print("🚀 开始更新 APK...")
