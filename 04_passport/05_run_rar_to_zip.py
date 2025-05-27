@@ -3,9 +3,11 @@ import rarfile
 import zipfile
 import shutil
 from tqdm import tqdm
+from datetime import datetime
 from tkinter import Tk, filedialog
 
 RAR_PASSWORD = "https://t.me/ZpostP"
+LOG_FILENAME = f"conversion_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
 
 def select_directory():
     root = Tk()
@@ -46,14 +48,14 @@ def compress_to_zip(source_folder, zip_path):
                 rel_path = os.path.relpath(full_path, source_folder)
                 zipf.write(full_path, arcname=rel_path)
 
-def show_preview_in_terminal(rar_files, folders_to_zip):
+def show_preview_in_terminal(rar_files, folders_to_zip, base_dir):
     print("🔍 將轉換以下 .rar 檔案為 .zip：")
     for path in rar_files:
-        print(f"  - {os.path.relpath(path)}")
+        print(f"  - {os.path.relpath(path, base_dir)}")
 
     print("\n🗂️ 將壓縮以下未壓縮的資料夾為 .zip：")
     for folder in folders_to_zip:
-        print(f"  - {os.path.relpath(folder)}")
+        print(f"  - {os.path.relpath(folder, base_dir)}")
 
     print("\n⚠️ 是否要繼續？ (y/n): ", end="")
     return input().strip().lower() == "y"
@@ -61,6 +63,21 @@ def show_preview_in_terminal(rar_files, folders_to_zip):
 def ask_user_delete_after_zip():
     print("\n🧹 壓縮後是否要刪除原始資料夾？ (y/n): ", end="")
     return input().strip().lower() == "y"
+
+def log(message):
+    with open(LOG_FILENAME, 'a', encoding='utf-8') as f:
+        f.write(message + '\n')
+
+def get_file_size(path):
+    total_size = 0
+    if os.path.isfile(path):
+        return os.path.getsize(path)
+    for root, _, files in os.walk(path):
+        for f in files:
+            fp = os.path.join(root, f)
+            if os.path.exists(fp):
+                total_size += os.path.getsize(fp)
+    return total_size
 
 def process_rar_files(rar_files):
     for rar_file in tqdm(rar_files, desc="處理 .rar 檔案"):
@@ -71,27 +88,44 @@ def process_rar_files(rar_files):
 
         try:
             extract_rar(rar_file, extract_dir, RAR_PASSWORD)
+            original_size = get_file_size(rar_file)
+            extracted_size = get_file_size(extract_dir)
             compress_to_zip(extract_dir, zip_file_path)
-            os.remove(rar_file)            # 註解這行可保留原始 .rar
-            shutil.rmtree(extract_dir)    # 註解這行可保留解壓資料夾
+            zip_size = get_file_size(zip_file_path)
+
+            os.remove(rar_file)            # 註解這行可保留 .rar
+            shutil.rmtree(extract_dir)     # 註解這行可保留解壓資料夾
+
+            log(f"✅ RAR轉ZIP：{rar_file}")
+            log(f"    原始RAR大小: {original_size} bytes")
+            log(f"    解壓後大小 : {extracted_size} bytes")
+            log(f"    ZIP壓縮後 : {zip_size} bytes\n")
+
         except rarfile.BadRarFile:
-            print(f"❌ 無法開啟 RAR 檔案：{rar_file}")
+            log(f"❌ 無法開啟 RAR 檔案：{rar_file}")
         except rarfile.RarWrongPassword:
-            print(f"🔑 密碼錯誤：{rar_file}")
+            log(f"🔑 密碼錯誤：{rar_file}")
         except Exception as e:
-            print(f"❌ 其他錯誤：{rar_file} -> {e}")
+            log(f"❌ 其他錯誤：{rar_file} -> {e}")
 
 def process_folders_to_zip(folders_to_zip, delete_original=False):
     for folder in tqdm(folders_to_zip, desc="壓縮未壓縮的資料夾"):
         zip_path = folder + ".zip"
         try:
+            original_size = get_file_size(folder)
             compress_to_zip(folder, zip_path)
+            zip_size = get_file_size(zip_path)
             if delete_original:
                 shutil.rmtree(folder)
-        except Exception as e:
-            print(f"❌ 壓縮失敗：{folder} -> {e}")
 
-if __name__ == "__main__":
+            log(f"✅ 資料夾壓縮：{folder}")
+            log(f"    原始資料夾大小: {original_size} bytes")
+            log(f"    ZIP壓縮後      : {zip_size} bytes\n")
+
+        except Exception as e:
+            log(f"❌ 壓縮失敗：{folder} -> {e}")
+
+def main():
     target_dir = select_directory()
     if target_dir:
         rar_files = find_rar_files(target_dir)
@@ -99,7 +133,7 @@ if __name__ == "__main__":
 
         if not rar_files and not folders_to_zip:
             print("⚠️ 沒有 .rar 或未壓縮資料夾可處理")
-        elif show_preview_in_terminal(rar_files, folders_to_zip):
+        elif show_preview_in_terminal(rar_files, folders_to_zip, target_dir):
             delete_after_zip = ask_user_delete_after_zip()
 
             if rar_files:
@@ -107,6 +141,9 @@ if __name__ == "__main__":
             if folders_to_zip:
                 process_folders_to_zip(folders_to_zip, delete_after_zip)
 
-            print("\n✅ 所有可處理項目已完成。")
+            print(f"\n✅ 所有可處理項目已完成，詳情請見日誌檔案：{LOG_FILENAME}")
         else:
             print("❎ 已取消執行")
+
+if __name__ == "__main__":
+    main()
