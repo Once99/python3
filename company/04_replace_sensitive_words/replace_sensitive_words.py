@@ -1,16 +1,14 @@
 import os
 import re
 import urllib.parse
-import shutil
 from datetime import datetime
 
 # 取得腳本所在目錄
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SENSITIVE_WORDS_PATH = os.path.join(SCRIPT_DIR, "sensitive_words.txt")
 
-# 備份與日誌路徑
+# 日誌路徑
 DOWNLOAD_DIR = os.path.expanduser("~/Downloads")
-BACKUP_DIR = os.path.join(DOWNLOAD_DIR, "backup")
 LOG_PATH = os.path.join(DOWNLOAD_DIR, "replace_log.txt")
 log_entries = []
 
@@ -22,26 +20,16 @@ def load_sensitive_words(path):
         return [line.strip() for line in f if line.strip()]
 
 def encode_word(word):
-    return urllib.parse.quote(word)
+    return ''.join(f'&#{ord(c)};' for c in word)
 
 def find_jsp_files(base_dir):
-    """尋找所有 .jsp 檔，排除 WEB-INF 資料夾"""
+    """尋找所有 .jsp 檔"""
     jsp_files = []
     for root, dirs, files in os.walk(base_dir):
-        if 'WEB-INF' in root.split(os.sep):
-            continue
         for file in files:
             if file.endswith(".jsp"):
                 jsp_files.append(os.path.join(root, file))
     return jsp_files
-
-def backup_file(original_path, root_folder):
-    """將原始檔案備份至 ~/Downloads/backup"""
-    rel_path = os.path.relpath(original_path, root_folder)
-    backup_path = os.path.join(BACKUP_DIR, rel_path)
-    os.makedirs(os.path.dirname(backup_path), exist_ok=True)
-    shutil.copy2(original_path, backup_path)
-    return backup_path
 
 def replace_outside_quotes(content, file_path, sensitive_words):
     """只在非引號內容中替換敏感詞"""
@@ -70,7 +58,6 @@ def replace_in_file(file_path, root_folder, sensitive_words):
     new_content, replacements, modified = replace_outside_quotes(content, file_path, sensitive_words)
 
     if modified:
-        backup_file(file_path, root_folder)
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(new_content)
         log_entries.extend(replacements)
@@ -101,7 +88,7 @@ if __name__ == "__main__":
     from tkinter import filedialog
 
     tk.Tk().withdraw()
-    target_dir = filedialog.askdirectory(title="選擇 web 資料夾（排除 WEB-INF）")
+    target_dir = filedialog.askdirectory(title="選擇 WebRoot 資料夾（排除 WEB-INF）")
     sensitive_words = load_sensitive_words(SENSITIVE_WORDS_PATH)
 
     if target_dir and sensitive_words:
