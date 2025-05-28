@@ -2,10 +2,9 @@ import os
 import hashlib
 from collections import defaultdict
 from tkinter import Tk, filedialog
-from tqdm import tqdm
 
-# 支援的圖片副檔名
 IMAGE_EXTS = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'}
+LOG_FILENAME = "duplicates_log.txt"
 
 def select_directory():
     root = Tk()
@@ -19,24 +18,28 @@ def get_file_hash(file_path, chunk_size=4096):
             for chunk in iter(lambda: f.read(chunk_size), b''):
                 hasher.update(chunk)
         return hasher.hexdigest()
-    except Exception as e:
-        print(f"❌ 無法讀取 {file_path}：{e}")
+    except Exception:
         return None
 
 def find_duplicate_photos(folder):
     hash_map = defaultdict(list)
-    print("🔍 開始掃描圖片檔案...")
     for root, _, files in os.walk(folder):
         for file in files:
             ext = os.path.splitext(file)[1].lower()
             if ext in IMAGE_EXTS:
-                file_path = os.path.join(root, file)
-                file_hash = get_file_hash(file_path)
+                path = os.path.join(root, file)
+                file_hash = get_file_hash(path)
                 if file_hash:
-                    hash_map[file_hash].append(file_path)
+                    hash_map[file_hash].append(path)
 
-    duplicates = [paths for paths in hash_map.values() if len(paths) > 1]
-    return duplicates
+    return [group for group in hash_map.values() if len(group) > 1]
+
+def write_log(duplicates, output_path):
+    with open(output_path, 'w', encoding='utf-8') as f:
+        for group in duplicates:
+            for path in group:
+                f.write(path + '\n')
+            f.write('---\n')  # 每組重複檔案之間用分隔線
 
 def main():
     folder = select_directory()
@@ -45,16 +48,11 @@ def main():
         return
 
     duplicates = find_duplicate_photos(folder)
-
-    if not duplicates:
-        print("✅ 沒有發現重複的照片")
+    if duplicates:
+        write_log(duplicates, LOG_FILENAME)
+        print(f"✅ 已將 {len(duplicates)} 組重複照片寫入 {LOG_FILENAME}")
     else:
-        print(f"\n📸 找到 {len(duplicates)} 組重複的照片：\n")
-        for i, group in enumerate(duplicates, 1):
-            print(f"🧩 重複組 {i}:")
-            for path in group:
-                print(f"   - {path}")
-            print()
+        print("✅ 沒有找到任何重複照片")
 
 if __name__ == "__main__":
     main()
