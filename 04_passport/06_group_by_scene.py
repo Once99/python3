@@ -3,7 +3,7 @@ import shutil
 from PIL import Image, ExifTags
 from datetime import datetime
 from tqdm import tqdm
-from tkinter import Tk, filedialog, simpledialog
+from tkinter import Tk, filedialog, simpledialog, messagebox
 
 IMAGE_EXTS = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp'}
 VIDEO_EXTS = {'.mp4', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.mpeg', '.webm'}
@@ -14,14 +14,18 @@ def select_directory():
     root.withdraw()
     return filedialog.askdirectory(title="選擇來源目錄")
 
-def ask_interval_minutes(default=10):
+def ask_interval_mode():
     root = Tk()
     root.withdraw()
-    try:
-        value = simpledialog.askinteger("分類時間間隔", f"輸入場景分類的時間間隔（分鐘）", initialvalue=default, minvalue=1, maxvalue=180)
-        return value if value else default
-    except Exception:
-        return default
+    result = messagebox.askquestion("選擇時間間隔方式", "是否要以『一天』為分組間隔？\n\n選『是』 ➜ 每一天一組\n選『否』 ➜ 自訂分鐘間隔")
+    if result == 'yes':
+        return 'day', None
+    else:
+        try:
+            minutes = simpledialog.askinteger("輸入間隔", "請輸入時間間隔（單位：分鐘）", initialvalue=10, minvalue=1, maxvalue=180)
+            return 'minute', minutes or 10
+        except Exception:
+            return 'minute', 10
 
 def get_taken_time(file_path):
     try:
@@ -38,7 +42,7 @@ def get_taken_time(file_path):
     except Exception:
         return None
 
-def group_by_scene(file_paths, interval_minutes=10):
+def group_by_scene(file_paths, interval_mode='minute', interval_value=10):
     grouped = []
     file_paths_with_time = []
 
@@ -51,9 +55,10 @@ def group_by_scene(file_paths, interval_minutes=10):
 
     current_group = []
     last_time = None
+    interval_seconds = 86400 if interval_mode == 'day' else interval_value * 60
 
     for path, taken_time in file_paths_with_time:
-        if last_time is None or (taken_time - last_time).total_seconds() > interval_minutes * 60:
+        if last_time is None or (taken_time - last_time).total_seconds() > interval_seconds:
             if current_group:
                 grouped.append(current_group)
             current_group = [path]
@@ -92,7 +97,7 @@ def main():
         print("❌ 未選擇來源資料夾")
         return
 
-    interval = ask_interval_minutes(default=10)
+    interval_mode, interval_value = ask_interval_mode()
 
     all_files = []
     for root, _, files in os.walk(src_folder):
@@ -101,7 +106,7 @@ def main():
                 all_files.append(os.path.join(root, file))
 
     print(f"\n🔍 共找到 {len(all_files)} 個媒體檔案，正在分析時間…")
-    groups = group_by_scene(all_files, interval_minutes=interval)
+    groups = group_by_scene(all_files, interval_mode=interval_mode, interval_value=interval_value)
 
     preview_groups(groups)
 
