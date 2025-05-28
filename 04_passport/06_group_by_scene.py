@@ -3,7 +3,7 @@ import shutil
 from PIL import Image, ExifTags
 from datetime import datetime
 from tqdm import tqdm
-from tkinter import Tk, filedialog
+from tkinter import Tk, filedialog, simpledialog
 
 IMAGE_EXTS = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp'}
 VIDEO_EXTS = {'.mp4', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.mpeg', '.webm'}
@@ -13,6 +13,15 @@ def select_directory():
     root = Tk()
     root.withdraw()
     return filedialog.askdirectory(title="選擇來源目錄")
+
+def ask_interval_minutes(default=10):
+    root = Tk()
+    root.withdraw()
+    try:
+        value = simpledialog.askinteger("分類時間間隔", f"輸入場景分類的時間間隔（分鐘）", initialvalue=default, minvalue=1, maxvalue=180)
+        return value if value else default
+    except Exception:
+        return default
 
 def get_taken_time(file_path):
     try:
@@ -83,6 +92,8 @@ def main():
         print("❌ 未選擇來源資料夾")
         return
 
+    interval = ask_interval_minutes(default=10)
+
     all_files = []
     for root, _, files in os.walk(src_folder):
         for file in files:
@@ -90,7 +101,7 @@ def main():
                 all_files.append(os.path.join(root, file))
 
     print(f"\n🔍 共找到 {len(all_files)} 個媒體檔案，正在分析時間…")
-    groups = group_by_scene(all_files)
+    groups = group_by_scene(all_files, interval_minutes=interval)
 
     preview_groups(groups)
 
