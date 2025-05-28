@@ -4,7 +4,7 @@ from datetime import datetime
 from pync import Notifier  # 用來觸發 macOS 通知
 
 # 設定來源與目的地
-SRC_DISK = "/Volumes/My Passport/05_成人專區/"
+SRC_DISK = "/Volumes/My Passport/05_成人專區"
 DST_DISK = "/Volumes/SP PHD U3/"
 
 def run_backup():
@@ -18,7 +18,7 @@ def run_backup():
     # rsync 指令
     cmd = [
         "rsync",
-        "-avh", "--progress",
+        "-avh", "--progress", "--delete",
         SRC_DISK,
         DST_DISK
     ]
