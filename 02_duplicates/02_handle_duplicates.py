@@ -1,7 +1,15 @@
 import os
 from send2trash import send2trash
+from tkinter import Tk, filedialog
 
-LOG_FILENAME = "duplicates_log.txt"
+def select_log_file():
+    root = Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename(
+        title="選擇 duplicates_log.txt 檔案",
+        filetypes=[("Text Files", "*.txt")]
+    )
+    return file_path
 
 def load_duplicates(log_path):
     with open(log_path, 'r', encoding='utf-8') as f:
@@ -31,11 +39,12 @@ def prompt_delete(group):
         print("❌ 無效輸入，請重新輸入。")
 
 def main():
-    if not os.path.exists(LOG_FILENAME):
-        print(f"❌ 找不到 {LOG_FILENAME}，請先執行找重複的腳本")
+    log_path = select_log_file()
+    if not log_path or not os.path.exists(log_path):
+        print("❌ 未選取有效的 log 檔案，請重新執行。")
         return
 
-    duplicate_groups = load_duplicates(LOG_FILENAME)
+    duplicate_groups = load_duplicates(log_path)
     for group in duplicate_groups:
         prompt_delete(group)
 
