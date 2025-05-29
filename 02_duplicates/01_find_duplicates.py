@@ -108,7 +108,7 @@ def main():
     if duplicates:
         write_log(duplicates, log_filename, mode_name)
         print(f"\n✅ 共找到 {len(duplicates)} 組重複檔案，已寫入 {log_filename}")
-        subprocess.run(["open", log_filename])  # 🔥 自動開啟結果檔
+        # subprocess.run(["open", log_filename])  # 🔥 自動開啟結果檔
     else:
         print("\n✅ 沒有找到任何重複檔案")
 
