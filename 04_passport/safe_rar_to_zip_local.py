@@ -73,19 +73,11 @@ def main():
             zip_local_path = os.path.join(temp_dir, base_name + ".zip")
             compress_to_zip(extract_dir, zip_local_path)
 
-            final_zip_path = os.path.join(os.path.dirname(rar_path), base_name + ".zip")
-            shutil.move(zip_local_path, final_zip_path)
-            os.remove(rar_path)
-
             log.append(f"✅ {file_name} → {base_name}.zip")
         except Exception as e:
             log.append(f"❌ 處理失敗：{file_name} - {e}")
 
-    try:
-        shutil.rmtree(temp_dir)
-        print(f"\n🧹 清理暫存資料夾完成：{temp_dir}")
-    except Exception as e:
-        print(f"⚠️ 無法刪除暫存資料夾：{e}")
+    print(f"\n✅ ZIP 檔案全部保存在：{temp_dir}")
 
     with open(log_path, "w", encoding="utf-8") as f:
         f.write("\n".join(log))

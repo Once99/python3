@@ -4,8 +4,8 @@ from datetime import datetime
 from pync import Notifier  # 用來觸發 macOS 通知
 
 # 設定來源與目的地
-SRC_DISK = "/Volumes/My Passport/05_成人專區"
-DST_DISK = "/Volumes/SP PHD U3/"
+SRC_DISK = "/Volumes/My Passport"
+DST_DISK = "/Volumes/SP PHD U3"
 
 def run_backup():
     if not os.path.exists(SRC_DISK):
