@@ -1,21 +1,14 @@
 import subprocess
-import os
 from datetime import datetime
 from pync import Notifier  # 用來觸發 macOS 通知
 
 # 設定來源與目的地
+# 加上斜線，就是目錄拷貝目錄
+# 沒加斜線，就是當前目錄下的所有檔案
 SRC_DISK = "/Volumes/TOSHIBA EXT/2025-05-22"
 DST_DISK = "/Volumes/TOSHIBA EXT 1/"
 
 def run_backup():
-    if not os.path.exists(SRC_DISK):
-        Notifier.notify("來源硬碟未掛載", title="❌ 備份錯誤")
-        return
-    if not os.path.exists(DST_DISK):
-        Notifier.notify("目標硬碟未掛載", title="❌ 備份錯誤")
-        return
-
-    # rsync 指令 "--delete",
     cmd = [
         "rsync",
         "-avh", "--progress",
