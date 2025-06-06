@@ -2,8 +2,10 @@ import os
 import re
 import urllib.parse
 from datetime import datetime
+from tkinter import Tk, filedialog
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# === 參數與路徑 ===
+SCRIPT_DIR = os.getcwd()
 SENSITIVE_WORDS_PATH = os.path.join(SCRIPT_DIR, "sensitive_words.txt")
 DOWNLOAD_DIR = os.path.expanduser("~/Downloads")
 LOG_PATH = os.path.join(DOWNLOAD_DIR, "replace_log.txt")
@@ -22,7 +24,7 @@ def encode_word(word):
 def find_all_files(project_root):
     target_dir = os.path.join(project_root, "src", "pages")
     all_files = []
-    for root, dirs, files in os.walk(target_dir):
+    for root, _, files in os.walk(target_dir):
         for file in files:
             if file == ".DS_Store":
                 continue
@@ -30,15 +32,15 @@ def find_all_files(project_root):
             all_files.append(full_path)
     return all_files
 
-def replace_in_template_tagged_html(content, file_path, sensitive_words):
+def replace_in_template_tagged_html_regex(content, file_path, sensitive_words):
     modified = False
     replacements = []
 
-    def replace_inside_template(template_match):
-        block = template_match.group(0)
+    def replace_template_block(match):
+        block = match.group(0)
 
-        def replace_tag_content(match):
-            tag_name, attrs, inner = match.groups()
+        def replace_tag_text(tag_match):
+            tag_name, attrs, inner = tag_match.groups()
             for word in sensitive_words:
                 if word in inner:
                     encoded = encode_word(word)
@@ -49,10 +51,12 @@ def replace_in_template_tagged_html(content, file_path, sensitive_words):
             return f"<{tag_name}{attrs}>{inner}</{tag_name}>"
 
         tag_pattern = re.compile(r"<(\w+)([^<>]*?)>([^<>]+?)</\1>", re.DOTALL)
-        return tag_pattern.sub(replace_tag_content, block)
+        return tag_pattern.sub(replace_tag_text, block)
 
-    content_new = re.sub(r"<template[\s\S]*?</template>", replace_inside_template, content, flags=re.IGNORECASE)
-    return content_new, replacements, modified
+    template_pattern = re.compile(r"<template[\s\S]*?</template>", re.IGNORECASE)
+    new_content = template_pattern.sub(replace_template_block, content)
+
+    return new_content, replacements, modified
 
 def replace_in_file(file_path, root_folder, sensitive_words):
     try:
@@ -62,7 +66,7 @@ def replace_in_file(file_path, root_folder, sensitive_words):
         print(f"⚠️ 跳過非 UTF-8 編碼檔案: {file_path}")
         return False
 
-    new_content, replacements, modified = replace_in_template_tagged_html(content, file_path, sensitive_words)
+    new_content, replacements, modified = replace_in_template_tagged_html_regex(content, file_path, sensitive_words)
 
     if modified:
         with open(file_path, 'w', encoding='utf-8') as f:
@@ -90,11 +94,9 @@ def scan_and_replace(project_root, sensitive_words):
             log_file.write("\n".join(log_entries))
         print(f"📝 替換詳細紀錄已儲存：{LOG_PATH}")
 
+# === 執行入口 ===
 if __name__ == "__main__":
-    import tkinter as tk
-    from tkinter import filedialog
-
-    tk.Tk().withdraw()
+    Tk().withdraw()
     project_root = filedialog.askdirectory(title="選擇專案根目錄（包含 src/pages）")
     sensitive_words = load_sensitive_words(SENSITIVE_WORDS_PATH)
 
