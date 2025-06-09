@@ -20,14 +20,16 @@ def download_apk():
     for url in URLS:
         try:
             print(f"尝试下载: {url}")
-            response = requests.get(url, timeout=10)
+            response = requests.get(url, timeout=10, verify=False)
             if response.status_code == 200:
                 with open(APK_PATH, 'wb') as f:
                     f.write(response.content)
                 print("✅ 下载成功")
                 return True
+        except requests.exceptions.SSLError as e:
+            print(f"❌ SSL 驗證錯誤: {url} - {e}")
         except Exception as e:
-            print(f"❌ 下载失败: {url} - {e}")
+            print(f"❌ 下載失敗: {url} - {e}")
     return False
 
 def extract_version(apk_path, fallback_version=None):
