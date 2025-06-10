@@ -44,6 +44,11 @@ def git_commit_and_tag():
 
     # ✅ 自動複製網址到剪貼簿
     subprocess.run("echo 'http://uedweb01.itomtest.com/index.jsp' | pbcopy", shell=True)
+    print("📋 已自動複製網址到剪貼簿：http://uedweb01.itomtest.com/index.jsp")
+
+    # ✅ 自動打開 GitLab Pipelines 頁面
+    subprocess.run(["open", "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"])
+    print("🌐 已自動開啟 GitLab Pipelines 頁面")
 
 if __name__ == "__main__":
     git_commit_and_tag()
