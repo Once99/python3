@@ -33,9 +33,13 @@ def git_commit_and_tag():
             print("⚠️ 即使 add 之後也沒有可提交的內容，跳過")
             return
 
-    subprocess.run(["git", "commit", "-m", "日常维护"])
+    message = input("💬 請輸入 commit 訊息（預設：日常维护）：").strip()
+    if not message:
+        message = "日常维护"
+
+    subprocess.run(["git", "commit", "-m", message])
     subprocess.run(["git", "push"])
-    print("✅ 已提交並推送完成：日常维护")
+    print(f"✅ 已提交並推送完成：{message}")
 
     tag = f"v{datetime.now().strftime('%Y.%m.%d.%H%M')}"
     subprocess.run(["git", "tag", tag])
@@ -44,7 +48,7 @@ def git_commit_and_tag():
 
     # ✅ 自動複製網址到剪貼簿
     subprocess.run("echo 'https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp' | pbcopy", shell=True)
-    print("📋 已自動複製網址到剪貼簿：http://uedweb01.itomtest.com/index.jsp")
+    print("📋 已自動複製網址到剪貼簿：https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp")
 
     # ✅ 自動打開 GitLab Pipelines 頁面
     subprocess.run(["open", "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"])
