@@ -43,7 +43,7 @@ def git_commit_and_tag():
     print(f"🏷️ 已打 tag：{tag} 並推送成功")
 
     # ✅ 自動複製網址到剪貼簿
-    subprocess.run("echo 'http://uedweb01.itomtest.com/index.jsp' | pbcopy", shell=True)
+    subprocess.run("echo 'https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp' | pbcopy", shell=True)
     print("📋 已自動複製網址到剪貼簿：http://uedweb01.itomtest.com/index.jsp")
 
     # ✅ 自動打開 GitLab Pipelines 頁面
