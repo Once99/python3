@@ -42,5 +42,8 @@ def git_commit_and_tag():
     subprocess.run(["git", "push", "origin", tag])
     print(f"🏷️ 已打 tag：{tag} 並推送成功")
 
+    # ✅ 自動複製網址到剪貼簿
+    subprocess.run("echo 'http://uedweb01.itomtest.com/index.jsp' | pbcopy", shell=True)
+
 if __name__ == "__main__":
     git_commit_and_tag()
