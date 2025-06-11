@@ -14,8 +14,11 @@ def extract_domain_and_page_name(full_url):
     parsed = urlparse(full_url)
     domain = parsed.hostname or "unknown"
     domain_name = domain.split('.')[0]
-    path = os.path.basename(parsed.path)
-    page_name = os.path.splitext(path)[0] or "page"
+    dir_parts = parsed.path.strip("/").split("/")
+    if len(dir_parts) > 1:
+        page_name = f"{dir_parts[-2]}_{os.path.splitext(dir_parts[-1])[0]}"
+    else:
+        page_name = os.path.splitext(dir_parts[-1])[0]
     return domain_name, page_name
 
 def is_internal_link(base_url, link_url):
@@ -74,6 +77,10 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
     with open(output_file, "w", encoding="utf-8") as f:
         for url in sorted(php_api_urls):
             f.write(url + "\n")
+
+    # 追加來源頁面資訊
+    with open(output_file, "a", encoding="utf-8") as f:
+        f.write(f"\n# Source Page: {start_url}\n")
 
     print(f"📄 寫入 {output_file}（{len(php_api_urls)} 筆）")
     for url in sorted(php_api_urls):

@@ -57,7 +57,7 @@ def collect_api_response(url, method='GET', data=None, headers=None):
         }
 
 
-def save_to_txt(results, filename='api_responses.txt'):
+def save_to_txt(results, filename=os.path.join("output", 'api_responses_report.txt')):
     """
     将结果保存到TXT文件
     :param results: 收集的结果列表
@@ -93,6 +93,7 @@ def save_to_txt(results, filename='api_responses.txt'):
         for i, result in enumerate(results, 1):
             f.write(f"【接口 {i}】 => {result['status_code']} \n")
             f.write(f"URL: {result.get('url', 'N/A')}\n")
+            f.write(f"来源页面: {result.get('source', 'unknown')}\n")
 
             if 'error' in result:
                 f.write(f"请求状态: 失败\n")
@@ -126,6 +127,9 @@ def batch_collect_api_responses(api_list):
         headers = api.get('headers')
 
         result = collect_api_response(url, method, data, headers)
+        # 注入来源信息
+        if "source" in api:
+            result["source"] = api["source"]
         all_results.append(result)
 
         if 'error' in result:
@@ -136,7 +140,7 @@ def batch_collect_api_responses(api_list):
     return all_results
 
 
-def load_api_list_from_file(filename=os.path.join("output", "php_post_urls_converted.txt")):
+def load_api_list_from_file(filename=os.path.join("output", "all_php_api_converted.txt")):
     api_list = []
     if not os.path.exists(filename):
         print(f"❌ 檔案不存在：{filename}")
@@ -146,10 +150,19 @@ def load_api_list_from_file(filename=os.path.join("output", "php_post_urls_conve
         for line in f:
             path = line.strip()
             if path:
-                api_list.append({
-                    "url": f"{BASE_URL}{path}",
-                    "method": "POST"
-                })
+                if "# from:" in path:
+                    clean_path, source = path.split("# from:")
+                    api_list.append({
+                        "url": f"{BASE_URL}{clean_path.strip()}",
+                        "method": "POST",
+                        "source": source.strip()
+                    })
+                else:
+                    api_list.append({
+                        "url": f"{BASE_URL}{path}",
+                        "method": "POST",
+                        "source": "unknown"
+                    })
     return api_list
 
 if __name__ == "__main__":
@@ -158,7 +171,7 @@ if __name__ == "__main__":
     results = batch_collect_api_responses(api_list)
 
     # 保存到TXT文件
-    txt_filename = "api_responses_report.txt"
+    txt_filename = os.path.join("output", "api_responses_report.txt")
     save_to_txt(results, txt_filename)
 
     # 在控制台也显示统计信息

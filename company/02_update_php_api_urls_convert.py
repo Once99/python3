@@ -5,7 +5,7 @@ def convert_php_urls(input_dir, output_file):
         print(f"❌ 找不到資料夾：{input_dir}")
         return
 
-    urls = set()
+    urls = {}
 
     for filename in os.listdir(input_dir):
         if filename.endswith(".txt") and filename != output_file:
@@ -14,25 +14,30 @@ def convert_php_urls(input_dir, output_file):
                 for line in f:
                     url = line.strip()
                     if url and (url.endswith(".php") or ".php?" in url):
-                        urls.add(url)
+                        if url not in urls:
+                            urls[url] = filename  # 儲存來源檔名
 
+    converted_set = set()
     converted = []
     for url in sorted(urls):
-        filename = os.path.basename(url).split("?")[0].replace(".php", "")
-        converted_url = f"/api/{filename}"
-        converted.append(converted_url)
+        base_name = os.path.basename(url).split("?")[0].replace(".php", "")
+        converted_url = f"/api/{base_name}"
+        if converted_url not in converted_set:
+            comment = f"# from: {urls[url]}"
+            converted.append((converted_url, comment))
+            converted_set.add(converted_url)
 
     output_path = os.path.join(input_dir, output_file)
     with open(output_path, 'w', encoding='utf-8') as f:
-        for url in converted:
-            print(f"✅ {url}")
-            f.write(f"{url}\n")
+        for url, comment in converted:
+            print(f"✅ {url} {comment}")
+            f.write(f"{url} {comment}\n")
 
     print(f"\n📄 已輸出轉換結果到：{output_path}")
 
 if __name__ == "__main__":
     current_dir = os.path.dirname(os.path.abspath(__file__))
     input_dir = os.path.join(current_dir, "output")
-    output_file = "php_post_urls_converted.txt"
+    output_file = "all_php_api_converted.txt"
 
     convert_php_urls(input_dir, output_file)
