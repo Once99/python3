@@ -46,7 +46,7 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
 
     # 在訪問前檢查檔案是否已存在，若存在則直接跳過
     domain_name, page_name = extract_domain_and_page_name(start_url)
-    output_dir = "qy212"
+    output_dir = "output"
     if not os.path.exists(output_dir):
         os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, f"{page_name}_php_api.txt")
@@ -118,7 +118,7 @@ def main():
         )
 
     # 寫入總檔案
-    all_file_path = os.path.join("qy212", "all_php_api.txt")
+    all_file_path = os.path.join("output", "all_php_api.txt")
     with open(all_file_path, "w", encoding="utf-8") as f:
         for url in sorted(all_php_urls):
             f.write(url + "\n")

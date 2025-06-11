@@ -136,7 +136,7 @@ def batch_collect_api_responses(api_list):
     return all_results
 
 
-def load_api_list_from_file(filename="php_post_urls_converted.txt"):
+def load_api_list_from_file(filename=os.path.join("output", "php_post_urls_converted.txt")):
     api_list = []
     if not os.path.exists(filename):
         print(f"❌ 檔案不存在：{filename}")
