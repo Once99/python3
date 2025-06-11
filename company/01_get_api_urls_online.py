@@ -16,9 +16,18 @@ def extract_domain_and_page_name(full_url):
     domain_name = domain.split('.')[0]
     dir_parts = parsed.path.strip("/").split("/")
     if len(dir_parts) > 1:
-        page_name = f"{dir_parts[-2]}_{os.path.splitext(dir_parts[-1])[0]}"
+        base = f"{dir_parts[-2]}_{os.path.splitext(dir_parts[-1])[0]}"
     else:
-        page_name = os.path.splitext(dir_parts[-1])[0]
+        base = os.path.splitext(dir_parts[-1])[0]
+
+    # 只接受 ?action 參數，忽略其他參數
+    if "action=" in parsed.query:
+        query_parts = [q for q in parsed.query.split("&") if q.startswith("action=")]
+        query = "_".join(q.replace("=", "_") for q in query_parts)
+        page_name = f"{base}_{query}"
+    else:
+        page_name = base
+
     return domain_name, page_name
 
 def is_internal_link(base_url, link_url):
@@ -73,14 +82,10 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
         if req.response and is_php_api(req.url):
             php_api_urls.add(req.url)
 
-    # 寫入個別頁面檔案
+    # 寫入個別頁面檔案，每行附帶來源頁面
     with open(output_file, "w", encoding="utf-8") as f:
         for url in sorted(php_api_urls):
-            f.write(url + "\n")
-
-    # 追加來源頁面資訊
-    with open(output_file, "a", encoding="utf-8") as f:
-        f.write(f"\n# Source Page: {start_url}\n")
+            f.write(f"{url}  # from: {start_url}\n")
 
     print(f"📄 寫入 {output_file}（{len(php_api_urls)} 筆）")
     for url in sorted(php_api_urls):
@@ -90,8 +95,17 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
 
     # 搜尋內部連結並遞迴訪問
     internal_links = get_all_internal_links(driver, start_url)
+    slot_game_visited = False
     for link in internal_links:
         link_cleaned = link.split("#")[0]
+
+        # 特別處理 slotGame.jsp，只訪問其中一個
+        if "slotGame.jsp" in link_cleaned:
+            if slot_game_visited:
+                continue
+            else:
+                slot_game_visited = True
+
         if link_cleaned not in visited:
             visit_and_collect(driver, link, wait_selector=None, visited=visited, all_php_urls=all_php_urls)
 
@@ -107,7 +121,7 @@ def main():
     # 起始頁面列表（不含 wait_for）
     start_pages = [
         "https://qy212.vip/index.jsp",
-        "https://qy212.vip/userManage.php?action=1",
+        "https://qy212.vip/userManage.php",
         "https://qy212.vip/mobile/index.jsp",
         "https://qy212.vip/mobile/userCenterNew.jsp"
     ]
@@ -124,13 +138,6 @@ def main():
             all_php_urls=all_php_urls
         )
 
-    # 寫入總檔案
-    all_file_path = os.path.join("output", "all_php_api.txt")
-    with open(all_file_path, "w", encoding="utf-8") as f:
-        for url in sorted(all_php_urls):
-            f.write(url + "\n")
-
-    print(f"\n📊 總共收集 {len(all_php_urls)} 筆 .php API，寫入：{all_file_path}")
     driver.quit()
 
 if __name__ == "__main__":

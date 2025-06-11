@@ -7,13 +7,14 @@ import os
 
 BASE_URL = "https://qyvue.itomtest.com"
 
-def collect_api_response(url, method='GET', data=None, headers=None):
+def collect_api_response(url, method='GET', data=None, headers=None, source=None):
     """
     收集单个API接口的响应信息
     :param url: 接口URL
     :param method: 请求方法
     :param data: POST数据
     :param headers: 请求头
+    :param source: 来源页面
     :return: 包含响应信息的字典
     """
     try:
@@ -24,7 +25,7 @@ def collect_api_response(url, method='GET', data=None, headers=None):
         elif method.upper() == 'POST':
             response = requests.post(url, data=data, headers=headers)
         else:
-            return {"error": f"Unsupported method: {method}", "url": url}
+            return {"error": f"Unsupported method: {method}", "url": url, "source": source}
 
         parsed_url = urlparse(url)
 
@@ -39,7 +40,8 @@ def collect_api_response(url, method='GET', data=None, headers=None):
             "response_size": len(response.content),
             "response_content": response.text,
             "json_response": None,
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "source": source
         }
 
         try:
@@ -53,7 +55,8 @@ def collect_api_response(url, method='GET', data=None, headers=None):
         return {
             "error": str(e),
             "url": url,
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "source": source
         }
 
 
@@ -91,7 +94,7 @@ def save_to_txt(results, filename=os.path.join("output", 'api_responses_report.t
         f.write("\n" + "=" * 50 + "\n\n")
 
         for i, result in enumerate(results, 1):
-            f.write(f"【接口 {i}】 => {result['status_code']} \n")
+            f.write(f"【接口 {i}】 => {result.get('status_code', 'N/A')} \n")
             f.write(f"URL: {result.get('url', 'N/A')}\n")
             f.write(f"来源页面: {result.get('source', 'unknown')}\n")
 
@@ -125,11 +128,9 @@ def batch_collect_api_responses(api_list):
         method = api.get('method', 'GET')
         data = api.get('data')
         headers = api.get('headers')
+        source = api.get("source", "unknown")
 
-        result = collect_api_response(url, method, data, headers)
-        # 注入来源信息
-        if "source" in api:
-            result["source"] = api["source"]
+        result = collect_api_response(url, method, data, headers, source=source)
         all_results.append(result)
 
         if 'error' in result:

@@ -12,10 +12,13 @@ def convert_php_urls(input_dir, output_file):
             file_path = os.path.join(input_dir, filename)
             with open(file_path, 'r', encoding='utf-8') as f:
                 for line in f:
-                    url = line.strip()
-                    if url and (url.endswith(".php") or ".php?" in url):
-                        if url not in urls:
-                            urls[url] = filename  # 儲存來源檔名
+                    parts = line.strip().split("# from:")
+                    if len(parts) >= 1:
+                        url = parts[0].strip()
+                        if url and (url.endswith(".php") or ".php?" in url):
+                            source = parts[1].strip() if len(parts) == 2 else filename
+                            if url not in urls:
+                                urls[url] = source
 
     converted_set = set()
     converted = []
@@ -23,6 +26,7 @@ def convert_php_urls(input_dir, output_file):
         base_name = os.path.basename(url).split("?")[0].replace(".php", "")
         converted_url = f"/api/{base_name}"
         if converted_url not in converted_set:
+            # Preserve the actual source page from the .txt file line
             comment = f"# from: {urls[url]}"
             converted.append((converted_url, comment))
             converted_set.add(converted_url)
