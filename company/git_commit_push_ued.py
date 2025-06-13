@@ -19,18 +19,20 @@ def git_commit_and_tag():
     if not has_staged_changes():
         unstaged = get_unstaged_files()
         if unstaged:
-            print("⚠️ 偵測到以下未 staged 的變更（已略過 .DS_Store）：\n")
+            print("\n⚠️ 當前尚未加入 staged 區的檔案（已排除 .DS_Store）：\n")
             for file in unstaged:
-                print(f" - {file}")
-            choice = input("\n是否要自動執行 git add . ? [y/N]: ").strip().lower()
+                print(f"  • {file}")
+            print("\n➡️ 上述檔案尚未加入 git 暫存區")
+            choice = input("是否要自動執行 `git add .`？ [y/N]: ").strip().lower()
             if choice == 'y':
                 subprocess.run(["git", "add", "."])
             else:
-                print("❌ 未加入 staged 區，結束")
+                print("❌ 已取消提交流程")
                 return
 
+        # 再次確認是否已 staged
         if not has_staged_changes():
-            print("⚠️ 即使 add 之後也沒有可提交的內容，跳過")
+            print("⚠️ 即使執行了 git add，依然沒有可提交的內容，流程中止")
             return
 
     message = input("💬 請輸入 commit 訊息（預設：日常维护）：").strip()
