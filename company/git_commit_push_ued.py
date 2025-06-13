@@ -52,7 +52,7 @@ def git_commit_and_tag():
 
     # ✅ 自動打開 GitLab Pipelines 頁面
     subprocess.run(["open", "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"])
-    print("🌐 已自動開啟 GitLab Pipelines 頁面")
+    print("🌐 已自動開啟 GitLab 頁面：https://git.easydevops.net/B2C_DC/ued/web/")
 
 if __name__ == "__main__":
     git_commit_and_tag()
