@@ -17,6 +17,14 @@ def create_and_push_tag():
     subprocess.run(["git", "push", "origin", tag])
     print(f"🏷️ 已打 tag：{tag} 並推送成功")
 
+    # 檢查 FortiClientVPN 是否正在執行
+    check_vpn = subprocess.run(["pgrep", "-f", "FortiClientVPN"], capture_output=True, text=True)
+    if check_vpn.returncode != 0:
+        print("🔐 FortiClientVPN 未開啟，正在啟動...")
+        subprocess.run(["open", "-a", "FortiClientVPN"])
+    else:
+        print("✅ FortiClientVPN 已在執行中")
+
     subprocess.run("echo 'https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp' | pbcopy", shell=True)
     print("📋 已自動複製網址到剪貼簿：https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp")
 
