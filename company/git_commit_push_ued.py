@@ -1,15 +1,28 @@
 import os
 import subprocess
+import time
+import socket
 from datetime import datetime
+
 
 def has_staged_changes():
     result = subprocess.run(["git", "diff", "--cached", "--quiet"])
     return result.returncode != 0
 
+
 def get_unstaged_files():
     result = subprocess.run(["git", "diff", "--name-only"], capture_output=True, text=True)
     files = result.stdout.strip().splitlines()
     return [f for f in files if os.path.basename(f) != ".DS_Store"]
+
+
+def vpn_connected(host="HKVPN01.dc66.net", port=443):
+    try:
+        with socket.create_connection((host, port), timeout=3):
+            return True
+    except Exception:
+        return False
+
 
 def create_and_push_tag():
     tag = f"v{datetime.now().strftime('%Y.%m.%d.%H%M')}"
@@ -22,14 +35,38 @@ def create_and_push_tag():
     if check_vpn.returncode != 0:
         print("🔐 FortiClientVPN 未開啟，正在啟動...")
         subprocess.run(["open", "-a", "FortiClientVPN"])
+        print("⏳ 等待 FortiClientVPN 啟動並連線中...")
+        time.sleep(10)  # 初步等待時間，可根據實際情況調整
     else:
         print("✅ FortiClientVPN 已在執行中")
 
-    subprocess.run("echo 'https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp' | pbcopy", shell=True)
-    print("📋 已自動複製網址到剪貼簿：https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp")
+    # 等待 VPN 連線成功（偵測指定 IP 可達）
+    vpn_hosts = ["HKVPN01.dc66.net", "HKVPN02.dc66.net", "HKVPN03.dc66.net"]
+    connected = False
+    for host in vpn_hosts:
+        if vpn_connected(host):
+            print(f"🔗 FortiClientVPN 已成功連線至 {host}")
+            connected = True
+            break
+        else:
+            print(f"❌ 無法連線至 VPN 主機 {host}")
+    if not connected:
+        print("❌ 請手動連線 VPN")
+        return
 
-    subprocess.run(["open", "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"])
-    print("🌐 已自動開啟 GitLab 頁面：https://git.easydevops.net/B2C_DC/ued/web/")
+    for _ in range(10):
+        if vpn_connected(host):
+            subprocess.run("echo 'https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp' | pbcopy", shell=True)
+            print("📋 已自動複製網址到剪貼簿：https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp")
+
+            subprocess.run(["open", "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"])
+            print("🌐 已自動開啟 GitLab 頁面：https://git.easydevops.net/B2C_DC/ued/web/")
+            break
+        print("⏳ 等待 VPN 連線成功...")
+        time.sleep(3)
+    else:
+        print("❌ FortiClientVPN 似乎尚未連線成功")
+
 
 def git_commit_and_tag():
     repo_path = "/Users/oncechen/IdeaProjects/c_ued"
@@ -63,6 +100,7 @@ def git_commit_and_tag():
             create_and_push_tag()
         else:
             print("✅ 任務已結束，未進行 tag")
+
 
 if __name__ == "__main__":
     git_commit_and_tag()
