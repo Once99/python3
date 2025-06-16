@@ -33,39 +33,15 @@ def create_and_push_tag():
     # 檢查 FortiClientVPN 是否正在執行
     check_vpn = subprocess.run(["pgrep", "-f", "FortiClientVPN"], capture_output=True, text=True)
     if check_vpn.returncode != 0:
-        print("🔐 FortiClientVPN 未開啟，正在啟動...")
+        print("🔐 FortiClientVPN 正在啟動...")
         subprocess.run(["open", "-a", "FortiClientVPN"])
-        print("⏳ 等待 FortiClientVPN 啟動並連線中...")
-        time.sleep(10)  # 初步等待時間，可根據實際情況調整
-    else:
-        print("✅ FortiClientVPN 已在執行中")
 
-    # 等待 VPN 連線成功（偵測指定 IP 可達）
-    vpn_hosts = ["HKVPN01.dc66.net", "HKVPN02.dc66.net", "HKVPN03.dc66.net"]
-    connected = False
-    for host in vpn_hosts:
-        if vpn_connected(host):
-            print(f"🔗 FortiClientVPN 已成功連線至 {host}")
-            connected = True
-            break
-        else:
-            print(f"❌ 無法連線至 VPN 主機 {host}")
-    if not connected:
-        print("❌ 請手動連線 VPN")
-        return
 
-    for _ in range(10):
-        if vpn_connected(host):
-            subprocess.run("echo 'https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp' | pbcopy", shell=True)
-            print("📋 已自動複製網址到剪貼簿：https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp")
+    subprocess.run("echo 'https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp' | pbcopy", shell=True)
+    print("📋 已自動複製網址到剪貼簿：https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp")
 
-            subprocess.run(["open", "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"])
-            print("🌐 已自動開啟 GitLab 頁面：https://git.easydevops.net/B2C_DC/ued/web/")
-            break
-        print("⏳ 等待 VPN 連線成功...")
-        time.sleep(3)
-    else:
-        print("❌ FortiClientVPN 似乎尚未連線成功")
+    subprocess.run(["open", "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"])
+    print("🌐 已自動開啟 GitLab 頁面：https://git.easydevops.net/B2C_DC/ued/web/")
 
 
 def git_commit_and_tag():
