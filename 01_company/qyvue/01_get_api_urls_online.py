@@ -6,10 +6,43 @@ from selenium.webdriver.common.by import By
 from urllib.parse import urlparse
 import os
 import time
+from tqdm import tqdm
 
 def is_php_api(url):
     return url.endswith('.php') or '.php?' in url
 
+def is_valid_api(url):
+    return is_php_api(url) or "/api/" in url
+
+def collect_api_info(req):
+    try:
+        full_url = req.url
+        method = req.method
+        headers = dict(req.headers)
+        data = req.body.decode(errors="ignore") if req.body else ""
+
+        print(f"\n🔍 測試接口: {full_url}")
+        print(f"📤 發送參數: {data}")
+        start_time = time.time()
+
+        if method.upper() == 'GET':
+            r = requests.get(full_url, headers=headers, params=data)
+        else:
+            r = requests.post(full_url, headers=headers, data=data)
+
+        elapsed = time.time() - start_time
+        print(f"✅ 狀態碼: {r.status_code} | ⏱️ 響應時間: {elapsed:.2f} 秒")
+
+        try:
+            json_data = r.json()
+            preview = json.dumps(json_data, indent=2, ensure_ascii=False)[:500]
+        except Exception:
+            preview = r.text[:500]
+
+        return (full_url, r.status_code, data, preview)
+    except Exception as e:
+        print(f"❌ 測試失敗：{e}")
+        return None
 
 def extract_domain_and_page_name(full_url):
     parsed = urlparse(full_url)
@@ -46,7 +79,7 @@ def get_all_internal_links(driver, base_url):
             links.add(href)
     return links
 
-def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_php_urls=None):
+def visit_and_collect(driver, start_url, visited=None, all_php_urls=None):
     if visited is None:
         visited = set()
     if all_php_urls is None:
@@ -67,7 +100,11 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
     # 清空請求記錄
     del driver.requests
     print(f"\n➡️ 訪問：{start_url}")
-    driver.get(start_url)
+    try:
+        driver.get(start_url)
+    except Exception as e:
+        print(f"⚠️ 訪問失敗：{e}")
+        return
 
     try:
         time.sleep(5)
@@ -77,38 +114,10 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
     # 收集 PHP API 請求資訊
     api_infos = []
     for req in driver.requests:
-        if req.response and is_php_api(req.url):
-            try:
-                full_url = req.url
-                method = req.method
-                headers = dict(req.headers)
-                data = req.body.decode(errors="ignore") if req.body else ""
-
-                print(f"\n🔍 測試接口: {full_url}")
-                print(f"📤 發送參數: {data}")
-                start_time = time.time()
-
-                if method.upper() == 'GET':
-                    r = requests.get(full_url, headers=headers, params=data)
-                else:
-                    r = requests.post(full_url, headers=headers, data=data)
-
-                elapsed = time.time() - start_time
-                print(f"✅ 狀態碼: {r.status_code} | ⏱️ 響應時間: {elapsed:.2f} 秒")
-
-                try:
-                    json_data = r.json()
-                    code = str(json_data.get("code", ""))
-                    message = json_data.get("msg") or json_data.get("message", "")
-                    preview = json.dumps(json_data, indent=2, ensure_ascii=False)[:500]
-                except Exception:
-                    code = ""
-                    message = ""
-                    preview = r.text[:500]
-
-                api_infos.append((full_url, r.status_code, data, preview))
-            except Exception as e:
-                print(f"❌ 測試失敗：{e}")
+        if req.response and is_valid_api(req.url):
+            info = collect_api_info(req)
+            if info:
+                api_infos.append(info)
 
     # 寫入個別頁面檔案，每筆資料條列式說明
     with open(output_file, "w", encoding="utf-8") as f:
@@ -140,7 +149,7 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
                 slot_game_visited = True
 
         if link_cleaned not in visited:
-            visit_and_collect(driver, link, wait_selector=None, visited=visited, all_php_urls=all_php_urls)
+            visit_and_collect(driver, link, visited=visited, all_php_urls=all_php_urls)
 
 def main():
     # 清空 output 目錄下所有 .txt 檔案
@@ -168,8 +177,8 @@ def main():
     all_php_urls = set()
     visited_links = set()
 
-    url = start_pages[0]
-    visit_and_collect(driver, start_url=url, wait_selector=None, visited=visited_links, all_php_urls=all_php_urls)
+    for url in tqdm(start_pages):
+        visit_and_collect(driver, start_url=url, visited=visited_links, all_php_urls=all_php_urls)
 
     driver.quit()
 

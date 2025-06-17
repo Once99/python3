@@ -129,7 +129,6 @@ def visit_and_collect(driver, start_url, visited=None, all_api_urls=None):
 
     all_api_urls.update([url for url, _, _, _, _ in api_infos])
 
-
     # 搜尋內部連結並遞迴訪問
     internal_links = get_all_internal_links(driver, start_url)
     for link in internal_links:
@@ -155,10 +154,21 @@ def main():
     # 起始頁面列表（不含 wait_for）
     start_pages = [
         "https://lpapis5811.com/home",
+        "https://lpapis5811.com/slot/PMSLOT"
+        "https://lpapis5811.com/bet/nfb",
+        "https://lpapis5811.com/HelpCenter",
+        "https://lpapis5811.com/events",
         "https://lpapis5811.com/about",
         "https://lpapis5811.com/deposit",
         "https://lpapis5811.com/withdraw",
-        "https://lpapis5811.com/transfer"
+        "https://lpapis5811.com/transfer",
+        "https://lpapis5811.com/record",
+        "https://lpapis5811.com/selfPromote",
+        "https://lpapis5811.com/belong",
+        "https://lpapis5811.com/join",
+        "https://lpapis5811.com/events/921",
+        "https://lpapis5811.com/Setting"
+
     ]
 
     all_api_urls = set()
