@@ -1,47 +1,19 @@
 import os
 
-def convert_php_urls(input_dir, output_file):
-    if not os.path.exists(input_dir):
-        print(f"❌ 找不到資料夾：{input_dir}")
-        return
+def merge_all_txt_in_output(output_dir="output", merged_filename="merged_api_all.txt"):
+    merged_path = os.path.join(output_dir, merged_filename)
 
-    urls = {}
+    with open(merged_path, 'w', encoding='utf-8') as outfile:
+        for fname in sorted(os.listdir(output_dir)):
+            if fname.endswith('.txt') and fname != merged_filename:
+                file_path = os.path.join(output_dir, fname)
+                with open(file_path, 'r', encoding='utf-8') as infile:
+                    outfile.write(f"##### 檔案：{fname} #####\n")
+                    outfile.writelines(infile.readlines())
+                    outfile.write("\n\n")
 
-    for filename in os.listdir(input_dir):
-        if filename.endswith(".txt") and filename != output_file:
-            file_path = os.path.join(input_dir, filename)
-            with open(file_path, 'r', encoding='utf-8') as f:
-                for line in f:
-                    parts = line.strip().split("# from:")
-                    if len(parts) >= 1:
-                        url = parts[0].strip()
-                        if url and (url.endswith(".php") or ".php?" in url):
-                            source = parts[1].strip() if len(parts) == 2 else filename
-                            if url not in urls:
-                                urls[url] = source
+    print(f"✅ 已整合完成，輸出到：{merged_path}")
 
-    converted_set = set()
-    converted = []
-    for url in sorted(urls):
-        base_name = os.path.basename(url).split("?")[0].replace(".php", "")
-        converted_url = f"/api/{base_name}"
-        if converted_url not in converted_set:
-            # Preserve the actual source page from the .txt file line
-            comment = f"# from: {urls[url]}"
-            converted.append((converted_url, comment))
-            converted_set.add(converted_url)
-
-    output_path = os.path.join(input_dir, output_file)
-    with open(output_path, 'w', encoding='utf-8') as f:
-        for url, comment in converted:
-            print(f"✅ {url} {comment}")
-            f.write(f"{url} {comment}\n")
-
-    print(f"\n📄 已輸出轉換結果到：{output_path}")
-
+# 使用方法
 if __name__ == "__main__":
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    input_dir = os.path.join(current_dir, "output")
-    output_file = "all_php_api_converted.txt"
-
-    convert_php_urls(input_dir, output_file)
+    merge_all_txt_in_output()

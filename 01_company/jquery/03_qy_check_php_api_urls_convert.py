@@ -60,7 +60,7 @@ def collect_api_response(url, method='GET', data=None, headers=None, source=None
         }
 
 
-def save_to_txt(results, filename=os.path.join("output", 'api_responses_report.txt')):
+def save_to_txt(results, filename=os.path.join("output", 'merged_api_all.txt')):
     """
     将结果保存到TXT文件
     :param results: 收集的结果列表
@@ -125,7 +125,7 @@ def batch_collect_api_responses(api_list):
         print(f"收集: {api.get('url')}...", end=' ')
 
         url = api.get('url')
-        method = api.get('method', 'GET')
+        method = api.get('method', 'POST')
         data = api.get('data')
         headers = api.get('headers')
         source = api.get("source", "unknown")
@@ -141,29 +141,50 @@ def batch_collect_api_responses(api_list):
     return all_results
 
 
-def load_api_list_from_file(filename=os.path.join("output", "all_php_api_converted.txt")):
+def load_api_list_from_file(filename=os.path.join("output", "merged_api_all.txt")):
+    import re
     api_list = []
+
     if not os.path.exists(filename):
         print(f"❌ 檔案不存在：{filename}")
         return api_list
 
     with open(filename, "r", encoding="utf-8") as f:
+        block = []
         for line in f:
-            path = line.strip()
-            if path:
-                if "# from:" in path:
-                    clean_path, source = path.split("# from:")
+            if line.strip() == "--------------------------------------------------":
+                block_text = "\n".join(block)
+                match_url = re.search(r"2\.API地址：([^\n]+)", block_text)
+                match_page = re.search(r"1\.訪問頁面：([^\n]+)", block_text)
+                match_param = re.search(r"4\.接口參數：([^\n]*)", block_text)
+
+                if match_url:
+                    raw_url = match_url.group(1).strip()
+                    parsed = urlparse(raw_url)
+                    url = BASE_URL + parsed.path
+                    source = match_page.group(1).strip() if match_page else "unknown"
+                    data = match_param.group(1).strip()
+
+                    # 嘗試將 JSON 字串轉成 dict
+                    if data and not data.startswith("（"):  # 過濾 Binary 類資料
+                        try:
+                            data_obj = json.loads(data)
+                        except json.JSONDecodeError:
+                            data_obj = data  # 非 JSON 格式原樣傳回
+                    else:
+                        data_obj = None
+
                     api_list.append({
-                        "url": f"{BASE_URL}{clean_path.strip()}",
+                        "url": url,
                         "method": "POST",
-                        "source": source.strip()
+                        "source": source,
+                        "data": data_obj
                     })
-                else:
-                    api_list.append({
-                        "url": f"{BASE_URL}{path}",
-                        "method": "POST",
-                        "source": "unknown"
-                    })
+
+                block = []  # 清空以準備下一區塊
+            else:
+                block.append(line.strip())
+
     return api_list
 
 if __name__ == "__main__":

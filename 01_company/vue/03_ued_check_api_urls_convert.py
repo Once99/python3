@@ -4,7 +4,6 @@ from urllib.parse import urlparse
 from datetime import datetime
 import time
 import os
-import re
 
 BASE_URL = "https://jxfvue.itomtest.com"
 
