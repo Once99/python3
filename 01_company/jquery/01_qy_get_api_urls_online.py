@@ -1,14 +1,15 @@
 from seleniumwire import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse
 import os
 import time
 
 def is_php_api(url):
     return url.endswith('.php') or '.php?' in url
+
+def is_api_endpoint(url):
+    return '/api/' in url
 
 def extract_domain_and_page_name(full_url):
     parsed = urlparse(full_url)
@@ -61,7 +62,7 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
     output_dir = "output"
     if not os.path.exists(output_dir):
         os.makedirs(output_dir, exist_ok=True)
-    output_file = os.path.join(output_dir, f"{page_name}_php_api.txt")
+    output_file = os.path.join(output_dir, f"{page_name}_api_info.txt")
     if os.path.exists(output_file):
         print(f"⏩ 已存在 {output_file}，跳過")
         return
@@ -76,22 +77,39 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
     except Exception as e:
         print(f"⚠️ 固定等待失敗：{e}")
 
-    # 收集 .php API 請求
-    php_api_urls = set()
+    # 收集 /api/ API 請求資訊
+    api_infos = []
     for req in driver.requests:
-        if req.response and is_php_api(req.url):
-            php_api_urls.add(req.url)
+        if req.response and is_api_endpoint(req.url):
+            status_code = req.response.status_code
+            try:
+                request_body = req.body.decode(errors="ignore") if req.body else ""
+            except Exception:
+                request_body = ""
+            try:
+                response_body = req.response.body.decode("utf-8")
+                if any(ord(c) < 32 and c not in '\r\n\t' for c in response_body[:50]):
+                    raise ValueError("binary content detected")
+                response_body = response_body[:500]
+            except Exception:
+                response_body = "（Binary 資料，略過）"
+            api_infos.append((req.url, status_code, request_body, response_body))
 
-    # 寫入個別頁面檔案，每行附帶來源頁面
+    # 寫入個別頁面檔案，每筆資料條列式說明
     with open(output_file, "w", encoding="utf-8") as f:
-        for url in sorted(php_api_urls):
-            f.write(f"{url}  # from: {start_url}\n")
+        for url, status_code, request_body, response_body in sorted(api_infos, key=lambda x: x[0]):
+            f.write(f"1.訪問頁面：{start_url}\n")
+            f.write(f"2.API地址：{url}\n")
+            f.write(f"3.接口狀態：{status_code}\n")
+            f.write(f"4.接口參數：{request_body}\n")
+            f.write(f"5.接口返回：{response_body}\n")
+            f.write("--------------------------------------------------\n\n")
 
-    print(f"📄 寫入 {output_file}（{len(php_api_urls)} 筆）")
-    for url in sorted(php_api_urls):
+    print(f"📄 寫入 {output_file}（{len(api_infos)} 筆）")
+    for url, _, _, _ in sorted(api_infos, key=lambda x: x[0]):
         print("✅", url)
 
-    all_php_urls.update(php_api_urls)
+    all_php_urls.update([info[0] for info in api_infos])
 
     # 搜尋內部連結並遞迴訪問
     internal_links = get_all_internal_links(driver, start_url)
@@ -110,6 +128,15 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
             visit_and_collect(driver, link, wait_selector=None, visited=visited, all_php_urls=all_php_urls)
 
 def main():
+    # 清空 output 目錄下所有 .txt 檔案
+    output_dir = "output"
+    if os.path.exists(output_dir):
+        for file in os.listdir(output_dir):
+            if file.endswith(".txt"):
+                os.remove(os.path.join(output_dir, file))
+    else:
+        os.makedirs(output_dir, exist_ok=True)
+
     options = Options()
     driver = webdriver.Chrome(options=options)  # 可視化登入
 
@@ -120,10 +147,7 @@ def main():
 
     # 起始頁面列表（不含 wait_for）
     start_pages = [
-        "https://qy212.vip/index.jsp",
-        "https://qy212.vip/userManage.php",
-        "https://qy212.vip/mobile/index.jsp",
-        "https://qy212.vip/mobile/userCenterNew.jsp"
+        "https://qy212.vip/index.jsp"
     ]
 
     all_php_urls = set()
