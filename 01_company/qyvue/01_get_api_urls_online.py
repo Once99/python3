@@ -1,3 +1,5 @@
+import requests
+import json
 from seleniumwire import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -8,8 +10,6 @@ import time
 def is_php_api(url):
     return url.endswith('.php') or '.php?' in url
 
-def is_api_endpoint(url):
-    return '/api/' in url
 
 def extract_domain_and_page_name(full_url):
     parsed = urlparse(full_url)
@@ -63,9 +63,6 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
     if not os.path.exists(output_dir):
         os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, f"{page_name}_api_info.txt")
-    if os.path.exists(output_file):
-        print(f"⏩ 已存在 {output_file}，跳過")
-        return
 
     # 清空請求記錄
     del driver.requests
@@ -77,23 +74,41 @@ def visit_and_collect(driver, start_url, wait_selector=None, visited=None, all_p
     except Exception as e:
         print(f"⚠️ 固定等待失敗：{e}")
 
-    # 收集 /api/ API 請求資訊
+    # 收集 PHP API 請求資訊
     api_infos = []
     for req in driver.requests:
-        if req.response and is_api_endpoint(req.url):
-            status_code = req.response.status_code
+        if req.response and is_php_api(req.url):
             try:
-                request_body = req.body.decode(errors="ignore") if req.body else ""
-            except Exception:
-                request_body = ""
-            try:
-                response_body = req.response.body.decode("utf-8")
-                if any(ord(c) < 32 and c not in '\r\n\t' for c in response_body[:50]):
-                    raise ValueError("binary content detected")
-                response_body = response_body[:500]
-            except Exception:
-                response_body = "（Binary 資料，略過）"
-            api_infos.append((req.url, status_code, request_body, response_body))
+                full_url = req.url
+                method = req.method
+                headers = dict(req.headers)
+                data = req.body.decode(errors="ignore") if req.body else ""
+
+                print(f"\n🔍 測試接口: {full_url}")
+                print(f"📤 發送參數: {data}")
+                start_time = time.time()
+
+                if method.upper() == 'GET':
+                    r = requests.get(full_url, headers=headers, params=data)
+                else:
+                    r = requests.post(full_url, headers=headers, data=data)
+
+                elapsed = time.time() - start_time
+                print(f"✅ 狀態碼: {r.status_code} | ⏱️ 響應時間: {elapsed:.2f} 秒")
+
+                try:
+                    json_data = r.json()
+                    code = str(json_data.get("code", ""))
+                    message = json_data.get("msg") or json_data.get("message", "")
+                    preview = json.dumps(json_data, indent=2, ensure_ascii=False)[:500]
+                except Exception:
+                    code = ""
+                    message = ""
+                    preview = r.text[:500]
+
+                api_infos.append((full_url, r.status_code, data, preview))
+            except Exception as e:
+                print(f"❌ 測試失敗：{e}")
 
     # 寫入個別頁面檔案，每筆資料條列式說明
     with open(output_file, "w", encoding="utf-8") as f:
@@ -153,14 +168,8 @@ def main():
     all_php_urls = set()
     visited_links = set()
 
-    for url in start_pages:
-        visit_and_collect(
-            driver,
-            start_url=url,
-            wait_selector=None,
-            visited=visited_links,
-            all_php_urls=all_php_urls
-        )
+    url = start_pages[0]
+    visit_and_collect(driver, start_url=url, wait_selector=None, visited=visited_links, all_php_urls=all_php_urls)
 
     driver.quit()
 

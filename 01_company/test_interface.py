@@ -1,17 +1,6 @@
 import requests
 import json
-from urllib.parse import urljoin
 import time
-
-BASE_URL = "https://qyvue.itomtest.com"
-DEFAULT_TOKEN = "demo123"
-
-# ✅ 每個 API 對應其參數
-API_CONFIGS = [
-    {"path": "/api/getRecords", "params": {"transType": "全部", "transStatus": "全部", "timeType": "3"}},
-    {"path": "/api/getBetListRecordV2", "params": {"num": "1"}},
-    # 其他接口可依需求開啟
-]
 
 CODE_HINTS = {
     "101": "⚠️ 系統繁忙，請稍後再試",
@@ -22,13 +11,7 @@ CODE_HINTS = {
 }
 
 
-def check_single_api(api_path: str, method='POST', data=None, headers=None):
-    full_url = urljoin(BASE_URL, api_path)
-
-    # 統一加入 token
-    if isinstance(data, dict):
-        data.setdefault("token", DEFAULT_TOKEN)
-
+def check_single_api(full_url: str, method='POST', data=None, headers=None):
     print(f"\n🔍 測試接口: {full_url}")
     print(f"📤 發送參數: {data}")
 
@@ -59,9 +42,18 @@ def check_single_api(api_path: str, method='POST', data=None, headers=None):
 
 
 def main():
-    input("🔑 請先手動登入（如有登入驗證機制），完成後請按 Enter 繼續...\n")
-    for config in API_CONFIGS:
-        check_single_api(config["path"], data=config.get("params", {}))
+    while True:
+        full_url = input("🔗 請輸入完整 API URL（或輸入 q 結束）：\n").strip()
+        if full_url.lower() == 'q':
+            break
+        param_str = input("📤 請輸入 JSON 格式的參數（預設為空）：\n").strip()
+        try:
+            params = json.loads(param_str) if param_str else {}
+        except json.JSONDecodeError:
+            print("⚠️ 參數不是合法的 JSON 格式，請重新輸入。")
+            continue
+        method = input("📨 請輸入請求方法（GET 或 POST，預設為 POST）：\n").strip().upper() or "POST"
+        check_single_api(full_url, method=method, data=params)
 
 
 if __name__ == "__main__":

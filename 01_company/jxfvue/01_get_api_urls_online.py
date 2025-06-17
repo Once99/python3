@@ -1,12 +1,11 @@
 from seleniumwire import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from urllib.parse import urlparse, urljoin
 import os
 import time
 from tqdm import tqdm
+import requests  # 確保此行在頂部已引入
 
 def is_api_endpoint(url):
     return '/api/' in url
@@ -80,25 +79,39 @@ def visit_and_collect(driver, start_url, visited=None, all_api_urls=None):
     except Exception as e:
         print(f"⚠️ 固定等待失敗：{e}")
 
-    # 收集 API 請求，包含 URL、狀態碼、返回預覽、參數、返回結果
+    # 收集 .php 或 /api/ 結尾的 API 請求資訊
     api_infos = []
+    import requests  # 確保此行在頂部已引入
     for req in driver.requests:
-        if req.response and is_api_endpoint(req.url):
+        if req.response and req.method in ("GET", "POST") and ("/api/" in req.url):
             status_code = req.response.status_code
+            method = req.method.upper()
+            headers = dict(req.headers)
+            headers.pop('Content-Length', None)  # 避免錯誤
+            headers.pop('Host', None)
             try:
-                preview = req.response.body.decode(errors="ignore")[:100]
-            except Exception:
-                preview = ""
-            request_body = req.body.decode(errors="ignore")[:200] if req.body else ""
-            response_body_raw = req.response.body
+                if method == "GET":
+                    resp = requests.get(req.url, headers=headers, timeout=10)
+                else:
+                    resp = requests.post(req.url, headers=headers, data=req.body or {}, timeout=10)
+
+                status_code = resp.status_code
+                try:
+                    response_body = resp.text
+                    if any(ord(c) < 32 and c not in '\r\n\t' for c in response_body[:50]):
+                        raise ValueError("binary content")
+                    response_body = response_body[:500]
+                except Exception:
+                    response_body = "(⚠️ 回傳內容無法解析)"
+            except Exception as e:
+                response_body = f"(⚠️ 請求失敗: {e})"
+
             try:
-                response_body = response_body_raw.decode("utf-8")
-                if any(ord(c) < 32 and c not in '\r\n\t' for c in response_body[:50]):
-                    raise ValueError("binary content detected")
-                response_body = response_body[:500]
-            except Exception:
-                response_body = "（Binary 資料，略過）"
-            api_infos.append((req.url, status_code, preview, request_body, response_body))
+                request_body = req.body.decode("utf-8", errors="ignore") if req.body else ""
+            except:
+                request_body = ""
+
+            api_infos.append((req.url, status_code, "", request_body, response_body))
 
     # 寫入個別頁面檔案，每筆資料以條列式格式寫入
     with open(output_file, "w", encoding="utf-8") as f:
