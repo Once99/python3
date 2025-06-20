@@ -16,21 +16,7 @@ def get_unstaged_files():
     return [f for f in files if os.path.basename(f) != ".DS_Store"]
 
 
-def vpn_connected(host="HKVPN01.dc66.net", port=443):
-    try:
-        with socket.create_connection((host, port), timeout=3):
-            return True
-    except Exception:
-        return False
-
-
 def create_and_push_tag():
-    # 檢查 FortiClientVPN 是否正在執行
-    check_vpn = subprocess.run(["pgrep", "-f", "FortiClientVPN"], capture_output=True, text=True)
-    if check_vpn.returncode != 0:
-        print("🔐 FortiClientVPN 正在啟動...")
-        subprocess.run(["open", "-a", "FortiClientVPN"])
-
     tag = f"v{datetime.now().strftime('%Y.%m.%d.%H%M')}"
     subprocess.run(["git", "tag", tag])
     subprocess.run(["git", "push", "origin", tag])
@@ -40,7 +26,7 @@ def create_and_push_tag():
     print("📋 已自動複製網址到剪貼簿：https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp")
 
     subprocess.run(["open", "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"])
-    print("🌐 已自動開啟 GitLab 頁面：https://git.easydevops.net/B2C_DC/ued/web/")
+    print("🌐 已自動開啟 GitLab 頁面：https://git.easydevops.net/B2C_DC/ued/web/-/pipelines")
 
 
 def git_commit_and_tag():
