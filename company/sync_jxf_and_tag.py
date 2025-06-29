@@ -8,6 +8,15 @@ DEST = "/Users/oncechen/IdeaProjects/jxf_web_static_vue_main"
 # 生成 tag：vYYYY.MM.DD.HHmm
 TAG = "v" + datetime.now().strftime("%Y.%m.%d.%H%M")
 
+def run(cmd, **kwargs):
+  """執行指令，出錯時中止腳本"""
+  print(f"🔧 執行指令: {' '.join(cmd)}")
+  result = subprocess.run(cmd, text=True, **kwargs)
+  if result.returncode != 0:
+    print(f"❌ 指令失敗：{' '.join(cmd)}")
+    exit(1)
+  return result
+
 # 檢查目錄
 if not os.path.isdir(SRC):
   print(f"❌ 源目录不存在：{SRC}")
@@ -19,35 +28,40 @@ if not os.path.isdir(os.path.join(DEST, ".git")):
 
 # 同步文件（排除 .git 及 .gitlab-ci.yml）
 print("📦 正在同步文件...")
-rsync_cmd = [
+run([
   "rsync", "-av", "--delete",
   "--exclude=.git",
   "--exclude=.gitlab-ci.yml",
   f"{SRC}/", f"{DEST}/"
-]
-subprocess.run(rsync_cmd, check=True)
+])
 
-# 切换目录
+# 切換目錄
 os.chdir(DEST)
 
 # 檢查是否有變更
-status_result = subprocess.run(
-  ["git", "status", "--porcelain"],
-  capture_output=True,
-  text=True
-)
+status = run(["git", "status", "--porcelain"], capture_output=True)
+has_changes = status.stdout.strip() != ""
 
-if status_result.stdout.strip():
-  print("🔧 检测到变更，正在提交...")
-  subprocess.run(["git", "add", "."], check=True)
-  subprocess.run(["git", "commit", "-m", "同步 dev 项目内容"], check=True)
-  subprocess.run(["git", "push"], check=True)
+if has_changes:
+  print("📍 檢測到變更，準備提交...")
+
+  run(["git", "add", "."])
+  run(["git", "commit", "-m", "同步 dev 项目内容"])
+
+  print("⬇️ 拉取远端变更并尝试 rebase...")
+  try:
+    run(["git", "pull", "--rebase"])
+  except Exception as e:
+    print("❌ git pull --rebase 失败，請手動解決衝突後再重新執行")
+    exit(1)
+
+  run(["git", "push"])
 else:
-  print("✅ 无需提交，工作目录干净")
+  print("✅ 無需提交，工作目录干净")
 
 # 打标签并推送
 print(f"🏷️ 打标签: {TAG}")
-subprocess.run(["git", "tag", TAG], check=True)
-subprocess.run(["git", "push", "origin", TAG], check=True)
+run(["git", "tag", TAG])
+run(["git", "push", "origin", TAG])
 
-print(f"✅ 同步与版本标记 {TAG} 完成")
+print(f"✅ 同步與版本標記 {TAG} 完成")
