@@ -30,7 +30,7 @@ def create_and_push_tag():
 
 
 def git_commit_and_tag():
-    repo_path = "/Users/oncechen/IdeaProjects/jxf_web_static_vue"
+    repo_path = "/Users/oncechen/IdeaProjects/jxf_web_static_vue_main"
     os.chdir(repo_path)
 
     unstaged = get_unstaged_files()
