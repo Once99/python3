@@ -1,0 +1,543 @@
+{
+    "code": "10000",
+    "data": [
+        {
+            "id": 260,
+            "name": "USDT",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/9276e294-08d8-467a-aff5-92523e3fb418.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/8fa088af-6480-4d1b-880e-f16987d66c0d.png",
+            "type": "1",
+            "typeMark": "szhb",
+            "giftBonus": 1.0,
+            "parentId": -1,
+            "itemSort": 1,
+            "columnTag": "3",
+            "secondLevelList": [
+                {
+                    "min": 35.0,
+                    "max": 1000000.0,
+                    "recommendAmount": "100,500,1000,5000,10000,50000",
+                    "successRate": 100.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 9909,
+                        "name": "UBIT",
+                        "title": "资金加密，安全便捷",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/66547b14-fe13-4d2e-8a8a-1ba758b02f81.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/11fcba2e-330a-47f6-a09b-e26ffb99b535.png",
+                        "type": "2",
+                        "typeMark": "ubit",
+                        "giftBonus": 1.0,
+                        "parentId": 260,
+                        "subType": "60",
+                        "itemSort": 6,
+                        "columnTag": "1,1,6",
+                        "remark": "\u003cp\u003e\u003cspan class\u003d\"ui-provider a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ae af ag ah ai aj ak\" dir\u003d\"ltr\"\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(247, 150, 70);\"\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e温馨提醒\u003c/span\u003e\u003cbr/\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e1.只支持使用UBIT钱包扫码付款，否则无法到账。\u003c/span\u003e\u003ca href\u003d\"https://www.yubitusers.com/?merchantCode\u003dDCQY\" target\u003d\"_blank\" title\u003d\"https://www.yubitusers.com/?merchantCode\u003dDCQY\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(31, 73, 125);\"\u003e点此下载UBIT钱包\u003c/span\u003e\u003c/a\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e2.下单后需要在15分钟内完成，超时请勿支付。(使用截图重复支付将无法到账）\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e3.若支付金额与下单金额不符，将导致无法到账和上分，请留意。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e4.UBIT钱包若遇到问题，请联系UBIT钱包平台客服获取专业协助。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e5.使用UBIT钱包完成交易后方可享受最优汇率，使用其他外部钱包转账无法享受最优汇率。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e6.返赠1%将以\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e即时返赠0.5%+次日返赠0.5%的方式进行派发。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y",
+                        "ercFlag": "Y",
+                        "trcFlag": "Y"
+                    }
+                },
+                {
+                    "min": 100.0,
+                    "max": 1000000.0,
+                    "recommendAmount": "100,500,1000,5000,10000,50000",
+                    "successRate": 20.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 9005,
+                        "name": "USDT",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/7c4fcfc7-0ce5-4f9b-b1a2-8e5b56eb8d65.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/7ec15223-516e-4dd3-900b-bb2a7d7c1103.png",
+                        "type": "2",
+                        "typeMark": "usdt",
+                        "giftBonus": 1.0,
+                        "parentId": 260,
+                        "subType": "49",
+                        "itemSort": 6,
+                        "columnTag": "8",
+                        "remark": "\u003cp\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cspan style\u003d\"color:#a5a5a5\"\u003e场外交易所\u0026nbsp;\u003c/span\u003e\u003ca href\u003d\"https://www.yubitusers.com/?merchantCode\u003dDCQY\" target\u003d\"_blank\" title\u003d\"优币Ubit\" textvalue\u003d\"▸优币Ubit\"\u003e\u003cspan style\u003d\"color: rgb(31, 73, 125)\"\u003e▸优币Ubit\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"color:#a5a5a5\"\u003e\u0026nbsp;\u003c/span\u003e\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e\u003ca href\u003d\"https://www.hyperpay.me/?lang\u003dzh-cn\" target\u003d\"_blank\" textvalue\u003d\"▸HyperPay\" style\u003d\"font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px;white-space: normal\"\u003e\u003cspan style\u003d\"color: rgb(31, 73, 125)\"\u003e▸HyperPay\u003c/span\u003e\u003c/a\u003e\u0026nbsp;\u003c/span\u003e\u003ca href\u003d\"https://www.coinw.com/\" target\u003d\"_blank\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(31, 73, 125);\"\u003e▸币赢\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(31, 73, 125);\"\u003e\u0026nbsp;\u003c/span\u003e\u003ca href\u003d\"https://www.zb.com/cn/\" target\u003d\"_blank\" textvalue\u003d\"▸中币\" style\u003d\"white-space: normal\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(31, 73, 125);\"\u003e▸中币\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(247, 150, 70);\"\u003e\u0026nbsp;\u0026nbsp;\u003ca href\u003d\"https://www.coincola.com/\" target\u003d\"_blank\" textvalue\u003d\"▸可盈可乐\"\u003e\u003cspan style\u003d\"color: rgb(31, 73, 125)\"\u003e▸可盈可乐\u003c/span\u003e\u003c/a\u003e\u0026nbsp;\u0026nbsp;\u003c/span\u003e\u003ca href\u003d\"https://www.bitget.com/zh-CN/\" target\u003d\"_blank\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(31, 73, 125);\"\u003e▸\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-decoration: underline; color: rgb(31, 73, 125);\"\u003eBitget\u0026nbsp;\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-decoration: underline;\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px;color: rgb(247, 150, 70)\"\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e温馨提醒\u003cbr/\u003e1.\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(192, 80, 77);\"\u003e请勿保存地址重复支付\u003c/span\u003e，每次请重新获取最新地址进行支付\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e。\u003cbr/\u003e\u003c/span\u003e2.\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003eERC20建议中等额度，安全性高，转账速度快（几分钟到十分钟）\u003cbr/\u003e\u003c/span\u003e3.\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003eTRC20建议小额高频，安全性较高，转账速度极快（几秒到几分钟）\u003cbr/\u003e\u003c/span\u003e4.\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e本平台不负责担保场外交易结果，数字钱包若遇到操作，账户类的问题，请联系数字交易平台客服获取专业协助。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e5.\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap; color: rgb(165, 165, 165);\"\u003e返赠1%将以\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap; color: rgb(165, 165, 165);\"\u003e即时返赠0.5%+次日返赠0.5%的方式进行派发。\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y",
+                        "ercFlag": "Y",
+                        "trcFlag": "Y"
+                    }
+                }
+            ],
+            "flag": "Y",
+            "title": "USDT"
+        },
+        {
+            "id": 259,
+            "name": "银行卡",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/b867b8ea-7385-4de3-8371-e6f873e4cc37.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/e680ede1-baf9-436d-8d88-2067f3dbd333.png",
+            "type": "1",
+            "typeMark": "yhzz",
+            "parentId": -1,
+            "itemSort": 2,
+            "columnTag": "9",
+            "secondLevelList": [
+                {
+                    "min": 100.0,
+                    "max": 50000.0,
+                    "recommendAmount": "300,600,800,1000,3000,5000,7000,10000,13000,15000",
+                    "successRate": 85.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 9260,
+                        "name": "新快捷支付",
+                        "title": "100~5000",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/cbbd9787-6fed-49bd-b9d3-b84bb5df89ec.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/bd1e2352-0149-4101-847c-87be9b4426d3.png",
+                        "type": "2",
+                        "parentId": 259,
+                        "subType": "55",
+                        "itemSort": 1,
+                        "columnTag": "1,3,9",
+                        "remark": "\u003cp style\u003d\"text-wrap: wrap; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0); font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; color: rgb(247, 150, 70);\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e🛡️ 此存款渠道交易将受到保护，可提供真实凭证，请放心充值\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap; text-align: left;\"\u003e\u003cspan style\u003d\"text-wrap: wrap; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; font-size: 12px; color: rgb(192, 80, 77);\"\u003e注意：请避开使用工商银行进行转账，否则查账可能耗时3天\u003cbr style\u003d\"text-align: left;\"/\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; font-size: 12px; color: rgb(192, 80, 77);\"\u003e禁止使用亲情卡、信用卡或花呗进行存款，否则将延迟到账并收取最高7.5%的手续费\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0); font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; color: rgb(247, 150, 70);\"\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e温馨提醒\u003c/span\u003e\u003c/span\u003e\u003cbr style\u003d\"text-align: left;\"/\u003e\u003c/p\u003e\u003cp style\u003d\"box-sizing: border-box; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(208, 36, 67); line-height: 1.8; font-size: 14px; text-wrap: wrap; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e1. 使用新快捷支付请确保您的网络稳定，并于“确实”存款后上传您的存款凭证。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"box-sizing: border-box; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(208, 36, 67); line-height: 1.8; font-size: 14px; text-wrap: wrap; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e2. 如系统侦测到您帐户有任何风险行为将无法即时到帐，情节严重者将永久冻结账户\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"box-sizing: border-box; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(208, 36, 67); line-height: 1.8; font-size: 14px; text-wrap: wrap; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e3. 点击取消交易，存款无法到账并无法追回\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"box-sizing: border-box; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(208, 36, 67); line-height: 1.8; font-size: 14px; text-wrap: wrap; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e4. 需在提示时间内完成存款，逾期将导致款项丢失，无法处理，如有异常，请及时联系在线客服咨询\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 100.0,
+                    "max": 60000.0,
+                    "recommendAmount": "101,118,158,189,1897,2082,5579,8268,15682,22145,35000,48000",
+                    "successRate": 65.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 284,
+                        "name": "极速网银 ",
+                        "title": "银行卡转账，VIP首选",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/fccbeee7-ddc8-4ace-8590-aac6a943ba72.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/2dec0c55-b8ca-4255-b899-4bdb11ac3eab.png",
+                        "type": "2",
+                        "parentId": 259,
+                        "subType": "31",
+                        "itemSort": 3,
+                        "columnTag": "1,3,9",
+                        "remark": "\u003cp\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(89, 89, 89); text-decoration: none;\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e🛡️ 此存款渠道交易将受到保护，可提供真实凭证，请放心充值\u003c/span\u003e\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(247, 150, 70);\"\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 14px; text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(192, 80, 77); font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; font-size: 12px; text-wrap: wrap;\"\u003e注意：请避开使用工商银行进行转账，否则查账可能耗时3天\u003cbr/\u003e\u003cspan style\u003d\"color: rgb(192, 80, 77); font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; font-size: 12px; text-wrap-mode: wrap;\"\u003e禁止使用亲情卡、信用卡或花呗进行存款，否则将延迟到账并收取最高7.5%的手续费\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(247, 150, 70);\"\u003eⓘ \u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e重要提醒\u003cbr/\u003e1. 此通道\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(192, 80, 77);\"\u003e仅支持银行卡转账充值\u003c/span\u003e，如使用支付宝转账，微信转账，银联转账将导致无法自动到账或金额丢失的情况\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e概不负责。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e2. 为了提高充值的成功率，系统将随机生成小数点金额，请务必根据系统提示的金额进行充值，以确保能自动到账。\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e3. \u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e由于银行政策监管严格，充值过程中无法获取充值卡号信息，请勿频繁多次发起充值，请寻求在线客服帮助。\u003cbr/\u003e\u003c/span\u003e4. 需\u003c/span\u003e\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e使用与注册姓名一致的银行卡转账，如使用非注册姓名银行卡转账或ATM方式将无法自动到账或金额丢失的情况概不负责。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e5. 付款信息仅一次有效每次下单请重新获取，切勿保存历史账户进行存款，以免导致资金丢失。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003c/span\u003e\u003cbr/\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 3000.0,
+                    "max": 50000.0,
+                    "recommendAmount": "3000,10000,20000,30000,50000",
+                    "successRate": 20.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 285,
+                        "name": "高额通道 ",
+                        "title": "高额绿色通道，VIP首选",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/3218eed3-805c-4d64-bc67-2515c5fbcf1e.jpg",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/6ec37a99-5e74-4ca0-ad10-d0d82bf8b83d.jpg",
+                        "type": "2",
+                        "typeMark": "usdt",
+                        "parentId": 259,
+                        "subType": "27",
+                        "itemSort": 3,
+                        "columnTag": "1,6,9",
+                        "remark": "\u003cp\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-decoration-line: underline;\"\u003e\u003c/span\u003e\u003cspan style\u003d\"text-decoration: none; color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e🛡️ 此存款渠道交易将受到保护，可提供真实凭证，请放心充值\u003cbr/\u003e\u003c/span\u003e\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(247, 150, 70);\"\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 14px; text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(192, 80, 77); font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; font-size: 12px; text-wrap: wrap;\"\u003e注意：请避开使用工商银行进行转账，否则查账可能耗时3天\u003cbr/\u003e\u003cspan style\u003d\"color: rgb(192, 80, 77); font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; font-size: 12px; text-wrap-mode: wrap;\"\u003e禁止使用亲情卡、信用卡或花呗进行存款，否则将延迟到账并收取最高7.5%的手续费\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(247, 150, 70);\"\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e温馨提醒\u003cbr/\u003e1. \u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e需使用与本人一致的注册姓名转账，如使用非本人姓名转账将原路退款\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e2. \u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e根据系统显示的银行账户进行场外交易, 人民币无感知购买虚拟币自动到账主账户。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e3. 此渠道计算人民币充值（非虚拟币）大额充值首选，无风险成功率高。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e4.\u0026nbsp;\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e付款信息仅一次有效每次下单请重新获取，切勿保存历史账户进行存款，以免导致资金丢失。\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                }
+            ],
+            "flag": "Y",
+            "title": "银行卡转卡"
+        },
+        {
+            "id": 9917,
+            "name": "支付宝",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/97c847b2-2c28-41d9-b553-8d101f10348e.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/c3183a10-bcd7-42cd-9c53-50da2dbc7313.png",
+            "type": "1",
+            "typeMark": "c2czk",
+            "giftBonus": 1.0,
+            "parentId": -1,
+            "itemSort": 3,
+            "columnTag": "9",
+            "secondLevelList": [
+                {
+                    "min": 300.0,
+                    "max": 15000.0,
+                    "recommendAmount": "300,600,800,1000,3000,5000,7000,10000,13000,15000",
+                    "successRate": 85.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 9979,
+                        "name": "新支付宝支付",
+                        "title": "限额100~15000元",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/a6514815-ba92-483b-a36a-377336d976d4.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/99e4e849-73fb-4528-abca-11af1a107c75.png",
+                        "type": "2",
+                        "parentId": 9917,
+                        "subType": "63",
+                        "itemSort": 1,
+                        "columnTag": "1,3,9",
+                        "remark": "\u003cp style\u003d\"text-wrap: wrap; text-align: justify;\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;; font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e🔴\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; background-color: rgb(229, 185, 183); color: rgb(63, 63, 63);\"\u003e安全警示！请确认使用本人支付宝账户存款，切勿选择24小时到账，违规操作将导致资金冻结不退！\u003c/span\u003e\u003cspan style\u003d\"color: rgb(63, 63, 63); background-color: rgb(229, 185, 183);\"\u003e\u003ca href\u003d\"https://tq.welovechina888.com:12828/web/video/zfbc2c.mp4\" target\u003d\"_blank\" style\u003d\"color: rgb(31, 73, 125);\"\u003e支付宝支付教程\u003c/a\u003e \u0026nbsp; \u0026nbsp; \u0026nbsp; \u0026nbsp;\u003c/span\u003e\u0026nbsp; \u0026nbsp;\u0026nbsp;\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap; color: rgb(247, 150, 70); font-size: 12px;\"\u003e\u003cspan style\u003d\"font-size: 12px; text-wrap-mode: wrap; color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; text-wrap-mode: wrap;\"\u003e温馨提醒\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; text-wrap-mode: wrap;\"\u003e1.\u0026nbsp;禁止使用支付宝头像证件大头贴、证件照片、花呗、信用卡存款，可能导致失败或扣除手续费。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; text-wrap-mode: wrap;\"\u003e2.确保网络稳定，并上传存款凭证。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; text-wrap-mode: wrap;\"\u003e3. 账户异常或风险行为可能导致存款延迟或冻结。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; text-wrap-mode: wrap;\"\u003e4. 取消交易后存款无法到账且无法追回。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; text-wrap-mode: wrap;\"\u003e5. 请在规定时间内完成存款，否则可能导致资金丢失。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; text-wrap-mode: wrap;\"\u003e6. 如支付通道余额不足，请调整金额或使用在线支付充值。\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 100.0,
+                    "max": 50000.0,
+                    "recommendAmount": "300,400,500,600,700",
+                    "successRate": 100.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 274,
+                        "name": "支付宝",
+                        "title": "快速到账 安全可靠",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/d814e89f-a6f5-480b-9ca2-fde84964b123.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/43e26f8f-8b3a-46bc-a818-4d41b8cae52b.png",
+                        "type": "2",
+                        "parentId": 9917,
+                        "subType": "1",
+                        "itemSort": 2,
+                        "columnTag": "1,9",
+                        "remark": "\u003cp style\u003d\"white-space: normal; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e🔴 \u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; background-color: rgb(229, 185, 183); color: rgb(63, 63, 63);\"\u003e安全警示！请确认使用本人支付宝账户存款，切勿选择24小时到账，违规操作将导致资金冻结不退！\u003c/span\u003e\u003cbr/\u003e\u003c/span\u003e\u003c/span\u003e\u003cspan style\u003d\"color: rgb(192, 80, 77); font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; font-size: 12px; text-wrap-mode: wrap;\"\u003e\u003cbr/\u003e\u003c/span\u003eⓘ\u0026nbsp;\u003c/span\u003e温馨提醒\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e1.\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; color: rgb(255, 0, 0);\"\u003e禁止使用支付宝头像证件大头贴\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e，花呗、亲情卡及信用卡存款，如若使用可能无法到账或延迟到帐并收取手续费。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e2.\u0026nbsp;\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e请根据实际充值金额进行支付，请勿支付其他金额。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e3. 请勿擅自修改订单充值金额\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e，如造成损失概不负责\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e4. 请依据第三方指示操作，切勿随意相信来自任何的私聊。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e5\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e.\u0026nbsp;\u003c/span\u003e 如充值遇到任何问题，请联系在线客服\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e\u003c/span\u003e\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e6\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e.\u0026nbsp;\u003c/span\u003e禁止使用亲情卡、信用卡或花呗进行存款，否则将延迟到账并收取最高7.5%的手续费\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [
+                            {
+                                "id": 501,
+                                "specialId": 274,
+                                "name": "测试教程",
+                                "jumpLink": "https://qy478.com/misc.php?mod\u003dfaq\u0026action\u003dfaq\u0026id\u003d1"
+                            }
+                        ],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 100.0,
+                    "max": 2000.0,
+                    "recommendAmount": "100,200,300,400,500,1000,2000",
+                    "successRate": 93.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 9905,
+                        "name": "极速支付宝",
+                        "title": "快速到账 安全可靠",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/9e2037a3-0682-400e-a5a6-a176d513b5d3.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/d04522e2-d5dc-4fd0-9a3b-153cc2604178.png",
+                        "type": "2",
+                        "parentId": 9917,
+                        "subType": "59",
+                        "itemSort": 2,
+                        "columnTag": "1,9",
+                        "remark": "\u003cp style\u003d\"white-space: normal; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e🔴\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; background-color: rgb(229, 185, 183); color: rgb(63, 63, 63);\"\u003e安全警示！请确认使用本人支付宝账户存款，切勿选择24小时到账，违规操作将导致资金冻结不退！\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; background-color: rgb(229, 185, 183); color: rgb(0, 0, 0);\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003c/span\u003e\u003cbr/\u003eⓘ\u0026nbsp;\u003c/span\u003e温馨提醒\u003cbr/\u003e1.\u0026nbsp;\u003cspan style\u003d\"font-size: 12px; text-wrap: wrap; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; color: rgb(255, 0, 0);\"\u003e禁止使用支付宝头像证件大头贴\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; text-wrap: wrap; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e，花呗、亲情卡及信用卡存款，如若使用可能无法到账或延迟到帐并收取手续费。\u003cbr/\u003e\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e2. 请根据实际充值金额进行支付，请勿支付其他金额。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e3. 请勿擅自修改订单充值金额\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e，如造成损失概不负责\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e4. 请依据第三方指示操作，切勿随意相信来自任何的私聊。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e5. 如充值遇到任何问题，请联系在线客服\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003c/span\u003e\u003cbr/\u003e\u003c/span\u003e\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 10000.0,
+                    "max": 50000.0,
+                    "recommendAmount": "10000,20000,30000,40000",
+                    "successRate": 100.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 10005,
+                        "name": "VIP支付宝",
+                        "title": "VIP大额",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/d814e89f-a6f5-480b-9ca2-fde84964b123.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/43e26f8f-8b3a-46bc-a818-4d41b8cae52b.png",
+                        "type": "2",
+                        "parentId": 9917,
+                        "subType": "64",
+                        "itemSort": 2,
+                        "columnTag": "1,9",
+                        "remark": "\u003cp style\u003d\"white-space: normal; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e🔴 \u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; background-color: rgb(229, 185, 183); color: rgb(63, 63, 63);\"\u003e安全警示！请确认使用本人支付宝账户存款，切勿选择24小时到账，违规操作将导致资金冻结不退！\u003c/span\u003e\u003cspan style\u003d\"color: rgb(89, 89, 89); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; background-color: rgb(229, 185, 183);\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003c/span\u003e\u003cbr/\u003eⓘ\u0026nbsp;\u003c/span\u003e温馨提醒\u003cbr/\u003e1.\u0026nbsp;\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap; color: rgb(255, 0, 0);\"\u003e禁止使用支付宝头像证件大头贴\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003e，花呗、亲情卡及信用卡存款，如若使用可能无法到账或延迟到帐并收取手续费。\u003cbr/\u003e\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e2. 请根据实际充值金额进行支付，请勿支付其他金额。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e3. 请勿擅自修改订单充值金额\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e，如造成损失概不负责\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e4. 请依据第三方指示操作，切勿随意相信来自任何的私聊。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e5. 如充值遇到任何问题，请联系在线客服\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal; text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003c/span\u003e\u003cbr/\u003e\u003c/span\u003e\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                }
+            ],
+            "flag": "Y"
+        },
+        {
+            "id": 258,
+            "name": "在线充值",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/0d61b377-fc06-4f87-94e7-a00886deb506.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/d6fae264-941b-48a2-bbaf-33715e0569b5.png",
+            "type": "1",
+            "typeMark": "dsfcz",
+            "parentId": -1,
+            "itemSort": 4,
+            "secondLevelList": [
+                {
+                    "min": 200.0,
+                    "max": 30000.0,
+                    "recommendAmount": "2000,3000,5000,10000,20000,30000",
+                    "successRate": 77.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 277,
+                        "name": "微信支付",
+                        "title": "限额10~10000",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/39824a27-a817-4349-a1b0-aa015c724314.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/4716825c-bdd9-4625-92e3-b0a9bf0639a0.png",
+                        "type": "2",
+                        "parentId": 258,
+                        "subType": "2",
+                        "itemSort": 3,
+                        "columnTag": "1",
+                        "remark": "\u003cp style\u003d\"text-align: left;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(192, 80, 77);\"\u003e注意：请通过官网渠道购买E卡，切勿外部自行购买，以免被骗\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cbr/\u003e\u003cbr/\u003eⓘ\u0026nbsp;\u003c/span\u003e温馨提醒\u003cbr/\u003e1. 请在页面提示时间内完成支付，逾期将导致款项丢失概不负责。\u003cbr/\u003e2. 会员必须依据正确的指示进行支付，如未按照正确流程支付导致的资金损失，恕无法处理。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e3. 时刻保持警惕，\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e切勿随意相信\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e来自\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e任何的私聊。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-align: left;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e4. 如充值遇到任何问题，请联系在线客服。\u003cbr/\u003e\u003cbr/\u003e\u003c/span\u003e\u003cbr/\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 100.0,
+                    "max": 1000.0,
+                    "recommendAmount": "200,400,600,800,1000",
+                    "successRate": 53.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 672,
+                        "name": "淘宝支付",
+                        "title": "淘宝充值",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/a0de3938-b5b4-4411-bd95-8817d915c2ed.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/484368cb-17bb-4fb5-b44f-704015e56ee7.png",
+                        "type": "2",
+                        "giftBonus": 0.0,
+                        "parentId": 258,
+                        "subType": "39",
+                        "itemSort": 3,
+                        "columnTag": "1",
+                        "remark": "\u003cp style\u003d\"white-space: normal;\"\u003e\u003ca href\u003d\"https://tq.welovechina888.com:12828/web/WEB/share/hongbao.png\" target\u003d\"_blank\" style\u003d\"color: rgb(0, 32, 96); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e支付教程：\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e\u003ca href\u003d\"https://tq.welovechina888.com:12828/web/WEB/share/hongbao.png\" target\u003d\"_blank\"\u003e\u003cspan style\u003d\"color: rgb(0, 32, 96);\"\u003e▸\u003c/span\u003e\u003c/a\u003e\u003c/span\u003e\u003c/span\u003e\u003ca href\u003d\"https://tq.welovechina888.com:12828/web/WEB/share/wxzftb.png\" target\u003d\"_blank\" style\u003d\"font-size: 12px; color: rgb(31, 73, 125);\"\u003e\u003cspan style\u003d\"color: rgb(0, 32, 96);\"\u003e淘宝模式\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e\u003cbr/\u003e\u003cbr/\u003eⓘ\u0026nbsp;\u003c/span\u003e温馨提醒\u003cbr/\u003e1. 请在页面提示时间内完成支付，逾期将导致款项丢失，概不负责。\u003cbr/\u003e2. 会员必须依据正确的指示进行支付，如未按照正确流程支付导致的资金损失，恕无法处理。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e3. 部分渠道模式需入群发红包，\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e切勿随意相信\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e来自\u003c/span\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e任何的私聊。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e4. \u003cstrong\u003e如会员出现恶意行为，我们将不排除使用非正常手段不设上限进行追讨究责。\u003c/strong\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e5. 如充值遇到任何问题，请联系在线客服。\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 100.0,
+                    "max": 2000.0,
+                    "recommendAmount": "100,200,300,400,500,1000,2000",
+                    "successRate": 100.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 276,
+                        "name": "银联扫码",
+                        "title": "限额10~10000",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/uf/pay/yl_ckfs.png?version\u003d1.0",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/uf/pay/yl_ckfs.png?version\u003d1.0",
+                        "type": "2",
+                        "parentId": 258,
+                        "subType": "13",
+                        "itemSort": 5,
+                        "columnTag": "1",
+                        "remark": "\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003eⓘ\u0026nbsp;\u003c/span\u003e温馨提醒\u003cbr/\u003e1. 获取订单需网络确定，出现短暂的加载时间属于正常，请耐心等候，切勿重复下单。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e2. 如充值遇到任何问题，请联系在线客服\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cbr/\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 200.0,
+                    "max": 2000.0,
+                    "recommendAmount": "200,300,500,1000,2000",
+                    "successRate": 100.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 725,
+                        "name": "抖音",
+                        "title": "抖音",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/f636d8f2-f53c-4801-8baa-d9517e5c6456.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/8e49cf8b-ce2c-4835-a136-36adcc8a4ac8.png",
+                        "type": "2",
+                        "giftBonus": 0.0,
+                        "parentId": 258,
+                        "subType": "48",
+                        "itemSort": 5,
+                        "columnTag": "1",
+                        "remark": "\u003cp\u003e\u003ca href\u003d\"https://www.feishu.cn/download\" target\u003d\"_blank\" title\u003d\"【点击下载飞书app】\" textvalue\u003d\"【点击下载飞书app】\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 14px; color: rgb(84, 141, 212);\"\u003e\u003c/span\u003e\u003c/a\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; color: rgb(247, 150, 70); font-size: 12px;\"\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"font-size: 12px; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e温馨提醒\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"font-size: 12px; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e1. \u003cspan class\u003d\"ui-provider bqe bqf c d e f g h i j k l m n o p q r s t bqg bqh w x y z ab ac ae af ag ah ai aj ak\" dir\u003d\"ltr\"\u003e\u003cspan style\u003d\"font-size: 11px; font-style: inherit; font-weight: inherit;\"\u003e步骤: 跳转抖音APP→完成绑定银行卡→视频内点击发红包\u003c/span\u003e\u003cspan style\u003d\"font-size: 11px; font-style: inherit; font-weight: inherit;\"\u003e→\u003c/span\u003e\u003cspan style\u003d\"font-size: 11px; font-style: inherit; font-weight: inherit;\"\u003e完成交易后即可到账。\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"font-size: 12px; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e2. 第三方收取的手续费将由\u0026lt;谈球吧\u0026gt;承担，用户无需支付任何手续费。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"font-size: 12px; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e3. 需在提示时间内完成支付，逾期将导致款项丢失，无法处理。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cbr/\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 11px;\"\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 200.0,
+                    "max": 2000.0,
+                    "recommendAmount": "300,500,600,800,1000",
+                    "successRate": 49.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 278,
+                        "name": "QQ支付",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/6a587dda-5202-43e8-97ef-d87499a27b47.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/9db21e1d-daab-4c79-9539-350b45a9d32f.png",
+                        "type": "2",
+                        "parentId": 258,
+                        "subType": "7",
+                        "itemSort": 6,
+                        "columnTag": "1",
+                        "remark": "\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"font-size: 12px;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e\u003cspan style\u003d\"color:#a5a5a5\"\u003e支付教程：\u003c/span\u003e\u003ca href\u003d\"https://tq.welovechina888.com:12828/web/WEB/share/qqhb.png\" target\u003d\"_blank\" style\u003d\"color: rgb(247, 150, 70); white-space: normal;\"\u003e\u003cspan style\u003d\"font-size: 12px; color: rgb(31, 73, 125); text-decoration-line: none;\"\u003e▸QQ面对面红包教程\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"color:#f79646\"\u003e\u0026nbsp; \u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"color:#1f497d\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003cbr/\u003e\u003cspan style\u003d\"color:#f79646\"\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003c/span\u003e\u003cspan style\u003d\"color:#a5a5a5\"\u003e温馨提醒\u003c/span\u003e\u003cbr/\u003e\u003cspan style\u003d\"color:#a5a5a5\"\u003e1. \u003cspan style\u003d\"font-size: 12px; color: rgb(255, 0, 0);\"\u003e请务必上传保存的面对面红包二维码，以免影响到账时间！\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e2. 会员必须依据正确的指示进行支付\u003c/span\u003e\u003cspan style\u003d\"font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e，如个人原因导致的资金丢失，恕无法处理。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e3.\u0026nbsp;\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e切勿随意相信\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e来自\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;;\"\u003e任何的私聊,提防受骗。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e4.\u0026nbsp;\u003cspan style\u003d\"color: rgb(165, 165, 165); font-size: 12px;\"\u003e如充值遇到任何问题，请联系在线客服。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cbr/\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                },
+                {
+                    "min": 200.0,
+                    "max": 2000.0,
+                    "recommendAmount": "200,300,500,1000,2000",
+                    "successRate": 100.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 689,
+                        "name": "钉钉支付",
+                        "title": "钉钉充值",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/42a91a61-baee-42eb-a050-fad26241acc4.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/46e6e744-31cd-4320-b7f9-72cd975bec18.png",
+                        "type": "2",
+                        "giftBonus": 0.0,
+                        "parentId": 258,
+                        "subType": "43",
+                        "itemSort": 6,
+                        "columnTag": "1",
+                        "remark": "\u003cp\u003e\u003ca href\u003d\"https://www.feishu.cn/download\" target\u003d\"_blank\" title\u003d\"【点击下载飞书app】\" textvalue\u003d\"【点击下载飞书app】\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 14px; color: rgb(84, 141, 212);\"\u003e\u003c/span\u003e\u003c/a\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(247, 150, 70);\"\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e温馨提醒\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e1. 需\u003c/span\u003e\u003ca href\u003d\"https://www.dingtalk.com/\" target\u003d\"_self\" textvalue\u003d\"下载钉钉APP\"\u003e\u003cspan style\u003d\"color: rgb(31, 73, 125); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e下载钉钉APP\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e→绑定银行卡→扫码添加好友后依照通知进行操作→完成交易后即可到账。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e2. 需在提示时间内完成支付，逾期将导致款项丢失，无法处理。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e3. 一单一码，请勿重复使用，支付后截图保存群聊天记录，否则无法查单\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e4. 任何主动加您好友要求充值，\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e不论什么理由\u003c/span\u003e都是骗子，请提防受骗。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 11px;\"\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                }
+            ],
+            "flag": "Y",
+            "title": "在线充值"
+        },
+        {
+            "id": 9220,
+            "name": "EBPAY",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/e3cf73f5-62df-478e-aa1f-8c006cc13b0d.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/7047943c-766f-41e1-b8af-d92e1b7de9ef.png",
+            "type": "1",
+            "typeMark": "ebpay",
+            "giftBonus": 1.0,
+            "parentId": -1,
+            "itemSort": 6,
+            "columnTag": "3,8",
+            "secondLevelList": [
+                {
+                    "min": 100.0,
+                    "max": 200000.0,
+                    "recommendAmount": "1000,2000,3000,5000,10000,20000,30000",
+                    "successRate": 98.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 9221,
+                        "name": "EBPAY支付",
+                        "title": "限额100~3万元",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/f58de861-01fa-4928-a9af-ff58de4aef91.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/8587304f-df62-4f46-b578-52dd67bd50bb.png",
+                        "type": "2",
+                        "giftBonus": 1.0,
+                        "parentId": 9220,
+                        "subType": "51",
+                        "itemSort": 1,
+                        "columnTag": "8",
+                        "remark": "\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e钱包下载：\u003c/span\u003e\u003ca href\u003d\"https://www.ebpay.org/download\" target\u003d\"_blank\" title\u003d\"▸下载EBPAY钱包\"\u003e\u003cspan style\u003d\"font-size: 12px; color: rgb(31, 73, 125);\"\u003e▸下载EBPAY钱包\u003c/span\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003c/a\u003e\u003cspan style\u003d\"text-wrap: wrap; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(247, 150, 70);\"\u003e\u003cbr/\u003eⓘ\u0026nbsp;\u003c/span\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e温馨提醒\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e1. 下载EBPAY钱包，使用EBpay扫一扫付款。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e2.\u0026nbsp;请勿向获取到的支付二维码地址充值任何非 EB 资产，否则资产将不可找回。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e3. 转账金额请与提单金额一致，否则无法及时到账！\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e4. EB 币不支持任何第三方数字钱包，如您的手机没有安装 EBpay，请先下载安装。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e5. 请务必确认电脑及浏览器安全，防止信息被篡改或泄露。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e6.返赠1%将以\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e即时返赠0.5%+次日返赠0.5%的方式进行派发。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                }
+            ],
+            "flag": "Y"
+        },
+        {
+            "id": 9508,
+            "name": "OKPAY",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/71f2aae9-633b-4eb3-9a60-29a3b9ad7e38.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/87ec2f8c-34cd-4c67-a360-84c47d1c0c1b.png",
+            "type": "1",
+            "typeMark": "okpay",
+            "giftBonus": 1.0,
+            "parentId": -1,
+            "itemSort": 7,
+            "columnTag": "8",
+            "secondLevelList": [
+                {
+                    "min": 100.0,
+                    "max": 200000.0,
+                    "recommendAmount": "100,200,500,800,1000,3000,5000,8000,10000,15000,20000,30000",
+                    "successRate": 80.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 9509,
+                        "name": "OKPAY支付",
+                        "title": "限额100~1万元",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/9ee9338d-c791-41b1-8ab0-b8698baf846a.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/48a11465-9e7e-4a7f-8243-e9429b3f28c7.png",
+                        "type": "2",
+                        "giftBonus": 1.0,
+                        "parentId": 9508,
+                        "subType": "61",
+                        "itemSort": 5,
+                        "columnTag": "8",
+                        "remark": "\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003eⓘ\u003c/span\u003e温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e1. 下载OKPAY钱包，使用OKPAY扫一扫付款，\u003c/span\u003e\u003ca href\u003d\"http://okpay1best.com/\" target\u003d\"_blank\" title\u003d\"【OKPAY存款教程】\" textvalue\u003d\"点此下载OKPAY钱包\"\u003e\u003cspan style\u003d\"font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; color: rgb(31, 73, 125);\"\u003e点此下载OKPAY钱包\u003c/span\u003e\u003c/a\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e2.\u0026nbsp;请勿向获取到的支付二维码地址充值任何非\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003eOK\u003c/span\u003ePAY 资产，否则资产将不可找回。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e3. 转账金额请与提单金额一致，否则无法及时到账！\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e4. 平台专属币种不支持任何第三方数字钱包，如您的手机没有安装 \u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003eOK\u003c/span\u003ePAY，请先下载安装。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e5. 请务必确认电脑及浏览器安全，防止信息被篡改或泄露。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e6.返赠1%将以\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e即时返赠0.5%+次日返赠0.5%的方式进行派发。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                }
+            ],
+            "flag": "Y"
+        },
+        {
+            "id": 10013,
+            "name": "KDPAY",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/65431d4e-be38-4230-85a1-2f081c340ac1.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/65431d4e-be38-4230-85a1-2f081c340ac1.png",
+            "type": "1",
+            "typeMark": "kdpay",
+            "giftBonus": 1.0,
+            "parentId": -1,
+            "itemSort": 7,
+            "secondLevelList": [
+                {
+                    "min": 100.0,
+                    "max": 200000.0,
+                    "recommendAmount": "100,200,300,500,1000,2000,3000",
+                    "successRate": 100.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 10014,
+                        "name": "KDPAY",
+                        "title": "限额100~1万元",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/65431d4e-be38-4230-85a1-2f081c340ac1.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/65431d4e-be38-4230-85a1-2f081c340ac1.png",
+                        "type": "2",
+                        "giftBonus": 1.0,
+                        "parentId": 10013,
+                        "subType": "65",
+                        "itemSort": 5,
+                        "remark": "\u003cp\u003e\u003cspan style\u003d\"text-wrap: wrap; color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px;\"\u003e钱包下载：\u003c/span\u003e\u003ca href\u003d\"https://kdaz2.com/home/#/\" target\u003d\"_blank\" title\u003d\"▸下载KDPAY钱包\" textvalue\u003d\"▸下载KDPAY钱包\"\u003e\u003cspan style\u003d\"font-size: 12px; color: rgb(31, 73, 125);\"\u003e▸下载KDPAY钱包\u003c/span\u003e\u003c/a\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003eⓘ\u003c/span\u003e温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e1. 下载KDPAY钱包，使用KDPAY扫一扫付款，\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e2.\u0026nbsp;请勿向获取到的支付二维码地址充值任何非 KDPAY 资产，否则资产将不可找回。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e3. 转账金额请与提单金额一致，否则无法及时到账！\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e4. KD 币不支持任何第三方数字钱包，如您的手机没有安装 KDPAY，请先下载安装。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e5. 请务必确认电脑及浏览器安全，防止信息被篡改或泄露。\u003cbr/\u003e6.返赠1%将以\u003cspan style\u003d\"text-wrap-mode: wrap;\"\u003e即时返赠0.5%+次日返赠0.5%的方式进行派发。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                }
+            ],
+            "flag": "Y"
+        },
+        {
+            "id": 9239,
+            "name": "TOPAY",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/56bb253a-26aa-408d-bac5-024bc9ed11e2.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/c685227d-5496-478a-aea2-7d6f74f9e786.png",
+            "type": "1",
+            "typeMark": "topay",
+            "giftBonus": 1.0,
+            "parentId": -1,
+            "itemSort": 8,
+            "columnTag": "3",
+            "secondLevelList": [
+                {
+                    "min": 100.0,
+                    "max": 200000.0,
+                    "recommendAmount": "100,200,500,800,1000,3000,5000,8000,10000,15000,20000,30000",
+                    "successRate": 80.0,
+                    "paySpecialConfigResDTO": {
+                        "id": 9240,
+                        "name": "TOPAY支付",
+                        "title": "限额100~1万元",
+                        "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/cf427864-dbd6-467a-9b44-4b1d4813c6c5.png",
+                        "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/847b5c14-57ea-4572-af24-2e74e08a3415.png",
+                        "type": "2",
+                        "giftBonus": 1.0,
+                        "parentId": 9239,
+                        "subType": "53",
+                        "itemSort": 5,
+                        "columnTag": "8",
+                        "remark": "\u003cp\u003e\u003ca href\u003d\"https://topay001.xyz/index.html?type\u003d1\" target\u003d\"_blank\" textvalue\u003d\"电脑使用教程\"\u003e\u003cspan style\u003d\"text-wrap: wrap; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-decoration: underline; color: rgb(79, 129, 189);\"\u003e电脑使用教程\u003c/span\u003e\u003c/a\u003e\u0026nbsp; \u003ca href\u003d\"https://topay001.xyz/phone.html\" target\u003d\"_blank\" textvalue\u003d\"手机使用教程\"\u003e\u003cspan style\u003d\"text-wrap: wrap; font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-decoration: underline; color: rgb(79, 129, 189);\"\u003e手机使用教程\u003c/span\u003e\u003c/a\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e\u003cspan style\u003d\"color: rgb(247, 150, 70); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap: wrap;\"\u003eⓘ\u003c/span\u003e温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e1. 下载TOPAY钱包，使用TOPAY扫一扫付款，\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e2.\u0026nbsp;请勿向获取到的支付二维码地址充值任何非 TOPAY 资产，否则资产将不可找回。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e3. 转账金额请与提单金额一致，否则无法及时到账！\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e4. TO 币不支持任何第三方数字钱包，如您的手机没有安装 TOPAY，请先下载安装。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e5. 请务必确认电脑及浏览器安全，防止信息被篡改或泄露。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);font-family: 微软雅黑, \u0026#39;Microsoft YaHei\u0026#39;;font-size: 12px\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e6.返赠1%将以\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: 微软雅黑, \u0026quot;Microsoft YaHei\u0026quot;; font-size: 12px; text-wrap-mode: wrap;\"\u003e即时返赠0.5%+次日返赠0.5%的方式进行派发。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+                        "linkList": [],
+                        "flag": "Y"
+                    }
+                }
+            ],
+            "flag": "Y"
+        }
+    ]
+}

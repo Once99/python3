@@ -1,0 +1,462 @@
+{
+  "code": "10000",
+  "data": [
+    {
+      "id": 616,
+      "name": "USDT",
+      "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/96109572-df26-4478-80f7-8009e9d6d8ff.png",
+      "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/54ac08b9-30c6-486b-874d-c0cfbcfc1922.png",
+      "type": "1",
+      "typeMark": "szhb",
+      "giftBonus": 0.0,
+      "parentId": -1,
+      "itemSort": 0,
+      "columnTag": "3",
+      "secondLevelList": [
+        {
+          "min": 100.0,
+          "max": 1000000.0,
+          "recommendAmount": "100,500,1000,5000,10000,50000",
+          "successRate": 20.0,
+          "paySpecialConfigResDTO": {
+            "id": 9006,
+            "name": "USDT",
+            "title": "限额 100~100万元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/054f3d64-491e-42c7-b86a-e036b03b7b0c.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/f5d40e4d-56aa-4dfb-8da3-c088f0085fe2.png",
+            "type": "2",
+            "typeMark": "usdt",
+            "giftBonus": 0.0,
+            "parentId": 616,
+            "subType": "49",
+            "itemSort": 6,
+            "columnTag": "3",
+            "remark": "\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003eⓘ温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e1.ERC20建议中等额度，安全性高，转账速度快（几分钟到十分钟）\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e2.TRC20建议小额高频，安全性较高，转账速度极快（几秒到几分钟）\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e3.每日福利：每日USDT单笔存款成功后，可获得对应存款2%的礼金\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e4.本平台不负责担保交易结果，数字钱包若遇到操作，账户类的问题，请联系数字交易平台客服获取专业协助。\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y",
+            "ercFlag": "Y",
+            "trcFlag": "Y"
+          }
+        },
+        {
+          "min": 35.0,
+          "max": 1000000.0,
+          "recommendAmount": "100,500,1000,5000,10000,50000",
+          "successRate": 100.0,
+          "paySpecialConfigResDTO": {
+            "id": 9907,
+            "name": "UBIT",
+            "title": "限额 35~100万元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/66547b14-fe13-4d2e-8a8a-1ba758b02f81.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/11fcba2e-330a-47f6-a09b-e26ffb99b535.png",
+            "type": "2",
+            "typeMark": "ubit",
+            "giftBonus": 0.0,
+            "parentId": 616,
+            "subType": "60",
+            "itemSort": 6,
+            "columnTag": "3,10",
+            "remark": "\u003cp\u003e\u003cspan class\u003d\"ui-provider a b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ae af ag ah ai aj ak\" dir\u003d\"ltr\"\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003ca href\u003d\"https://ubitme.com/#/help\" target\u003d\"_blank\" title\u003d\"https://ubitme.com/#/help\" textvalue\u003d\"【如何买币】\"\u003e【如何买币】\u003c/a\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e温馨提示\u003cbr/\u003e1.只支持使用UBIT钱包扫码付款，否则无法到账。\u003c/span\u003e\u003ca href\u003d\"https://www.yubitusers.com/?merchantCode\u003dDCQY\" target\u003d\"_blank\" title\u003d\"https://www.yubitusers.com/?merchantCode\u003dDCQY\" textvalue\u003d\"点此下载UBIT钱包\"\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0);\"\u003e点此下载UBIT钱包\u003c/span\u003e\u003c/a\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e2.下单后需要在15分钟内完成，超时请勿支付。(使用截图重复支付将无法到账）\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e3.若支付金额与下单金额不符，将导致无法到账和上分，请留意。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e4.UBIT渠道请务必使用UBIT钱包进行付款，非UBIT钱包付款将可能导致汇率不符。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 8px; margin-top: 8px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e5.UBIT钱包若遇到问题，请联系UBIT钱包平台客服获取专业协助。\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y",
+            "ercFlag": "Y",
+            "trcFlag": "Y"
+          }
+        }
+      ],
+      "flag": "Y",
+      "title": "安全匿名稳定可靠"
+    },
+    {
+      "id": 9218,
+      "name": "其他数字钱包",
+      "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/67c6bd4e-3133-41a7-8f16-4f46de529b78.png",
+      "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/011e0c99-defc-4ed6-a08a-9f7f614d60a4.png",
+      "type": "1",
+      "typeMark": "ebpay",
+      "giftBonus": 0.0,
+      "parentId": -1,
+      "itemSort": 1,
+      "columnTag": "3",
+      "secondLevelList": [
+        {
+          "min": 100.0,
+          "max": 200000.0,
+          "recommendAmount": "100,200,500,800,1000,3000,5000,8000,10000,15000,20000,30000",
+          "successRate": 80.0,
+          "paySpecialConfigResDTO": {
+            "id": 9242,
+            "name": "TOPAY支付",
+            "title": "限额100~20万元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/4e5816d6-1b19-42b8-b206-c505f656d4fa.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/f41d6407-faa6-4d7d-952c-a874080fe8d0.png",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 9218,
+            "subType": "53",
+            "itemSort": 1,
+            "columnTag": "3",
+            "remark": "\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003ca href\u003d\"https://topay777.xyz/index.html?type\u003d1\" target\u003d\"_blank\" title\u003d\"topay教程\" textvalue\u003d\"【存款教程】\"\u003e\u003cspan style\u003d\"color:#a5a5a5\"\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0);\"\u003e【存款教程】\u003c/span\u003e\u003c/span\u003e\u003c/a\u003e\u0026nbsp;\u003ca href\u003d\"https://jiaocheng202311.oss-cn-shanghai.aliyuncs.com/%E5%AE%9E%E5%90%8D%E4%B9%B0%E5%8D%96%E6%95%99%E7%A8%8B.mp4\" target\u003d\"_blank\" title\u003d\"topay视频教程\"\u003e【视频教程】\u003c/a\u003e\u003cspan style\u003d\"color:#a5a5a5\"\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e1. 下载Topay钱包，使用\u003cspan style\u003d\"color: rgb(165, 165, 165); text-wrap: wrap;\"\u003eTopay\u003c/span\u003e扫一扫付款\u003c/span\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e2.\u0026nbsp;请勿向获取到的支付二维码地址充值任何非 \u003cspan style\u003d\"color: rgb(165, 165, 165); text-wrap: wrap;\"\u003eTopay\u003c/span\u003e 资产，否则资产将不可找回。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e3.\u0026nbsp;转账金额请与提单金额一致，否则无法及时到账！\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e4.\u0026nbsp;EB 币不支持任何第三方数字钱包，如您的手机没有安装 \u003cspan style\u003d\"color: rgb(165, 165, 165); text-wrap: wrap;\"\u003eTopay\u003c/span\u003e，请先下载安装。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-wrap: wrap;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e5.\u0026nbsp;请务必确认电脑及浏览器安全，防止信息被篡改或泄露。\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [
+              {
+                "id": 753,
+                "specialId": 9242,
+                "name": "下载TOPAY钱包",
+                "jumpLink": "https://tppay365.com"
+              }
+            ],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 10.0,
+          "max": 200000.0,
+          "recommendAmount": "50,200,300,500,1000,2000,3000",
+          "successRate": 94.0,
+          "paySpecialConfigResDTO": {
+            "id": 10010,
+            "name": "KDPAY",
+            "title": "限额10~20万元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/65431d4e-be38-4230-85a1-2f081c340ac1.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/65431d4e-be38-4230-85a1-2f081c340ac1.png",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 9218,
+            "subType": "65",
+            "itemSort": 2,
+            "columnTag": "3",
+            "remark": "\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e温馨提示\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e1. 只支持使用KDPAY钱包扫码付款，否则无法到账。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e2. 下单后需要在10分钟内完成，超时请勿支付。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e(使用截图重复支付将无法到账）\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e3. 若支付金额与下单金额不符，将导致无法到账和上分，请留意。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e4.\u0026nbsp;\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003eKDPAY\u003c/span\u003e钱包若遇到问题，请联系\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003eKDPAY\u003c/span\u003e钱包平台客服获取专业协助。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e支付步骤：下载\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003eKDPAY\u003c/span\u003e钱包 \u0026gt; 进入买豆页面进行交易 \u0026gt;\u0026nbsp;\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e在官网存款页面输入下单金额 \u0026gt; 使用\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003eKDPAY\u003c/span\u003e钱包扫码付款 \u0026gt; 完成支付\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [
+              {
+                "id": 754,
+                "specialId": 10010,
+                "name": "下载KDPAY钱包",
+                "jumpLink": "http://kdaz2.com"
+              }
+            ],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 100.0,
+          "max": 200000.0,
+          "recommendAmount": "100,200,500,800,1000,3000,5000,8000,10000,15000,20000,30000",
+          "successRate": 80.0,
+          "paySpecialConfigResDTO": {
+            "id": 9510,
+            "name": "OKPAY支付",
+            "title": "限额100~20万元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/9e35ae03-9f64-4133-86c5-7fc21955daa6.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/e55194c1-501d-4682-8335-4cfed4236058.png",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 9218,
+            "subType": "61",
+            "itemSort": 2,
+            "columnTag": "3",
+            "remark": "\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e温馨提示\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e1. 只支持使用OKPAY钱包扫码付款，否则无法到账。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e2. 下单后需要在3分钟内完成，超时请勿支付。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e(使用截图重复支付将无法到账）\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e3. 若支付金额与下单金额不符，将导致无法到账和上分，请留意。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e4. OKPAY钱包若遇到问题，请联系OKPAY钱包平台客服获取专业协助。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e支付步骤：下载OKPAY钱包 \u0026gt; 通过交易所进行买币 \u0026gt;\u0026nbsp;\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap: nowrap; color: rgb(165, 165, 165);\"\u003e在官网存款页面输入下单金额 \u0026gt; 使用OKPAY钱包扫码付款 \u0026gt; 完成支付\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [
+              {
+                "id": 755,
+                "specialId": 9510,
+                "name": "下载OKPAY钱包",
+                "jumpLink": "http://okpay1best.com"
+              }
+            ],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 100.0,
+          "max": 200000.0,
+          "recommendAmount": "1000,2000,3000,5000,10000,20000,30000",
+          "successRate": 96.0,
+          "paySpecialConfigResDTO": {
+            "id": 9219,
+            "name": "EBPAY支付",
+            "title": "限额100~20万元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/f58de861-01fa-4928-a9af-ff58de4aef91.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/8587304f-df62-4f46-b578-52dd67bd50bb.png",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 9218,
+            "subType": "51",
+            "itemSort": 3,
+            "remark": "\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e1. 下载EBPAY钱包，使用EBpay扫一\u003cspan style\u003d\"color: rgb(165, 165, 165); text-decoration: none;\"\u003e扫付款\u003c/span\u003e\u003c/span\u003e\u003cspan style\u003d\"text-decoration: none; color: rgb(165, 165, 165);\"\u003e。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e2.\u0026nbsp;\u003cspan style\u003d\"color: rgb(165, 165, 165); text-wrap: wrap;\"\u003e请勿向获取到的支付二维码地址充值任何非 EB 资产，否则资产将不可找回。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e3. \u003cspan style\u003d\"color: rgb(165, 165, 165); text-wrap: wrap;\"\u003e转账金额请与提单金额一致，否则无法及时到账！\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e4. \u003cspan style\u003d\"color: rgb(165, 165, 165); text-wrap: wrap;\"\u003eEB 币不支持任何第三方数字钱包，如您的手机没有安装 EBpay，请先下载安装。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e5. \u003cspan style\u003d\"color: rgb(165, 165, 165); text-wrap: wrap;\"\u003e请务必确认电脑及浏览器安全，防止信息被篡改或泄露。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [
+              {
+                "id": 756,
+                "specialId": 9219,
+                "name": "下载EBPAY钱包",
+                "jumpLink": "https://www.ebpay25.com/download"
+              }
+            ],
+            "flag": "Y"
+          }
+        }
+      ],
+      "flag": "Y"
+    },
+    {
+      "id": 9256,
+      "name": "支付宝",
+      "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/c3369ed4-60ca-4211-be6f-9a71ed669be6.png",
+      "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/26c00743-ef91-495f-a1c5-e604ec81eec0.png",
+      "type": "1",
+      "typeMark": "c2czk",
+      "giftBonus": 0.0,
+      "parentId": -1,
+      "itemSort": 1,
+      "columnTag": "9",
+      "secondLevelList": [
+        {
+          "min": 300.0,
+          "max": 20000.0,
+          "recommendAmount": "300,600,800,1000,3000,5000,7000,10000,13000,15000",
+          "successRate": 85.0,
+          "paySpecialConfigResDTO": {
+            "id": 9977,
+            "name": "新支付宝支付",
+            "title": "限额300元~20000元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/241ee6ca-9483-470f-8d9d-54e1ff314d2b.jpg",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/260b0e38-0697-45f9-8f18-8baaf7c0dc9e.jpg",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 9256,
+            "subType": "63",
+            "itemSort": 1,
+            "columnTag": "3,9",
+            "remark": "\u003cp style\u003d\"margin-top: 0px; margin-bottom: 0px;\"\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127); text-wrap: wrap;\"\u003e温馨提示\u003cbr/\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e1、使用支付宝转账时，请确保网络稳定，并在完成付款后及时上传存款凭证。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e支付流程：获取收款账号 → 支付宝转账 → 上传凭证 → 提交\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e2、新支付宝渠道严禁使用以下付款方式：\u003cstrong style\u003d\"color: rgb(255, 0, 0);\"\u003e花呗、亲情卡、信用卡、会员卡、贷款。\u003c/strong\u003e否则将无法到账且扣除最高\u003cspan style\u003d\"color: rgb(255, 0, 0);\"\u003e\u003cstrong\u003e7.5%手续费\u003c/strong\u003e\u003c/span\u003e！\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e3、若提示“谨防诈骗”，请取消转账并重新下单，\u003cspan style\u003d\"color: rgb(255, 0, 0);\"\u003e\u003cstrong\u003e请勿选择24小时到账选项！\u003c/strong\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e4、若系统检测到风险行为，存款将延迟或失败，严重者账号将被冻结。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e5、取消交易将导致款项无法到账且无法追回，请确认后操作。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e6、请在提示时间内完成存款，逾期款项将丢失且无法处理。如遇异常，请联系在线客服。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e7、若当前金额不可用，请尝试更换金额或选择其他支付方式（如在人民币充值 - 支付宝支付等）。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e8、推荐返赠金额每20秒刷新一次，\u003cspan style\u003d\"color: rgb(255, 0, 0);\"\u003e\u003cstrong\u003e届时将重置您选择的金额\u003c/strong\u003e\u003c/span\u003e，请您重新选择！\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-top: 0px; margin-bottom: 0px;\"\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003cbr/\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 500.0,
+          "max": 50000.0,
+          "recommendAmount": "500,1000,2000,3000,5000,10007,20003,30009,49999",
+          "successRate": 83.0,
+          "paySpecialConfigResDTO": {
+            "id": 10001,
+            "name": "VIP支付宝",
+            "title": "限额500元~50000元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/241ee6ca-9483-470f-8d9d-54e1ff314d2b.jpg",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/260b0e38-0697-45f9-8f18-8baaf7c0dc9e.jpg",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 9256,
+            "subType": "64",
+            "itemSort": 2,
+            "columnTag": "9",
+            "remark": "\u003cp style\u003d\"margin-top: 0px; margin-bottom: 0px;\"\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e\u003cspan style\u003d\"text-wrap: wrap;\"\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 10px; text-wrap-mode: wrap; line-height: 1.5em;\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(255, 0, 0);\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif;\"\u003eⓘ\u003c/span\u003e温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 10px; text-wrap-mode: wrap; line-height: 1.5em;\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e1.请按照订单页面的收款信息存款，切勿保存收款人信息，请保证每次及时获取最新收款信息。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 10px; text-wrap-mode: wrap; line-height: 1.5em;\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e2.任何渠道充值，请按照第三方页面提示进行存款，请勿相信任何私聊人员。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-bottom: 10px; text-wrap-mode: wrap; line-height: 1.5em;\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e3.如遇到【谨防诈骗】提醒，请您取消转账，重新下单存款即可。\u003cspan style\u003d\"font-size: 14px; color: rgb(255, 0, 0);\"\u003e请勿选择24小时后到账！\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 100.0,
+          "max": 10000.0,
+          "recommendAmount": "100,200,300,400,500,600,700,800,1000,1500,2000,3000,4000,5000,10000",
+          "successRate": 80.0,
+          "paySpecialConfigResDTO": {
+            "id": 619,
+            "name": "支付宝支付",
+            "title": "限额100元~10000元",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/7b87919a-97b5-41b5-8d31-44a00546c898.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/f2ee7610-9bf8-42bc-979e-fc0378f1c1d8.png",
+            "type": "2",
+            "parentId": 9256,
+            "subType": "1",
+            "itemSort": 2,
+            "columnTag": "3,9",
+            "remark": "\u003cp style\u003d\"text-align: left; line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(255, 0, 0);\"\u003e\u003cspan style\u003d\"font-size: 14px; font-family: arial, helvetica, sans-serif;\"\u003eⓘ\u003c/span\u003e温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-align: left; line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e1.因近日存款风控严重，支付宝存款通道可能会要求\u003ca href\u003d\"https://www.dingtalk.com/\" target\u003d\"_blank\" title\u003d\"钉钉下载\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(255, 0, 0);\"\u003e\u003cstrong\u003e\u003cspan style\u003d\"font-size: 16px; background-color: rgb(255, 255, 0);\"\u003e下载钉钉软件\u003c/span\u003e\u003c/strong\u003e\u003c/span\u003e\u003c/a\u003e\u003cstrong\u003e\u003cspan style\u003d\"font-size: 16px; background-color: rgb(255, 255, 0);\"\u003e\u003c/span\u003e\u003c/strong\u003e，请安心下载使用。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-align: left; line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e2.任何渠道充值，请按照第三方页面提示进行存款，请勿相信任何私聊人员。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"text-align: left; line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e3.如遇到【谨防诈骗】提醒，请您取消转账，重新下单存款即可。\u003cspan style\u003d\"font-size: 14px; color: rgb(255, 0, 0);\"\u003e请勿选择24小时后到账！\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        }
+      ],
+      "flag": "Y",
+      "title": "支付宝"
+    },
+    {
+      "id": 615,
+      "name": "银行卡",
+      "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/7c95dcf6-4506-49ac-9a55-183f9075a907.png",
+      "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/454e57bf-5795-4466-b5d3-1f5da6cfabdb.png",
+      "type": "1",
+      "typeMark": "yhzz",
+      "parentId": -1,
+      "itemSort": 2,
+      "columnTag": "9",
+      "remark": "\u003cp\u003e\u003cspan style\u003d\"text-wrap-mode: nowrap; color: rgb(127, 127, 127);\"\u003e温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap-mode: nowrap; color: rgb(127, 127, 127);\"\u003e1、银行卡转账\u003cspan style\u003d\"text-wrap-mode: nowrap; color: rgb(255, 0, 0);\"\u003e请勿填写附言\u003c/span\u003e。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap-mode: nowrap; color: rgb(127, 127, 127);\"\u003e2、凌晨时段银行风控日渐严重，请会员尽量在 \u003cspan style\u003d\"text-wrap-mode: nowrap; color: rgb(255, 0, 0);\"\u003e08:00至23:0\u003c/span\u003e0 时间段完成充值准备。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"text-wrap-mode: nowrap; color: rgb(127, 127, 127);\"\u003e3、任何渠道充值，\u003cspan style\u003d\"text-wrap-mode: nowrap; color: rgb(255, 0, 0);\"\u003e请按照获取订单页面提示进行存款\u003c/span\u003e，如充值遇到任何问题，请联系在线客服。\u003c/span\u003e\u003c/p\u003e",
+      "secondLevelList": [
+        {
+          "min": 100.0,
+          "max": 50000.0,
+          "recommendAmount": "300,600,800,1000,3000,5000,7000,10000,13000,15000",
+          "successRate": 85.0,
+          "paySpecialConfigResDTO": {
+            "id": 9250,
+            "name": "新快捷支付",
+            "title": "100~50000",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/cbbd9787-6fed-49bd-b9d3-b84bb5df89ec.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/bd1e2352-0149-4101-847c-87be9b4426d3.png",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 615,
+            "subType": "55",
+            "itemSort": 1,
+            "columnTag": "3,9",
+            "remark": "\u003cp\u003e\u003cspan style\u003d\"color: rgb(255, 0, 0);\"\u003eⓘ\u0026nbsp;温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e1、使用新快捷支付请确保您的网络稳定，并于“确实”存款后上传您的存款凭证。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e2、如系统侦测到您帐户有任何风险行为将无法即时到帐，情节严重者将永久冻结账户！\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e3、由于工商银行改版机制，若使用工商入款查单需三天，还请谨慎使用。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(127, 127, 127);\"\u003e4、推荐返赠金额每20秒刷新一次，届时将重置您选择的金额，请您重新选择！\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cbr/\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 100.0,
+          "max": 2000.0,
+          "recommendAmount": "100,200,300,400,500,600,780,960,1200,1500,2000",
+          "successRate": 86.0,
+          "paySpecialConfigResDTO": {
+            "id": 621,
+            "name": "银联扫码",
+            "title": "限额100~3000",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/uf/pay/yl_ckfs.png?version\u003d1.0",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/uf/pay/yl_ckfs.png?version\u003d1.0",
+            "type": "2",
+            "parentId": 615,
+            "subType": "13",
+            "itemSort": 9,
+            "columnTag": "9",
+            "remark": "\u003cp style\u003d\"margin-top: 0px; margin-bottom: 10px; text-wrap: wrap; box-sizing: border-box; padding: 0px; line-height: 1.8;\"\u003e\u003cspan style\u003d\"box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003eⓘ温馨提示：\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"margin-top: 0px; margin-bottom: 10px; text-wrap: wrap; box-sizing: border-box; padding: 0px; line-height: 1.8;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: arial, helvetica, sans-serif; font-size: 14px;\"\u003e1、凌晨时段银行风控日渐严重，请会员尽量在\u0026nbsp;\u003cspan style\u003d\"color: rgb(255, 0, 0);\"\u003e\u003cstrong\u003e\u003cspan style\u003d\"box-sizing: border-box;\"\u003e08:00至23:00\u003c/span\u003e\u003c/strong\u003e\u003c/span\u003e\u003cstrong\u003e\u003cspan style\u003d\"box-sizing: border-box;\"\u003e\u0026nbsp;\u003c/span\u003e\u003c/strong\u003e\u003cstrong\u003e\u003cspan style\u003d\"box-sizing: border-box;\"\u003e\u003c/span\u003e\u003c/strong\u003e\u003cstrong\u003e\u003cspan style\u003d\"box-sizing: border-box;\"\u003e\u003c/span\u003e\u003c/strong\u003e\u003cstrong\u003e\u003cspan style\u003d\"box-sizing: border-box;\"\u003e\u003c/span\u003e\u003c/strong\u003e时间段完成充值准备\u003cbr/\u003e2、任何渠道充值，\u003cspan style\u003d\"color: rgb(255, 0, 0);\"\u003e请按照获取订单页面提示进行存款\u003c/span\u003e，如充值遇到任何问题，请联系在线客服。\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        }
+      ],
+      "flag": "Y",
+      "title": "银行卡"
+    },
+    {
+      "id": 614,
+      "name": "三方充值",
+      "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/b078e3ab-7c30-4583-ae30-0be7247b119f.png",
+      "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/df8acd75-fa8a-4df0-9ddc-00271d4b3231.png",
+      "type": "1",
+      "typeMark": "dsfcz",
+      "parentId": -1,
+      "itemSort": 7,
+      "secondLevelList": [
+        {
+          "min": 50.0,
+          "max": 1000.0,
+          "recommendAmount": "50,200,300,400,600,800,1000",
+          "successRate": 61.0,
+          "paySpecialConfigResDTO": {
+            "id": 671,
+            "name": "淘宝支付",
+            "title": "限额50~1000",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/0f8a0fd7-bed7-4eff-80de-ee0b3ee25991.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/0f8a0fd7-bed7-4eff-80de-ee0b3ee25991.png",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 614,
+            "subType": "39",
+            "itemSort": 0,
+            "columnTag": "1",
+            "remark": "\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e\u003cspan style\u003d\"font-size: 14px; font-family: arial, helvetica, sans-serif;\"\u003eⓘ\u003c/span\u003e\u003cspan style\u003d\"font-size: 14px;\"\u003e温馨提示:\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e1. 会员必须依据正确的指示进行支付，如未按照正确流程支付导致的资金损失，恕无法处理。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e\u003cspan style\u003d\"font-size: 14px;\"\u003e2. 支付时需\u003c/span\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(255, 0, 0);\"\u003e\u003cstrong\u003e\u003cspan style\u003d\"font-size: 14px; background-color: rgb(255, 255, 0);\"\u003e备注存款页面上的附言口令\u003c/span\u003e\u003c/strong\u003e\u003c/span\u003e\u003cspan style\u003d\"font-size: 14px;\"\u003e\u003cstrong\u003e\u003cspan style\u003d\"font-size: 14px; background-color: rgb(255, 255, 0);\"\u003e\u003c/span\u003e\u003c/strong\u003e，\u003cspan style\u003d\"font-size: 14px;\"\u003e避免款项丢失，无法处理。\u003cbr/\u003e\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e3. 切勿随意相信来自任何的私聊,提防受骗。\u003cbr/\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"font-size: 14px; color: rgb(165, 165, 165);\"\u003e4. 如充值遇到任何问题，请联系在线客服。\u003c/span\u003e\u003cbr/\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 100.0,
+          "max": 5000.0,
+          "recommendAmount": "100,200,300,500,1000,2000,3000,5000",
+          "successRate": 63.0,
+          "paySpecialConfigResDTO": {
+            "id": 726,
+            "name": "抖音",
+            "title": "限额100~10000",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/a108373c-ad42-4d25-be46-268dcb7ea0ae.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/f2f7d51c-e00b-4d09-bdb0-5b993bd57d4f.png",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 614,
+            "subType": "48",
+            "itemSort": 1,
+            "columnTag": "3",
+            "remark": "\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e温馨提示:\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e1.步骤: 跳转抖音APP→完成绑定银行卡→视频内点击发红包→完成交易后即可到账。\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 200.0,
+          "max": 2000.0,
+          "recommendAmount": "300,500,600,800,1000",
+          "successRate": 65.0,
+          "paySpecialConfigResDTO": {
+            "id": 623,
+            "name": "QQ支付",
+            "title": "限额100~2000",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/5c037883-ad4e-4fc5-9c8f-4e6f47bb10fb.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/7ea20fda-f56e-40bc-a3f1-2b352a3e0369.png",
+            "type": "2",
+            "parentId": 614,
+            "subType": "7",
+            "itemSort": 2,
+            "remark": "\u003cp style\u003d\"line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"color: rgb(0, 176, 240); text-decoration: none; font-size: 14px;\"\u003e\u003ca href\u003d\"https://ued.welovechina888.com:12828/web/web/other/qqhb.png\" target\u003d\"_blank\"\u003e点击查看→QQ支付教程\u003c/a\u003e\u003c/span\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e\u003cbr/\u003eⓘ温馨提醒：\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px;\"\u003e1. 请务必\u003c/span\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(255, 0, 0);\"\u003e\u003cstrong\u003e\u003cspan style\u003d\"font-size: 16px; font-family: arial, helvetica, sans-serif; background-color: rgb(255, 255, 0);\"\u003e上传保存的面对面红包二维码\u003c/span\u003e\u003c/strong\u003e\u003c/span\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px;\"\u003e\u003cstrong\u003e\u003cspan style\u003d\"font-size: 16px; font-family: arial, helvetica, sans-serif; background-color: rgb(255, 255, 0);\"\u003e\u003c/span\u003e\u003c/strong\u003e，\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px;\"\u003e以免影响到账时间！\u003c/span\u003e\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165); font-family: arial, helvetica, sans-serif; font-size: 14px;\"\u003e2. 会员必须依据正确的指示进行支付，如个人原因导致的资金丢失，恕无法处理。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e3. 切勿随意相信来自任何的私聊,提防受骗。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"line-height: 1.5em; margin-bottom: 10px;\"\u003e\u003cspan style\u003d\"font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e4. 如充值遇到任何问题，请联系在线客服。\u003c/span\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 100.0,
+          "max": 30000.0,
+          "recommendAmount": "100,200,300,500,1000,2000,3000,5000,10000,20000,30000",
+          "successRate": 85.0,
+          "paySpecialConfigResDTO": {
+            "id": 620,
+            "name": "微信扫码",
+            "title": "限额200~10000",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/39824a27-a817-4349-a1b0-aa015c724314.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/4716825c-bdd9-4625-92e3-b0a9bf0639a0.png",
+            "type": "2",
+            "parentId": 614,
+            "subType": "2",
+            "itemSort": 3,
+            "columnTag": "1",
+            "remark": "\u003cp style\u003d\"box-sizing: border-box; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); line-height: 1.8; font-size: 14px; white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e\u003cspan style\u003d\"box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 14px;\"\u003eⓘ\u0026nbsp;温馨提醒\u003c/span\u003e\u003cspan style\u003d\"box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 14px;\"\u003e\u003cbr style\u003d\"box-sizing: border-box;\"/\u003e1. 请在页面提示时间内完成支付，逾期将导致款项丢失，概不负责。\u003cbr style\u003d\"box-sizing: border-box;\"/\u003e2. 会员必须依据正确的指示进行支付，如未按照正确流程支付导致的资金损失，恕无法处理。\u003c/span\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"box-sizing: border-box; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); line-height: 1.8; font-size: 14px; white-space: normal;\"\u003e\u003cspan style\u003d\"box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e3. 部分渠道模式需入群发红包，切勿随意相信来自任何的私聊。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"box-sizing: border-box; font-family: \u0026quot;Microsoft YaHei\u0026quot;, Verdana, Arial; margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(51, 51, 51); line-height: 1.8; font-size: 14px; white-space: normal;\"\u003e\u003cspan style\u003d\"box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(165, 165, 165);\"\u003e4. 如充值遇到任何问题，请联系在线客服。\u003c/span\u003e\u003cspan style\u003d\"box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 14px; color: rgb(84, 141, 212);\"\u003e\u003cbr style\u003d\"box-sizing: border-box;\"/\u003e\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cbr/\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        },
+        {
+          "min": 200.0,
+          "max": 2000.0,
+          "recommendAmount": "200,300,500,800,1000,1500,2000",
+          "successRate": 100.0,
+          "paySpecialConfigResDTO": {
+            "id": 690,
+            "name": "钉钉",
+            "title": "限额200~2000",
+            "selectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/584e8f7d-e05f-4c3a-bae1-25563c19bad7.png",
+            "unselectedImageUrl": "https://tg.shdunjiusy.com/at/paySpecial/d49f0c14-d1d9-44cf-b775-a56eb4bec500.png",
+            "type": "2",
+            "giftBonus": 0.0,
+            "parentId": 614,
+            "subType": "43",
+            "itemSort": 3,
+            "columnTag": "3",
+            "remark": "\u003cp style\u003d\"white-space: normal;\"\u003e\u003ca href\u003d\"https://www.dingtalk.com/\" target\u003d\"_blank\" style\u003d\"color: rgb(255, 0, 0);\"\u003e点此下载钉钉\u003c/a\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e温馨提示：\u003c/span\u003e\u003cspan style\u003d\"color: rgb(84, 141, 212);\"\u003e\u003cbr/\u003e\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e1、下载打开钉钉APP，选择转账、红包，完成交易后即可到账。\u003c/span\u003e\u003c/p\u003e\u003cp style\u003d\"white-space: normal;\"\u003e\u003cspan style\u003d\"color: rgb(165, 165, 165);\"\u003e2、订单需要在提示时间内完成支付，预期导致款项丢失，UED概不负责。\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cbr/\u003e\u003c/p\u003e",
+            "linkList": [],
+            "flag": "Y"
+          }
+        }
+      ],
+      "flag": "Y",
+      "title": "三方充值"
+    }
+  ]
+}
