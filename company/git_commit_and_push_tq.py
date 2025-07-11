@@ -30,7 +30,7 @@ def create_and_push_tag():
 
 
 def git_commit_and_tag():
-    repo_path = "/Users/oncechen/IdeaProjects/c_ued"
+    repo_path = "/Users/oncechen/IdeaProjects/c_sportone"
     os.chdir(repo_path)
 
     unstaged = get_unstaged_files()
