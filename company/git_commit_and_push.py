@@ -111,6 +111,6 @@ def git_commit_and_tag(project_key):
 
 
 if __name__ == "__main__":
-    print("请输入项目代号：pt777、tq、ued")
+    print("请输入项目代号：ued、tq、pt777、qy、long8")
     key = input("👉 项目代号：").strip().lower()
     git_commit_and_tag(key)
