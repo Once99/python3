@@ -1,0 +1,106 @@
+import os
+import subprocess
+from datetime import datetime
+
+# === 项目配置：根据实际情况维护 ===
+PROJECTS = {
+    "pt777": {
+        "path": "/Users/oncechen/IdeaProjects/c_pt777",
+        "web_url": "https://pt777web01.itomtest.com/mobile/app/fundsManage.jsp",
+        "pipeline_url": "https://git.easydevops.net/B2C_DC/pt777/web/-/pipelines"
+    },
+    "tq": {
+        "path": "/Users/oncechen/IdeaProjects/c_sportone",
+        "web_url": "https://sportoneweb01.itomtest.com/mobile/app/fundsManage.jsp",
+        "pipeline_url": "https://git.easydevops.net/B2C_DC/sportone/web/-/pipelines"
+    },
+    "ued": {
+        "path": "/Users/oncechen/IdeaProjects/c_ued",
+        "web_url": "https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp",
+        "pipeline_url": "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"
+    }
+}
+
+
+def is_git_repo():
+    return subprocess.run(["git", "rev-parse", "--is-inside-work-tree"], capture_output=True).returncode == 0
+
+
+def has_commit():
+    return subprocess.run(["git", "rev-parse", "--verify", "HEAD"], capture_output=True).returncode == 0
+
+
+def has_staged_changes():
+    return subprocess.run(["git", "diff", "--staged", "--quiet"]).returncode != 0
+
+
+def get_unstaged_files():
+    result = subprocess.run(["git", "diff", "--name-only"], capture_output=True, text=True)
+    files = result.stdout.strip().splitlines()
+    return [f for f in files if os.path.basename(f) != ".DS_Store"]
+
+
+def create_and_push_tag(project_info):
+    if not has_commit():
+        print("⚠️ 当前仓库没有任何提交，无法打 tag！请先至少提交一次。")
+        return
+
+    tag = f"v{datetime.now().strftime('%Y.%m.%d.%H%M')}"
+    subprocess.run(["git", "tag", tag], check=True)
+    subprocess.run(["git", "push", "origin", tag], check=True)
+    print(f"\n🏷️ 已打 tag：{tag} 并推送成功")
+
+    subprocess.run(f"echo '{project_info['web_url']}' | pbcopy", shell=True)
+    print(f"📋 已自动复制网址到剪贴板：{project_info['web_url']}")
+
+    subprocess.run(["open", project_info["pipeline_url"]], check=True)
+    print(f"🌐 已自动打开 GitLab Pipelines 页面：{project_info['pipeline_url']}\n")
+
+
+def git_commit_and_tag(project_key):
+    if project_key not in PROJECTS:
+        print(f"❌ 未知项目代号：{project_key}")
+        return
+
+    project_info = PROJECTS[project_key]
+    repo_path = project_info["path"]
+
+    os.chdir(repo_path)
+
+    if not is_git_repo():
+        print("❌ 当前目录不是 Git 仓库，请确认路径是否正确：", repo_path)
+        return
+
+    unstaged = get_unstaged_files()
+    if unstaged:
+        print("\n⚠️ 以下文件尚未加入 Git 暂存区（已排除 .DS_Store）：\n")
+        for file in unstaged:
+            print(f"  • {file}")
+        choice = input("\n➡️ 是否要自动执行 `git add .`？ [y/N]: ").strip().lower()
+        if choice == 'y':
+            subprocess.run(["git", "add", "."], check=True)
+        else:
+            print("⚠️ 未加入暂存区，跳过 commit 流程")
+
+    if has_staged_changes():
+        message = input("\n💬 请输入 commit 信息（默认：日常维护）：").strip() or "日常维护"
+        try:
+            subprocess.run(["git", "commit", "-m", message], check=True)
+            subprocess.run(["git", "push"], check=True)
+            print(f"\n✅ 已提交并推送成功：{message}")
+            create_and_push_tag(project_info)
+        except subprocess.CalledProcessError:
+            print("❌ commit 或 push 发生错误，流程中止")
+    else:
+        print("\n📦 没有文件需要 commit")
+        choice = input("是否仍要打 Git Tag？ [y/N]: ").strip().lower()
+        if choice == 'y':
+            create_and_push_tag(project_info)
+        else:
+            print("✅ 任务结束，未进行 tag 操作")
+
+
+if __name__ == "__main__":
+    print("请输入项目代号：pt777、tq、ued")
+    key = input("👉 项目代号：").strip().lower()
+    git_commit_and_tag(key)
