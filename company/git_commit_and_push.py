@@ -4,6 +4,16 @@ from datetime import datetime
 
 # === 项目配置：根据实际情况维护 ===
 PROJECTS = {
+    "qy": {
+        "path": "/Users/oncechen/IdeaProjects/c_qy",
+        "web_url": "https://qyweb01.itomtest.com/mobile/app/fundsManage.jsp",
+        "pipeline_url": "https://git.easydevops.net/B2C_DC/qy/web/-/pipelines"
+    },
+    "long8": {
+        "path": "/Users/oncechen/IdeaProjects/c_long8",
+        "web_url": "https://long8web01.itomtest.com/mobile/app/fundsManage.jsp",
+        "pipeline_url": "https://git.easydevops.net/B2C_DC/long8/web/-/pipelines"
+    },
     "pt777": {
         "path": "/Users/oncechen/IdeaProjects/c_pt777",
         "web_url": "https://pt777web01.itomtest.com/mobile/app/fundsManage.jsp",
