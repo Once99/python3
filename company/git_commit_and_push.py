@@ -5,7 +5,7 @@ from datetime import datetime
 # === 项目配置：根据实际情况维护 ===
 PROJECTS = {
     "ued": {
-        "path": "/Users/oncechen/IdeaProjects/c_ued/web/WebRoot/",
+        "path": "/Users/oncechen/IdeaProjects/c_ued/WebRoot/",
         "web_url": "https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp",
         "pipeline_url": "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"
     },
