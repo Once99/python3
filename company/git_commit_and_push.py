@@ -81,6 +81,12 @@ def git_commit_and_tag(project_key):
         print("❌ 当前目录不是 Git 仓库，请确认路径是否正确：", repo_path)
         return
 
+    print("🔄 正在执行 git pull...")
+    pull_result = subprocess.run(["git", "pull"])
+    if pull_result.returncode != 0:
+        print("❌ git pull 失败，请检查网络或远端状态")
+    return
+
     unstaged = get_unstaged_files()
     if unstaged:
         print("\n⚠️ 以下文件尚未加入 Git 暂存区（已排除 .DS_Store）：\n")
