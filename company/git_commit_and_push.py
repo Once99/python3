@@ -85,7 +85,7 @@ def git_commit_and_tag(project_key):
     pull_result = subprocess.run(["git", "pull"])
     if pull_result.returncode != 0:
         print("❌ git pull 失败，请检查网络或远端状态")
-    return
+        return
 
     unstaged = get_unstaged_files()
     if unstaged:
