@@ -4,6 +4,16 @@ from datetime import datetime
 
 # === 项目配置：根据实际情况维护 ===
 PROJECTS = {
+    "rb88": {
+        "path": "/Users/oncechen/IdeaProjects/rb88_web_vue/",
+        "web_url": "https://rb88vue.nntitestserver.com/",
+        "pipeline_url": "https://git.easydevops.net/frontend/rb88_web_vue/-/pipelines"
+    },
+    "jxf": {
+        "path": "/Users/oncechen/IdeaProjects/jxf_web_static_vue/",
+        "web_url": "https://jxfvue.nntitestserver.com/",
+        "pipeline_url": "https://git.easydevops.net/frontend/jxf_web_static_vue/-/pipelines"
+    },
     "ued": {
         "path": "/Users/oncechen/IdeaProjects/c_ued/WebRoot/",
         "web_url": "https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp",
@@ -117,6 +127,6 @@ def git_commit_and_tag(project_key):
 
 
 if __name__ == "__main__":
-    print("请输入项目代号：ued、tq、pt777、qy、long8")
+    print("请输入项目代号：rb88、jxf、ued、tq、pt777、qy、long8")
     key = input("👉 项目代号：").strip().lower()
     git_commit_and_tag(key)
