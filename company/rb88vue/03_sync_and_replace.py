@@ -99,3 +99,5 @@ print("🌐 打开 GitLab Pipeline 页面")
 webbrowser.open("https://git.easydevops.net/frontend/rb88_web_vue/-/pipelines")
 
 print(f"\n🎉 全部流程完成，版本标签 {TAG} 已推送")
+print(f"\n记得换接口API地址!")
+print(f"\n记得换滑动验证码CaptchID地址!")
