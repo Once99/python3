@@ -80,7 +80,7 @@ def ensure_proxy_target(dest_dir):
     with open(vite_file, "r", encoding="utf-8") as f:
         content = f.read()
 
-    expected_target = "https://rb88vue.itomtest.com"
+    expected_target = "https://rb88vue.nntitestserver.com"
     if expected_target in content:
         print("✅ Proxy target 设置正确")
     else:
