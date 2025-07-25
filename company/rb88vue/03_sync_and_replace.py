@@ -46,6 +46,46 @@ def walk_and_replace(target_dir):
                 except Exception as e:
                     print(f"⚠️ 错误：{filepath} - {e}")
 
+# Step 3.1: 替换 Captcha ID
+def ensure_captcha_id(dest_dir):
+    target_file = os.path.join(dest_dir, "src", "composables", "useNeCaptcha.ts")
+    if not os.path.exists(target_file):
+        print(f"⚠️ Captcha 檔案不存在: {target_file}")
+        return
+
+    with open(target_file, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    old_id = "873182f57b6241eb987f3f579f9d6fcb"
+    new_id = "d7679d69f38c4a56baffd5ce627b03dc"
+
+    if old_id in content:
+        content = content.replace(old_id, new_id)
+        with open(target_file, "w", encoding="utf-8") as f:
+            f.write(content)
+        print("🔄 Captcha ID 已更新")
+    elif new_id in content:
+        print("✅ Captcha ID 已正确设置")
+    else:
+        print("⚠️ 未找到 Captcha ID，未做替换")
+
+
+# Step 3.2: 检查 Vite Proxy 配置
+def ensure_proxy_target(dest_dir):
+    vite_file = os.path.join(dest_dir, "vite.config.ts")
+    if not os.path.exists(vite_file):
+        print(f"⚠️ vite.config.ts 不存在: {vite_file}")
+        return
+
+    with open(vite_file, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    expected_target = "https://rb88vue.itomtest.com"
+    if expected_target in content:
+        print("✅ Proxy target 设置正确")
+    else:
+        print("⚠️ Proxy target 不是预期值，建议检查 vite.config.ts 中的 /api 配置！")
+
 # === 主流程 ===
 
 # 檢查目錄
@@ -74,6 +114,12 @@ run([
 # Step 3: 替换目标项目内容
 print("🔧 替换目标项目内容...")
 walk_and_replace(DEST)
+
+# Step 3.1: 检查 Captcha ID
+ensure_captcha_id(DEST)
+
+# Step 3.2: 检查 Proxy 配置
+ensure_proxy_target(DEST)
 
 # Step 4: 提交、推送变更
 os.chdir(DEST)
