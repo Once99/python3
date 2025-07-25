@@ -41,6 +41,17 @@ PROJECTS = {
     }
 }
 
+LAST_COMMIT_FILE = os.path.expanduser("~/.last_commit_msg")
+
+def load_last_commit_message():
+    if os.path.exists(LAST_COMMIT_FILE):
+        with open(LAST_COMMIT_FILE, 'r', encoding='utf-8') as f:
+            return f.read().strip()
+    return "日常维护"
+
+def save_last_commit_message(message):
+    with open(LAST_COMMIT_FILE, 'w', encoding='utf-8') as f:
+        f.write(message.strip())
 
 def is_git_repo():
     return subprocess.run(["git", "rev-parse", "--is-inside-work-tree"], capture_output=True).returncode == 0
