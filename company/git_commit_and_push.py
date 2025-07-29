@@ -41,13 +41,18 @@ PROJECTS = {
     }
 }
 
-LAST_COMMIT_FILE = os.path.expanduser("~/.last_commit_msg")
+# 使用当前脚本所在目录的 txt 文件缓存上次 commit 信息
+LAST_COMMIT_FILE = os.path.join(os.path.dirname(__file__), "last_commit_msg.txt")
 
 def load_last_commit_message():
     if os.path.exists(LAST_COMMIT_FILE):
         with open(LAST_COMMIT_FILE, 'r', encoding='utf-8') as f:
             return f.read().strip()
-    return "日常维护"
+    else:
+        # 文件不存在，自动创建并写入默认内容
+        with open(LAST_COMMIT_FILE, 'w', encoding='utf-8') as f:
+            f.write("日常维护")
+        return "日常维护"
 
 def save_last_commit_message(message):
     with open(LAST_COMMIT_FILE, 'w', encoding='utf-8') as f:
@@ -120,7 +125,9 @@ def git_commit_and_tag(project_key):
             print("⚠️ 未加入暂存区，跳过 commit 流程")
 
     if has_staged_changes():
-        message = input("\n💬 请输入 commit 信息（默认：日常维护）：").strip() or "日常维护"
+        last_msg = load_last_commit_message()
+        message = input(f"\n💬 请输入 commit 信息（默认：{last_msg}）：").strip() or last_msg
+        save_last_commit_message(message)
         try:
             subprocess.run(["git", "commit", "-m", message], check=True)
             subprocess.run(["git", "push"], check=True)
