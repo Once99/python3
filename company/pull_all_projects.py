@@ -16,7 +16,7 @@ PROJECTS = {
         "path": "/Users/oncechen/IdeaProjects/c_sportone/web/WebRoot/"
     },
     "pt777": {
-        "path": "/Users/oncechen/IdeaProjects/c_pt777/web/WebRoot/"
+        "path": "/Users/oncechen/IdeaProjects/c_pt777/WebRoot/"
     },
     "qy": {
         "path": "/Users/oncechen/IdeaProjects/c_qy/web/WebRoot/"
