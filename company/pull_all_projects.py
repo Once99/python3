@@ -29,8 +29,18 @@ PROJECTS = {
     },
     "lwh5": {
         "path": "/Users/oncechen/IdeaProjects/e68_web_static_vue/"
+    },
+    "feiyu": {
+        "path": "/Users/oncechen/IdeaProjects/feiyu-site/"
+    },
+    "94Chat": {
+        "path": "/Users/oncechen/IdeaProjects/site-dolphin/"
+    },
+    "weiquandanbao": {
+        "path": "/Users/oncechen/IdeaProjects/site-weiquandanbao/"
     }
 }
+
 
 def pull_project(name, info):
     path = info["path"]
@@ -49,11 +59,13 @@ def pull_project(name, info):
         print("❌ git pull 失败")
         print(e.stderr)
 
+
 def main():
     print("🚀 开始批量 git pull 所有项目...\n")
     for name, info in PROJECTS.items():
         pull_project(name, info)
     print("\n✅ 所有项目已完成 pull")
+
 
 if __name__ == "__main__":
     main()
