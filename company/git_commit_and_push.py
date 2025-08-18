@@ -25,7 +25,7 @@ PROJECTS = {
         "pipeline_url": "https://git.easydevops.net/B2C_DC/sportone/web/-/pipelines"
     },
     "pt777": {
-        "path": "/Users/oncechen/IdeaProjects/c_pt777/web/WebRoot/",
+        "path": "/Users/oncechen/IdeaProjects/c_pt777/WebRoot/",
         "web_url": "https://pt777web01.itomtest.com/mobile/app/fundsManage.jsp",
         "pipeline_url": "https://git.easydevops.net/B2C_DC/pt777/web/-/pipelines"
     },
