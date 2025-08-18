@@ -14,29 +14,39 @@ PROJECTS = {
         "web_url": "https://jxfvue.nntitestserver.com/",
         "pipeline_url": "https://git.easydevops.net/frontend/jxf_web_static_vue/-/pipelines"
     },
+    "e68pc": {
+        "path": "/Users/oncechen/IdeaProjects/e68_web_vue/",
+        "web_url": "https://e68web01.itomtest.com/",
+        "pipeline_url": "https://git.easydevops.net/frontend/e68_web_vue/-/pipelines"
+    },
+    "e68h5": {
+        "path": "/Users/oncechen/IdeaProjects/e68_web_static_vue/",
+        "web_url": "https://e68web01.itomtest.com/",
+        "pipeline_url": "https://git.easydevops.net/frontend/e68_web_static_vue/-/pipelines"
+    },
     "ued": {
         "path": "/Users/oncechen/IdeaProjects/c_ued/WebRoot/",
-        "web_url": "https://uedweb01.itomtest.com/mobile/app/fundsManage.jsp",
+        "web_url": "https://uedweb01.itomtest.com/mobile/index.jsp",
         "pipeline_url": "https://git.easydevops.net/B2C_DC/ued/web/-/pipelines"
     },
     "tq": {
         "path": "/Users/oncechen/IdeaProjects/c_sportone/web/WebRoot/",
-        "web_url": "https://sportoneweb01.itomtest.com/mobile/app/fundsManage.jsp",
+        "web_url": "https://sportoneweb01.itomtest.com/mobile/index.jsp",
         "pipeline_url": "https://git.easydevops.net/B2C_DC/sportone/web/-/pipelines"
     },
     "pt777": {
         "path": "/Users/oncechen/IdeaProjects/c_pt777/WebRoot/",
-        "web_url": "https://pt777web01.itomtest.com/mobile/app/fundsManage.jsp",
+        "web_url": "https://pt777web01.itomtest.com/mobile/index.jsp",
         "pipeline_url": "https://git.easydevops.net/B2C_DC/pt777/web/-/pipelines"
     },
     "qy": {
         "path": "/Users/oncechen/IdeaProjects/c_qy/web/WebRoot/",
-        "web_url": "https://qyweb01.itomtest.com/mobile/app/fundsManage.jsp",
+        "web_url": "https://qyweb01.itomtest.com/mobile/index.jsp",
         "pipeline_url": "https://git.easydevops.net/B2C_DC/qy/web/-/pipelines"
     },
     "long8": {
         "path": "/Users/oncechen/IdeaProjects/c_long8/web/WebRoot/",
-        "web_url": "https://long8web01.itomtest.com/mobile/app/fundsManage.jsp",
+        "web_url": "https://long8web01.itomtest.com/mobile21/index.jsp",
         "pipeline_url": "https://git.easydevops.net/B2C_DC/long8/web/-/pipelines"
     }
 }
@@ -145,6 +155,6 @@ def git_commit_and_tag(project_key):
 
 
 if __name__ == "__main__":
-    print("请输入项目代号：rb88、jxf、ued、tq、pt777、qy、long8")
+    print("请输入项目代号：rb88、jxf、ued、tq、pt777、qy、long8、e68pc、e68h5")
     key = input("👉 项目代号：").strip().lower()
     git_commit_and_tag(key)
