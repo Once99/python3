@@ -24,6 +24,12 @@ PROJECTS = {
     "long8": {
         "path": "/Users/oncechen/IdeaProjects/c_long8/web/WebRoot/"
     },
+    "uedpc": {
+        "path": "/Users/oncechen/IdeaProjects/ued_web_vue/"
+    },
+    "uedh5": {
+        "path": "/Users/oncechen/IdeaProjects/ued_web_static_vue/"
+    },
     "lwpc": {
         "path": "/Users/oncechen/IdeaProjects/e68_web_vue/"
     },

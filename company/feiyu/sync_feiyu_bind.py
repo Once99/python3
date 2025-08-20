@@ -38,7 +38,7 @@ def copy_merge(src, dst, dry=False):
         print(f"❌ 来源目录不存在：{src}"); sys.exit(1)
     os.makedirs(dst, exist_ok=True)
     for root, _, files in os.walk(src):
-        rel = os.path.relpath(root, src)
+        rel = os.pathe.relpath(root, src)
         target_root = os.path.join(dst, rel) if rel != "." else dst
         os.makedirs(target_root, exist_ok=True)
         for fn in files:
