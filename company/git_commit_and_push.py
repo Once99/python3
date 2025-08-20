@@ -81,12 +81,27 @@ def has_staged_changes():
 
 
 def get_unstaged_files():
-    result = subprocess.run(["git", "diff", "--name-only"], capture_output=True, text=True)
+    result = subprocess.run(
+        ["git", "diff", "--name-only"],
+        capture_output=True,
+        text=True
+    )
     files = result.stdout.strip().splitlines()
-    # 过滤掉 .DS_Store / package-lock.json / yarn.lock
-    exclude = {".DS_Store", "package-lock.json", "yarn.lock"}
-    return [f for f in files if os.path.basename(f) not in exclude]
 
+    # 要排除的文件名
+    exclude_files = {".DS_Store", "package-lock.json", "yarn.lock"}
+
+    unstaged = []
+    for f in files:
+        # 跳過指定文件
+        if os.path.basename(f) in exclude_files:
+            continue
+        # 跳過 dist 目錄下的任何檔案
+        if f.startswith("dist/") or f == "dist":
+            continue
+        unstaged.append(f)
+
+    return unstaged
 
 def create_and_push_tag(project_info):
     if not has_commit():
