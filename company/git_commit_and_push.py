@@ -52,7 +52,7 @@ PROJECTS = {
     "black": {
         "path": "/Users/oncechen/IdeaProjects/site-weiquandanbao/",
         "web_url": "https://weiquandanbao.nntitestserver.com/mobile/",
-        "pipeline_url": "https://git.easydevops.net/newmedia/weiquandanbao"
+        "pipeline_url": "https://git.easydevops.net/newmedia/weiquandanbao/-/pipelines"
     }
 }
 
