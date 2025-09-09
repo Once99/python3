@@ -48,6 +48,11 @@ PROJECTS = {
         "path": "/Users/oncechen/IdeaProjects/c_long8/web/WebRoot/",
         "web_url": "https://long8web01.itomtest.com/mobile21/index.jsp",
         "pipeline_url": "https://git.easydevops.net/B2C_DC/long8/web/-/pipelines"
+    },
+    "black": {
+        "path": "/Users/oncechen/IdeaProjects/site-weiquandanbao/",
+        "web_url": "https://weiquandanbao.nntitestserver.com/mobile/",
+        "pipeline_url": "https://git.easydevops.net/newmedia/weiquandanbao"
     }
 }
 
@@ -207,6 +212,6 @@ def git_commit_and_tag(project_key):
             print("✅ 任务结束，未进行 tag 操作")
 
 if __name__ == "__main__":
-    print("请输入项目代号：rb88、jxf、ued、tq、pt777、qy、long8、e68pc、e68h5")
+    print("请输入项目代号：rb88、jxf、ued、tq、pt777、qy、long8、e68pc、e68h5、black")
     key = input("👉 项目代号：").strip().lower()
     git_commit_and_tag(key)
