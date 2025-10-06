@@ -21,9 +21,7 @@ APK_PATH  = os.path.join(DEST_DIR, APK_NAME)
 INDEX_JS_PATH = os.path.join(REPO_PATH, "js/index.js")
 
 URLS = [
-    "https://feiyu.equgou.com/Android/apk/flychat/flychat_release.apk",
-    "https://fujkou.com:12828/Android/apk/flychat/flychat_release.apk",
-    "https://fujkou.net:12828/Android/apk/flychat/flychat_release.apk",
+    "https://feiyu.equgou.com/Android/apk/flychat/flychat_release.apk"
 ]
 
 def ensure_dirs():
