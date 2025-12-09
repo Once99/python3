@@ -3,11 +3,11 @@ import os
 
 # === 项目配置：根据实际情况维护 ===
 PROJECTS = {
+    "rb88": {
+        "path": "/Users/oncechen/IdeaProjects/rb88_web_vue/"
+    },
     "jxf": {
         "path": "/Users/oncechen/IdeaProjects/jxf_web_static_vue_main/"
-    },
-    "jxfdev": {
-        "path": "/Users/oncechen/IdeaProjects/jxf_web_static_vue_dev/"
     },
     "ued": {
         "path": "/Users/oncechen/IdeaProjects/c_ued/WebRoot/"
