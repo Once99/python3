@@ -3,11 +3,23 @@ import os
 
 # === 项目配置：根据实际情况维护 ===
 PROJECTS = {
-    "rb88": {
-        "path": "/Users/oncechen/IdeaProjects/rb88_web_vue/"
+    "rb88_main": {
+        "path": "/Users/oncechen/IdeaProjects/rb88_web_vue_main/"
     },
-    "jxf": {
+    "rb88_dev": {
+        "path": "/Users/oncechen/IdeaProjects/rb88_web_vue_dev/"
+    },
+    "jxf_main": {
         "path": "/Users/oncechen/IdeaProjects/jxf_web_static_vue_main/"
+    },
+    "jxf_dev": {
+        "path": "/Users/oncechen/IdeaProjects/jxf_web_static_vue_dev/"
+    },
+    "uedpc": {
+        "path": "/Users/oncechen/IdeaProjects/ued_web_vue/"
+    },
+    "uedh5": {
+        "path": "/Users/oncechen/IdeaProjects/ued_web_static_vue/"
     },
     "ued": {
         "path": "/Users/oncechen/IdeaProjects/c_ued/WebRoot/"
@@ -15,20 +27,14 @@ PROJECTS = {
     "tq": {
         "path": "/Users/oncechen/IdeaProjects/c_sportone/web/WebRoot/"
     },
-    "pt777": {
-        "path": "/Users/oncechen/IdeaProjects/c_pt777/WebRoot/"
-    },
     "qy": {
         "path": "/Users/oncechen/IdeaProjects/c_qy/web/WebRoot/"
     },
+    "pt777": {
+        "path": "/Users/oncechen/IdeaProjects/c_pt777/WebRoot/"
+    },
     "long8": {
         "path": "/Users/oncechen/IdeaProjects/c_long8/web/WebRoot/"
-    },
-    "uedpc": {
-        "path": "/Users/oncechen/IdeaProjects/ued_web_vue/"
-    },
-    "uedh5": {
-        "path": "/Users/oncechen/IdeaProjects/ued_web_static_vue/"
     },
     "lwpc": {
         "path": "/Users/oncechen/IdeaProjects/e68_web_vue/"
