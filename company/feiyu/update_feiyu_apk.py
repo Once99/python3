@@ -24,6 +24,19 @@ try:
 except:
     pass
 
+# =================== 防缓存请求头 ===================
+HEADERS = {
+    "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0",
+}
+
+def with_cache_bust(url: str) -> str:
+    """给 URL 加时间戳参数，避免 CDN/代理缓存命中"""
+    ts = int(time.time())
+    joiner = "&" if "?" in url else "?"
+    return f"{url}{joiner}_t={ts}"
+
 
 # =================== 工具方法 ===================
 def ensure_dir(p):
@@ -48,24 +61,59 @@ def atomic_write_json(path, data):
     os.replace(tmp, path)
 
 
-# =================== 1. 下载 APK ===================
+# =================== 1. 下载 APK（原子替换 + 防缓存）===================
 def download_apk():
     ensure_dir(DEST_DIR)
+    tmp_path = APK_PATH + ".tmp"
+
     for url in URLS:
         try:
-            print("🚚 下载:", url)
-            with requests.get(url, timeout=20, verify=False, stream=True) as r:
+            busted_url = with_cache_bust(url)
+            print("🚚 下载(避缓存):", busted_url)
+
+            with requests.get(
+                    busted_url,
+                    timeout=20,
+                    verify=False,
+                    stream=True,
+                    headers=HEADERS
+            ) as r:
                 if r.status_code == 200:
-                    with open(APK_PATH, "wb") as f:
+                    # 先写临时文件，避免下载中断导致正式 APK 损坏
+                    with open(tmp_path, "wb") as f:
                         for chunk in r.iter_content(1024 * 64):
                             if chunk:
                                 f.write(chunk)
-                    print("✅ APK 下载成功")
+
+                    # 简单校验：APK/ZIP 文件头应为 PK（避免拿到错误页 HTML）
+                    with open(tmp_path, "rb") as f:
+                        if f.read(2) != b"PK":
+                            print("❌ 下载内容疑似不是 APK（文件头不是 PK），可能返回了错误页/缓存页")
+                            try:
+                                os.remove(tmp_path)
+                            except:
+                                pass
+                            continue
+
+                    # 原子替换正式文件
+                    os.replace(tmp_path, APK_PATH)
+
+                    size_mb = os.path.getsize(APK_PATH) / 1024 / 1024
+                    print(f"✅ APK 下载成功并已替换：{APK_PATH} ({size_mb:.2f} MB)")
                     return True
                 else:
                     print("❌ 响应码:", r.status_code)
+
         except Exception as e:
             print("❌ 下载失败:", e)
+
+    # 清理残留 tmp
+    try:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+    except:
+        pass
+
     return False
 
 

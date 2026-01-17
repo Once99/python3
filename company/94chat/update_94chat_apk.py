@@ -49,23 +49,65 @@ def atomic_write_json(path, data):
 
 
 # =================== 1. 下载 APK ===================
+HEADERS = {
+    "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0",
+}
+
+def with_cache_bust(url: str) -> str:
+    ts = int(time.time())
+    joiner = "&" if "?" in url else "?"
+    return f"{url}{joiner}_t={ts}"
+
 def download_apk():
     ensure_dir(DEST_DIR)
+    tmp_path = APK_PATH + ".tmp"
+
     for url in URLS:
         try:
-            print("🚚 下载:", url)
-            with requests.get(url, timeout=20, verify=False, stream=True) as r:
+            busted_url = with_cache_bust(url)
+            print("🚚 下载(避缓存):", busted_url)
+
+            with requests.get(
+                    busted_url,
+                    timeout=20,
+                    verify=False,
+                    stream=True,
+                    headers=HEADERS,
+            ) as r:
                 if r.status_code == 200:
-                    with open(APK_PATH, "wb") as f:
+                    with open(tmp_path, "wb") as f:
                         for chunk in r.iter_content(1024 * 64):
                             if chunk:
                                 f.write(chunk)
-                    print("✅ APK 下载成功")
+
+                    # ✅ 简单校验：APK/ZIP 文件头应为 PK
+                    with open(tmp_path, "rb") as f:
+                        if f.read(2) != b"PK":
+                            print("❌ 下载内容疑似不是 APK（文件头不是 PK），可能被回源到错误页")
+                            try:
+                                os.remove(tmp_path)
+                            except:
+                                pass
+                            continue
+
+                    os.replace(tmp_path, APK_PATH)
+                    size_mb = os.path.getsize(APK_PATH) / 1024 / 1024
+                    print(f"✅ APK 下载成功并已替换：{APK_PATH} ({size_mb:.2f} MB)")
                     return True
                 else:
                     print("❌ 响应码:", r.status_code)
+
         except Exception as e:
             print("❌ 下载失败:", e)
+
+    try:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+    except:
+        pass
+
     return False
 
 
