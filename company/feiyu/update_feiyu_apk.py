@@ -15,7 +15,7 @@ APK_PATH  = os.path.join(DEST_DIR, APK_NAME)
 VERSION_JSON_PATH = os.path.join(REPO_PATH, "version.json")
 
 URLS = [
-    "https://feiyu.equgou.com/Android/apk/flychat/flychat_release.apk"
+    "https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk"
 ]
 
 # 关闭 insecure warning

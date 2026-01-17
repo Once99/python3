@@ -15,7 +15,7 @@ APK_PATH  = os.path.join(DEST_DIR, APK_NAME)
 VERSION_JSON_PATH = os.path.join(REPO_PATH, "version.json")
 
 URLS = [
-    "https://94chat.equgou.com/Android/apk/94chat.apk"
+    "https://94chat-2.equgou.com/Android/apk/94chat.apk"
 ]
 
 # 关闭 insecure warning
