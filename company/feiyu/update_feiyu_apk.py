@@ -157,16 +157,24 @@ def update_version_json(version):
 
 
 # =================== 4. Git 提交 ===================
+def git_pull_safe():
+    print("🔄 git pull (--ff-only)...")
+    try:
+        print(run_cmd(["git", "pull", "--ff-only"]))
+        return
+    except SystemExit:
+        # ff-only 失败：说明有分叉，改用 rebase
+        print("⚠️ 分叉分支，改用 git pull --rebase ...")
+        print(run_cmd(["git", "pull", "--rebase"]))
+
 def git_commit_and_tag(version):
-    print("🔄 git pull...")
-    print(run_cmd(["git", "pull"]))
+    git_pull_safe()
 
     rel_apk = os.path.relpath(APK_PATH, REPO_PATH)
     rel_ver = os.path.relpath(VERSION_JSON_PATH, REPO_PATH)
 
     run_cmd(["git", "add", rel_apk, rel_ver])
 
-    # 无变更跳过
     if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=REPO_PATH).returncode == 0:
         print("⚠️ 无变更，跳过提交")
         return
@@ -174,10 +182,8 @@ def git_commit_and_tag(version):
     msg = f"{datetime.now():%Y-%m-%d} update apk {version}"
     run_cmd(["git", "commit", "-m", msg])
     run_cmd(["git", "push"])
-
     print("✅ Git 提交完成:", msg)
 
-    # tag 使用 vYYYYMMDDHHMMSS
     tag = f"v{version}"
     run_cmd(["git", "tag", tag])
     run_cmd(["git", "push", "origin", tag])

@@ -31,10 +31,12 @@ def ensure_dir(p):
 
 
 def run_cmd(cmd):
-    """执行 git 命令"""
+    """执行命令（默认 cwd=REPO_PATH）"""
     p = subprocess.run(cmd, cwd=REPO_PATH, capture_output=True, text=True)
     if p.returncode != 0:
-        print("[Git Error]", p.stdout, p.stderr)
+        print("[Cmd Error]", " ".join(cmd))
+        print(p.stdout)
+        print(p.stderr)
         raise SystemExit(p.returncode)
     return p.stdout
 
@@ -48,7 +50,7 @@ def atomic_write_json(path, data):
     os.replace(tmp, path)
 
 
-# =================== 1. 下载 APK ===================
+# =================== 1. 下载 APK（原子替换 + 防缓存）===================
 HEADERS = {
     "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
     "Pragma": "no-cache",
@@ -56,9 +58,11 @@ HEADERS = {
 }
 
 def with_cache_bust(url: str) -> str:
+    """给 URL 加时间戳参数，避免 CDN/代理缓存命中"""
     ts = int(time.time())
     joiner = "&" if "?" in url else "?"
     return f"{url}{joiner}_t={ts}"
+
 
 def download_apk():
     ensure_dir(DEST_DIR)
@@ -77,22 +81,25 @@ def download_apk():
                     headers=HEADERS,
             ) as r:
                 if r.status_code == 200:
+                    # 先写临时文件，避免下载中断导致正式 APK 损坏
                     with open(tmp_path, "wb") as f:
                         for chunk in r.iter_content(1024 * 64):
                             if chunk:
                                 f.write(chunk)
 
-                    # ✅ 简单校验：APK/ZIP 文件头应为 PK
+                    # ✅ 简单校验：APK/ZIP 文件头应为 PK（避免拿到错误页 HTML）
                     with open(tmp_path, "rb") as f:
                         if f.read(2) != b"PK":
-                            print("❌ 下载内容疑似不是 APK（文件头不是 PK），可能被回源到错误页")
+                            print("❌ 下载内容疑似不是 APK（文件头不是 PK），可能被回源到错误页/缓存页")
                             try:
                                 os.remove(tmp_path)
                             except:
                                 pass
                             continue
 
+                    # 原子替换正式文件
                     os.replace(tmp_path, APK_PATH)
+
                     size_mb = os.path.getsize(APK_PATH) / 1024 / 1024
                     print(f"✅ APK 下载成功并已替换：{APK_PATH} ({size_mb:.2f} MB)")
                     return True
@@ -102,6 +109,7 @@ def download_apk():
         except Exception as e:
             print("❌ 下载失败:", e)
 
+    # 清理残留 tmp
     try:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
@@ -150,10 +158,25 @@ def update_version_json(version):
     print(json.dumps(new_data, indent=2, ensure_ascii=False))
 
 
-# =================== 4. Git 提交 ===================
+# =================== 4. Git：pull 策略（ff-only -> rebase） ===================
+def git_pull_safe():
+    """
+    ✅ 方案 A：优先 fast-forward；如果分叉则自动 rebase
+    - 能 FF：不改历史
+    - 不能 FF：用 rebase 保持线性历史（会改本地未 push 提交的 SHA）
+    """
+    print("🔄 git pull (--ff-only)...")
+    try:
+        print(run_cmd(["git", "pull", "--ff-only"]))
+        return
+    except SystemExit:
+        print("⚠️ 分叉分支，改用 git pull --rebase ...")
+        # 这里如果 rebase 冲突会直接抛出并退出，让你手动解决
+        print(run_cmd(["git", "pull", "--rebase"]))
+
+
 def git_commit_and_tag(version):
-    print("🔄 git pull...")
-    print(run_cmd(["git", "pull"]))
+    git_pull_safe()
 
     rel_apk = os.path.relpath(APK_PATH, REPO_PATH)
     rel_ver = os.path.relpath(VERSION_JSON_PATH, REPO_PATH)
