@@ -1,26 +1,41 @@
 #!/bin/zsh
 set -u
 
+########################################
+# 設定區
+########################################
 SRC="/Volumes/My Passport"
 DST="/Volumes/TOSHIBA EXT"
 
-# 你要跑幾次
+# 要跑幾次（你要 3 次）
 PASSES=3
 
-# 工作目錄（存 logs / failed lists）
+# 工作目錄：存 logs / failed lists
 WORKDIR="${HOME}/rsync_retry_logs"
 mkdir -p "$WORKDIR"
 
-# rsync 參數集中管理
+# rsync 參數
+# 注意：這裡不加 -n（dry-run），就是「實際操作」
 RSYNC_OPTS=(
   -a
   --ignore-errors
   --partial
   --info=progress2
   --no-times
+
+  # 排除 macOS 常見系統資料夾，避免 Permission / Spotlight 造成噪音
+  --exclude='.Spotlight-V100'
+  --exclude='.Trashes'
+  --exclude='.fseventsd'
+  --exclude='.TemporaryItems'
+  --exclude='.DS_Store'
 )
 
-# 判斷 log 是否含 I/O 類錯誤（可依你的實際狀況再增修關鍵字）
+########################################
+# 函數區
+########################################
+
+# 判斷 log 是否含 I/O 類錯誤（只抓硬碟/讀寫相關）
 has_io_error() {
   local logfile="$1"
   /usr/bin/grep -Eqi \
@@ -28,7 +43,8 @@ has_io_error() {
     "$logfile"
 }
 
-# 同步一個父資料夾，並回傳 0=成功 1=失敗(含I/O類錯誤或rsync exit code非0)
+# 同步一個父資料夾
+# 回傳：0=成功，1=失敗（rsync exit code !=0 或 log 偵測到 I/O 類錯誤）
 sync_one_dir() {
   local dir="$1"
   local name="$2"
@@ -40,20 +56,26 @@ sync_one_dir() {
   echo "SRC: $dir/"
   echo "DST: $DST/$name/"
   echo "LOG: $log"
+  echo ""
 
-  # 跑 rsync 並把 stdout/stderr 都記到 log
+  # 確保目的地資料夾存在
+  /bin/mkdir -p "$DST/$name/" 2>/dev/null
+
+  # 跑 rsync 並把 stdout/stderr 都寫入 log
   /usr/bin/rsync "${RSYNC_OPTS[@]}" "$dir/" "$DST/$name/" >"$log" 2>&1
   local code=$?
 
-  # rsync exit code 不為 0 也算失敗（即使不是 I/O）
+  # rsync exit code 不為 0 → 直接視為失敗（會進入下一輪重試清單）
   if [[ $code -ne 0 ]]; then
     echo "!! rsync exit code = $code (視為失敗): $name"
+    echo "   你可以查看 log：$log"
     return 1
   fi
 
-  # 看 log 有沒有 I/O 類錯誤字樣
+  # 偵測 I/O 類錯誤字樣 → 視為失敗
   if has_io_error "$log"; then
     echo "!! 偵測到 I/O 類錯誤字樣 (視為失敗): $name"
+    echo "   你可以查看 log：$log"
     return 1
   fi
 
@@ -61,7 +83,22 @@ sync_one_dir() {
   return 0
 }
 
-# 取得 SRC 下第一層父資料夾清單
+########################################
+# 主流程
+########################################
+
+# 基本檢查：來源/目的是否存在
+if [[ ! -d "$SRC" ]]; then
+  echo "SRC 不存在或未掛載：$SRC"
+  exit 1
+fi
+
+if [[ ! -d "$DST" ]]; then
+  echo "DST 不存在或未掛載：$DST"
+  exit 1
+fi
+
+# 收集 SRC 第一層資料夾
 all_dirs=()
 for dir in "$SRC"/*; do
   [[ -d "$dir" ]] || continue
@@ -73,20 +110,21 @@ if [[ ${#all_dirs[@]} -eq 0 ]]; then
   exit 1
 fi
 
-# 第一次同步：全部
+# Pass 1 先同步全部
 targets=("${all_dirs[@]}")
 
-for pass in {1..3}; do
-  [[ $pass -le $PASSES ]] || break
-
+# 跑 PASSES 次
+pass=1
+while [[ $pass -le $PASSES ]]; do
   local_failed="$WORKDIR/failed_pass${pass}.txt"
   : > "$local_failed"
 
   echo ""
-  echo "==============================="
+  echo "=========================================="
   echo "開始 Pass $pass / $PASSES"
   echo "目標資料夾數: ${#targets[@]}"
-  echo "==============================="
+  echo "=========================================="
+  echo ""
 
   if [[ ${#targets[@]} -eq 0 ]]; then
     echo "沒有需要重試的資料夾了，提早結束。"
@@ -98,20 +136,21 @@ for pass in {1..3}; do
     name=$(basename "$dir")
 
     if ! sync_one_dir "$dir" "$name" "$pass"; then
-      # 記錄失敗的父資料夾「完整路徑」
       echo "$dir" >> "$local_failed"
     fi
 
     echo ""
   done
 
-  # 整理下一輪 targets：只針對失敗者
+  # 準備下一輪：只跑失敗的資料夾
   if [[ -s "$local_failed" ]]; then
-    echo "Pass $pass 完成：有失敗資料夾，清單：$local_failed"
+    echo "Pass $pass 完成：仍有失敗資料夾"
+    echo "失敗清單：$local_failed"
     echo "內容如下："
     cat "$local_failed"
+    echo ""
 
-    # 讀成陣列供下一 pass 使用
+    # 讀成陣列 targets，給下一輪用
     targets=()
     while IFS= read -r line; do
       [[ -n "$line" ]] && targets+=("$line")
@@ -120,8 +159,11 @@ for pass in {1..3}; do
     echo "Pass $pass 完成：全部成功，沒有需要重試的資料夾。"
     targets=()
   fi
+
+  pass=$((pass + 1))
 done
 
 echo ""
 echo "=== 完成 ==="
 echo "logs / failed lists 都在：$WORKDIR"
+echo "最後仍失敗的（如果有）：$WORKDIR/failed_pass${PASSES}.txt"
