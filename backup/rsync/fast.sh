@@ -1,15 +1,21 @@
 #!/bin/zsh
 
-SRC="/Volumes/My Passport"
-DST="/Volumes/TOSHIBA EXT"
+SRC="/Volumes/My Passport/"
+DST="/Volumes/TOSHIBA EXT/"
 
-for dir in "$SRC"/*; do
-  [ -d "$dir" ] || continue
+echo "📦 正在計算總檔案大小..."
+TOTAL=$(rsync -a --dry-run --stats "$SRC" "$DST" | grep "Total file size" | awk '{print $4}')
 
-  name=$(basename "$dir")
+echo "📊 總大小: $TOTAL"
+echo "🚀 開始備份..."
+echo "===================================="
 
-  echo "====== 同步: $name ======"
+rsync -a \
+  --ignore-errors \
+  --partial \
+  --info=progress2 \
+  --human-readable \
+  "$SRC" "$DST"
 
-  rsync -a --ignore-errors --partial --info=progress2 --no-times \
-    "$dir/" "$DST/$name/"
-done
+echo "===================================="
+echo "✅ 備份完成"

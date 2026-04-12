@@ -13,12 +13,15 @@ LOG="$HOME/rsync_mirror_$(date +%Y%m%d_%H%M%S).log"
 echo "SRC: $SRC" | tee "$LOG"
 echo "DST: $DST" | tee -a "$LOG"
 echo "LOG: $LOG" | tee -a "$LOG"
+echo "🚀 開始備份..." | tee -a "$LOG"
+echo "========================================" | tee -a "$LOG"
 
 rsync \
 -a \
 --delete \
 --human-readable \
 --info=progress2 \
+--no-inc-recursive \
 --partial \
 --protect-args \
 --no-owner --no-group --no-perms \
@@ -30,4 +33,5 @@ rsync \
 --exclude="._*" \
 "$SRC" "$DST" | tee -a "$LOG"
 
-echo "✅ Mirror Backup 完成"
+echo "========================================" | tee -a "$LOG"
+echo "✅ Mirror Backup 完成" | tee -a "$LOG"
