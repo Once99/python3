@@ -35,6 +35,7 @@ for pass in 1 2 3; do
     rsync -a \
       --ignore-errors \
       --partial \
+      --delete \
       --partial-dir=".rsync-partial" \
       --info=progress2 \
       --human-readable \
