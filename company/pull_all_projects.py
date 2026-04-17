@@ -5,6 +5,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # === 项目配置：根据实际情况维护 ===
 PROJECTS = {
 
+    "tyadmin": {"path": "/Users/oncechen/IdeaProjects/ty_admin/"},
     "ezpay": {"path": "/Users/oncechen/IdeaProjects/ezpay-site/"},
 
     "qypc": {"path": "/Users/oncechen/IdeaProjects/qy_web_vue/"},

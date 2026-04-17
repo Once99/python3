@@ -4,6 +4,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 PROJECTS = {
+    "tyadmin": {"path": "/Users/oncechen/IdeaProjects/ty_admin/"},
     "ezpay": {"path": "/Users/oncechen/IdeaProjects/ezpay-site/"},
     "qypc": {"path": "/Users/oncechen/IdeaProjects/qy_web_vue/"},
     "qyh5": {"path": "/Users/oncechen/IdeaProjects/qy_web_static_vue/"},
