@@ -33,7 +33,8 @@ REPO_PATH_2 = Path("/Applications/XAMPP/xamppfiles/htdocs/feiyu-site")
 
 APK_NAME = "flychat_release.apk"
 URLS = [
-    "https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk",
+    "https://fujkou.com:12828/Android/apk/flychat/flychat_release.apk",
+    "https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk"
 ]
 
 HEADERS = {

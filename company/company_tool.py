@@ -125,7 +125,7 @@ APK_TARGETS = {
         repo1=Path("/Users/oncechen/IdeaProjects/feiyu-site"),
         repo2=Path("/Applications/XAMPP/xamppfiles/htdocs/feiyu-site"),
         apk_name="flychat_release.apk",
-        urls=("https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk",),
+        urls=("https://fujkou.com:12828/Android/apk/flychat/flychat_release.apk", "https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk",),
         push_tag=True,
         update_when_unchanged=True,
     ),
