@@ -72,6 +72,8 @@ PROJECTS = {
     "ued": {"path": "/Users/oncechen/IdeaProjects/c_ued/WebRoot/"},
     "tq": {"path": "/Users/oncechen/IdeaProjects/c_sportone/web/WebRoot/"},
     "pt777": {"path": "/Users/oncechen/IdeaProjects/c_pt777/WebRoot/"},
+    "pt777pc": {"path": "/Users/oncechen/IdeaProjects/pt777_web_vue/"},
+    "pt777h5": {"path": "/Users/oncechen/IdeaProjects/pt777_web_static_vue/"},
     "long8": {"path": "/Users/oncechen/IdeaProjects/c_long8/web/WebRoot/"},
     "lwpc": {"path": "/Users/oncechen/IdeaProjects/e68_web_vue/"},
     "lwh5": {"path": "/Users/oncechen/IdeaProjects/e68_web_static_vue/"},
