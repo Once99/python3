@@ -109,6 +109,29 @@ def ensure_remote(repo: Path, remote: str) -> str:
         fail(f"missing git remote: {remote}")
 
 
+def merge_remote_branch(repo: Path, remote: str, branch: str, dry_run: bool) -> None:
+    log(f"syncing {remote}/{branch} into local sport branch {branch}")
+    run(["git", "fetch", remote, branch], cwd=repo, dry_run=dry_run)
+    try:
+        run(["git", "merge", "--ff-only", f"{remote}/{branch}"], cwd=repo, dry_run=dry_run)
+    except subprocess.CalledProcessError:
+        log(f"{remote}/{branch} is not a fast-forward; creating a merge commit in sport.")
+        try:
+            run(["git", "merge", "--no-edit", f"{remote}/{branch}"], cwd=repo, dry_run=dry_run)
+        except subprocess.CalledProcessError:
+            fail(f"merge failed for {remote}/{branch}. Resolve conflicts in sport, then rerun ayea mode.")
+
+
+def push_sport_branch(repo: Path, remote: str, branch: str, dry_run: bool) -> None:
+    log(f"running git push inside sport: {remote} {branch}:{branch}")
+    try:
+        run(["git", "push", remote, f"{branch}:{branch}"], cwd=repo, dry_run=dry_run)
+    except subprocess.CalledProcessError:
+        log(f"push was rejected; fetching {remote}/{branch}, merging, and retrying once.")
+        merge_remote_branch(repo, remote, branch, dry_run)
+        run(["git", "push", remote, f"{branch}:{branch}"], cwd=repo, dry_run=dry_run)
+
+
 def sync_ty_sport_to_sport(
     repo: Path,
     branch: str | None,
@@ -128,22 +151,13 @@ def sync_ty_sport_to_sport(
         fail(f"current branch is '{current_branch(repo)}'. Please switch to '{active_branch}' first.")
 
     commit_worktree_changes(repo, commit_message, dry_run)
-    log(f"syncing {ty_remote}/{active_branch} into local sport branch {active_branch}")
-    run(["git", "fetch", ty_remote, active_branch], cwd=repo, dry_run=dry_run)
-    try:
-        run(["git", "merge", "--ff-only", f"{ty_remote}/{active_branch}"], cwd=repo, dry_run=dry_run)
-    except subprocess.CalledProcessError:
-        log(f"{ty_remote}/{active_branch} is not a fast-forward; creating a merge commit in sport.")
-        try:
-            run(["git", "merge", "--no-edit", f"{ty_remote}/{active_branch}"], cwd=repo, dry_run=dry_run)
-        except subprocess.CalledProcessError:
-            fail("merge failed. Resolve conflicts in sport, then rerun ayea mode.")
+    merge_remote_branch(repo, ty_remote, active_branch, dry_run)
+    merge_remote_branch(repo, sport_remote, active_branch, dry_run)
 
     if has_worktree_changes(repo) and not dry_run:
         fail("sync left uncommitted changes in sport; resolve them before pushing.")
 
-    log(f"running git push inside sport: {sport_remote} {active_branch}:{active_branch}")
-    run(["git", "push", sport_remote, f"{active_branch}:{active_branch}"], cwd=repo, dry_run=dry_run)
+    push_sport_branch(repo, sport_remote, active_branch, dry_run)
 
 
 def open_vpn(app_names: list[str], dry_run: bool) -> None:
