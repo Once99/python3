@@ -538,6 +538,10 @@ def generate_version() -> str:
     return datetime.now().strftime("%Y%m%d%H%M%S")
 
 
+def generate_tag() -> str:
+    return datetime.now().strftime("v%y.%m.%d.%H%M")
+
+
 def repo_has_staged_changes(repo_path: Path) -> bool:
     return subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=repo_path).returncode != 0
 
@@ -555,7 +559,7 @@ def git_commit_push(repo_path: Path, files_to_add: list[str], version: str) -> b
 
 
 def git_tag_push(repo_path: Path, version: str) -> None:
-    tag = f"v{version}"
+    tag = generate_tag()
     exists = subprocess.run(
         ["git", "rev-parse", "-q", "--verify", tag],
         cwd=repo_path,
