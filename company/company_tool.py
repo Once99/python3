@@ -60,13 +60,12 @@ HEADERS = {
 }
 
 PROJECTS = {
-    "tyadmin": {"path": "/Users/oncechen/IdeaProjects/ty_admin/"},
     "ezpay": {"path": "/Users/oncechen/IdeaProjects/ezpay-site/"},
     "qypc": {"path": "/Users/oncechen/IdeaProjects/qy_web_vue/"},
     "qyh5": {"path": "/Users/oncechen/IdeaProjects/qy_web_static_vue/"},
     "qy": {"path": "/Users/oncechen/IdeaProjects/c_qy/web/WebRoot/"},
-    "rb88_main": {"path": "/Users/oncechen/IdeaProjects/rb88_web_vue_main/"},
-    "jxf_main": {"path": "/Users/oncechen/IdeaProjects/jxf_web_static_vue_main/"},
+    "rb88": {"path": "/Users/oncechen/IdeaProjects/rb88_web_vue/"},
+    "jxf": {"path": "/Users/oncechen/IdeaProjects/jxf_web_vue/"},
     "uedpc": {"path": "/Users/oncechen/IdeaProjects/ued_web_vue/"},
     "uedh5": {"path": "/Users/oncechen/IdeaProjects/ued_web_static_vue/"},
     "ued": {"path": "/Users/oncechen/IdeaProjects/c_ued/WebRoot/"},
@@ -82,7 +81,7 @@ PROJECTS = {
     "weiquandanbao": {"path": "/Users/oncechen/IdeaProjects/site-weiquandanbao/"},
     "haitun": {"path": "/Users/oncechen/IdeaProjects/site-haitun-web/"},
     "dolphin_im": {"path": "/Users/oncechen/IdeaProjects/dolphin_im_pc/"},
-    "ty_sport": {"path": "/Users/oncechen/IdeaProjects/ty_sport/"},
+
 }
 
 ALIASES = {
