@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import zipfile
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -58,7 +59,7 @@ DEPARTMENTS = {
                 "/Users/oncechen/IdeaProjects/qy_web_vue",
             ],
         },
-        "QM框架(PT777_web_static_vue)": {
+        "QM框架": {
             "contacts": ("Jyue", "-"),
             "repos": [
                 "/Users/oncechen/IdeaProjects/pt777_web_static_vue",
@@ -69,7 +70,7 @@ DEPARTMENTS = {
             "contacts": ("AaronY", "-"),
             "repos": ["/Users/oncechen/IdeaProjects/c_qy"],
         },
-        "QM(PT777)": {
+        "QM": {
             "contacts": ("Avram", "-"),
             "repos": ["/Users/oncechen/IdeaProjects/c_pt777"],
         },
@@ -90,13 +91,17 @@ DEPARTMENTS = {
             "contacts": ("Nolan", "-"),
             "repos": ["/Users/oncechen/IdeaProjects/site-dolphin"],
         },
-        "飞鱼": {
+        "咪乐": {
             "contacts": ("Nolan", "-"),
             "repos": ["/Users/oncechen/IdeaProjects/feiyu-site"],
         },
         "优客服": {
             "contacts": ("Nolan", "-"),
-            "repos": ["/Users/oncechen/IdeaProjects/youkefu-site"],
+            "repos": ["/Users/oncechen/IdeaProjects/ukefu_client_vue"],
+        },
+        "Ezpay": {
+            "contacts": ("-", "-"),
+            "repos": ["/Users/oncechen/IdeaProjects/ezpay-site"],
         },
     },
 }
@@ -135,6 +140,37 @@ LEGACY_DEPARTMENTS = {
             "/Users/oncechen/IdeaProjects/jxf_web_static_vue_dev",
         ],
     },
+}
+
+WEEKLY_EXCEL_PRODUCT_NAMES = {
+    "RB88": "RB88（走地皇）",
+    "走地皇(RB88)": "RB88（走地皇）",
+    "QY框架": "QY框架（球友会）",
+    "QY": "QY（球友会）",
+    "QM": "QM（球盟会）",
+    "L8": "L8（头号玩家）",
+    "LW": "LH（乐玩国际）",
+    "94Chat": "94Chat",
+    "咪乐": "咪乐",
+    "优客服": "优客服",
+    "Ezpay": "Ezpay",
+}
+
+WEEKLY_EXCEL_PRODUCT_GROUPS = {
+    "MT": [
+        ("QY框架（球友会）", ["QY框架"]),
+        ("RB88（走地皇）", ["走地皇(RB88)", "RB88"]),
+        ("QY（球友会）", ["QY"]),
+        ("QM（球盟会）", ["QM"]),
+        ("L8（头号玩家）", ["L8"]),
+        ("LH（乐玩国际）", ["LW"]),
+    ],
+    "非业务": [
+        ("咪乐", ["咪乐"]),
+        ("94Chat", ["94Chat"]),
+        ("优客服", ["优客服"]),
+        ("Ezpay", ["Ezpay"]),
+    ],
 }
 
 DOMAIN_RULES = [
@@ -569,6 +605,23 @@ def summary_text(summary: dict[str, dict[str, list[str]]], limit: int = 8) -> st
     return "\n".join(f"{index}. {item}。" for index, item in enumerate(items, 1))
 
 
+def excel_summary_text(summary: dict[str, dict[str, list[str]]], limit: int = 8) -> str:
+    lines: list[str] = []
+    for type_name in ("新增需求", "维护需求"):
+        domains = summary.get(type_name)
+        if not domains:
+            continue
+        for domain in sorted(domains):
+            for phrase in domains[domain][:limit]:
+                text = phrase.rstrip("。.")
+                if type_name == "新增需求" and not text.startswith(("新增", "新建", "接入", "上线")):
+                    text = f"新增：{text}"
+                lines.append(text)
+    if not lines:
+        return "1.日常维护"
+    return "\n".join(f"{index}. {line}。" for index, line in enumerate(lines[:10], 1))
+
+
 def weekly_plan_text(summary: dict[str, dict[str, list[str]]]) -> str:
     domains = sorted({domain for typed in summary.values() for domain in typed})
     if not domains:
@@ -579,25 +632,54 @@ def weekly_plan_text(summary: dict[str, dict[str, list[str]]]) -> str:
 
 def weekly_excel_rows(departments: dict, since: str, until: str) -> list[tuple[str, str, str, str]]:
     rows: list[tuple[str, str, str, str]] = []
-    for department_name, projects in departments.items():
+    report_departments = [name for name in ("MT", "非业务") if name in departments]
+    report_departments.extend(name for name in departments if name not in {"RT", "MT", "非业务"})
+    for department_index, department_name in enumerate(report_departments):
+        projects = departments[department_name]
         if department_name == "RT":
             continue
         first_project = True
-        section_name = "综合/体育" if department_name == "MT" else "市场"
-        for project_name, project_meta in projects.items():
+        section_name = "综合/体育" if department_name == "MT" else "非业务"
+        grouped_names: set[str] = set()
+        configured_groups = WEEKLY_EXCEL_PRODUCT_GROUPS.get(department_name)
+        product_groups = []
+        for display_name, project_names in configured_groups or []:
+            existing = [name for name in project_names if name in projects]
+            if existing:
+                product_groups.append((display_name, existing))
+                grouped_names.update(existing)
+        if not configured_groups:
+            product_groups.extend(
+                (WEEKLY_EXCEL_PRODUCT_NAMES.get(name, name), [name])
+                for name in projects
+                if name not in grouped_names
+            )
+        for display_name, project_names in product_groups:
             commits: list[Commit] = []
-            for repo in project_meta.get("repos", []):
-                if (Path(repo) / ".git").exists():
-                    commits.extend(run_git_log(repo, since, until))
+            for project_name in project_names:
+                project_meta = projects[project_name]
+                for repo in project_meta.get("repos", []):
+                    if (Path(repo) / ".git").exists():
+                        commits.extend(run_git_log(repo, since, until))
             summary = summarize_group(commits)
             rows.append((
                 section_name if first_project else "",
-                project_name,
-                summary_text(summary),
+                display_name,
+                excel_summary_text(summary),
                 weekly_plan_text(summary),
             ))
             first_project = False
+        if department_name == "MT" and department_index < len(report_departments) - 1:
+            rows.append(("", "", "", ""))
     return rows
+
+
+def excel_text_height(*values: str) -> str:
+    line_count = max(
+        1,
+        max((value.count("\n") + 1 for value in values if value), default=1),
+    )
+    return str(min(max(28, line_count * 18), 150))
 
 
 def render_report(
@@ -865,12 +947,17 @@ def set_inline_string(cell: ET.Element, value: str | None) -> None:
     cell.attrib.pop("t", None)
     if value is None or value == "":
         return
+    value = format_excel_numbered_lines(value)
     cell.set("t", "inlineStr")
     inline = ET.SubElement(cell, f"{{{XML_MAIN_NS}}}is")
     text = ET.SubElement(inline, f"{{{XML_MAIN_NS}}}t")
     if value != value.strip():
         text.set("{http://www.w3.org/XML/1998/namespace}space", "preserve")
     text.text = value
+
+
+def format_excel_numbered_lines(value: str) -> str:
+    return re.sub(r"(?<!^)(?<!\n)\s+(?=\d+[.．、]\s*)", "\n", value)
 
 
 XML_MAIN_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
@@ -917,12 +1004,13 @@ def write_weekly_excel(
     until: str,
     output_stem: Path,
     template_path: Path = WEEKLY_XLSX_TEMPLATE,
+    suffix: str = "_脚本生成",
 ) -> str | None:
     if not template_path.exists():
         return None
 
     rows = weekly_excel_rows(departments, since, until)
-    output_path = Path(f"{output_stem}.xlsx")
+    output_path = Path(f"{output_stem}{suffix}.xlsx")
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with zipfile.ZipFile(template_path, "r") as source:
@@ -941,7 +1029,7 @@ def write_weekly_excel(
             set_inline_string(ensure_cell(row, f"C{offset}", "3"), summary)
             set_inline_string(ensure_cell(row, f"D{offset}", "3"), plan)
             row.set("customHeight", "1")
-            row.set("ht", "110")
+            row.set("ht", excel_text_height(summary, plan))
 
         for row_index in range(3 + len(rows), 40):
             row = ensure_row(root, row_index)
@@ -1015,7 +1103,82 @@ def build_kpi_report(today: dt.date, period_keys: list[str] | None = None) -> st
     return render_kpi_report(DEPARTMENTS, periods, title)
 
 
-def default_output_stem(period: str, today: dt.date, output_dir: str) -> Path:
+def clear_report_dir(output_dir: str) -> None:
+    report_dir = Path(output_dir)
+    if not report_dir.exists():
+        report_dir.mkdir(parents=True, exist_ok=True)
+        return
+    for item in report_dir.iterdir():
+        if item.is_dir():
+            shutil.rmtree(item)
+        else:
+            item.unlink()
+
+
+def choose_interactive_action(today: dt.date) -> str:
+    last_month_since, _, _ = period_dates("last-month", today)
+    last_month_name = chinese_month_name_from_since(last_month_since)
+    print("请选择要产生的 git 工作报告：")
+    print("  1. 上周报告（默认）")
+    print(f"  2. {last_month_name}报告")
+    print(f"  3. {last_month_name}KPI建议")
+    try:
+        value = input("请输入选项 [1/2/3]：").strip()
+    except EOFError:
+        value = ""
+    return value or "1"
+
+
+def run_interactive(args: argparse.Namespace, today: dt.date) -> int:
+    action = choose_interactive_action(today)
+    if action not in {"1", "2", "3"}:
+        raise SystemExit("选项错误，请输入 1、2、3，或直接按 Enter 使用默认上周报告。")
+
+    if not args.stdout:
+        clear_report_dir(args.output_dir)
+
+    if action == "1":
+        period = "last-week"
+        since, until, label = period_dates(period, today)
+        report = render_report(DEPARTMENTS, since, until, label, weekly_summary_title(since, until))
+        output_stem = output_stem_from_arg(args.output) if args.output else default_output_stem(period, today, args.output_dir, include_today=False)
+        if args.stdout:
+            print(report)
+            return 0
+        outputs = write_report_files(report, output_stem, args.format)
+        weekly_xlsx = write_weekly_excel(DEPARTMENTS, since, until, output_stem)
+        if weekly_xlsx:
+            outputs.append(weekly_xlsx)
+        print("\n".join(outputs))
+        return 0
+
+    if action == "2":
+        period = "last-month"
+        _, _, _, report = build_report(period, today)
+        output_stem = output_stem_from_arg(args.output) if args.output else default_output_stem(period, today, args.output_dir)
+        if args.stdout:
+            print(report)
+            return 0
+        print("\n".join(write_report_files(report, output_stem, args.format)))
+        return 0
+
+    last_month_since, _, _ = period_dates("last-month", today)
+    last_month_name = chinese_month_name_from_since(last_month_since)
+    report = build_kpi_report(today, ["last-month"]).replace("KPI评分", "KPI建议", 1)
+    last_month_start = dt.date.fromisoformat(last_month_since)
+    output_stem = (
+        output_stem_from_arg(args.output)
+        if args.output
+        else Path(args.output_dir) / f"{last_month_name}KPI建议_{last_month_start:%Y年%m月}_{today:%Y%m%d}"
+    )
+    if args.stdout:
+        print(report)
+        return 0
+    print("\n".join(write_report_files(report, output_stem, args.format)))
+    return 0
+
+
+def default_output_stem(period: str, today: dt.date, output_dir: str, include_today: bool = True) -> Path:
     last_month_start = (today.replace(day=1) - dt.timedelta(days=1)).replace(day=1)
     last_month_name = chinese_month_name_from_since(last_month_start.isoformat())
     week_since, week_until, _ = period_dates("week", today)
@@ -1031,12 +1194,18 @@ def default_output_stem(period: str, today: dt.date, output_dir: str) -> Path:
     }
     if period == "last-month-week":
         return Path(output_dir) / names[period]
-    return Path(output_dir) / f"{names.get(period, '工作报告')}_{today:%Y%m%d}"
+    stem = names.get(period, "工作报告")
+    if include_today:
+        stem = f"{stem}_{today:%Y%m%d}"
+    return Path(output_dir) / stem
 
 
 def main() -> int:
     args = parse_args()
     today = dt.date.fromisoformat(args.today) if args.today else dt.date.today()
+
+    if len(sys.argv) == 1:
+        return run_interactive(args, today)
 
     if args.kpi and not (args.period or args.since or args.until or args.both):
         report = build_kpi_report(today)
