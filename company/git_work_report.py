@@ -150,10 +150,10 @@ WEEKLY_EXCEL_PRODUCT_NAMES = {
     "QM": "QM（球盟会）",
     "L8": "L8（头号玩家）",
     "LW": "LH（乐玩国际）",
-    "94Chat": "94Chat",
-    "咪乐": "咪乐",
-    "优客服": "优客服",
     "Ezpay": "Ezpay",
+    "优客服": "优客服",
+    "咪乐": "咪乐",
+    "94Chat": "94Chat",
 }
 
 WEEKLY_EXCEL_PRODUCT_GROUPS = {
@@ -166,10 +166,10 @@ WEEKLY_EXCEL_PRODUCT_GROUPS = {
         ("LH（乐玩国际）", ["LW"]),
     ],
     "非业务": [
+        ("Ezpay", ["Ezpay"]),
+        ("优客服", ["优客服"]),
         ("咪乐", ["咪乐"]),
         ("94Chat", ["94Chat"]),
-        ("优客服", ["优客服"]),
-        ("Ezpay", ["Ezpay"]),
     ],
 }
 
@@ -957,7 +957,12 @@ def set_inline_string(cell: ET.Element, value: str | None) -> None:
 
 
 def format_excel_numbered_lines(value: str) -> str:
-    return re.sub(r"(?<!^)(?<!\n)\s+(?=\d+[.．、]\s*)", "\n", value)
+    normalized = value.replace("\r\n", "\n").replace("\r", "\n")
+    return re.sub(
+        r"(?<!^)(?<!\n)(?:\s+|(?<=[。.!！?？；;]))(?=(?:\d+|[０-９]+)[.．、]\s*)",
+        "\n",
+        normalized,
+    )
 
 
 XML_MAIN_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
