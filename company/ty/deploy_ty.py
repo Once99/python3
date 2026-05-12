@@ -26,7 +26,15 @@ DEFAULT_VPN_WAIT_HOST = "git.helpom.com"
 DEFAULT_VPN_WAIT_PORT = 80
 DEFAULT_TY_SPORT_REMOTE = "gitlab"
 DEFAULT_SPORT_PUSH_REMOTE = "origin"
-DEFAULT_COMMIT_MESSAGE = "deploy: sync sport changes"
+DEFAULT_SYNC_AUTHOR_NAME = "loki"
+DEFAULT_SYNC_AUTHOR_EMAIL = "webm@dc66.net"
+DEFAULT_COMMIT_MESSAGE = """05/12 提交内容
+
+新增赛果结算 API
+新增录入赛果入口页与日志页
+更新赛果结算页面
+更新早盘列表、滚球列表
+调整路由与权限菜单"""
 
 
 def log(message: str) -> None:
@@ -90,18 +98,6 @@ def has_worktree_changes(repo: Path) -> bool:
     return bool(git_output(repo, ["status", "--porcelain"]))
 
 
-def commit_worktree_changes(repo: Path, message: str, dry_run: bool) -> None:
-    status = git_output(repo, ["status", "--porcelain"])
-    if not status:
-        log("sport worktree has no local changes to commit.")
-        return
-
-    log("sport worktree has local changes; committing them before push.")
-    print(status)
-    run(["git", "add", "-A"], cwd=repo, dry_run=dry_run)
-    run(["git", "commit", "-m", message], cwd=repo, dry_run=dry_run)
-
-
 def ensure_remote(repo: Path, remote: str) -> str:
     try:
         return git_output(repo, ["remote", "get-url", remote])
@@ -109,27 +105,47 @@ def ensure_remote(repo: Path, remote: str) -> str:
         fail(f"missing git remote: {remote}")
 
 
-def merge_remote_branch(repo: Path, remote: str, branch: str, dry_run: bool) -> None:
-    log(f"syncing {remote}/{branch} into local sport branch {branch}")
-    run(["git", "fetch", remote, branch], cwd=repo, dry_run=dry_run)
-    try:
-        run(["git", "merge", "--ff-only", f"{remote}/{branch}"], cwd=repo, dry_run=dry_run)
-    except subprocess.CalledProcessError:
-        log(f"{remote}/{branch} is not a fast-forward; creating a merge commit in sport.")
-        try:
-            run(["git", "merge", "--no-edit", f"{remote}/{branch}"], cwd=repo, dry_run=dry_run)
-        except subprocess.CalledProcessError:
-            fail(f"merge failed for {remote}/{branch}. Resolve conflicts in sport, then rerun ayea mode.")
-
-
 def push_sport_branch(repo: Path, remote: str, branch: str, dry_run: bool) -> None:
     log(f"running git push inside sport: {remote} {branch}:{branch}")
-    try:
-        run(["git", "push", remote, f"{branch}:{branch}"], cwd=repo, dry_run=dry_run)
-    except subprocess.CalledProcessError:
-        log(f"push was rejected; fetching {remote}/{branch}, merging, and retrying once.")
-        merge_remote_branch(repo, remote, branch, dry_run)
-        run(["git", "push", remote, f"{branch}:{branch}"], cwd=repo, dry_run=dry_run)
+    run(["git", "push", remote, f"{branch}:{branch}"], cwd=repo, dry_run=dry_run)
+
+
+def message_args(message: str) -> list[str]:
+    paragraphs = [part.strip() for part in message.splitlines() if part.strip()]
+    if not paragraphs:
+        fail("commit message cannot be empty")
+    args: list[str] = []
+    for paragraph in paragraphs:
+        args.extend(["-m", paragraph])
+    return args
+
+
+def commit_squashed_changes(
+    repo: Path,
+    message: str,
+    author_name: str,
+    author_email: str,
+    dry_run: bool,
+) -> None:
+    if not has_worktree_changes(repo):
+        log("no ty_sport changes to commit.")
+        return
+
+    author = f"{author_name} <{author_email}>"
+    run(
+        [
+            "git",
+            "-c",
+            f"user.name={author_name}",
+            "-c",
+            f"user.email={author_email}",
+            "commit",
+            f"--author={author}",
+            *message_args(message),
+        ],
+        cwd=repo,
+        dry_run=dry_run,
+    )
 
 
 def sync_ty_sport_to_sport(
@@ -138,6 +154,8 @@ def sync_ty_sport_to_sport(
     ty_remote: str,
     sport_remote: str,
     commit_message: str,
+    author_name: str,
+    author_email: str,
     dry_run: bool,
 ) -> None:
     if not (repo / ".git").exists():
@@ -150,12 +168,21 @@ def sync_ty_sport_to_sport(
     if not dry_run and current_branch(repo) != active_branch:
         fail(f"current branch is '{current_branch(repo)}'. Please switch to '{active_branch}' first.")
 
-    commit_worktree_changes(repo, commit_message, dry_run)
-    merge_remote_branch(repo, ty_remote, active_branch, dry_run)
-    merge_remote_branch(repo, sport_remote, active_branch, dry_run)
+    status = git_output(repo, ["status", "--porcelain"])
+    if status:
+        print(status)
+        fail("sport repo has uncommitted changes. Commit/stash them before syncing ty_sport.")
 
-    if has_worktree_changes(repo) and not dry_run:
-        fail("sync left uncommitted changes in sport; resolve them before pushing.")
+    log(f"pulling latest sport branch: {sport_remote}/{active_branch}")
+    run(["git", "pull", "--ff-only", sport_remote, active_branch], cwd=repo, dry_run=dry_run)
+    log(f"fetching ty_sport branch: {ty_remote}/{active_branch}")
+    run(["git", "fetch", ty_remote, active_branch], cwd=repo, dry_run=dry_run)
+    try:
+        run(["git", "merge", "--squash", "--no-commit", f"{ty_remote}/{active_branch}"], cwd=repo, dry_run=dry_run)
+    except subprocess.CalledProcessError:
+        fail(f"squash merge failed for {ty_remote}/{active_branch}. Resolve conflicts in sport, then commit manually.")
+
+    commit_squashed_changes(repo, commit_message, author_name, author_email, dry_run)
 
     push_sport_branch(repo, sport_remote, active_branch, dry_run)
 
@@ -348,13 +375,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--branch", default=os.environ.get("SPORT_BRANCH"))
     parser.add_argument(
         "--mode",
-        choices=["prompt", "deploy", "ayea"],
+        choices=["prompt", "deploy", "sync"],
         default=os.environ.get("SPORT_DEPLOY_MODE", "prompt"),
-        help="prompt: ask; deploy: default CI/CD; ayea: sync ty_sport to sport, push, then deploy",
+        help="prompt: ask; deploy: default CI/CD; sync: squash ty_sport into sport, push, then deploy",
     )
     parser.add_argument("--ty-sport-remote", default=os.environ.get("TY_SPORT_REMOTE", DEFAULT_TY_SPORT_REMOTE))
     parser.add_argument("--sport-push-remote", default=os.environ.get("SPORT_PUSH_REMOTE", DEFAULT_SPORT_PUSH_REMOTE))
     parser.add_argument("--commit-message", default=os.environ.get("SPORT_COMMIT_MESSAGE", DEFAULT_COMMIT_MESSAGE))
+    parser.add_argument("--sync-author-name", default=os.environ.get("SPORT_SYNC_AUTHOR_NAME", DEFAULT_SYNC_AUTHOR_NAME))
+    parser.add_argument("--sync-author-email", default=os.environ.get("SPORT_SYNC_AUTHOR_EMAIL", DEFAULT_SYNC_AUTHOR_EMAIL))
     parser.add_argument("--strict-clean", action="store_true")
     parser.add_argument("--no-pull", action="store_true")
     parser.add_argument("--no-vpn", action="store_true")
@@ -379,14 +408,14 @@ def choose_mode(mode: str) -> str:
     if mode != "prompt":
         return mode
     try:
-        value = input("部署模式：直接按 Enter=开启 CI/CD 部署；输入 ayea=同步 ty_sport 到 sport、push 后部署：").strip()
+        value = input("部署模式：直接按 Enter=开启 CI/CD 部署；输入 sync=同步 ty_sport 到 sport、push 后部署：").strip()
     except EOFError:
         value = ""
     if not value:
         return "deploy"
-    if value.lower() == "ayea":
-        return "ayea"
-    fail(f"unknown mode: {value}. Use Enter or ayea.")
+    if value.lower() == "sync":
+        return "sync"
+    fail(f"unknown mode: {value}. Use Enter or sync.")
 
 
 def main() -> None:
@@ -405,13 +434,15 @@ def main() -> None:
 
     mode = choose_mode(args.mode)
 
-    if mode == "ayea":
+    if mode == "sync":
         sync_ty_sport_to_sport(
             args.repo.expanduser(),
             args.branch,
             args.ty_sport_remote,
             args.sport_push_remote,
             args.commit_message,
+            args.sync_author_name,
+            args.sync_author_email,
             args.dry_run,
         )
     elif not args.no_pull:
