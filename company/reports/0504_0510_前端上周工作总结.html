@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>0504_0510_前端上周工作总结</title>
+  <style>
+    @page { size: A4; margin: 14mm 13mm; }
+    body {
+      color: #1f2933;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+    h1 { font-size: 22px; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid #111827; }
+    h2 { font-size: 17px; margin: 22px 0 8px; padding: 6px 8px; background: #eef2f7; }
+    h3 { font-size: 14px; margin: 16px 0 6px; color: #0f4c81; }
+    h4 { font-size: 12px; margin: 10px 0 4px; color: #374151; }
+    p { margin: 3px 0; }
+    .bullet { margin: 2px 0 2px 12px; text-indent: -10px; }
+    .bullet-sub { margin-left: 28px; color: #374151; }
+    .space { height: 5px; }
+    code { font-family: Menlo, Monaco, Consolas, monospace; font-size: 10px; color: #7c2d12; }
+    strong { color: #111827; }
+  </style>
+</head>
+<body>
+<h1>0504_0510_前端上周工作总结</h1>
+<div class='space'></div>
+<div class='bullet'>- 统计范围：<code>2026-05-04</code> 到 <code>2026-05-11</code>（git 查询 until 为开区间）</div>
+<div class='bullet'>- 说明：已过滤 Merge、明显测试类提交；需求归纳为基于 git 记录的自动整理。</div>
+<div class='space'></div>
+<h2>RT</h2>
+<div class='space'></div>
+<h3>吉祥坊(JXF)</h3>
+<div class='space'></div>
+<p>未找到仓库：</p>
+<div class='bullet'>- <code>/Users/oncechen/IdeaProjects/jxf_web_static_vue_main</code></div>
+<div class='bullet'>- <code>/Users/oncechen/IdeaProjects/jxf_web_static_vue_dev</code></div>
+<div class='space'></div>
+<p>本周期没有查询到提交。</p>
+<div class='space'></div>
+<h3>UED</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：app下载页ios专业版新增推荐图标。</div>
+<div class='bullet bullet-sub'>- 提款/账户：UU银行卡活动页，如果已开卡再次点击领卡则直接跳转至UU银行卡页面。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：ued体育盘口详情页面动画视频加上全屏、feat: 世界杯比赛数据接口euid参数修改为20303、赛事添加按钮滚动、聊天室UI、添加app中处理token登录态的loading状态、feat: 初版聊天室、feat: 暂时使用进行中比赛替换世界杯比赛、feat: 聊天室样式 交互等。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：nfb试玩token获取方法更新、nfb试玩apidomain获取方法更新。</div>
+<div class='bullet bullet-sub'>- VIP/福利：会员日、VIP 会员日领取按钮文字显示修正。</div>
+<div class='bullet bullet-sub'>- 其他：add components.d.ts and auto-imports.d.ts to gitignore、ts、邀请好友、邀请码、串关一直刷新问题、串关页面优化骨架屏刷新、忽略自动导入的类型声明文件。</div>
+<div class='bullet bullet-sub'>- 工程配置：Edit main.yml、Edit dev.yml、邀请码、Update file AreaRestrictFilter.java、线上域名调整。</div>
+<div class='bullet bullet-sub'>- 提款/账户：修正app下访问uu银行卡活动没有初始化数据的问题、修正app下访问uu银行卡活动初始化数据丢失的问题。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：ob盘口详情页动画全屏样式优化、未选中比赛样式、展示世界杯赛事、邀请码、世界杯2026赛事投注页面数据修正、调整tokenForTopic处理方式，优化代码结构、赔率刷新、注单列表分享图标样式调整等。</div>
+<div class='bullet bullet-sub'>- 登录/注册：数据初始化时加上登录判断。</div>
+<div class='space'></div>
+<h3>TQ(Sportone)</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- 游戏/赛事：feat(worldCup2026): 换一批激情三卡仅 renderFinal 绘一版、feat(h5/wc): 小组赛阶段筛选移入分组顶栏深蓝条（对齐设计稿）、feat(worldcup-h5): 投注页阶段筛选下拉与 jxf 同款三角样式、feat(worldcup): 对齐 UED 用 matchesPB 拉满世界杯赛程并按阶段分组。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- 工程配置：Edit main.yml、Edit dev.yml。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：fix(worldCup2026): PC快速投注全场大小布局与hpid=2选项名、fix(worldCup2026): 侧栏1x2合并全部hpid=1并优先全场线，投注单勿用hl.hmt判半场、fix(worldCup2026): 活动页1x2副标题与全场口径、详情请求并发、fix(worldCup2026): PC快速投注红条/玩法行文案、fix(worldCup2026): 投注单副标题勿把第一粒进球误判为上半场大小、fix(worldCup2026): PB 的 hl.hmt 为早盘/滚球，修正投注单全场副标题、fix(worldCup2026): H5快速投注卡片玩法行与PC对齐、fix(worldCup2026): 侧栏1x2合并全部hpid=1的hl，优先全场独赢等。</div>
+<div class='space'></div>
+<div class='space'></div>
+<h2>MT</h2>
+<div class='space'></div>
+<h3>走地皇(RB88)</h3>
+<div class='space'></div>
+<p>未找到仓库：</p>
+<div class='bullet'>- <code>/Users/oncechen/IdeaProjects/rb88_web_vue_main</code></div>
+<div class='bullet'>- <code>/Users/oncechen/IdeaProjects/rb88_web_vue_dev</code></div>
+<div class='space'></div>
+<p>本周期没有查询到提交。</p>
+<div class='space'></div>
+<h3>QY框架</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：鸿蒙系统下载APP。</div>
+<div class='bullet bullet-sub'>- 其他：每日签到页面补签按钮未显示。</div>
+<div class='bullet bullet-sub'>- 工程配置：每日签到页面补签按钮未显示。</div>
+<div class='bullet bullet-sub'>- 支付/存款：支付宝-添加二维码教程。</div>
+<div class='bullet bullet-sub'>- 文案/样式：优惠大页加入接口显示banner下内容。</div>
+<div class='bullet bullet-sub'>- 活动专题：周周献礼专题oppa手机跑版。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：app打开H5页面补齐。</div>
+<div class='bullet bullet-sub'>- 代理/合营：1. 短信驗證顯示數字 2. 修改文案、修正無數據。</div>
+<div class='bullet bullet-sub'>- 其他：邀请好友送红利删除彩票账户、绑定KDPAY少传参数、用户开启.jsp后缀时导到首页。</div>
+<div class='bullet bullet-sub'>- 工程配置：Edit dev.yml、Edit main.yml、用户开启.jsp后缀时导到首页。</div>
+<div class='bullet bullet-sub'>- 提款/账户：设置修改提款密码全流程、修改提款密码有问题。</div>
+<div class='bullet bullet-sub'>- 支付/存款：数字钱包双重礼-文案修正换图、专题头部删除,体育投注规则app开启头部重复、c2c上传凭证图是页面-UI错误图片出不来。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：体育投注规则app开启后切换顶部种类会出现头部重、密码正则修改、专题头部删除,体育投注规则app开启头部重复、登入密码允许大写、登入出现两个验证滑块弹窗、PT游戏打不开、app进入PGPT游戏、app进入游戏。</div>
+<div class='bullet bullet-sub'>- 登录/注册：登入不限制账号密码的格式、未登入给力优惠弹窗 统一使用。</div>
+<div class='space'></div>
+<h3>QM框架</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='space'></div>
+<h3>QY</h3>
+<div class='space'></div>
+<p>本周期没有查询到提交。</p>
+<div class='space'></div>
+<h3>QM</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- 游戏/赛事：世界杯专题投注增加免转。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：更新飞鱼下载地址。</div>
+<div class='bullet bullet-sub'>- VIP/福利：更新文案。</div>
+<div class='bullet bullet-sub'>- 代理/合营：代理推广链接调整。</div>
+<div class='bullet bullet-sub'>- 其他：更新css。</div>
+<div class='bullet bullet-sub'>- 客服/通知：麦讯通、速讯通短信内容可配置。</div>
+<div class='bullet bullet-sub'>- 工程配置：Edit main.yml、Edit dev.yml。</div>
+<div class='bullet bullet-sub'>- 文案/样式：更新文案、更新图片。</div>
+<div class='bullet bullet-sub'>- 活动专题：更新专题跳转。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：更新PC跳转、更新世界杯投注视频播放问题、更新余额显示、更新世界杯专题、更新飞鱼下载地址、更新世界杯投注、更新世界杯投注赛事、更新世界杯投注页面调整等。</div>
+<div class='space'></div>
+<h3>L8</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- 代理/合营：代理新增登出按钮。</div>
+<div class='bullet bullet-sub'>- 支付/存款：首页新增体育现金券、存款V4、V4存款。</div>
+<div class='bullet bullet-sub'>- 活动专题：活动。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：PC代理公告新增分类。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：ios下载优化。</div>
+<div class='bullet bullet-sub'>- VIP/福利：体育内测优惠券。</div>
+<div class='bullet bullet-sub'>- 代理/合营：代理公告。</div>
+<div class='bullet bullet-sub'>- 其他：飞鱼地址更新。</div>
+<div class='bullet bullet-sub'>- 客服/通知：短信通道。</div>
+<div class='bullet bullet-sub'>- 工程配置：Edit main.yml、Edit dev.yml。</div>
+<div class='bullet bullet-sub'>- 支付/存款：推荐钱包更新。</div>
+<div class='bullet bullet-sub'>- 活动专题：五一活动优化。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：add depositRewards2025、首单包赔活动更新、首单包赔、项目瘦身。</div>
+<div class='space'></div>
+<h3>LW</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：SportCoupon。</div>
+<div class='bullet bullet-sub'>- 其他：SportCoupon。</div>
+<div class='bullet bullet-sub'>- 活动专题：专题体育返还。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：网站效能优化（静态资源缩小）。</div>
+<div class='bullet bullet-sub'>- 工程配置：Edit dev.yml、Edit main.yml、VUEJS CONFIG 优化。</div>
+<div class='bullet bullet-sub'>- 活动专题：奖池转盘错误不要转，五月专题领取错误弹窗修正。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：飞鱼链接https://www.feiuchat.com/ 换成https://fychat.io/、网站效能优化（静态资源缩小）。</div>
+<div class='space'></div>
+<div class='space'></div>
+<h2>非业务</h2>
+<div class='space'></div>
+<h3>94Chat</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- 工程配置：Add new file、Add new directory。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- 工程配置：Edit .gitlab-ci.yml、Delete .gitkeep。</div>
+<div class='space'></div>
+<h3>咪乐</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- 工程配置：Add new file、Add new directory。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- 其他：2026-05-10 update apk 20260510154412、style update、2026-05-05 update apk 20260505153037。</div>
+<div class='bullet bullet-sub'>- 工程配置：Edit .gitlab-ci.yml、Delete .gitkeep。</div>
+<div class='space'></div>
+<h3>优客服</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>新增需求</strong></div>
+<div class='bullet bullet-sub'>- 游戏/赛事：feat: 新增 /im/logo 接口，支援動態 logo 與 PC 標頭背景色、chore: 加入 socket emit / disconnect 偵錯攔截器以定位 clientClose 來源。</div>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- 其他：webimclient.inflodesk.com 改成 webimclient2.inflodesk.com。</div>
+<div class='bullet bullet-sub'>- 工程配置：Edit main.yml、Edit dev.yml。</div>
+<div class='bullet bullet-sub'>- 游戏/赛事：refactor: 移除預設 logo，等待 /im/logo 回應前不顯示圖片。</div>
+<div class='space'></div>
+<h3>Ezpay</h3>
+<div class='space'></div>
+<p>上周需求：</p>
+<div class='bullet'>- <strong>维护需求</strong></div>
+<div class='bullet bullet-sub'>- APP/H5/下载：no message。</div>
+<div class='bullet bullet-sub'>- 客服/通知：产品介绍和帮助中心。</div>
+</body>
+</html>
