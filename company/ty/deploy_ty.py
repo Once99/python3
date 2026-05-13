@@ -5,9 +5,11 @@ from __future__ import annotations
 
 import argparse
 import base64
+import datetime as dt
 import getpass
 import json
 import os
+import re
 import socket
 import subprocess
 import sys
@@ -19,6 +21,9 @@ from pathlib import Path
 
 
 DEFAULT_REPO = Path("/Users/oncechen/IdeaProjects/sport")
+DEFAULT_REPORT_REPO = Path("/Users/oncechen/IdeaProjects/ty_sport_test")
+DEFAULT_REPORT_AUTHOR = "Ayea"
+DEFAULT_REPORT_OUTPUT_DIR = Path(__file__).resolve().parents[1] / "reports"
 DEFAULT_JENKINS = "https://jenkins.helpom.com/"
 DEFAULT_JOB = "system-ui"
 DEFAULT_VPN_APPS = ["OpenVPN Connect", "OpenVPN"]
@@ -185,6 +190,267 @@ def sync_ty_sport_to_sport(
     commit_squashed_changes(repo, commit_message, author_name, author_email, dry_run)
 
     push_sport_branch(repo, sport_remote, active_branch, dry_run)
+
+
+def report_period_dates(period: str, today: dt.date) -> tuple[str, str]:
+    if period == "week":
+        start = today - dt.timedelta(days=today.weekday())
+        return start.isoformat(), (today + dt.timedelta(days=1)).isoformat()
+    if period == "last-week":
+        this_week = today - dt.timedelta(days=today.weekday())
+        start = this_week - dt.timedelta(days=7)
+        return start.isoformat(), this_week.isoformat()
+    raise ValueError(f"Unsupported report period: {period}")
+
+
+def report_author_pattern(author: str) -> str:
+    if author.strip().lower() == "ayea":
+        return "Aye"
+    return author
+
+
+def report_title_date(value: str | None, today_text: str | None) -> str:
+    if value:
+        return value
+    today = dt.date.fromisoformat(today_text) if today_text else dt.date.today()
+    return f"{today:%m/%d}"
+
+
+def report_period(since: str | None, until: str | None, period: str, today_text: str | None) -> tuple[str, str]:
+    today = dt.date.fromisoformat(today_text) if today_text else dt.date.today()
+    report_since, report_until = (since, until) if since and until else report_period_dates(period, today)
+    if not report_since or not report_until:
+        fail("--report-since and --report-until must be used together.")
+    return report_since, report_until
+
+
+def collect_author_commit_files(repo: Path, author: str, since: str, until: str) -> tuple[list[str], list[str]]:
+    if not (repo / ".git").exists():
+        fail(f"{repo} is not a git repository")
+
+    result = subprocess.run(
+        [
+            "git",
+            "log",
+            f"--since={since}",
+            f"--until={until}",
+            f"--author={report_author_pattern(author)}",
+            "--pretty=format:%x1e%s",
+            "--name-only",
+            "--reverse",
+        ],
+        cwd=repo,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        if result.stderr:
+            print(result.stderr.strip(), file=sys.stderr)
+        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
+
+    subjects: list[str] = []
+    files: list[str] = []
+    for block in result.stdout.split("\x1e"):
+        block = block.strip()
+        if not block:
+            continue
+        lines = [line.strip() for line in block.splitlines() if line.strip()]
+        if not lines:
+            continue
+        subject = re.sub(r"\s+", " ", lines[0]).strip()
+        if subject and not subject.lower().startswith("merge"):
+            subjects.append(subject)
+        files.extend(lines[1:])
+    return subjects, files
+
+
+def collect_author_commit_groups(repo: Path, author: str, since: str, until: str) -> list[tuple[str, list[str], list[str]]]:
+    if not (repo / ".git").exists():
+        fail(f"{repo} is not a git repository")
+
+    result = subprocess.run(
+        [
+            "git",
+            "log",
+            f"--since={since}",
+            f"--until={until}",
+            f"--author={report_author_pattern(author)}",
+            "--date=format:%m/%d",
+            "--pretty=format:%x1e%ad%x1f%s",
+            "--name-only",
+            "--reverse",
+        ],
+        cwd=repo,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        if result.stderr:
+            print(result.stderr.strip(), file=sys.stderr)
+        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
+
+    grouped: dict[str, tuple[list[str], list[str]]] = {}
+    ordered_dates: list[str] = []
+    for block in result.stdout.split("\x1e"):
+        block = block.strip()
+        if not block:
+            continue
+        lines = [line.strip() for line in block.splitlines() if line.strip()]
+        if not lines or "\x1f" not in lines[0]:
+            continue
+        date_text, subject = lines[0].split("\x1f", 1)
+        subject = re.sub(r"\s+", " ", subject).strip()
+        if date_text not in grouped:
+            grouped[date_text] = ([], [])
+            ordered_dates.append(date_text)
+        subjects, files = grouped[date_text]
+        if subject and not subject.lower().startswith("merge"):
+            subjects.append(subject)
+        files.extend(lines[1:])
+
+    return [(date_text, *grouped[date_text]) for date_text in ordered_dates]
+
+
+def append_once(items: list[str], value: str) -> None:
+    if value not in items:
+        items.append(value)
+
+
+def summarize_ty_work(subjects: list[str], files: list[str]) -> list[str]:
+    file_text = "\n".join(files).lower()
+    subject_text = "\n".join(subjects).lower()
+    haystack = f"{subject_text}\n{file_text}"
+    items: list[str] = []
+
+    if "src/api/sports/settlementmatch" in file_text:
+        append_once(items, "新增赛果结算 API")
+    if "manualsettlement" in file_text and "settlementlog" in file_text:
+        append_once(items, "新增录入赛果入口页与日志页")
+    elif "manualsettlement" in file_text:
+        append_once(items, "新增录入赛果入口页")
+    if "settlementmatch" in file_text or "结算管理" in haystack or "完善结算管理" in haystack:
+        append_once(items, "更新赛果结算页面")
+    if "earlymarketlist" in file_text and "rollingballlist" in file_text:
+        append_once(items, "更新早盘列表、滚球列表")
+    elif "earlymarketlist" in file_text:
+        append_once(items, "更新早盘列表")
+    elif "rollingballlist" in file_text:
+        append_once(items, "更新滚球列表")
+    if "src/router/" in file_text or "store/modules/permission" in file_text:
+        append_once(items, "调整路由与权限菜单")
+
+    if not items:
+        for subject in subjects:
+            cleaned = re.sub(r"^(feat|feature|fix|bug|chore|refactor|style|docs)[:：]\s*", "", subject, flags=re.I)
+            cleaned = cleaned.strip(" -：:")
+            if cleaned:
+                append_once(items, cleaned)
+
+    return items
+
+
+def render_summary_report(title_date: str, items: list[str]) -> str:
+    lines = [f"{title_date} 提交内容"]
+    lines.extend(items or ["本周期没有查询到提交内容"])
+    return "\n".join(lines) + "\n"
+
+
+def build_summary_message(
+    repo: Path,
+    author: str,
+    period: str,
+    since: str | None,
+    until: str | None,
+    today_text: str | None,
+    title_date_text: str | None,
+) -> str:
+    report_since, report_until = report_period(since, until, period, today_text)
+    subjects, files = collect_author_commit_files(repo.expanduser(), author, report_since, report_until)
+    return render_summary_report(report_title_date(title_date_text, today_text), summarize_ty_work(subjects, files))
+
+
+def build_chronological_report(
+    repo: Path,
+    author: str,
+    period: str,
+    since: str | None,
+    until: str | None,
+    today_text: str | None,
+) -> tuple[str, str, str]:
+    report_since, report_until = report_period(since, until, period, today_text)
+    groups = collect_author_commit_groups(repo.expanduser(), author, report_since, report_until)
+    if not groups:
+        return "本周期没有查询到提交内容\n", report_since, report_until
+
+    lines: list[str] = []
+    for date_text, subjects, files in groups:
+        lines.append(f"{date_text} 提交内容")
+        lines.extend(summarize_ty_work(subjects, files) or ["本日没有查询到提交内容"])
+        lines.append("")
+    return "\n".join(lines).rstrip() + "\n", report_since, report_until
+
+
+def write_summary_report(
+    report: str,
+    output: Path | None,
+    output_dir: Path,
+    title_date: str | None = None,
+    since: str | None = None,
+    until: str | None = None,
+) -> Path:
+    if output:
+        output_path = output.expanduser()
+    else:
+        if title_date:
+            suffix = title_date.replace("/", "")
+        elif since and until:
+            start = dt.date.fromisoformat(since)
+            end = dt.date.fromisoformat(until) - dt.timedelta(days=1)
+            suffix = f"{start:%m%d}_{end:%m%d}"
+        else:
+            suffix = "提交内容"
+        output_path = output_dir.expanduser() / f"TY体育_Ayea_{suffix}_提交内容.txt"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(report, encoding="utf-8")
+    return output_path
+
+
+def generate_summary_report(
+    repo: Path,
+    author: str,
+    period: str,
+    since: str | None,
+    until: str | None,
+    today_text: str | None,
+    title_date_text: str | None,
+    output: Path | None,
+    output_dir: Path,
+    stdout: bool,
+) -> None:
+    report, report_since, report_until = build_chronological_report(repo, author, period, since, until, today_text)
+    if stdout:
+        print(report, end="")
+        return
+
+    output_path = write_summary_report(report, output, output_dir, since=report_since, until=report_until)
+    print(output_path)
+
+
+def resolve_sync_commit_message(args: argparse.Namespace) -> str:
+    custom_message = os.environ.get("SPORT_COMMIT_MESSAGE") is not None or args.commit_message != DEFAULT_COMMIT_MESSAGE
+    if custom_message:
+        return args.commit_message
+    return build_summary_message(
+        args.report_repo,
+        args.report_author,
+        args.report_period,
+        args.report_since,
+        args.report_until,
+        args.report_today,
+        args.report_date,
+    ).strip()
 
 
 def open_vpn(app_names: list[str], dry_run: bool) -> None:
@@ -375,9 +641,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--branch", default=os.environ.get("SPORT_BRANCH"))
     parser.add_argument(
         "--mode",
-        choices=["prompt", "deploy", "sync"],
+        choices=["prompt", "deploy", "sync", "report"],
         default=os.environ.get("SPORT_DEPLOY_MODE", "prompt"),
-        help="prompt: ask; deploy: default CI/CD; sync: squash ty_sport into sport, push, then deploy",
+        help="prompt: ask; deploy: default CI/CD; sync: squash ty_sport into sport, push, then deploy; report: Ayea work summary from ty_sport_test",
     )
     parser.add_argument("--ty-sport-remote", default=os.environ.get("TY_SPORT_REMOTE", DEFAULT_TY_SPORT_REMOTE))
     parser.add_argument("--sport-push-remote", default=os.environ.get("SPORT_PUSH_REMOTE", DEFAULT_SPORT_PUSH_REMOTE))
@@ -400,6 +666,21 @@ def parse_args() -> argparse.Namespace:
         default=os.environ.get("JENKINS_TRIGGER", "open"),
         help="open: open job page; api: POST build; none: only print URL",
     )
+    parser.add_argument("--report-repo", type=Path, default=Path(os.environ.get("TY_SPORT_REPORT_REPO", DEFAULT_REPORT_REPO)))
+    parser.add_argument("--report-author", default=os.environ.get("TY_SPORT_REPORT_AUTHOR", DEFAULT_REPORT_AUTHOR))
+    parser.add_argument(
+        "--report-period",
+        choices=["week", "last-week"],
+        default=os.environ.get("TY_SPORT_REPORT_PERIOD", "last-week"),
+        help="Report period. Default: last-week.",
+    )
+    parser.add_argument("--report-since", help="Report start date, inclusive. Example: 2026-05-04.")
+    parser.add_argument("--report-until", help="Report end date, exclusive. Example: 2026-05-11.")
+    parser.add_argument("--report-today", help="Override today for report period calculation. Example: 2026-05-13.")
+    parser.add_argument("--report-date", help="Title date, example: 05/12. Default follows DEFAULT_COMMIT_MESSAGE.")
+    parser.add_argument("--report-output", type=Path, help="Output txt path for the report.")
+    parser.add_argument("--report-output-dir", type=Path, default=Path(os.environ.get("TY_SPORT_REPORT_OUTPUT_DIR", DEFAULT_REPORT_OUTPUT_DIR)))
+    parser.add_argument("--report-stdout", action="store_true", help="Print report to stdout instead of writing a file.")
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 
@@ -408,18 +689,36 @@ def choose_mode(mode: str) -> str:
     if mode != "prompt":
         return mode
     try:
-        value = input("部署模式：直接按 Enter=开启 CI/CD 部署；输入 sync=同步 ty_sport 到 sport、push 后部署：").strip()
+        value = input("部署模式：直接按 Enter=开启 CI/CD 部署；输入 sync=同步 ty_sport 到 sport、push 后部署；输入 report=生成 Ayea 工作内容总结：").strip()
     except EOFError:
         value = ""
     if not value:
         return "deploy"
-    if value.lower() == "sync":
-        return "sync"
-    fail(f"unknown mode: {value}. Use Enter or sync.")
+    normalized = value.lower()
+    if normalized in {"sync", "report"}:
+        return normalized
+    fail(f"unknown mode: {value}. Use Enter, sync, or report.")
 
 
 def main() -> None:
     args = parse_args()
+    mode = choose_mode(args.mode)
+
+    if mode == "report":
+        generate_summary_report(
+            args.report_repo,
+            args.report_author,
+            args.report_period,
+            args.report_since,
+            args.report_until,
+            args.report_today,
+            args.report_date,
+            args.report_output,
+            args.report_output_dir,
+            args.report_stdout,
+        )
+        return
+
     target_job = job_url(args.jenkins_url, args.job, args.job_url)
     target_build_page = build_page_url(target_job)
 
@@ -432,15 +731,14 @@ def main() -> None:
             args.dry_run,
         )
 
-    mode = choose_mode(args.mode)
-
     if mode == "sync":
+        commit_message = resolve_sync_commit_message(args)
         sync_ty_sport_to_sport(
             args.repo.expanduser(),
             args.branch,
             args.ty_sport_remote,
             args.sport_push_remote,
-            args.commit_message,
+            commit_message,
             args.sync_author_name,
             args.sync_author_email,
             args.dry_run,

@@ -236,6 +236,64 @@ def ensure_clean_worktree(repo_path: Path) -> None:
     raise ToolError(f"{repo_path} 检测到已跟踪文件存在未提交变更，已中止。\n{status}")
 
 
+def has_tracked_changes(repo_path: Path) -> bool:
+    return not is_worktree_clean(repo_path)
+
+
+def has_unpushed_commits(repo_path: Path) -> bool:
+    if not has_upstream(repo_path):
+        return False
+    count = run_cmd(repo_path, ["git", "rev-list", "--count", "@{upstream}..HEAD"], check=False)
+    try:
+        return int(count or "0") > 0
+    except ValueError:
+        return False
+
+
+def commit_tracked_changes(repo_path: Path, target_name: str) -> bool:
+    if not has_tracked_changes(repo_path):
+        return False
+
+    status = run_cmd(repo_path, ["git", "status", "--short"], check=False)
+    log(f"⚠️ {repo_path} 检测到已跟踪修改，先提交再 push：\n{status}")
+    run_cmd(repo_path, ["git", "add", "-u"])
+
+    if not repo_has_staged_changes(repo_path):
+        log(f"ℹ️ {repo_path} 没有可提交的已跟踪修改")
+        return False
+
+    message = f"{datetime.now():%Y-%m-%d} update {target_name} site"
+    run_cmd(repo_path, ["git", "commit", "-m", message])
+    log(f"✅ {repo_path} 已提交：{message}")
+    return True
+
+
+def push_if_needed(repo_path: Path) -> None:
+    if has_unpushed_commits(repo_path):
+        log(f"⬆️ {repo_path} 有本地提交，先 git push")
+        run_cmd(repo_path, ["git", "push"])
+        log(f"✅ {repo_path} push 完成")
+
+
+def git_push_or_pull_before_update(repo_path: Path, target_name: str) -> None:
+    committed = commit_tracked_changes(repo_path, target_name)
+    if committed or has_unpushed_commits(repo_path):
+        push_if_needed(repo_path)
+        return
+
+    git_pull_safe(repo_path)
+
+
+def git_pull_secondary_clone(repo_path: Path, target_name: str) -> None:
+    if has_tracked_changes(repo_path):
+        status = run_cmd(repo_path, ["git", "status", "--short"], check=False)
+        log(f"⚠️ {repo_path} 是同远端预览目录，检测到本地修改，先 stash 再 pull：\n{status}")
+        message = f"auto backup before {target_name} pull {datetime.now():%Y%m%d%H%M%S}"
+        run_cmd(repo_path, ["git", "stash", "push", "-m", message])
+
+    git_pull_safe(repo_path)
+
+
 def git_pull_safe(repo_path: Path) -> None:
     ensure_clean_worktree(repo_path)
     log(f"🔄 git pull (--ff-only) @ {repo_path}")
@@ -580,8 +638,11 @@ def update_apk(target: ApkTarget) -> int:
     repo2_remote = get_remote_url(repo2.root)
     same_remote = bool(repo1_remote and repo1_remote == repo2_remote)
 
-    git_pull_safe(repo1.root)
-    git_pull_safe(repo2.root)
+    git_push_or_pull_before_update(repo1.root, target.name)
+    if same_remote:
+        git_pull_secondary_clone(repo2.root, target.name)
+    else:
+        git_push_or_pull_before_update(repo2.root, target.name)
 
     download_status = download_apk_to_repo1(target, repo1.apk_path)
     if download_status == "failed":
