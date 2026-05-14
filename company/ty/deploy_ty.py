@@ -33,13 +33,7 @@ DEFAULT_TY_SPORT_REMOTE = "gitlab"
 DEFAULT_SPORT_PUSH_REMOTE = "origin"
 DEFAULT_SYNC_AUTHOR_NAME = "loki"
 DEFAULT_SYNC_AUTHOR_EMAIL = "webm@dc66.net"
-DEFAULT_COMMIT_MESSAGE = """05/12 提交内容
-
-新增赛果结算 API
-新增录入赛果入口页与日志页
-更新赛果结算页面
-更新早盘列表、滚球列表
-调整路由与权限菜单"""
+DEFAULT_COMMIT_MESSAGE = ""
 
 
 def log(message: str) -> None:
@@ -99,6 +93,24 @@ def git_pull(repo: Path, remote: str, branch: str | None, strict_clean: bool, dr
         print(result.stderr.strip(), file=sys.stderr)
 
 
+def pull_ty_sport_worktree(repo: Path, branch: str | None, dry_run: bool) -> None:
+    if not (repo / ".git").exists():
+        fail(f"{repo} is not a git repository")
+
+    status = git_output(repo, ["status", "--porcelain"])
+    if status:
+        print(status)
+        fail("ty_sport_test repo has uncommitted changes. Commit/stash them before syncing.")
+
+    active_branch = branch or current_branch(repo)
+    log(f"pulling latest ty_sport_test branch: origin/{active_branch}")
+    result = run(["git", "pull", "--ff-only", "origin", active_branch], cwd=repo, dry_run=dry_run)
+    if result.stdout:
+        print(result.stdout.strip())
+    if result.stderr:
+        print(result.stderr.strip(), file=sys.stderr)
+
+
 def has_worktree_changes(repo: Path) -> bool:
     return bool(git_output(repo, ["status", "--porcelain"]))
 
@@ -113,6 +125,93 @@ def ensure_remote(repo: Path, remote: str) -> str:
 def push_sport_branch(repo: Path, remote: str, branch: str, dry_run: bool) -> None:
     log(f"running git push inside sport: {remote} {branch}:{branch}")
     run(["git", "push", remote, f"{branch}:{branch}"], cwd=repo, dry_run=dry_run)
+
+
+def sync_title_date(today: dt.date | None = None) -> str:
+    value = today or dt.date.today()
+    return f"{value:%m/%d}"
+
+
+def collect_sync_commit_details(repo: Path, base_ref: str, target_ref: str) -> tuple[list[str], list[str]]:
+    result = subprocess.run(
+        [
+            "git",
+            "log",
+            "--pretty=format:%x1e%s",
+            "--name-only",
+            "--reverse",
+            f"{base_ref}..{target_ref}",
+            "--",
+            "ruoyi-ui",
+        ],
+        cwd=repo,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        if result.stderr:
+            print(result.stderr.strip(), file=sys.stderr)
+        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
+
+    subjects: list[str] = []
+    files: list[str] = []
+    for block in result.stdout.split("\x1e"):
+        block = block.strip()
+        if not block:
+            continue
+        lines = [line.strip() for line in block.splitlines() if line.strip()]
+        if not lines:
+            continue
+        subject = re.sub(r"\s+", " ", lines[0]).strip()
+        if subject and not subject.lower().startswith("merge"):
+            append_once(subjects, subject)
+        files.extend(lines[1:])
+    return subjects, files
+
+
+def collect_sync_subjects(repo: Path, base_ref: str, target_ref: str) -> list[str]:
+    subjects, _ = collect_sync_commit_details(repo, base_ref, target_ref)
+    return subjects
+
+
+def staged_ruoyi_files(repo: Path) -> list[str]:
+    result = subprocess.run(
+        ["git", "diff", "--cached", "--name-only", "--", "ruoyi-ui"],
+        cwd=repo,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        if result.stderr:
+            print(result.stderr.strip(), file=sys.stderr)
+        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
+    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
+
+
+def has_ruoyi_diff(repo: Path, base_ref: str, target_ref: str) -> bool:
+    result = subprocess.run(
+        ["git", "diff", "--quiet", base_ref, target_ref, "--", "ruoyi-ui"],
+        cwd=repo,
+        check=False,
+    )
+    if result.returncode in {0, 1}:
+        return result.returncode == 1
+    raise subprocess.CalledProcessError(result.returncode, result.args)
+
+
+def build_sync_commit_message(repo: Path, base_ref: str, target_ref: str) -> str:
+    subjects = collect_sync_subjects(repo, base_ref, target_ref)
+    files = staged_ruoyi_files(repo)
+    items = summarize_ty_work(subjects, files)
+    lines = [f"{sync_title_date()} 提交内容", ""]
+    if not items:
+        lines.append("同步 ty_sport 前端更新")
+        return "\n".join(lines)
+
+    lines.extend(items)
+    return "\n".join(lines)
 
 
 def message_args(message: str) -> list[str]:
@@ -182,10 +281,19 @@ def sync_ty_sport_to_sport(
     run(["git", "pull", "--ff-only", sport_remote, active_branch], cwd=repo, dry_run=dry_run)
     log(f"fetching ty_sport branch: {ty_remote}/{active_branch}")
     run(["git", "fetch", ty_remote, active_branch], cwd=repo, dry_run=dry_run)
+    if not dry_run and not has_ruoyi_diff(repo, "HEAD", f"{ty_remote}/{active_branch}"):
+        log("no ruoyi-ui differences from ty_sport; skipping squash merge.")
+        push_sport_branch(repo, sport_remote, active_branch, dry_run)
+        return
     try:
         run(["git", "merge", "--squash", "--no-commit", f"{ty_remote}/{active_branch}"], cwd=repo, dry_run=dry_run)
     except subprocess.CalledProcessError:
         fail(f"squash merge failed for {ty_remote}/{active_branch}. Resolve conflicts in sport, then commit manually.")
+
+    if not commit_message:
+        commit_message = build_sync_commit_message(repo, f"{sport_remote}/{active_branch}", f"{ty_remote}/{active_branch}")
+        log("generated sport commit message from actual staged ruoyi-ui changes:")
+        print(commit_message)
 
     commit_squashed_changes(repo, commit_message, author_name, author_email, dry_run)
 
@@ -326,20 +434,30 @@ def summarize_ty_work(subjects: list[str], files: list[str]) -> list[str]:
 
     if "src/api/sports/settlementmatch" in file_text:
         append_once(items, "新增赛果结算 API")
-    if "manualsettlement" in file_text and "settlementlog" in file_text:
+    has_result_entry = "manualsettlement" in file_text or "settlementresultentry/" in file_text
+    has_result_entry_log = "settlementlog" in file_text or "settlementresultentrylog" in file_text
+    if has_result_entry and has_result_entry_log:
         append_once(items, "新增录入赛果入口页与日志页")
-    elif "manualsettlement" in file_text:
+    elif has_result_entry:
         append_once(items, "新增录入赛果入口页")
+    elif has_result_entry_log:
+        append_once(items, "更新录入赛果日志页")
     if "settlementmatch" in file_text or "结算管理" in haystack or "完善结算管理" in haystack:
         append_once(items, "更新赛果结算页面")
-    if "earlymarketlist" in file_text and "rollingballlist" in file_text:
+    if "早盘操盘" in haystack or "tradingboardmock" in file_text:
+        append_once(items, "早盘操盘更新")
+    elif "earlymarketlist" in file_text and "rollingballlist" in file_text:
         append_once(items, "更新早盘列表、滚球列表")
     elif "earlymarketlist" in file_text:
         append_once(items, "更新早盘列表")
-    elif "rollingballlist" in file_text:
+    if "rollingballlist" in file_text:
         append_once(items, "更新滚球列表")
     if "src/router/" in file_text or "store/modules/permission" in file_text:
         append_once(items, "调整路由与权限菜单")
+    if "storagetradermatchboard" in file_text:
+        append_once(items, "同步交易盘本地缓存处理")
+    if "vue.config.js" in file_text:
+        append_once(items, "更新前端构建配置")
 
     if not items:
         for subject in subjects:
@@ -442,15 +560,7 @@ def resolve_sync_commit_message(args: argparse.Namespace) -> str:
     custom_message = os.environ.get("SPORT_COMMIT_MESSAGE") is not None or args.commit_message != DEFAULT_COMMIT_MESSAGE
     if custom_message:
         return args.commit_message
-    return build_summary_message(
-        args.report_repo,
-        args.report_author,
-        args.report_period,
-        args.report_since,
-        args.report_until,
-        args.report_today,
-        args.report_date,
-    ).strip()
+    return ""
 
 
 def open_vpn(app_names: list[str], dry_run: bool) -> None:
@@ -647,7 +757,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--ty-sport-remote", default=os.environ.get("TY_SPORT_REMOTE", DEFAULT_TY_SPORT_REMOTE))
     parser.add_argument("--sport-push-remote", default=os.environ.get("SPORT_PUSH_REMOTE", DEFAULT_SPORT_PUSH_REMOTE))
-    parser.add_argument("--commit-message", default=os.environ.get("SPORT_COMMIT_MESSAGE", DEFAULT_COMMIT_MESSAGE))
+    parser.add_argument(
+        "--commit-message",
+        default=os.environ.get("SPORT_COMMIT_MESSAGE", DEFAULT_COMMIT_MESSAGE),
+        help="Override the sync commit message. Default: collect git log from ty_sport remote changes under ruoyi-ui.",
+    )
     parser.add_argument("--sync-author-name", default=os.environ.get("SPORT_SYNC_AUTHOR_NAME", DEFAULT_SYNC_AUTHOR_NAME))
     parser.add_argument("--sync-author-email", default=os.environ.get("SPORT_SYNC_AUTHOR_EMAIL", DEFAULT_SYNC_AUTHOR_EMAIL))
     parser.add_argument("--strict-clean", action="store_true")
@@ -732,6 +846,7 @@ def main() -> None:
         )
 
     if mode == "sync":
+        pull_ty_sport_worktree(args.report_repo.expanduser(), args.branch, args.dry_run)
         commit_message = resolve_sync_commit_message(args)
         sync_ty_sport_to_sport(
             args.repo.expanduser(),
