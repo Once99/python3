@@ -34,6 +34,11 @@ DEFAULT_SPORT_PUSH_REMOTE = "origin"
 DEFAULT_SYNC_AUTHOR_NAME = "loki"
 DEFAULT_SYNC_AUTHOR_EMAIL = "webm@dc66.net"
 DEFAULT_COMMIT_MESSAGE = ""
+DEFAULT_SYNC_EXCLUDE_PATHS = [
+    "ruoyi-ui/AGENTS.md",
+    "ruoyi-ui/.env.development.local",
+    "ruoyi-ui/docs",
+]
 
 
 def log(message: str) -> None:
@@ -113,6 +118,43 @@ def pull_ty_sport_worktree(repo: Path, branch: str | None, dry_run: bool) -> Non
 
 def has_worktree_changes(repo: Path) -> bool:
     return bool(git_output(repo, ["status", "--porcelain"]))
+
+
+def has_path_change(repo: Path, path: str) -> bool:
+    result = subprocess.run(
+        ["git", "status", "--porcelain", "--", path],
+        cwd=repo,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        if result.stderr:
+            print(result.stderr.strip(), file=sys.stderr)
+        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
+    return bool(result.stdout.strip())
+
+
+def unmerged_paths(repo: Path) -> list[str]:
+    result = subprocess.run(
+        ["git", "diff", "--name-only", "--diff-filter=U"],
+        cwd=repo,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        if result.stderr:
+            print(result.stderr.strip(), file=sys.stderr)
+        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
+    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
+
+
+def restore_sync_excluded_paths(repo: Path, dry_run: bool) -> None:
+    for path in DEFAULT_SYNC_EXCLUDE_PATHS:
+        if has_path_change(repo, path):
+            log(f"excluding from sport sync: {path}")
+            run(["git", "restore", "--source=HEAD", "--staged", "--worktree", "--", path], cwd=repo, dry_run=dry_run)
 
 
 def ensure_remote(repo: Path, remote: str) -> str:
@@ -288,7 +330,15 @@ def sync_ty_sport_to_sport(
     try:
         run(["git", "merge", "--squash", "--no-commit", f"{ty_remote}/{active_branch}"], cwd=repo, dry_run=dry_run)
     except subprocess.CalledProcessError:
-        fail(f"squash merge failed for {ty_remote}/{active_branch}. Resolve conflicts in sport, then commit manually.")
+        restore_sync_excluded_paths(repo, dry_run)
+        unresolved = unmerged_paths(repo)
+        if unresolved:
+            fail(
+                f"squash merge failed for {ty_remote}/{active_branch}. "
+                f"Unresolved paths: {', '.join(unresolved)}"
+            )
+
+    restore_sync_excluded_paths(repo, dry_run)
 
     if not commit_message:
         commit_message = build_sync_commit_message(repo, f"{sport_remote}/{active_branch}", f"{ty_remote}/{active_branch}")
@@ -421,6 +471,13 @@ def collect_author_commit_groups(repo: Path, author: str, since: str, until: str
     return [(date_text, *grouped[date_text]) for date_text in ordered_dates]
 
 
+def unique_ordered(items: list[str]) -> list[str]:
+    result: list[str] = []
+    for item in items:
+        append_once(result, item)
+    return result
+
+
 def append_once(items: list[str], value: str) -> None:
     if value not in items:
         items.append(value)
@@ -444,13 +501,18 @@ def summarize_ty_work(subjects: list[str], files: list[str]) -> list[str]:
         append_once(items, "更新录入赛果日志页")
     if "settlementmatch" in file_text or "结算管理" in haystack or "完善结算管理" in haystack:
         append_once(items, "更新赛果结算页面")
+    has_early_and_rolling_lists = "earlymarketlist" in file_text and "rollingballlist" in file_text
     if "早盘操盘" in haystack or "tradingboardmock" in file_text:
         append_once(items, "早盘操盘更新")
-    elif "earlymarketlist" in file_text and "rollingballlist" in file_text:
+    if "盘口赔率" in haystack:
+        append_once(items, "更新盘口赔率")
+    if "操盘列表路由" in haystack:
+        append_once(items, "调整操盘列表路由")
+    elif has_early_and_rolling_lists:
         append_once(items, "更新早盘列表、滚球列表")
     elif "earlymarketlist" in file_text:
         append_once(items, "更新早盘列表")
-    if "rollingballlist" in file_text:
+    if "rollingballlist" in file_text and not has_early_and_rolling_lists:
         append_once(items, "更新滚球列表")
     if "src/router/" in file_text or "store/modules/permission" in file_text:
         append_once(items, "调整路由与权限菜单")
@@ -502,10 +564,27 @@ def build_chronological_report(
     if not groups:
         return "本周期没有查询到提交内容\n", report_since, report_until
 
+    start = dt.date.fromisoformat(report_since)
+    end = dt.date.fromisoformat(report_until) - dt.timedelta(days=1)
+    all_subjects = [subject for _, subjects, _ in groups for subject in subjects]
+    all_files = [file for _, _, files in groups for file in files]
+    summary_items = summarize_ty_work(all_subjects, all_files)
+
     lines: list[str] = []
+    lines.append(f"前端工作周报（{start:%m/%d}-{end:%m/%d}）")
+    lines.append("")
+    lines.append("一、本周工作汇总")
+    lines.extend(f"- {item}" for item in (summary_items or ["本周没有归纳到明确工作项"]))
+    lines.append("")
+    lines.append("二、每日提交与实际修改文件")
     for date_text, subjects, files in groups:
         lines.append(f"{date_text} 提交内容")
-        lines.extend(summarize_ty_work(subjects, files) or ["本日没有查询到提交内容"])
+        lines.append("提交记录：")
+        lines.extend(f"- {subject}" for subject in unique_ordered(subjects))
+        lines.append("归纳工作：")
+        lines.extend(f"- {item}" for item in (summarize_ty_work(subjects, files) or ["本日没有归纳到明确工作项"]))
+        lines.append("实际修改文件：")
+        lines.extend(f"- {file}" for file in unique_ordered(files))
         lines.append("")
     return "\n".join(lines).rstrip() + "\n", report_since, report_until
 
@@ -785,8 +864,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--report-period",
         choices=["week", "last-week"],
-        default=os.environ.get("TY_SPORT_REPORT_PERIOD", "last-week"),
-        help="Report period. Default: last-week.",
+        default=os.environ.get("TY_SPORT_REPORT_PERIOD", "week"),
+        help="Report period. Default: week.",
     )
     parser.add_argument("--report-since", help="Report start date, inclusive. Example: 2026-05-04.")
     parser.add_argument("--report-until", help="Report end date, exclusive. Example: 2026-05-11.")
