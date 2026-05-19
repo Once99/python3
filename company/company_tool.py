@@ -15,6 +15,7 @@ import hashlib
 import json
 import os
 import plistlib
+import re
 import shutil
 import ssl
 import subprocess
@@ -118,26 +119,29 @@ class ApkTarget:
     urls: tuple[str, ...]
     push_tag: bool = False
     update_when_unchanged: bool = False
+    asset_version_files: tuple[str, ...] = ()
 
 
 APK_TARGETS = {
     "feiyu": ApkTarget(
         name="feiyu",
-        repo1=Path("/Users/oncechen/IdeaProjects/feiyu-site"),
-        repo2=Path("/Applications/XAMPP/xamppfiles/htdocs/feiyu-site"),
+        repo1=Path("/Users/oncechen/IdeaProjects/feiyu-site-clean"),
+        repo2=Path("/Users/oncechen/IdeaProjects/feiyu-site-clean"),
         apk_name="flychat_release.apk",
         urls=("https://fujkou.com:12828/Android/apk/flychat/flychat_release.apk", "https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk",),
         push_tag=True,
         update_when_unchanged=True,
+        asset_version_files=("index.html",),
     ),
     "94chat": ApkTarget(
         name="94chat",
         repo1=Path("/Users/oncechen/IdeaProjects/site-dolphin"),
-        repo2=Path("/Applications/XAMPP/xamppfiles/htdocs/site-dolphin"),
+        repo2=Path("/Users/oncechen/IdeaProjects/site-dolphin"),
         apk_name="94chat.apk",
         urls=("https://94chat-2.equgou.com/Android/apk/94chat.apk",),
         push_tag=False,
         update_when_unchanged=True,
+        asset_version_files=("index.html", "agreement.html", "support.html"),
     ),
 }
 
@@ -591,6 +595,25 @@ def update_version_json(path: Path, version: str) -> None:
     atomic_write_json(path, {"version": version, "assets": assets})
 
 
+def update_asset_query_versions(repo_path: Path, files: tuple[str, ...], version_date: str) -> list[str]:
+    changed: list[str] = []
+    if not files:
+        return changed
+    pattern = re.compile(r"(\.(?:js|css)(?:\?v=))\d{8,14}")
+    for rel_path in files:
+        path = repo_path / rel_path
+        if not path.exists():
+            log(f"⚠️ 静态资源版本文件不存在，跳过：{path}")
+            continue
+        old = path.read_text(encoding="utf-8")
+        new = pattern.sub(rf"\g<1>{version_date}", old)
+        if new != old:
+            path.write_text(new, encoding="utf-8")
+            changed.append(rel_path)
+            log(f"✅ 静态资源版本号已更新：{rel_path} -> {version_date}")
+    return changed
+
+
 def generate_version() -> str:
     return datetime.now().strftime("%Y%m%d%H%M%S")
 
@@ -655,8 +678,10 @@ def update_apk(target: ApkTarget) -> int:
         log("ℹ️ APK 内容无变化，仍继续更新 version.json 并提交新版本号")
 
     version = generate_version()
+    version_date = version[:8]
     log(f"✅ 生成版本号: {version}")
     update_version_json(repo1.version_path, version)
+    asset_version_files = update_asset_query_versions(repo1.root, target.asset_version_files, version_date)
 
     if not same_remote:
         atomic_copy(repo1.apk_path, repo2.apk_path)
@@ -672,6 +697,7 @@ def update_apk(target: ApkTarget) -> int:
         [
             os.path.relpath(repo1.apk_path, repo1.root),
             os.path.relpath(repo1.version_path, repo1.root),
+            *asset_version_files,
         ],
         version,
     )
