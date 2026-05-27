@@ -10,7 +10,6 @@ import getpass
 import json
 import os
 import re
-import shutil
 import socket
 import subprocess
 import sys
@@ -23,7 +22,6 @@ from pathlib import Path
 
 DEFAULT_REPO = Path("/Users/oncechen/IdeaProjects/sport")
 DEFAULT_REPORT_REPO = Path("/Users/oncechen/IdeaProjects/ty_sport_test")
-DEFAULT_CLIENT_REPORT_REPO = Path("/Users/oncechen/IdeaProjects/ty_client_test")
 DEFAULT_REPORT_AUTHOR = "Ayea"
 DEFAULT_REPORT_OUTPUT_DIR = Path(__file__).resolve().parents[1] / "reports"
 DEFAULT_JENKINS = "https://jenkins.helpom.com/"
@@ -41,12 +39,6 @@ DEFAULT_SYNC_EXCLUDE_PATHS = [
     "ruoyi-ui/.env.development.local",
     "ruoyi-ui/docs",
 ]
-DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = [
-    "docs",
-]
-DEFAULT_CLIENT_SOURCE_REPO = Path("/Users/oncechen/IdeaProjects/ty_client_test")
-DEFAULT_CLIENT_TARGET_REPO = Path("/Users/oncechen/IdeaProjects/if_sport_ui")
-DEFAULT_CLIENT_REMOTE = "origin"
 
 
 def log(message: str) -> None:
@@ -358,199 +350,6 @@ def sync_ty_sport_to_sport(
     push_sport_branch(repo, sport_remote, active_branch, dry_run)
 
 
-def ensure_branch(repo: Path, branch: str, label: str) -> None:
-    active = current_branch(repo)
-    if active != branch:
-        fail(f"{label} current branch is '{active}'. Please switch to '{branch}' first.")
-
-
-def changed_target_files(repo: Path) -> list[str]:
-    result = subprocess.run(
-        ["git", "status", "--porcelain=v1"],
-        cwd=repo,
-        check=False,
-        text=True,
-        capture_output=True,
-    )
-    if result.returncode != 0:
-        if result.stderr:
-            print(result.stderr.strip(), file=sys.stderr)
-        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
-    files: list[str] = []
-    for line in result.stdout.splitlines():
-        value = line[3:].strip()
-        if " -> " in value:
-            value = value.split(" -> ", 1)[1].strip()
-        if value:
-            files.append(value)
-    return files
-
-
-def latest_commit_date(repo: Path) -> str:
-    return git_output(repo, ["log", "-1", "--format=%cI"])
-
-
-def client_source_subjects(repo: Path, limit: int = 20, since: str | None = None) -> list[str]:
-    cmd = ["git", "log", f"-{limit}", "--pretty=format:%s"]
-    if since:
-        cmd.insert(2, f"--since={since}")
-    result = subprocess.run(
-        cmd,
-        cwd=repo,
-        check=False,
-        text=True,
-        capture_output=True,
-    )
-    if result.returncode != 0:
-        if result.stderr:
-            print(result.stderr.strip(), file=sys.stderr)
-        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
-    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
-
-
-def client_target_recent_message_text(repo: Path, limit: int = 20) -> str:
-    result = subprocess.run(
-        ["git", "log", f"-{limit}", "--pretty=format:%s%n%b"],
-        cwd=repo,
-        check=False,
-        text=True,
-        capture_output=True,
-    )
-    if result.returncode != 0:
-        if result.stderr:
-            print(result.stderr.strip(), file=sys.stderr)
-        raise subprocess.CalledProcessError(result.returncode, result.args, result.stdout, result.stderr)
-    return result.stdout.lower()
-
-
-def clean_client_subject(subject: str) -> str:
-    cleaned = re.sub(r"^(feat|feature|fix|bug|chore|refactor|style|docs)[:：]\s*", "", subject, flags=re.I)
-    return cleaned.strip(" -：:")
-
-
-def unsynced_client_source_subjects(source_repo: Path, target_repo: Path) -> list[str]:
-    target_latest_date = latest_commit_date(target_repo)
-    synced_text = client_target_recent_message_text(target_repo)
-    subjects: list[str] = []
-    for subject in client_source_subjects(source_repo, since=target_latest_date):
-        cleaned = clean_client_subject(subject)
-        if not cleaned or cleaned.lower().startswith("merge"):
-            continue
-        if cleaned.lower() in synced_text:
-            continue
-        append_once(subjects, cleaned)
-    return subjects
-
-
-def summarize_client_work(subjects: list[str], files: list[str]) -> list[str]:
-    file_text = "\n".join(files).lower()
-    subject_text = "\n".join(subjects).lower()
-    haystack = f"{subject_text}\n{file_text}"
-    items: list[str] = []
-
-    if "余额" in haystack or "balance" in haystack or "src/api/user" in file_text or "src/api/order" in file_text:
-        append_once(items, "接入余额接口并明确 token 来源")
-    if (
-        "sportsview" in haystack
-        or "matchdetailpanel" in file_text
-        or "usematchlistpolling" in file_text
-        or "useoddsflash" in file_text
-        or "oddsadapter" in file_text
-        or "后端协议" in haystack
-    ):
-        append_once(items, "重构 SportsView 并对齐后端协议")
-    if ".env.production" in file_text or ".env.development" in file_text:
-        append_once(items, "调整客户端环境配置")
-    if "src/utils/request" in file_text:
-        append_once(items, "调整客户端请求拦截处理")
-
-    if not items:
-        for subject in subjects:
-            cleaned = clean_client_subject(subject)
-            if cleaned and not cleaned.lower().startswith("merge"):
-                append_once(items, cleaned)
-
-    return items
-
-
-def build_client_sync_commit_message(source_repo: Path, target_repo: Path) -> str:
-    subjects = unsynced_client_source_subjects(source_repo, target_repo)
-    files = changed_target_files(target_repo)
-    items = subjects or summarize_client_work([], files)
-    if not items:
-        return f"{sync_title_date()} 提交内容：同步 ty_client_test 客户端更新"
-    title_items = "、".join(items[:2])
-    lines = [f"{sync_title_date()} 提交内容：{title_items}", ""]
-    lines.extend(items)
-    return "\n".join(lines)
-
-
-def sync_ty_client_to_if_sport_ui(
-    source_repo: Path,
-    target_repo: Path,
-    branch: str | None,
-    remote: str,
-    commit_message: str,
-    author_name: str,
-    author_email: str,
-    dry_run: bool,
-) -> None:
-    if not (source_repo / ".git").exists():
-        fail(f"{source_repo} is not a git repository")
-    if not (target_repo / ".git").exists():
-        fail(f"{target_repo} is not a git repository")
-    if shutil.which("rsync") is None:
-        fail("rsync is required for client sync")
-
-    active_branch = branch or "test"
-    ensure_remote(source_repo, remote)
-    ensure_remote(target_repo, remote)
-
-    if not dry_run:
-        ensure_branch(source_repo, active_branch, "ty_client_test")
-        ensure_branch(target_repo, active_branch, "if_sport_ui")
-
-    if git_output(source_repo, ["status", "--porcelain"]):
-        fail("ty_client_test repo has uncommitted changes. Commit/stash them before syncing client.")
-    if git_output(target_repo, ["status", "--porcelain"]):
-        fail("if_sport_ui repo has uncommitted changes. Commit/stash them before syncing client.")
-
-    log(f"pulling latest ty_client_test branch: {remote}/{active_branch}")
-    run(["git", "pull", "--ff-only", remote, active_branch], cwd=source_repo, dry_run=dry_run)
-
-    log(f"pulling latest if_sport_ui branch: {remote}/{active_branch}")
-    run(["git", "pull", "--ff-only", remote, active_branch], cwd=target_repo, dry_run=dry_run)
-
-    log(f"syncing ty_client_test -> if_sport_ui: {source_repo} -> {target_repo}")
-    rsync_cmd = [
-        "rsync",
-        "-a",
-        "--delete",
-        "--exclude",
-        ".git",
-    ]
-    for path in DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS:
-        rsync_cmd.extend(["--exclude", path])
-    rsync_cmd.extend([f"{source_repo}/", f"{target_repo}/"])
-    run(
-        rsync_cmd,
-        dry_run=dry_run,
-    )
-
-    if not has_worktree_changes(target_repo):
-        log("no ty_client changes to commit.")
-        return
-
-    if not commit_message:
-        commit_message = build_client_sync_commit_message(source_repo, target_repo)
-        log("generated client commit message from synced changes:")
-        print(commit_message)
-
-    run(["git", "add", "-A"], cwd=target_repo, dry_run=dry_run)
-    commit_squashed_changes(target_repo, commit_message, author_name, author_email, dry_run)
-    push_sport_branch(target_repo, remote, active_branch, dry_run)
-
-
 def report_period_dates(period: str, today: dt.date) -> tuple[str, str]:
     if period == "week":
         start = today - dt.timedelta(days=today.weekday())
@@ -583,24 +382,21 @@ def report_period(since: str | None, until: str | None, period: str, today_text:
     return report_since, report_until
 
 
-def collect_author_commit_files(repo: Path, author: str | None, since: str, until: str) -> tuple[list[str], list[str]]:
+def collect_author_commit_files(repo: Path, author: str, since: str, until: str) -> tuple[list[str], list[str]]:
     if not (repo / ".git").exists():
         fail(f"{repo} is not a git repository")
 
-    cmd = [
-        "git",
-        "log",
-        f"--since={since}",
-        f"--until={until}",
-        "--pretty=format:%x1e%s",
-        "--name-only",
-        "--reverse",
-    ]
-    if author:
-        cmd.insert(4, f"--author={report_author_pattern(author)}")
-
     result = subprocess.run(
-        cmd,
+        [
+            "git",
+            "log",
+            f"--since={since}",
+            f"--until={until}",
+            f"--author={report_author_pattern(author)}",
+            "--pretty=format:%x1e%s",
+            "--name-only",
+            "--reverse",
+        ],
         cwd=repo,
         check=False,
         text=True,
@@ -627,25 +423,22 @@ def collect_author_commit_files(repo: Path, author: str | None, since: str, unti
     return subjects, files
 
 
-def collect_author_commit_groups(repo: Path, author: str | None, since: str, until: str) -> list[tuple[str, list[str], list[str]]]:
+def collect_author_commit_groups(repo: Path, author: str, since: str, until: str) -> list[tuple[str, list[str], list[str]]]:
     if not (repo / ".git").exists():
         fail(f"{repo} is not a git repository")
 
-    cmd = [
-        "git",
-        "log",
-        f"--since={since}",
-        f"--until={until}",
-        "--date=format:%m/%d",
-        "--pretty=format:%x1e%ad%x1f%s",
-        "--name-only",
-        "--reverse",
-    ]
-    if author:
-        cmd.insert(4, f"--author={report_author_pattern(author)}")
-
     result = subprocess.run(
-        cmd,
+        [
+            "git",
+            "log",
+            f"--since={since}",
+            f"--until={until}",
+            f"--author={report_author_pattern(author)}",
+            "--date=format:%m/%d",
+            "--pretty=format:%x1e%ad%x1f%s",
+            "--name-only",
+            "--reverse",
+        ],
         cwd=repo,
         check=False,
         text=True,
@@ -746,7 +539,7 @@ def render_summary_report(title_date: str, items: list[str]) -> str:
 
 def build_summary_message(
     repo: Path,
-    author: str | None,
+    author: str,
     period: str,
     since: str | None,
     until: str | None,
@@ -760,7 +553,7 @@ def build_summary_message(
 
 def build_chronological_report(
     repo: Path,
-    author: str | None,
+    author: str,
     period: str,
     since: str | None,
     until: str | None,
@@ -803,7 +596,6 @@ def write_summary_report(
     title_date: str | None = None,
     since: str | None = None,
     until: str | None = None,
-    output_prefix: str = "TY体育_Ayea",
 ) -> Path:
     if output:
         output_path = output.expanduser()
@@ -816,7 +608,7 @@ def write_summary_report(
             suffix = f"{start:%m%d}_{end:%m%d}"
         else:
             suffix = "提交内容"
-        output_path = output_dir.expanduser() / f"{output_prefix}_{suffix}_提交内容.txt"
+        output_path = output_dir.expanduser() / f"TY体育_Ayea_{suffix}_提交内容.txt"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(report, encoding="utf-8")
     return output_path
@@ -824,7 +616,7 @@ def write_summary_report(
 
 def generate_summary_report(
     repo: Path,
-    author: str | None,
+    author: str,
     period: str,
     since: str | None,
     until: str | None,
@@ -833,274 +625,14 @@ def generate_summary_report(
     output: Path | None,
     output_dir: Path,
     stdout: bool,
-    output_prefix: str = "TY体育_Ayea",
 ) -> None:
     report, report_since, report_until = build_chronological_report(repo, author, period, since, until, today_text)
     if stdout:
         print(report, end="")
         return
 
-    output_path = write_summary_report(
-        report,
-        output,
-        output_dir,
-        since=report_since,
-        until=report_until,
-        output_prefix=output_prefix,
-    )
+    output_path = write_summary_report(report, output, output_dir, since=report_since, until=report_until)
     print(output_path)
-    print()
-    print(report, end="")
-
-
-def report_week_windows(today_text: str | None) -> tuple[tuple[dt.date, dt.date], tuple[dt.date, dt.date]]:
-    today = dt.date.fromisoformat(today_text) if today_text else dt.date.today()
-    this_week_start = today - dt.timedelta(days=today.weekday())
-    last_week_start = this_week_start - dt.timedelta(days=7)
-    return (last_week_start, this_week_start - dt.timedelta(days=1)), (this_week_start, today)
-
-
-def count_markdown_table_api_rows(readme: Path, heading: str) -> int:
-    if not readme.exists():
-        return 0
-    lines = readme.read_text(encoding="utf-8").splitlines()
-    in_section = False
-    count = 0
-    for line in lines:
-        stripped = line.strip()
-        if stripped.startswith("## "):
-            in_section = stripped == heading
-            continue
-        if in_section and stripped.startswith("| `"):
-            count += 1
-    return count
-
-
-def count_completed_settlement_docs(repo: Path, current_week_numbers: set[str]) -> tuple[int, int]:
-    settlement_dir = repo / "ruoyi-ui/docs/结算模块（Brad）"
-    if not settlement_dir.exists():
-        return 0, 0
-    completed = [path for path in settlement_dir.glob("*.md") if "【调试通过】" in path.name]
-    current_week = 0
-    for path in completed:
-        match = re.match(r"(\d+)-", path.name)
-        if match and match.group(1) in current_week_numbers:
-            current_week += 1
-    return max(0, len(completed) - current_week), current_week
-
-
-def file_contains_all(path: Path, keywords: list[str]) -> bool:
-    if not path.exists():
-        return False
-    text = path.read_text(encoding="utf-8", errors="ignore")
-    return all(keyword in text for keyword in keywords)
-
-
-def implemented_marker_count(markers: list[list[tuple[Path, list[str]]]]) -> int:
-    return sum(1 for marker in markers if all(file_contains_all(path, keywords) for path, keywords in marker))
-
-
-def directory_contains_all(root: Path, keywords: list[str]) -> bool:
-    if not root.exists():
-        return False
-    for path in root.rglob("*"):
-        if path.is_file() and path.suffix in {".js", ".vue", ".ts"}:
-            text = path.read_text(encoding="utf-8", errors="ignore")
-            if all(keyword in text for keyword in keywords):
-                return True
-    return False
-
-
-def build_sport_interface_counts(repo: Path) -> list[tuple[str, int, int, str | None]]:
-    root = repo.expanduser() / "ruoyi-ui"
-    trading_api = root / "src/api/sports/tradingTraderMatch.js"
-    league_api = root / "src/api/sports/leagueLevel.js"
-    trading_view = root / "src/views/sports/components/TradingBoardCore.vue"
-    league_page = root / "src/views/sports/leagueParameterSetting/index.vue"
-    template_manage = root / "src/views/sports/leagueParameterSetting/components/TemplateManageDialog.vue"
-    template_config = root / "src/views/sports/leagueParameterSetting/components/TemplateConfigDialog.vue"
-
-    trading_last_week = implemented_marker_count([
-        [(trading_api, ["listMyStorageMatches"]), (trading_view, ["listMyStorageMatches"])],
-        [(trading_api, ["reportTradingSwitch"]), (trading_view, ["reportTradingSwitch"])],
-        [(trading_api, ["reportTradingPlayTradeMode"]), (trading_view, ["reportTradingPlayTradeMode"])],
-        [(trading_api, ["reportTradingBettingOdds"]), (trading_view, ["reportTradingBettingOdds"])],
-    ])
-    trading_this_week = implemented_marker_count([
-        [(league_api, ["listLeagueParameterSetting"]), (league_page, ["listLeagueParameterSetting"])],
-        [(league_api, ["updateLeagueLocalAttributes"]), (league_page, ["updateLeagueLocalAttributes"])],
-        [(league_api, ["bindLeagueLocalTemplate"]), (template_manage, ["bindLeagueLocalTemplate"])],
-        [(league_api, ["listLeagueParamTemplate"]), (league_page, ["listLeagueParamTemplate"])],
-        [(league_api, ["getLeagueParamTemplateDetail"]), (template_config, ["getLeagueParamTemplateDetail"])],
-    ])
-
-    settlement_api = root / "src/api/sports/settlementMatch.js"
-    settlement_page = root / "src/views/sports/settlementMatch/index.vue"
-    settlement_log_page = root / "src/views/sports/settlementLog/index.vue"
-    settlement_last_week = implemented_marker_count([
-        [(settlement_api, ["repushResult", "SETTLE_MATCH_RESEND_URL"]), (settlement_page, ["repushResult"])],
-        [(settlement_api, ["toggleFreeze", "SETTLE_MATCH_FREEZE_TOGGLE_URL"]), (settlement_page, ["toggleFreeze"])],
-        [(settlement_api, ["toggleMarketFreeze", "SETTLE_MATCH_MARKET_FREEZE_URL"]), (settlement_page, ["toggleMarketFreeze"])],
-        [(settlement_api, ["listSettlementMatch", "SETTLE_MATCH_LIST_URL"]), (settlement_page, ["listSettlementMatch"])],
-        [(settlement_api, ["listAnnouncements", "SETTLE_MATCH_ANNOUNCEMENTS_URL"]), (settlement_page, ["listAnnouncements"])],
-    ])
-    settlement_this_week = implemented_marker_count([
-        [(settlement_api, ["publishAnnouncement", "SETTLE_MATCH_ANNOUNCEMENT_SEND_URL"]), (settlement_page, ["publishAnnouncement"])],
-        [(settlement_api, ["getStats", "SETTLE_MATCH_STATISTICS_URL"]), (settlement_page, ["getStats"])],
-        [(settlement_api, ["getSettlementLogs", "SETTLE_MATCH_LOG_LIST_URL"]), (settlement_log_page, ["getSettlementLogs"])],
-        [(settlement_api, ["deleteAnnouncement", "SETTLE_MATCH_ANNOUNCEMENT_DELETE_URL"]), (settlement_page, ["deleteAnnouncement"])],
-    ])
-
-    src_root = root / "src"
-    schedule_markers = [
-        ["/standard/match/generate"],
-        ["/standard/match/check"],
-        ["/standard/match/list"],
-        ["/standard/match/{standardMatchId}"],
-        ["/standard/match/lineup/{standardMatchId}"],
-        ["/standard/match/lineup"],
-        ["/standard/match/time"],
-        ["/standard/match/preSale"],
-        ["/standard/match/preSale/list"],
-        ["/storage/match/trading/standard/generated"],
-        ["/storage/match/trading/pre-sale/status"],
-    ]
-    schedule_this_week = sum(1 for keywords in schedule_markers if directory_contains_all(src_root, keywords))
-    settlement_note = (
-        "尚未连调的接口，需要盘口讯息，所以没办法继续。\n"
-        "需要盘口维度信息的接口： | 8 | `1` 盘口维度设置比分、`8` 盘口结算、`9` 盘口回滚、"
-        "`10` 盘口赛果重推、`12` 盘口取消、`16` 投注项级别查询结算信息、"
-        "`17` 盘口维度核心比分列表、`29` 获取已取消盘口列表 |"
-    )
-
-    return [
-        ("操盘模块", trading_last_week, trading_this_week, None),
-        ("结算模块", settlement_last_week, settlement_this_week, settlement_note),
-        ("赛事模块", 0, schedule_this_week, "赛事模块只按代码实际对接统计；当前仅有接口文档，未发现 /standard/match 前端封装与页面调用。"),
-    ]
-
-
-def build_client_interface_counts(repo: Path) -> list[tuple[str, int, int, str | None]]:
-    root = repo.expanduser()
-    last_week_markers = [
-        [(root / "src/api/announcement.js", ["getAnnouncementListTop"]), (root / "src/views/SportsView.vue", ["getAnnouncementListTop"])],
-        [(root / "src/api/match.js", ["getRecordScore", "getRecordStatusText"]), (root / "src/components/MatchDetailPanel.vue", ["getRecordScore", "getRecordStatusText"])],
-        [(root / "src/api/order.js", ["singlePassBet"]), (root / "src/components/BetSlipFloating.vue", ["singlePassBet"])],
-        [(root / "src/api/order.js", ["getOrderStatusDetail"]), (root / "src/components/BetSlipFloating.vue", ["getOrderStatusDetail"])],
-        [(root / "src/api/order.js", ["batchBetMatchMarketOfJumpLine"]), (root / "src/stores/match.js", ["batchBetMatchMarketOfJumpLine"])],
-    ]
-    this_week_markers = [
-        (root / "src/api/user.js", ["mockUserLogin", "getIfLToken"]),
-        (root / "src/api/user.js", ["getUserBase"]),
-        (root / "src/api/nfb.js", ["matchGetList"]),
-        (root / "src/api/nfb.js", ["getMatchDetail"]),
-        (root / "src/components/RightSidebar.vue", ["visibleMarketTabs", "getMatchDetail"]),
-        (root / "src/api/order.js", ["singlePassBet"]),
-        (root / "src/components/BetSlipFloating.vue", ["pollOrderStatus", "getOrderStatusDetail"]),
-        (root / "src/api/order.js", ["batchBetMatchMarketOfJumpLine"]),
-    ]
-    last_week = implemented_marker_count(last_week_markers)
-    this_week = sum(1 for path, keywords in this_week_markers if file_contains_all(path, keywords))
-    note = (
-        "客户端按 FB 原生体育主流程统计；充值、转账、注单列表、提前结算、串关投注、"
-        "收藏与周边页面接口未计入完成。"
-    )
-    return [("客户端", last_week, this_week, note)]
-
-
-def render_interface_progress_report(
-    targets: list[str],
-    sport_repo: Path,
-    client_repo: Path,
-    today_text: str | None,
-) -> str:
-    (last_start, last_end), (week_start, week_end) = report_week_windows(today_text)
-    sections: list[tuple[str, int, int, str | None]] = []
-    if "sport" in targets:
-        sections.extend(build_sport_interface_counts(sport_repo))
-    if "client" in targets:
-        sections.extend(build_client_interface_counts(client_repo))
-
-    lines = [
-        "接口完成统计报告",
-        f"统计范围：上周 {last_start:%Y-%m-%d} ~ {last_end:%Y-%m-%d}；本周 {week_start:%Y-%m-%d} ~ {week_end:%Y-%m-%d}",
-        "",
-    ]
-    completion_details = {
-        "操盘模块": (
-            "我的操盘赛事、开关封锁上报、盘口 A/M 操盘模式上报、M 模式赔率水位调整上报。",
-            "联赛参数设置列表、联赛属性修改、联赛模板绑定、操盘参数模板列表、操盘参数模板详情。",
-        ),
-        "结算模块": (
-            "赛事赛果重推、冻结/解冻赛事、盘口冻结/解冻、赛事列表、赛事公告列表获取。",
-            "赛事维度发送公告、看板统计数据、结算日志列表、赛事维度公告删除。",
-        ),
-        "客户端": (
-            "基础赛事、详情、订单、赔率跳线、公告等接口雏形/协议对齐。",
-            "登录两步走、余额读取、滚球/今日/早盘赛事列表、赛事详情、右侧玩法展示、单关投注、订单状态轮询、投注单赔率轮询。",
-        ),
-    }
-
-    for name, last_week, this_week, note in sections:
-        lines.append(f"{name}：")
-        lines.append(f"----上周完成多少接口：{last_week} 个")
-        detail = completion_details.get(name)
-        if detail:
-            lines.append(f"上周完成内容：{detail[0]}")
-        lines.append(f"----本周完成多少接口：{this_week} 个")
-        if detail:
-            lines.append(f"本周完成内容：{detail[1]}")
-        if name == "结算模块" and note:
-            lines.append("")
-            lines.append("结算模块备注：")
-            lines.extend(note.splitlines())
-        elif name == "赛事模块" and note:
-            lines.append(f"备注：{note}")
-        lines.append("")
-
-    if "client" in targets:
-        lines.append("客户端当前状态：")
-        lines.append(
-            "当前原生体育主流程已基本打通：登录两步走、余额读取、滚球/今日/早盘赛事列表、"
-            "赛事详情、右侧玩法展示、单关投注、订单状态轮询、投注单赔率轮询已完成。（FB接口）"
-        )
-        lines.append(
-            "目前还未完整串起来的部分：充值、转账、注单列表页面、提前结算页面流程、"
-            "串关投注流程、收藏功能，以及部分周边页面接口对接。"
-        )
-        lines.append("")
-        lines.append("客户端前端这面继续完成：注单列表页面、提前结算页面流程、串关投注流程。")
-        lines.append("")
-
-    return "\n".join(lines).rstrip() + "\n"
-
-
-def generate_interface_progress_report(
-    targets: list[str],
-    sport_repo: Path,
-    client_repo: Path,
-    today_text: str | None,
-    output: Path | None,
-    output_dir: Path,
-    stdout: bool,
-) -> None:
-    report = render_interface_progress_report(targets, sport_repo, client_repo, today_text)
-    if stdout:
-        print(report, end="")
-        return
-
-    (last_start, _), (_, week_end) = report_week_windows(today_text)
-    output_path = write_summary_report(
-        report,
-        output,
-        output_dir,
-        since=last_start.isoformat(),
-        until=(week_end + dt.timedelta(days=1)).isoformat(),
-        output_prefix="ty_report",
-    )
-    print(output_path)
-    print()
-    print(report, end="")
 
 
 def resolve_sync_commit_message(args: argparse.Namespace) -> str:
@@ -1187,7 +719,50 @@ def open_jenkins(url: str, dry_run: bool) -> None:
 
 def submit_jenkins_build_page(url: str, dry_run: bool, timeout: int = 30) -> None:
     open_jenkins(url, dry_run)
-    log("Jenkins build page is open; click the green 建置 button manually.")
+    if dry_run:
+        log("would click the Jenkins build button with the default parameters.")
+        return
+
+    script = f"""
+set targetUrl to "{url}"
+set deadline to (current date) + {timeout}
+tell application "Google Chrome"
+    activate
+    set URL of active tab of front window to targetUrl
+end tell
+
+repeat while (current date) < deadline
+    delay 1
+    try
+        tell application "Google Chrome"
+            set clicked to execute active tab of front window javascript "
+(() => {{
+  const buttons = Array.from(document.querySelectorAll('button, input[type=submit], a.jenkins-button'));
+  const buildButton = buttons.find((el) => {{
+    const text = ((el.innerText || el.value || el.getAttribute('aria-label') || '') + '').trim();
+    return /^(建置|Build)$/.test(text) || text.includes('建置') || text.includes('Build');
+  }});
+  if (!buildButton) return 'WAITING';
+  buildButton.click();
+  return 'CLICKED';
+}})();
+"
+        end tell
+        if clicked is "CLICKED" then return
+    end try
+end repeat
+error "Timed out waiting for Jenkins build button"
+"""
+    result = subprocess.run(["osascript", "-e", script], text=True, capture_output=True, check=False)
+    if result.returncode == 0:
+        log("submitted the Jenkins build page with the default parameters.")
+        return
+
+    message = (result.stderr or result.stdout or "").strip()
+    log("could not auto-click the Jenkins build button.")
+    if message:
+        log(message)
+    log("The page is open; click the green 建置 button manually if Chrome blocks automation.")
 
 
 def jenkins_request(
@@ -1250,18 +825,6 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Pull sport, start OpenVPN, open Jenkins, and deploy system-ui."
     )
-    parser.add_argument(
-        "command",
-        nargs="?",
-        choices=["deploy", "sync", "report"],
-        help="Optional positional mode. Example: deploy_ty.py sync client",
-    )
-    parser.add_argument(
-        "target",
-        nargs="?",
-        choices=["sport", "client", "all"],
-        help="Optional sync target. Example: deploy_ty.py sync client",
-    )
     parser.add_argument("--repo", type=Path, default=Path(os.environ.get("SPORT_REPO", DEFAULT_REPO)))
     parser.add_argument("--remote", default=os.environ.get("SPORT_REMOTE", "origin"))
     parser.add_argument("--branch", default=os.environ.get("SPORT_BRANCH"))
@@ -1269,29 +832,10 @@ def parse_args() -> argparse.Namespace:
         "--mode",
         choices=["prompt", "deploy", "sync", "report"],
         default=os.environ.get("SPORT_DEPLOY_MODE", "prompt"),
-        help="prompt: ask; deploy: default CI/CD; sync: squash ty_sport into sport, push, then deploy; report: Ayea work summary from the selected report target",
+        help="prompt: ask; deploy: default CI/CD; sync: squash ty_sport into sport, push, then deploy; report: Ayea work summary from ty_sport_test",
     )
     parser.add_argument("--ty-sport-remote", default=os.environ.get("TY_SPORT_REMOTE", DEFAULT_TY_SPORT_REMOTE))
     parser.add_argument("--sport-push-remote", default=os.environ.get("SPORT_PUSH_REMOTE", DEFAULT_SPORT_PUSH_REMOTE))
-    parser.add_argument(
-        "--sync-target",
-        choices=["sport", "client", "all"],
-        default=os.environ.get("SPORT_SYNC_TARGET", "sport"),
-        help="sync target: sport = ty_sport -> sport/system-ui; client = ty_client_test -> if_sport_ui; all = sport then client",
-    )
-    parser.add_argument(
-        "--client-source-repo",
-        type=Path,
-        default=Path(os.environ.get("TY_CLIENT_SOURCE_REPO", DEFAULT_CLIENT_SOURCE_REPO)),
-        help="Source repo for sync client. Default: ty_client_test.",
-    )
-    parser.add_argument(
-        "--client-target-repo",
-        type=Path,
-        default=Path(os.environ.get("TY_CLIENT_TARGET_REPO", DEFAULT_CLIENT_TARGET_REPO)),
-        help="Target repo for sync client. Default: if_sport_ui.",
-    )
-    parser.add_argument("--client-remote", default=os.environ.get("TY_CLIENT_REMOTE", DEFAULT_CLIENT_REMOTE))
     parser.add_argument(
         "--commit-message",
         default=os.environ.get("SPORT_COMMIT_MESSAGE", DEFAULT_COMMIT_MESSAGE),
@@ -1315,8 +859,8 @@ def parse_args() -> argparse.Namespace:
         default=os.environ.get("JENKINS_TRIGGER", "open"),
         help="open: open job page; api: POST build; none: only print URL",
     )
-    parser.add_argument("--report-repo", type=Path, default=Path(os.environ["TY_SPORT_REPORT_REPO"]) if os.environ.get("TY_SPORT_REPORT_REPO") else None)
-    parser.add_argument("--report-author", default=os.environ.get("TY_SPORT_REPORT_AUTHOR"))
+    parser.add_argument("--report-repo", type=Path, default=Path(os.environ.get("TY_SPORT_REPORT_REPO", DEFAULT_REPORT_REPO)))
+    parser.add_argument("--report-author", default=os.environ.get("TY_SPORT_REPORT_AUTHOR", DEFAULT_REPORT_AUTHOR))
     parser.add_argument(
         "--report-period",
         choices=["week", "last-week"],
@@ -1331,12 +875,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--report-output-dir", type=Path, default=Path(os.environ.get("TY_SPORT_REPORT_OUTPUT_DIR", DEFAULT_REPORT_OUTPUT_DIR)))
     parser.add_argument("--report-stdout", action="store_true", help="Print report to stdout instead of writing a file.")
     parser.add_argument("--dry-run", action="store_true")
-    args = parser.parse_args()
-    if args.command:
-        args.mode = args.command
-    if args.target:
-        args.sync_target = args.target
-    return args
+    return parser.parse_args()
 
 
 def choose_mode(mode: str) -> str:
@@ -1359,13 +898,14 @@ def main() -> None:
     mode = choose_mode(args.mode)
 
     if mode == "report":
-        report_targets = ["sport", "client"] if args.sync_target == "all" else [args.sync_target]
-        sport_report_repo = args.report_repo or DEFAULT_REPORT_REPO
-        generate_interface_progress_report(
-            report_targets,
-            sport_report_repo,
-            args.client_source_repo,
+        generate_summary_report(
+            args.report_repo,
+            args.report_author,
+            args.report_period,
+            args.report_since,
+            args.report_until,
             args.report_today,
+            args.report_date,
             args.report_output,
             args.report_output_dir,
             args.report_stdout,
@@ -1384,10 +924,8 @@ def main() -> None:
             args.dry_run,
         )
 
-    sync_targets = ["sport", "client"] if args.sync_target == "all" else [args.sync_target]
-
-    if mode == "sync" and "sport" in sync_targets:
-        pull_ty_sport_worktree((args.report_repo or DEFAULT_REPORT_REPO).expanduser(), args.branch, args.dry_run)
+    if mode == "sync":
+        pull_ty_sport_worktree(args.report_repo.expanduser(), args.branch, args.dry_run)
         commit_message = resolve_sync_commit_message(args)
         sync_ty_sport_to_sport(
             args.repo.expanduser(),
@@ -1399,23 +937,7 @@ def main() -> None:
             args.sync_author_email,
             args.dry_run,
         )
-
-    if mode == "sync" and "client" in sync_targets:
-        sync_ty_client_to_if_sport_ui(
-            args.client_source_repo.expanduser(),
-            args.client_target_repo.expanduser(),
-            args.branch,
-            args.client_remote,
-            args.commit_message,
-            args.sync_author_name,
-            args.sync_author_email,
-            args.dry_run,
-        )
-
-    if mode == "sync" and "sport" not in sync_targets:
-        return
-
-    if mode != "sync" and not args.no_pull:
+    elif not args.no_pull:
         git_pull(args.repo.expanduser(), args.remote, args.branch, args.strict_clean, args.dry_run)
 
     if args.trigger == "api":
