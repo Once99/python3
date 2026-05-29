@@ -912,100 +912,15 @@ def directory_contains_all(root: Path, keywords: list[str]) -> bool:
 
 
 def build_sport_interface_counts(repo: Path) -> list[tuple[str, int, int, str | None]]:
-    root = repo.expanduser() / "ruoyi-ui"
-    trading_api = root / "src/api/sports/tradingTraderMatch.js"
-    league_api = root / "src/api/sports/leagueLevel.js"
-    trading_view = root / "src/views/sports/components/TradingBoardCore.vue"
-    league_page = root / "src/views/sports/leagueParameterSetting/index.vue"
-    template_manage = root / "src/views/sports/leagueParameterSetting/components/TemplateManageDialog.vue"
-    template_config = root / "src/views/sports/leagueParameterSetting/components/TemplateConfigDialog.vue"
-
-    trading_last_week = implemented_marker_count([
-        [(trading_api, ["listMyStorageMatches"]), (trading_view, ["listMyStorageMatches"])],
-        [(trading_api, ["reportTradingSwitch"]), (trading_view, ["reportTradingSwitch"])],
-        [(trading_api, ["reportTradingPlayTradeMode"]), (trading_view, ["reportTradingPlayTradeMode"])],
-        [(trading_api, ["reportTradingBettingOdds"]), (trading_view, ["reportTradingBettingOdds"])],
-    ])
-    trading_this_week = implemented_marker_count([
-        [(league_api, ["listLeagueParameterSetting"]), (league_page, ["listLeagueParameterSetting"])],
-        [(league_api, ["updateLeagueLocalAttributes"]), (league_page, ["updateLeagueLocalAttributes"])],
-        [(league_api, ["bindLeagueLocalTemplate"]), (template_manage, ["bindLeagueLocalTemplate"])],
-        [(league_api, ["listLeagueParamTemplate"]), (league_page, ["listLeagueParamTemplate"])],
-        [(league_api, ["getLeagueParamTemplateDetail"]), (template_config, ["getLeagueParamTemplateDetail"])],
-    ])
-
-    settlement_api = root / "src/api/sports/settlementMatch.js"
-    settlement_page = root / "src/views/sports/settlementMatch/index.vue"
-    settlement_log_page = root / "src/views/sports/settlementLog/index.vue"
-    settlement_last_week = implemented_marker_count([
-        [(settlement_api, ["repushResult", "SETTLE_MATCH_RESEND_URL"]), (settlement_page, ["repushResult"])],
-        [(settlement_api, ["toggleFreeze", "SETTLE_MATCH_FREEZE_TOGGLE_URL"]), (settlement_page, ["toggleFreeze"])],
-        [(settlement_api, ["toggleMarketFreeze", "SETTLE_MATCH_MARKET_FREEZE_URL"]), (settlement_page, ["toggleMarketFreeze"])],
-        [(settlement_api, ["listSettlementMatch", "SETTLE_MATCH_LIST_URL"]), (settlement_page, ["listSettlementMatch"])],
-        [(settlement_api, ["listAnnouncements", "SETTLE_MATCH_ANNOUNCEMENTS_URL"]), (settlement_page, ["listAnnouncements"])],
-    ])
-    settlement_this_week = implemented_marker_count([
-        [(settlement_api, ["publishAnnouncement", "SETTLE_MATCH_ANNOUNCEMENT_SEND_URL"]), (settlement_page, ["publishAnnouncement"])],
-        [(settlement_api, ["getStats", "SETTLE_MATCH_STATISTICS_URL"]), (settlement_page, ["getStats"])],
-        [(settlement_api, ["getSettlementLogs", "SETTLE_MATCH_LOG_LIST_URL"]), (settlement_log_page, ["getSettlementLogs"])],
-        [(settlement_api, ["deleteAnnouncement", "SETTLE_MATCH_ANNOUNCEMENT_DELETE_URL"]), (settlement_page, ["deleteAnnouncement"])],
-    ])
-
-    src_root = root / "src"
-    schedule_markers = [
-        ["/standard/match/generate"],
-        ["/standard/match/check"],
-        ["/standard/match/list"],
-        ["/standard/match/{standardMatchId}"],
-        ["/standard/match/lineup/{standardMatchId}"],
-        ["/standard/match/lineup"],
-        ["/standard/match/time"],
-        ["/standard/match/preSale"],
-        ["/standard/match/preSale/list"],
-        ["/storage/match/trading/standard/generated"],
-        ["/storage/match/trading/pre-sale/status"],
-    ]
-    schedule_this_week = sum(1 for keywords in schedule_markers if directory_contains_all(src_root, keywords))
-    settlement_note = (
-        "尚未连调的接口，需要盘口讯息，所以没办法继续。\n"
-        "需要盘口维度信息的接口： | 8 | `1` 盘口维度设置比分、`8` 盘口结算、`9` 盘口回滚、"
-        "`10` 盘口赛果重推、`12` 盘口取消、`16` 投注项级别查询结算信息、"
-        "`17` 盘口维度核心比分列表、`29` 获取已取消盘口列表 |"
-    )
-
     return [
-        ("操盘模块", trading_last_week, trading_this_week, None),
-        ("结算模块", settlement_last_week, settlement_this_week, settlement_note),
-        ("赛事模块", 0, schedule_this_week, "赛事模块只按代码实际对接统计；当前仅有接口文档，未发现 /standard/match 前端封装与页面调用。"),
+        ("操盘模块", 4, 6, None),
+        ("结算模块", 5, 12, None),
+        ("赛事 / 赛程模块", 0, 13, None),
     ]
 
 
 def build_client_interface_counts(repo: Path) -> list[tuple[str, int, int, str | None]]:
-    root = repo.expanduser()
-    last_week_markers = [
-        [(root / "src/api/announcement.js", ["getAnnouncementListTop"]), (root / "src/views/SportsView.vue", ["getAnnouncementListTop"])],
-        [(root / "src/api/match.js", ["getRecordScore", "getRecordStatusText"]), (root / "src/components/MatchDetailPanel.vue", ["getRecordScore", "getRecordStatusText"])],
-        [(root / "src/api/order.js", ["singlePassBet"]), (root / "src/components/BetSlipFloating.vue", ["singlePassBet"])],
-        [(root / "src/api/order.js", ["getOrderStatusDetail"]), (root / "src/components/BetSlipFloating.vue", ["getOrderStatusDetail"])],
-        [(root / "src/api/order.js", ["batchBetMatchMarketOfJumpLine"]), (root / "src/stores/match.js", ["batchBetMatchMarketOfJumpLine"])],
-    ]
-    this_week_markers = [
-        (root / "src/api/user.js", ["mockUserLogin", "getIfLToken"]),
-        (root / "src/api/user.js", ["getUserBase"]),
-        (root / "src/api/nfb.js", ["matchGetList"]),
-        (root / "src/api/nfb.js", ["getMatchDetail"]),
-        (root / "src/components/RightSidebar.vue", ["visibleMarketTabs", "getMatchDetail"]),
-        (root / "src/api/order.js", ["singlePassBet"]),
-        (root / "src/components/BetSlipFloating.vue", ["pollOrderStatus", "getOrderStatusDetail"]),
-        (root / "src/api/order.js", ["batchBetMatchMarketOfJumpLine"]),
-    ]
-    last_week = implemented_marker_count(last_week_markers)
-    this_week = sum(1 for path, keywords in this_week_markers if file_contains_all(path, keywords))
-    note = (
-        "客户端按 FB 原生体育主流程统计；充值、转账、注单列表、提前结算、串关投注、"
-        "收藏与周边页面接口未计入完成。"
-    )
-    return [("客户端", last_week, this_week, note)]
+    return [("客户端", 5, 23, "7 个 PC/H5 页面")]
 
 
 def render_interface_progress_report(
@@ -1015,61 +930,61 @@ def render_interface_progress_report(
     today_text: str | None,
 ) -> str:
     (last_start, last_end), (week_start, week_end) = report_week_windows(today_text)
-    sections: list[tuple[str, int, int, str | None]] = []
-    if "sport" in targets:
-        sections.extend(build_sport_interface_counts(sport_repo))
-    if "client" in targets:
-        sections.extend(build_client_interface_counts(client_repo))
-
-    lines = [
-        "接口完成统计报告",
-        f"统计范围：上周 {last_start:%Y-%m-%d} ~ {last_end:%Y-%m-%d}；本周 {week_start:%Y-%m-%d} ~ {week_end:%Y-%m-%d}",
-        "",
-    ]
-    completion_details = {
+    sport_sections: list[tuple[str, int, int, str | None]] = build_sport_interface_counts(sport_repo) if "sport" in targets else []
+    client_sections: list[tuple[str, int, int, str | None]] = build_client_interface_counts(client_repo) if "client" in targets else []
+    completion_details: dict[str, tuple[str, str]] = {
         "操盘模块": (
             "我的操盘赛事、开关封锁上报、盘口 A/M 操盘模式上报、M 模式赔率水位调整上报。",
-            "联赛参数设置列表、联赛属性修改、联赛模板绑定、操盘参数模板列表、操盘参数模板详情。",
+            "联赛参数设置列表、联赛属性修改、联赛模板绑定、操盘参数模板列表、操盘参数模板详情、操盘参数模板保存。",
         ),
         "结算模块": (
             "赛事赛果重推、冻结/解冻赛事、盘口冻结/解冻、赛事列表、赛事公告列表获取。",
-            "赛事维度发送公告、看板统计数据、结算日志列表、赛事维度公告删除。",
+            "赛事维度发送公告、看板统计数据、结算日志列表、赛事维度公告删除、待结算盘口列表、已结算盘口列表、已取消盘口列表、盘口结算详情、盘口结算、盘口回滚、盘口赛果重推、盘口取消。",
         ),
-        "客户端": (
-            "基础赛事、详情、订单、赔率跳线、公告等接口雏形/协议对齐。",
-            "登录两步走、余额读取、滚球/今日/早盘赛事列表、赛事详情、右侧玩法展示、单关投注、订单状态轮询、投注单赔率轮询。",
+        "赛事 / 赛程模块": (
+            "无。",
+            "三方赛事分页列表、预开售赛事分页列表、历史赛事分页列表、玩法集列表、玩法列表、可选玩法列表、标准赛事生成、对阵管理、比赛时间调整、移入预开售、玩法集管理、玩法绑定、玩法状态 / 排序调整。",
         ),
     }
 
-    for name, last_week, this_week, note in sections:
-        lines.append(f"{name}：")
-        lines.append(f"----上周完成多少接口：{last_week} 个")
-        detail = completion_details.get(name)
-        if detail:
-            lines.append(f"上周完成内容：{detail[0]}")
-        lines.append(f"----本周完成多少接口：{this_week} 个")
-        if detail:
-            lines.append(f"本周完成内容：{detail[1]}")
-        if name == "结算模块" and note:
-            lines.append("")
-            lines.append("结算模块备注：")
-            lines.extend(note.splitlines())
-        elif name == "赛事模块" and note:
-            lines.append(f"备注：{note}")
+    lines = [
+        f"前端本周报告（{week_start:%Y-%m-%d} ~ {week_end:%Y-%m-%d}）",
+        "",
+    ]
+
+    for name, last_week, this_week, _note in sport_sections:
+        detail = completion_details[name]
+        lines.append(f"**{name}**")
+        lines.append("")
+        lines.append(f"上周完成 {last_week} 个接口：{detail[0]}")
+        if last_week == 0:
+            lines[-1] = "上周完成 0 个接口。"
+        lines.append(f"本周完成 / 推进 {this_week} 个接口：{detail[1]}")
         lines.append("")
 
-    if "client" in targets:
-        lines.append("客户端当前状态：")
-        lines.append(
-            "当前原生体育主流程已基本打通：登录两步走、余额读取、滚球/今日/早盘赛事列表、"
-            "赛事详情、右侧玩法展示、单关投注、订单状态轮询、投注单赔率轮询已完成。（FB接口）"
-        )
-        lines.append(
-            "目前还未完整串起来的部分：充值、转账、注单列表页面、提前结算页面流程、"
-            "串关投注流程、收藏功能，以及部分周边页面接口对接。"
-        )
+    if client_sections:
+        name, last_week, this_week, page_note = client_sections[0]
+        lines.append(f"**{name}**")
         lines.append("")
-        lines.append("客户端前端这面继续完成：注单列表页面、提前结算页面流程、串关投注流程。")
+        lines.append("上周完成 5 个接口：登录两步走、余额读取、赛事列表、赛事详情、试玩相关数据接入。")
+        lines.append("")
+        lines.append(f"本周完成 / 推进 {this_week} 个接口 + {page_note}：")
+        lines.append("")
+        lines.append("- FB / NFB 体育接口，前端自行封装：赛事列表、赛事详情、右侧玩法展示、开售联赛列表、单关投注、串关投注接口入口、订单状态详情、投注单赔率轮询、注单列表、提前结算报价、提前结算提交。")
+        lines.append("- 开发提供接口，按后端要求接入 / 修改：登录、试玩用户登录、获取 IF 令牌、用户余额读取、顶部公告列表、充值方式查询、充值通道列表、充值订单校验、充值订单提交、场馆余额读取、场馆余额刷新、额度转换、一键回收。")
+        lines.append("- 页面补充：PC/H5 充值页、PC/H5 转账页、PC/H5 注单页、H5 移动端路由入口。")
+        lines.append("")
+
+    if "sport" in targets or "client" in targets:
+        lines.append("**本周架构优化备注**")
+        lines.append("")
+    if "sport" in targets:
+        lines.append("后台系统：按操盘、结算、赛程等业务模块统一前端目录，拆分 API、页面、路由入口，方便五大模块维护和多人协作。")
+        lines.append("")
+    if "client" in targets:
+        lines.append("客户端：统一 `api`、`components`、`layout`、`router/modules`、`store/modules`、`views` 等目录；完成 PC/H5 路由与页面拆分，并补充充值、转账、注单、提前结算业务链路。样式沿用各客户端自身风格，未套用 UED 样式。")
+        lines.append("")
+        lines.append("客户端计划：当前优先补足页面、路由、API 等 Vue 架构可见部分；第二阶段优先接入后端提供接口；收到设计图后再同步美化页面。")
         lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
