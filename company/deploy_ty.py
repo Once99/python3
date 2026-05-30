@@ -255,13 +255,12 @@ def build_sync_commit_message(repo: Path, base_ref: str, target_ref: str) -> str
     subjects = collect_sync_subjects(repo, base_ref, target_ref)
     files = staged_ruoyi_files(repo)
     items = summarize_ty_work(subjects, files)
-    lines = [f"{sync_title_date()} 提交内容", ""]
     if not items:
-        lines.append("同步 ty_sport 前端更新")
-        return "\n".join(lines)
+        return "同步 ty_sport 前端更新"
 
+    lines: list[str] = ["",]
     lines.extend(items)
-    return "\n".join(lines)
+    return "\n".join(lines).lstrip()
 
 
 def message_args(message: str) -> list[str]:
@@ -478,9 +477,9 @@ def build_client_sync_commit_message(source_repo: Path, target_repo: Path) -> st
     files = changed_target_files(target_repo)
     items = subjects or summarize_client_work([], files)
     if not items:
-        return f"{sync_title_date()} 提交内容：同步 ty_client_test 客户端更新"
+        return "同步 ty_client_test 客户端更新"
     title_items = "、".join(items[:2])
-    lines = [f"{sync_title_date()} 提交内容：{title_items}", ""]
+    lines = [title_items, ""]
     lines.extend(items)
     return "\n".join(lines)
 
