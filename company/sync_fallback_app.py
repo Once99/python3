@@ -15,11 +15,13 @@ import subprocess
 import sys
 import tempfile
 import ssl
+import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Mapping
 
 
 @dataclass(frozen=True)
@@ -29,6 +31,8 @@ class AppTarget:
     repo: Path
     apk_path: Path
     referer: str
+    post_data: Mapping[str, str]
+    download_prefix: str
 
 
 TARGETS = [
@@ -38,6 +42,8 @@ TARGETS = [
         repo=Path("/Users/oncechen/IdeaProjects/c_pt777"),
         apk_path=Path("WebRoot/appBuild/apk/pt777_fallback.apk"),
         referer="https://qm7088.com/app/",
+        post_data={"isLogin": "0", "agent": "", "type": "android", "appProduct": "at"},
+        download_prefix="ae",
     ),
     AppTarget(
         name="TH",
@@ -45,6 +51,8 @@ TARGETS = [
         repo=Path("/Users/oncechen/IdeaProjects/c_long8/web"),
         apk_path=Path("WebRoot/appBuild/apk/th_fallback.apk"),
         referer="https://tty187.vip/asp/",
+        post_data={"isLogin": "0", "agent": "", "type": "android"},
+        download_prefix="th",
     ),
 ]
 
@@ -78,42 +86,60 @@ def ssl_context(insecure: bool) -> ssl.SSLContext | None:
 
 
 BROWSER_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+    "User-Agent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Mobile Safari/537.36",
     "Accept": "application/json,text/plain,*/*",
 }
 
 
-def fetch_json(url: str, timeout: int, insecure: bool, referer: str) -> dict:
+def fetch_json(target: AppTarget, timeout: int, insecure: bool) -> dict:
     headers = dict(BROWSER_HEADERS)
-    headers["Referer"] = referer
-    request = urllib.request.Request(url, headers=headers)
+    headers["Referer"] = target.referer
+    headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8"
+    headers["X-Requested-With"] = "XMLHttpRequest"
+    body = urllib.parse.urlencode(target.post_data).encode()
+    request = urllib.request.Request(target.api_url, data=body, headers=headers, method="POST")
     try:
         with urllib.request.urlopen(request, timeout=timeout, context=ssl_context(insecure)) as response:
             charset = response.headers.get_content_charset() or "utf-8"
             body = response.read().decode(charset)
     except urllib.error.URLError as exc:
-        raise SyncError(f"failed to call API {url}: {exc}") from exc
+        raise SyncError(f"failed to call API {target.api_url}: {exc}") from exc
 
     try:
         payload = json.loads(body)
     except json.JSONDecodeError as exc:
-        raise SyncError(f"API returned invalid JSON: {url}") from exc
+        raise SyncError(f"API returned invalid JSON: {target.api_url}") from exc
 
     if payload.get("code") != "10000":
-        raise SyncError(f"API returned non-success code for {url}: {payload!r}")
+        raise SyncError(f"API returned non-success code for {target.api_url}: {payload!r}")
     return payload
 
 
 def android_url_from_api(target: AppTarget, timeout: int, insecure: bool) -> str:
-    payload = fetch_json(target.api_url, timeout, insecure, target.referer)
+    payload = fetch_json(target, timeout, insecure)
     android_url = payload.get("data", {}).get("android")
     if not isinstance(android_url, str) or not android_url.startswith(("http://", "https://")):
         raise SyncError(f"{target.name} API did not provide a valid android URL: {payload!r}")
     return android_url
 
 
-def download_file(url: str, destination: Path, timeout: int, insecure: bool) -> None:
-    request = urllib.request.Request(url, headers={"User-Agent": BROWSER_HEADERS["User-Agent"], "Accept": "*/*"})
+def page_download_url(target: AppTarget, android_url: str) -> str:
+    parsed = urllib.parse.urlparse(android_url)
+    if not parsed.scheme or not parsed.netloc:
+        raise SyncError(f"{target.name} API returned malformed android URL: {android_url}")
+    timestamp = time.strftime("%Y%m%d%H%M%S")
+    return f"{parsed.scheme}://{parsed.netloc}/download/{target.download_prefix}_{timestamp}.apk"
+
+
+def download_file(url: str, destination: Path, timeout: int, insecure: bool, referer: str) -> None:
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": BROWSER_HEADERS["User-Agent"],
+            "Accept": "*/*",
+            "Referer": referer,
+        },
+    )
     try:
         with urllib.request.urlopen(request, timeout=timeout, context=ssl_context(insecure)) as response, destination.open("wb") as out:
             shutil.copyfileobj(response, out)
@@ -145,11 +171,13 @@ def sync_target(target: AppTarget, timeout: int, min_size: int, dry_run: bool, i
 
     android_url = android_url_from_api(target, timeout, insecure)
     print(f"android: {android_url}")
+    download_url = page_download_url(target, android_url)
+    print(f"download: {download_url}")
 
     with tempfile.NamedTemporaryFile(prefix=f"{target.name.lower()}_fallback_", suffix=".apk", delete=False) as tmp:
         tmp_path = Path(tmp.name)
     try:
-        download_file(android_url, tmp_path, timeout, insecure)
+        download_file(download_url, tmp_path, timeout, insecure, target.referer)
         validate_apk(tmp_path, min_size)
         old_size = full_apk_path.stat().st_size if full_apk_path.exists() else 0
         new_size = tmp_path.stat().st_size
