@@ -195,7 +195,7 @@ def sync_target(target: AppTarget, timeout: int, min_size: int, dry_run: bool, i
         return False
 
     run(["git", "add", str(target.apk_path)], cwd=target.repo)
-    run(["git", "commit", "-m", f"chore: sync {target.name} fallback apk"], cwd=target.repo)
+    run(["git", "commit", "-m", f"同步 {target.name} 兜底 APK"], cwd=target.repo)
     run(["git", "push"], cwd=target.repo)
     return True
 
