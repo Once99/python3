@@ -40,6 +40,7 @@ DEFAULT_SYNC_EXCLUDE_PATHS = [
     "ruoyi-ui/AGENTS.md",
     "ruoyi-ui/.env.development.local",
     "ruoyi-ui/docs",
+    "docs",
 ]
 DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = [
     "docs",
