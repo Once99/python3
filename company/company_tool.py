@@ -77,7 +77,7 @@ PROJECTS = {
     "long8": {"path": "/Users/oncechen/IdeaProjects/c_long8/web/WebRoot/"},
     "lwpc": {"path": "/Users/oncechen/IdeaProjects/e68_web_vue/"},
     "lwh5": {"path": "/Users/oncechen/IdeaProjects/e68_web_static_vue/"},
-    "feiyu": {"path": "/Users/oncechen/IdeaProjects/feiyu-site/"},
+    "feiyu": {"path": "/Users/oncechen/IdeaProjects/feiyu-site-clean/"},
     "94Chat": {"path": "/Users/oncechen/IdeaProjects/site-dolphin/"},
     "weiquandanbao": {"path": "/Users/oncechen/IdeaProjects/site-weiquandanbao/"},
     "haitun": {"path": "/Users/oncechen/IdeaProjects/site-haitun-web/"},
