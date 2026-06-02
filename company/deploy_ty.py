@@ -29,6 +29,7 @@ DEFAULT_REPORT_AUTHOR = "Ayea"
 DEFAULT_REPORT_OUTPUT_DIR = Path(__file__).resolve().parents[1] / "reports"
 DEFAULT_JENKINS = "https://jenkins.helpom.com/"
 DEFAULT_JOB = "system-ui"
+DEFAULT_CLIENT_JOB = "if-sport-ui"
 DEFAULT_VPN_APPS = ["OpenVPN Connect", "OpenVPN"]
 DEFAULT_VPN_WAIT_HOST = "git.helpom.com"
 DEFAULT_VPN_WAIT_PORT = 80
@@ -1311,7 +1312,9 @@ def main() -> None:
         )
         return
 
-    target_job = job_url(args.jenkins_url, args.job, args.job_url)
+    sync_targets = ["sport", "client"] if args.sync_target == "all" else [args.sync_target]
+    effective_job = DEFAULT_CLIENT_JOB if mode == "sync" and sync_targets == ["client"] and not args.job_url else args.job
+    target_job = job_url(args.jenkins_url, effective_job, args.job_url)
     target_build_page = build_page_url(target_job)
 
     if not args.no_vpn:
@@ -1322,8 +1325,6 @@ def main() -> None:
             args.vpn_timeout,
             args.dry_run,
         )
-
-    sync_targets = ["sport", "client"] if args.sync_target == "all" else [args.sync_target]
 
     if mode == "sync" and "sport" in sync_targets:
         pull_ty_sport_worktree((args.report_repo or DEFAULT_REPORT_REPO).expanduser(), args.branch, args.dry_run)
@@ -1351,9 +1352,6 @@ def main() -> None:
             args.sync_author_email,
             args.dry_run,
         )
-
-    if mode == "sync" and "sport" not in sync_targets:
-        return
 
     if mode != "sync" and not args.no_pull:
         git_pull(args.repo.expanduser(), args.remote, args.branch, args.strict_clean, args.dry_run)
