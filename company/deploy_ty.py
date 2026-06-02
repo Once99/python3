@@ -14,6 +14,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.parse
@@ -304,6 +305,7 @@ def commit_squashed_changes(
 
 def sync_ty_sport_to_sport(
     repo: Path,
+    source_repo: Path,
     branch: str | None,
     ty_remote: str,
     sport_remote: str,
@@ -316,40 +318,62 @@ def sync_ty_sport_to_sport(
         fail(f"{repo} is not a git repository")
 
     active_branch = branch or current_branch(repo)
-    ensure_remote(repo, ty_remote)
     ensure_remote(repo, sport_remote)
+
+    if not (source_repo / ".git").exists():
+        fail(f"{source_repo} is not a git repository")
 
     if not dry_run and current_branch(repo) != active_branch:
         fail(f"current branch is '{current_branch(repo)}'. Please switch to '{active_branch}' first.")
+    if not dry_run and current_branch(source_repo) != active_branch:
+        fail(f"ty_sport_test current branch is '{current_branch(source_repo)}'. Please switch to '{active_branch}' first.")
 
     status = git_output(repo, ["status", "--porcelain"])
     if status:
         print(status)
         fail("sport repo has uncommitted changes. Commit/stash them before syncing ty_sport.")
+    source_status = git_output(source_repo, ["status", "--porcelain"])
+    if source_status:
+        print(source_status)
+        fail("ty_sport_test repo has uncommitted changes. Commit/stash them before syncing.")
 
     log(f"pulling latest sport branch: {sport_remote}/{active_branch}")
     run(["git", "pull", "--ff-only", sport_remote, active_branch], cwd=repo, dry_run=dry_run)
-    log(f"fetching ty_sport branch: {ty_remote}/{active_branch}")
-    run(["git", "fetch", ty_remote, active_branch], cwd=repo, dry_run=dry_run)
-    if not dry_run and not has_ruoyi_diff(repo, "HEAD", f"{ty_remote}/{active_branch}"):
-        log("no ruoyi-ui differences from ty_sport; skipping squash merge.")
-        push_sport_branch(repo, sport_remote, active_branch, dry_run)
-        return
-    try:
-        run(["git", "merge", "--squash", "--no-commit", f"{ty_remote}/{active_branch}"], cwd=repo, dry_run=dry_run)
-    except subprocess.CalledProcessError:
-        restore_sync_excluded_paths(repo, dry_run)
-        unresolved = unmerged_paths(repo)
-        if unresolved:
-            fail(
-                f"squash merge failed for {ty_remote}/{active_branch}. "
-                f"Unresolved paths: {', '.join(unresolved)}"
-            )
 
+    log(f"syncing local ty_sport_test ruoyi-ui -> sport ruoyi-ui: {source_repo / 'ruoyi-ui'} -> {repo / 'ruoyi-ui'}")
+    if not dry_run:
+        with tempfile.TemporaryDirectory(prefix="ty-sport-ruoyi-ui-") as temp_name:
+            temp_dir = Path(temp_name)
+            archive = subprocess.run(
+                ["git", "archive", "--format=tar", "HEAD", "ruoyi-ui"],
+                cwd=source_repo,
+                check=False,
+                stdout=subprocess.PIPE,
+            )
+            if archive.returncode != 0:
+                fail("failed to archive ty_sport_test ruoyi-ui")
+            tar = subprocess.run(
+                ["tar", "-xf", "-", "-C", str(temp_dir)],
+                input=archive.stdout,
+                check=False,
+            )
+            if tar.returncode != 0:
+                fail("failed to extract ty_sport_test ruoyi-ui archive")
+            target_ruoyi = repo / "ruoyi-ui"
+            if target_ruoyi.exists():
+                shutil.rmtree(target_ruoyi)
+            shutil.copytree(temp_dir / "ruoyi-ui", target_ruoyi)
+
+    run(["git", "add", "-A", "ruoyi-ui"], cwd=repo, dry_run=dry_run)
     restore_sync_excluded_paths(repo, dry_run)
 
+    if not has_path_change(repo, "ruoyi-ui"):
+        log("no ruoyi-ui differences from local ty_sport_test; skipping commit.")
+        push_sport_branch(repo, sport_remote, active_branch, dry_run)
+        return
+
     if not commit_message:
-        commit_message = build_sync_commit_message(repo, f"{sport_remote}/{active_branch}", f"{ty_remote}/{active_branch}")
+        commit_message = build_sync_commit_message(repo, f"{sport_remote}/{active_branch}", "HEAD")
         log("generated sport commit message from actual staged ruoyi-ui changes:")
         print(commit_message)
 
@@ -1306,6 +1330,7 @@ def main() -> None:
         commit_message = resolve_sync_commit_message(args)
         sync_ty_sport_to_sport(
             args.repo.expanduser(),
+            (args.report_repo or DEFAULT_REPORT_REPO).expanduser(),
             args.branch,
             args.ty_sport_remote,
             args.sport_push_remote,
