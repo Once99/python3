@@ -8,6 +8,7 @@ then commits and pushes the APK changes in each repository.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import shutil
@@ -157,6 +158,16 @@ def validate_apk(path: Path, min_size: int) -> None:
         raise SyncError(f"downloaded file is not a ZIP/APK: {path}")
 
 
+def sha256_file(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    digest = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def ensure_clean_repo(repo: Path) -> None:
     status = run(["git", "status", "--porcelain"], cwd=repo).stdout.strip()
     if status:
@@ -181,9 +192,17 @@ def sync_target(target: AppTarget, timeout: int, min_size: int, dry_run: bool, i
         validate_apk(tmp_path, min_size)
         old_size = full_apk_path.stat().st_size if full_apk_path.exists() else 0
         new_size = tmp_path.stat().st_size
-        print(f"replace: {full_apk_path} ({old_size} -> {new_size} bytes)")
+        old_hash = sha256_file(full_apk_path)
+        new_hash = sha256_file(tmp_path)
+        print(f"compare: {full_apk_path} ({old_size} -> {new_size} bytes)")
+        print(f"sha256: {old_hash or 'missing'} -> {new_hash}")
+        if old_hash == new_hash:
+            print(f"{target.name}: APK unchanged; skip replace/commit/push")
+            return False
         if dry_run:
-            return old_size != new_size
+            print(f"{target.name}: APK changed; dry-run skips replace/commit/push")
+            return True
+        print(f"replace: {full_apk_path}")
         os.replace(tmp_path, full_apk_path)
     finally:
         if tmp_path.exists():
