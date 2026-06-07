@@ -39,7 +39,6 @@ DEFAULT_SYNC_AUTHOR_NAME = "loki"
 DEFAULT_SYNC_AUTHOR_EMAIL = "webm@dc66.net"
 DEFAULT_COMMIT_MESSAGE = ""
 DEFAULT_SYNC_EXCLUDE_PATHS = [
-    "ruoyi-ui/AGENTS.md",
     "ruoyi-ui/.env.development.local",
 ]
 DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = []
