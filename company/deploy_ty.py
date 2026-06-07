@@ -41,7 +41,6 @@ DEFAULT_COMMIT_MESSAGE = ""
 DEFAULT_SYNC_EXCLUDE_PATHS = [
     "ruoyi-ui/AGENTS.md",
     "ruoyi-ui/.env.development.local",
-    "ruoyi-ui/docs",
 ]
 DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = []
 DEFAULT_CLIENT_SOURCE_REPO = Path("/Users/oncechen/IdeaProjects/ty_client_test")
@@ -339,7 +338,7 @@ def sync_ty_sport_to_sport(
     log(f"pulling latest sport branch: {sport_remote}/{active_branch}")
     run(["git", "pull", "--ff-only", sport_remote, active_branch], cwd=repo, dry_run=dry_run)
 
-    log(f"syncing local ty_sport_test ruoyi-ui/docs -> sport: {source_repo} -> {repo}")
+    log(f"syncing local ty_sport_test ruoyi-ui + docs -> sport/ruoyi-ui: {source_repo} -> {repo / 'ruoyi-ui'}")
     if not dry_run:
         with tempfile.TemporaryDirectory(prefix="ty-sport-sync-") as temp_name:
             temp_dir = Path(temp_name)
@@ -358,11 +357,17 @@ def sync_ty_sport_to_sport(
             )
             if tar.returncode != 0:
                 fail("failed to extract ty_sport_test ruoyi-ui/docs archive")
-            for path in ("ruoyi-ui", "docs"):
-                target_path = repo / path
-                if target_path.exists():
-                    shutil.rmtree(target_path)
-                shutil.copytree(temp_dir / path, target_path)
+            target_ruoyi = repo / "ruoyi-ui"
+            if target_ruoyi.exists():
+                shutil.rmtree(target_ruoyi)
+            shutil.copytree(temp_dir / "ruoyi-ui", target_ruoyi)
+            target_ruoyi_docs = target_ruoyi / "docs"
+            if target_ruoyi_docs.exists():
+                shutil.rmtree(target_ruoyi_docs)
+            shutil.copytree(temp_dir / "docs", target_ruoyi_docs)
+            target_root_docs = repo / "docs"
+            if target_root_docs.exists():
+                shutil.rmtree(target_root_docs)
 
     run(["git", "add", "-A", "ruoyi-ui", "docs"], cwd=repo, dry_run=dry_run)
     restore_sync_excluded_paths(repo, dry_run)
