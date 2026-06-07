@@ -369,7 +369,9 @@ def sync_ty_sport_to_sport(
             if target_root_docs.exists():
                 shutil.rmtree(target_root_docs)
 
-    run(["git", "add", "-A", "ruoyi-ui", "docs"], cwd=repo, dry_run=dry_run)
+    run(["git", "add", "-A", "ruoyi-ui"], cwd=repo, dry_run=dry_run)
+    if (repo / "docs").exists() or git_output(repo, ["ls-files", "docs"]):
+        run(["git", "add", "-A", "docs"], cwd=repo, dry_run=dry_run)
     restore_sync_excluded_paths(repo, dry_run)
 
     if not has_path_change(repo, "ruoyi-ui") and not has_path_change(repo, "docs"):
