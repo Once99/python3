@@ -42,11 +42,8 @@ DEFAULT_SYNC_EXCLUDE_PATHS = [
     "ruoyi-ui/AGENTS.md",
     "ruoyi-ui/.env.development.local",
     "ruoyi-ui/docs",
-    "docs",
 ]
-DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = [
-    "docs",
-]
+DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = []
 DEFAULT_CLIENT_SOURCE_REPO = Path("/Users/oncechen/IdeaProjects/ty_client_test")
 DEFAULT_CLIENT_TARGET_REPO = Path("/Users/oncechen/IdeaProjects/if_sport_ui")
 DEFAULT_CLIENT_REMOTE = "origin"
@@ -196,6 +193,7 @@ def collect_sync_commit_details(repo: Path, base_ref: str, target_ref: str) -> t
             f"{base_ref}..{target_ref}",
             "--",
             "ruoyi-ui",
+            "docs",
         ],
         cwd=repo,
         check=False,
@@ -228,9 +226,9 @@ def collect_sync_subjects(repo: Path, base_ref: str, target_ref: str) -> list[st
     return subjects
 
 
-def staged_ruoyi_files(repo: Path) -> list[str]:
+def staged_sync_files(repo: Path) -> list[str]:
     result = subprocess.run(
-        ["git", "diff", "--cached", "--name-only", "--", "ruoyi-ui"],
+        ["git", "diff", "--cached", "--name-only", "--", "ruoyi-ui", "docs"],
         cwd=repo,
         check=False,
         text=True,
@@ -243,9 +241,9 @@ def staged_ruoyi_files(repo: Path) -> list[str]:
     return [line.strip() for line in result.stdout.splitlines() if line.strip()]
 
 
-def has_ruoyi_diff(repo: Path, base_ref: str, target_ref: str) -> bool:
+def has_sync_diff(repo: Path, base_ref: str, target_ref: str) -> bool:
     result = subprocess.run(
-        ["git", "diff", "--quiet", base_ref, target_ref, "--", "ruoyi-ui"],
+        ["git", "diff", "--quiet", base_ref, target_ref, "--", "ruoyi-ui", "docs"],
         cwd=repo,
         check=False,
     )
@@ -256,7 +254,7 @@ def has_ruoyi_diff(repo: Path, base_ref: str, target_ref: str) -> bool:
 
 def build_sync_commit_message(repo: Path, base_ref: str, target_ref: str) -> str:
     subjects = collect_sync_subjects(repo, base_ref, target_ref)
-    files = staged_ruoyi_files(repo)
+    files = staged_sync_files(repo)
     items = summarize_ty_work(subjects, files)
     if not items:
         return "同步 ty_sport 前端更新"
@@ -341,41 +339,42 @@ def sync_ty_sport_to_sport(
     log(f"pulling latest sport branch: {sport_remote}/{active_branch}")
     run(["git", "pull", "--ff-only", sport_remote, active_branch], cwd=repo, dry_run=dry_run)
 
-    log(f"syncing local ty_sport_test ruoyi-ui -> sport ruoyi-ui: {source_repo / 'ruoyi-ui'} -> {repo / 'ruoyi-ui'}")
+    log(f"syncing local ty_sport_test ruoyi-ui/docs -> sport: {source_repo} -> {repo}")
     if not dry_run:
-        with tempfile.TemporaryDirectory(prefix="ty-sport-ruoyi-ui-") as temp_name:
+        with tempfile.TemporaryDirectory(prefix="ty-sport-sync-") as temp_name:
             temp_dir = Path(temp_name)
             archive = subprocess.run(
-                ["git", "archive", "--format=tar", "HEAD", "ruoyi-ui"],
+                ["git", "archive", "--format=tar", "HEAD", "ruoyi-ui", "docs"],
                 cwd=source_repo,
                 check=False,
                 stdout=subprocess.PIPE,
             )
             if archive.returncode != 0:
-                fail("failed to archive ty_sport_test ruoyi-ui")
+                fail("failed to archive ty_sport_test ruoyi-ui/docs")
             tar = subprocess.run(
                 ["tar", "-xf", "-", "-C", str(temp_dir)],
                 input=archive.stdout,
                 check=False,
             )
             if tar.returncode != 0:
-                fail("failed to extract ty_sport_test ruoyi-ui archive")
-            target_ruoyi = repo / "ruoyi-ui"
-            if target_ruoyi.exists():
-                shutil.rmtree(target_ruoyi)
-            shutil.copytree(temp_dir / "ruoyi-ui", target_ruoyi)
+                fail("failed to extract ty_sport_test ruoyi-ui/docs archive")
+            for path in ("ruoyi-ui", "docs"):
+                target_path = repo / path
+                if target_path.exists():
+                    shutil.rmtree(target_path)
+                shutil.copytree(temp_dir / path, target_path)
 
-    run(["git", "add", "-A", "ruoyi-ui"], cwd=repo, dry_run=dry_run)
+    run(["git", "add", "-A", "ruoyi-ui", "docs"], cwd=repo, dry_run=dry_run)
     restore_sync_excluded_paths(repo, dry_run)
 
-    if not has_path_change(repo, "ruoyi-ui"):
-        log("no ruoyi-ui differences from local ty_sport_test; skipping commit.")
+    if not has_path_change(repo, "ruoyi-ui") and not has_path_change(repo, "docs"):
+        log("no ruoyi-ui/docs differences from local ty_sport_test; skipping commit.")
         push_sport_branch(repo, sport_remote, active_branch, dry_run)
         return
 
     if not commit_message:
         commit_message = build_sync_commit_message(repo, f"{sport_remote}/{active_branch}", "HEAD")
-        log("generated sport commit message from actual staged ruoyi-ui changes:")
+        log("generated sport commit message from actual staged ruoyi-ui/docs changes:")
         print(commit_message)
 
     commit_squashed_changes(repo, commit_message, author_name, author_email, dry_run)
