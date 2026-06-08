@@ -120,6 +120,7 @@ class ApkTarget:
     push_tag: bool = False
     update_when_unchanged: bool = False
     asset_version_files: tuple[str, ...] = ()
+    download_info_date_files: tuple[str, ...] = ()
 
 
 APK_TARGETS = {
@@ -132,6 +133,7 @@ APK_TARGETS = {
         push_tag=True,
         update_when_unchanged=True,
         asset_version_files=("index.html",),
+        download_info_date_files=("index.html",),
     ),
     "94chat": ApkTarget(
         name="94chat",
@@ -614,6 +616,42 @@ def update_asset_query_versions(repo_path: Path, files: tuple[str, ...], version
     return changed
 
 
+def format_version_date(version_date: str) -> str:
+    if len(version_date) == 8 and version_date.isdigit():
+        return f"{version_date[:4]}-{version_date[4:6]}-{version_date[6:8]}"
+    return version_date
+
+
+def update_download_info_dates(repo_path: Path, files: tuple[str, ...], version_date: str) -> list[str]:
+    changed: list[str] = []
+    if not files:
+        return changed
+
+    display_date = format_version_date(version_date)
+    pattern = re.compile(
+        r'(<span class="download-info-label" lang="downloadInfoUpdate">.*?</span>\s*'
+        r'<span class="download-info-value">)([^<]*)(</span>)',
+        re.DOTALL,
+    )
+
+    for rel_path in files:
+        path = repo_path / rel_path
+        if not path.exists():
+            log(f"⚠️ 下载信息日期文件不存在，跳过：{path}")
+            continue
+
+        old = path.read_text(encoding="utf-8")
+        new, count = pattern.subn(rf"\g<1>{display_date}\g<3>", old, count=1)
+        if count == 0:
+            log(f"⚠️ 未找到下载信息更新时间节点，跳过：{path}")
+            continue
+        if new != old:
+            path.write_text(new, encoding="utf-8")
+            changed.append(rel_path)
+            log(f"✅ 下载信息更新时间已更新：{rel_path} -> {display_date}")
+    return changed
+
+
 def generate_version() -> str:
     return datetime.now().strftime("%Y%m%d%H%M%S")
 
@@ -682,6 +720,7 @@ def update_apk(target: ApkTarget) -> int:
     log(f"✅ 生成版本号: {version}")
     update_version_json(repo1.version_path, version)
     asset_version_files = update_asset_query_versions(repo1.root, target.asset_version_files, version_date)
+    download_info_date_files = update_download_info_dates(repo1.root, target.download_info_date_files, version_date)
 
     if not same_remote:
         atomic_copy(repo1.apk_path, repo2.apk_path)
@@ -698,6 +737,7 @@ def update_apk(target: ApkTarget) -> int:
             os.path.relpath(repo1.apk_path, repo1.root),
             os.path.relpath(repo1.version_path, repo1.root),
             *asset_version_files,
+            *download_info_date_files,
         ],
         version,
     )
