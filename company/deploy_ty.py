@@ -41,7 +41,9 @@ DEFAULT_COMMIT_MESSAGE = ""
 DEFAULT_SYNC_EXCLUDE_PATHS = [
     "ruoyi-ui/.env.development.local",
 ]
-DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = []
+DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = [
+    "docs/",
+]
 DEFAULT_CLIENT_SOURCE_REPO = Path("/Users/oncechen/IdeaProjects/ty_client_test")
 DEFAULT_CLIENT_TARGET_REPO = Path("/Users/oncechen/IdeaProjects/if_sport_ui")
 DEFAULT_CLIENT_REMOTE = "origin"
@@ -564,6 +566,11 @@ def sync_ty_client_to_if_sport_ui(
         rsync_cmd,
         dry_run=dry_run,
     )
+    target_docs = target_repo / "docs"
+    if target_docs.exists():
+        log(f"removing if_sport_ui docs directory: {target_docs}")
+        if not dry_run:
+            shutil.rmtree(target_docs)
 
     if not has_worktree_changes(target_repo):
         log("no ty_client changes to commit.")
