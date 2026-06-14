@@ -5,6 +5,7 @@
 Usage:
   company_tool.py              # ask what to run
   company_tool.py pull         # pull all projects
+  company_tool.py all git pull # pull all projects
   company_tool.py feiyu        # update Feiyu APK
   company_tool.py 94chat       # update 94Chat APK
   company_tool.py sync-ty      # sync sport/test to GitLab ty_sport/test
@@ -160,6 +161,8 @@ def print_usage() -> None:
     print("用法:")
     print("  company_tool.py              # 互动询问要执行什么")
     print("  company_tool.py pull         # pull all projects")
+    print("  company_tool.py all git pull # pull all projects")
+    print("  company_tool.py git pull     # pull all projects")
     print("  company_tool.py pull feiyu   # 只 pull 指定项目，可指定多个")
     print("  company_tool.py feiyu        # update feiyu apk")
     print("  company_tool.py 94chat       # update 94chat apk")
@@ -170,6 +173,23 @@ def print_usage() -> None:
 def normalize_command(raw: str) -> str:
     key = raw.strip().lower()
     return ALIASES.get(key, key)
+
+
+def normalize_argv(argv: list[str]) -> list[str]:
+    """Accept shell-style commands like `all git pull` as aliases for `pull`."""
+    normalized = [arg.strip() for arg in argv if arg.strip()]
+    lowered = [arg.lower() for arg in normalized]
+
+    if lowered in (["git", "pull"], ["all", "git", "pull"], ["all", "pull"]):
+        return ["pull"]
+    if lowered[:2] == ["all", "git"] and lowered[2:3] == ["pull"]:
+        return ["pull", *normalized[3:]]
+    if lowered[:1] == ["all"] and lowered[1:2] == ["pull"]:
+        return ["pull", *normalized[2:]]
+    if lowered[:2] == ["git", "pull"]:
+        return ["pull", *normalized[2:]]
+
+    return normalized
 
 
 def run_cmd(repo_path: Path | str, cmd: list[str], check: bool = True, timeout: int | None = None) -> str:
@@ -597,7 +617,7 @@ def update_version_json(path: Path, version: str) -> None:
     atomic_write_json(path, {"version": version, "assets": assets})
 
 
-def update_asset_query_versions(repo_path: Path, files: tuple[str, ...], version_date: str) -> list[str]:
+def update_asset_query_versions(repo_path: Path, files: tuple[str, ...], version: str) -> list[str]:
     changed: list[str] = []
     if not files:
         return changed
@@ -608,11 +628,11 @@ def update_asset_query_versions(repo_path: Path, files: tuple[str, ...], version
             log(f"⚠️ 静态资源版本文件不存在，跳过：{path}")
             continue
         old = path.read_text(encoding="utf-8")
-        new = pattern.sub(rf"\g<1>{version_date}", old)
+        new = pattern.sub(rf"\g<1>{version}", old)
         if new != old:
             path.write_text(new, encoding="utf-8")
             changed.append(rel_path)
-            log(f"✅ 静态资源版本号已更新：{rel_path} -> {version_date}")
+            log(f"✅ 静态资源版本号已更新：{rel_path} -> {version}")
     return changed
 
 
@@ -719,7 +739,7 @@ def update_apk(target: ApkTarget) -> int:
     version_date = version[:8]
     log(f"✅ 生成版本号: {version}")
     update_version_json(repo1.version_path, version)
-    asset_version_files = update_asset_query_versions(repo1.root, target.asset_version_files, version_date)
+    asset_version_files = update_asset_query_versions(repo1.root, target.asset_version_files, version)
     download_info_date_files = update_download_info_dates(repo1.root, target.download_info_date_files, version_date)
 
     if not same_remote:
@@ -1044,6 +1064,7 @@ def prompt_for_command() -> list[str]:
 def main(argv: list[str]) -> int:
     if not argv:
         argv = prompt_for_command()
+    argv = normalize_argv(argv)
 
     command = normalize_command(argv[0])
     args = argv[1:]

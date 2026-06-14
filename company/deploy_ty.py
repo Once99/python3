@@ -1323,9 +1323,16 @@ def main() -> None:
         return
 
     sync_targets = ["sport", "client"] if args.sync_target == "all" else [args.sync_target]
-    effective_job = DEFAULT_CLIENT_JOB if mode == "sync" and sync_targets == ["client"] and not args.job_url else args.job
-    target_job = job_url(args.jenkins_url, effective_job, args.job_url)
-    target_build_page = build_page_url(target_job)
+    if args.job_url:
+        target_jobs = [job_url(args.jenkins_url, args.job, args.job_url)]
+    elif mode == "sync":
+        target_jobs = []
+        if "sport" in sync_targets:
+            target_jobs.append(job_url(args.jenkins_url, args.job, None))
+        if "client" in sync_targets:
+            target_jobs.append(job_url(args.jenkins_url, DEFAULT_CLIENT_JOB, None))
+    else:
+        target_jobs = [job_url(args.jenkins_url, args.job, None)]
 
     if not args.no_vpn:
         ensure_vpn_ready(
@@ -1367,11 +1374,14 @@ def main() -> None:
         git_pull(args.repo.expanduser(), args.remote, args.branch, args.strict_clean, args.dry_run)
 
     if args.trigger == "api":
-        trigger_jenkins_api(args.jenkins_url, target_job, args.dry_run)
+        for target_job in target_jobs:
+            trigger_jenkins_api(args.jenkins_url, target_job, args.dry_run)
     elif args.trigger == "open":
-        submit_jenkins_build_page(target_build_page, args.dry_run)
+        for target_job in target_jobs:
+            submit_jenkins_build_page(build_page_url(target_job), args.dry_run)
     else:
-        log(f"Jenkins build page URL: {target_build_page}")
+        for target_job in target_jobs:
+            log(f"Jenkins build page URL: {build_page_url(target_job)}")
 
 
 if __name__ == "__main__":
