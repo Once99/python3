@@ -27,6 +27,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import unquote, urlparse, parse_qs
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -122,6 +123,8 @@ class ApkTarget:
     update_when_unchanged: bool = False
     asset_version_files: tuple[str, ...] = ()
     download_info_date_files: tuple[str, ...] = ()
+    validate_code_download_links: bool = False
+    code_download_link_files: tuple[str, ...] = ()
 
 
 APK_TARGETS = {
@@ -130,11 +133,18 @@ APK_TARGETS = {
         repo1=Path("/Users/oncechen/IdeaProjects/feiyu-site-clean"),
         repo2=Path("/Users/oncechen/IdeaProjects/feiyu-site-clean"),
         apk_name="flychat_release.apk",
-        urls=("https://fujkou.com:12828/Android/apk/flychat/flychat_release.apk", "https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk",),
+        urls=(
+            "https://fujkou.com:12828/Android/apk/flychat/flychat_release.apk",
+            "https://fujkou.net:12828/Android/apk/flychat/flychat_release.apk",
+            "https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk",
+            "https://feiyu-03.equgou.com/Android/apk/flychat/flychat_release.apk",
+        ),
         push_tag=True,
         update_when_unchanged=True,
         asset_version_files=("index.html",),
         download_info_date_files=("index.html",),
+        validate_code_download_links=True,
+        code_download_link_files=("index.html", "aaa.html", "js/index.js"),
     ),
     "94chat": ApkTarget(
         name="94chat",
@@ -596,6 +606,155 @@ def download_apk_to_repo1(target: ApkTarget, repo1_apk_path: Path) -> str:
     return "failed" if download_failed else "unchanged"
 
 
+PACKAGE_LINK_RE = re.compile(
+    r'''(?P<url>(?:https?:)?//[^'"\s<>]+|/[^'"\s<>]+?)'''
+    r'''(?P<suffix>\.apk|\.msi|\.plist)''',
+    re.IGNORECASE,
+)
+APP_STORE_LINK_RE = re.compile(r'''https://apps\.apple\.com/[^'"\s<>]+''', re.IGNORECASE)
+ITMS_SERVICES_LINK_RE = re.compile(r'''itms-services://[^'"\s<>]+''', re.IGNORECASE)
+
+
+def normalize_download_link(url: str, suffix: str) -> str:
+    cleaned = (url + suffix).strip()
+    cleaned = cleaned.split("?", 1)[0].split("#", 1)[0]
+    if cleaned.startswith("//"):
+        return "https:" + cleaned
+    return cleaned
+
+
+def add_download_link(links: list[str], seen: set[str], link: str) -> None:
+    cleaned = link.strip().split("#", 1)[0]
+    if cleaned and cleaned not in seen:
+        seen.add(cleaned)
+        links.append(cleaned)
+
+
+def extract_itms_manifest_url(link: str) -> str | None:
+    parsed = urlparse(link)
+    manifest = parse_qs(parsed.query).get("url", [None])[0]
+    if not manifest:
+        return None
+    return unquote(manifest).split("?", 1)[0].split("#", 1)[0]
+
+
+def collect_code_download_links(repo_path: Path, files: tuple[str, ...]) -> list[str]:
+    links: list[str] = []
+    seen: set[str] = set()
+    for rel_path in files:
+        path = repo_path / rel_path
+        if not path.exists():
+            log(f"⚠️ 下载链接检查文件不存在，跳过：{path}")
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for match in PACKAGE_LINK_RE.finditer(text):
+            add_download_link(links, seen, normalize_download_link(match.group("url"), match.group("suffix")))
+        for match in APP_STORE_LINK_RE.finditer(text):
+            add_download_link(links, seen, match.group(0))
+        for match in ITMS_SERVICES_LINK_RE.finditer(text):
+            manifest_url = extract_itms_manifest_url(match.group(0))
+            if manifest_url:
+                add_download_link(links, seen, match.group(0))
+                add_download_link(links, seen, manifest_url)
+    return links
+
+
+def expected_magic_for_download_link(link: str) -> bytes | None:
+    lower = urlparse(link).path.lower()
+    if lower.endswith(".apk"):
+        return b"PK"
+    if lower.endswith(".msi"):
+        return b"\xd0\xcf\x11\xe0"
+    if lower.endswith(".plist"):
+        return None
+    return None
+
+
+def validate_local_download_link(repo_path: Path, link: str) -> tuple[bool, str]:
+    local_path = (repo_path / link.lstrip("/")).resolve()
+    try:
+        local_path.relative_to(repo_path.resolve())
+    except ValueError:
+        return False, "本地路径不在仓库内"
+    if not local_path.exists():
+        return False, f"本地文件不存在：{local_path}"
+    expected_magic = expected_magic_for_download_link(link)
+    if expected_magic:
+        try:
+            with local_path.open("rb") as fh:
+                actual = fh.read(len(expected_magic))
+        except OSError as exc:
+            return False, f"本地文件读取失败：{exc}"
+        if actual != expected_magic:
+            return False, "本地文件头不符合预期，可能不是正确安装包"
+    return True, "OK"
+
+
+def validate_remote_download_link(link: str) -> tuple[bool, str]:
+    if link.startswith("itms-services://"):
+        manifest_url = extract_itms_manifest_url(link)
+        if not manifest_url:
+            return False, "itms-services 缺少 manifest url"
+        return validate_remote_download_link(manifest_url)
+
+    request = Request(with_cache_bust(link), headers=HEADERS)
+    ssl_context = ssl._create_unverified_context()
+    expected_magic = expected_magic_for_download_link(link)
+    try:
+        with urlopen(request, timeout=CONNECT_TIMEOUT + READ_TIMEOUT, context=ssl_context) as response:
+            status = getattr(response, "status", 200)
+            if status < 200 or status >= 400:
+                return False, f"响应码：{status}"
+            first = response.read(max(len(expected_magic or b""), 4) or 4)
+            if not first:
+                return False, "响应为空"
+            if expected_magic and not first.startswith(expected_magic):
+                return False, "文件头不符合预期，可能返回错误页或缓存页"
+    except (HTTPError, URLError, TimeoutError, OSError) as exc:
+        return False, f"请求失败：{exc}"
+    return True, "OK"
+
+
+def validate_download_link(repo_path: Path, link: str) -> tuple[bool, str]:
+    parsed = urlparse(link)
+    if parsed.scheme == "itms-services":
+        return validate_remote_download_link(link)
+    if parsed.scheme in ("http", "https"):
+        return validate_remote_download_link(link)
+    if link.startswith("/"):
+        return validate_local_download_link(repo_path, link)
+    return False, "不支持的下载链接格式"
+
+
+def validate_code_download_links(target: ApkTarget, repo_path: Path) -> bool:
+    if not target.validate_code_download_links:
+        return True
+
+    links = collect_code_download_links(repo_path, target.code_download_link_files)
+    if not links:
+        log("❌ 未在代码中找到 Android / iOS / PC 下载链接，禁止继续更新和打 tag")
+        return False
+
+    log(f"🔎 检查代码下载链接，共 {len(links)} 个")
+    failed: list[tuple[str, str]] = []
+    for link in links:
+        ok, reason = validate_download_link(repo_path, link)
+        if ok:
+            log(f"✅ 下载链接可用：{link}")
+        else:
+            log(f"❌ 下载链接不可用：{link} - {reason}")
+            failed.append((link, reason))
+
+    if failed:
+        log("❌ 检测到不可下载的代码链接，已停止后续更新并禁止打 tag：")
+        for link, reason in failed:
+            log(f" - {link} -> {reason}")
+        return False
+
+    log("✅ 代码下载链接检查通过")
+    return True
+
+
 def load_version_json(path: Path) -> dict:
     if not path.exists():
         return {}
@@ -724,6 +883,9 @@ def update_apk(target: ApkTarget) -> int:
         git_pull_secondary_clone(repo2.root, target.name)
     else:
         git_push_or_pull_before_update(repo2.root, target.name)
+
+    if not validate_code_download_links(target, repo1.root):
+        return 1
 
     download_status = download_apk_to_repo1(target, repo1.apk_path)
     if download_status == "failed":
