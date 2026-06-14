@@ -144,7 +144,7 @@ APK_TARGETS = {
         asset_version_files=("index.html",),
         download_info_date_files=("index.html",),
         validate_code_download_links=True,
-        code_download_link_files=("index.html", "aaa.html", "js/index.js"),
+        code_download_link_files=("index.html", "aaa.html", "aaa_20260121.html", "js/index.js"),
     ),
     "94chat": ApkTarget(
         name="94chat",
