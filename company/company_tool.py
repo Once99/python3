@@ -79,7 +79,7 @@ PROJECTS = {
     "long8": {"path": "/Users/oncechen/IdeaProjects/c_long8/web/WebRoot/"},
     "lwpc": {"path": "/Users/oncechen/IdeaProjects/e68_web_vue/"},
     "lwh5": {"path": "/Users/oncechen/IdeaProjects/e68_web_static_vue/"},
-    "feiyu": {"path": "/Users/oncechen/IdeaProjects/feiyu-site-clean/"},
+    "feiyu": {"path": "/Users/oncechen/IdeaProjects/feiyu-site-dev/"},
     "94Chat": {"path": "/Users/oncechen/IdeaProjects/site-dolphin/"},
     "weiquandanbao": {"path": "/Users/oncechen/IdeaProjects/site-weiquandanbao/"},
     "haitun": {"path": "/Users/oncechen/IdeaProjects/site-haitun-web/"},
@@ -130,8 +130,8 @@ class ApkTarget:
 APK_TARGETS = {
     "feiyu": ApkTarget(
         name="feiyu",
-        repo1=Path("/Users/oncechen/IdeaProjects/feiyu-site-clean"),
-        repo2=Path("/Users/oncechen/IdeaProjects/feiyu-site-clean"),
+        repo1=Path("/Users/oncechen/IdeaProjects/feiyu-site-dev"),
+        repo2=Path("/Users/oncechen/IdeaProjects/feiyu-site-dev"),
         apk_name="flychat_release.apk",
         urls=(
             "https://fujkou.com:12828/Android/apk/flychat/flychat_release.apk",
