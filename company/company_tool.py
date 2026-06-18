@@ -141,7 +141,7 @@ APK_TARGETS = {
         ),
         push_tag=True,
         update_when_unchanged=True,
-        asset_version_files=("index.html",),
+        asset_version_files=("index.html", "privacy.html", "help.html"),
         download_info_date_files=("index.html",),
         validate_code_download_links=True,
         code_download_link_files=("index.html", "aaa.html", "aaa_20260121.html", "js/index.js"),
