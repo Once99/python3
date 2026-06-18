@@ -515,6 +515,51 @@ def build_client_sync_commit_message(source_repo: Path, target_repo: Path) -> st
     return "\n".join(lines)
 
 
+def build_client_direct_commit_message(target_repo: Path) -> str:
+    files = changed_target_files(target_repo)
+    items = summarize_client_work([], files)
+    if not items:
+        return "同步 if_sport_ui 客户端更新"
+    title_items = "、".join(items[:2])
+    lines = [title_items, ""]
+    lines.extend(items)
+    return "\n".join(lines)
+
+
+def commit_and_push_client_target(
+    target_repo: Path,
+    branch: str | None,
+    remote: str,
+    commit_message: str,
+    author_name: str,
+    author_email: str,
+    dry_run: bool,
+) -> None:
+    if not (target_repo / ".git").exists():
+        fail(f"{target_repo} is not a git repository")
+
+    active_branch = branch or "test"
+    ensure_remote(target_repo, remote)
+    if not dry_run:
+        ensure_branch(target_repo, active_branch, "if_sport_ui")
+
+    log(f"pulling latest if_sport_ui branch: {remote}/{active_branch}")
+    run(["git", "pull", "--ff-only", remote, active_branch], cwd=target_repo, dry_run=dry_run)
+
+    if has_worktree_changes(target_repo):
+        if not commit_message:
+            commit_message = build_client_direct_commit_message(target_repo)
+            log("generated client commit message from local if_sport_ui changes:")
+            print(commit_message)
+
+        run(["git", "add", "-A"], cwd=target_repo, dry_run=dry_run)
+        commit_squashed_changes(target_repo, commit_message, author_name, author_email, dry_run)
+    else:
+        log("no local if_sport_ui changes to commit; pushing current branch anyway.")
+
+    push_sport_branch(target_repo, remote, active_branch, dry_run)
+
+
 def sync_ty_client_to_if_sport_ui(
     source_repo: Path,
     target_repo: Path,
@@ -526,7 +571,17 @@ def sync_ty_client_to_if_sport_ui(
     dry_run: bool,
 ) -> None:
     if not (source_repo / ".git").exists():
-        fail(f"{source_repo} is not a git repository")
+        log(f"client source repo is not available; publishing if_sport_ui directly: {target_repo}")
+        commit_and_push_client_target(
+            target_repo,
+            branch,
+            remote,
+            commit_message,
+            author_name,
+            author_email,
+            dry_run,
+        )
+        return
     if not (target_repo / ".git").exists():
         fail(f"{target_repo} is not a git repository")
     if shutil.which("rsync") is None:
