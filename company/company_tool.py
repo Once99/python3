@@ -57,6 +57,7 @@ GIT_TIMEOUT = 90
 MAX_WORKERS = 6
 
 HEADERS = {
+    "User-Agent": "Mozilla/5.0",
     "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
     "Pragma": "no-cache",
     "Expires": "0",
