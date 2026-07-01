@@ -137,8 +137,6 @@ APK_TARGETS = {
         urls=(
             "https://fujkou.com:12828/Android/apk/flychat/flychat_release.apk",
             "https://fujkou.net:12828/Android/apk/flychat/flychat_release.apk",
-            "https://feiyu-02.equgou.com/Android/apk/flychat/flychat_release.apk",
-            "https://feiyu-03.equgou.com/Android/apk/flychat/flychat_release.apk",
         ),
         push_tag=True,
         update_when_unchanged=True,
