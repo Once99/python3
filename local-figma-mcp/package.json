@@ -1,0 +1,21 @@
+{
+  "name": "local-figma-mcp",
+  "version": "1.0.0",
+  "description": "Local stdio MCP server for read-only Figma API access.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "build": "tsc --noEmit",
+    "inspect": "npx @modelcontextprotocol/inspector npm run start"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.13.3",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
