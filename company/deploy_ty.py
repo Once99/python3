@@ -29,7 +29,9 @@ DEFAULT_REPORT_AUTHOR = "Ayea"
 DEFAULT_REPORT_OUTPUT_DIR = Path(__file__).resolve().parents[1] / "reports"
 DEFAULT_JENKINS = "https://jenkins.helpom.com/"
 DEFAULT_JOB = "system-ui"
-DEFAULT_CLIENT_JOB = "if-sport-ui"
+DEFAULT_SPORT_JOB = "if-sport-ui"
+DEFAULT_ADMIN_JOB = "if-admin-ui"
+DEFAULT_CLIENT_JOB = DEFAULT_SPORT_JOB
 DEFAULT_VPN_APPS = ["OpenVPN Connect", "OpenVPN"]
 DEFAULT_VPN_WAIT_HOST = "git.helpom.com"
 DEFAULT_VPN_WAIT_PORT = 80
@@ -45,8 +47,11 @@ DEFAULT_CLIENT_SYNC_EXCLUDE_PATHS = [
     "docs/",
 ]
 DEFAULT_CLIENT_SOURCE_REPO = Path("/Users/oncechen/IdeaProjects/ty_client_test")
-DEFAULT_CLIENT_TARGET_REPO = Path("/Users/oncechen/IdeaProjects/if_sport_ui")
-DEFAULT_CLIENT_REMOTE = "origin"
+DEFAULT_SPORT_TARGET_REPO = Path("/Users/oncechen/IdeaProjects/if_sport_ui")
+DEFAULT_ADMIN_TARGET_REPO = Path("/Users/oncechen/IdeaProjects/if_admin_ui")
+DEFAULT_CLIENT_TARGET_REPO = DEFAULT_SPORT_TARGET_REPO
+DEFAULT_FRONTEND_REMOTE = "origin"
+DEFAULT_CLIENT_REMOTE = DEFAULT_FRONTEND_REMOTE
 
 
 def log(message: str) -> None:
@@ -515,15 +520,54 @@ def build_client_sync_commit_message(source_repo: Path, target_repo: Path) -> st
     return "\n".join(lines)
 
 
-def build_client_direct_commit_message(target_repo: Path) -> str:
+def build_frontend_direct_commit_message(target_repo: Path, fallback_message: str) -> str:
     files = changed_target_files(target_repo)
     items = summarize_client_work([], files)
     if not items:
-        return "同步 if_sport_ui 客户端更新"
+        return fallback_message
     title_items = "、".join(items[:2])
     lines = [title_items, ""]
     lines.extend(items)
     return "\n".join(lines)
+
+
+def build_client_direct_commit_message(target_repo: Path) -> str:
+    return build_frontend_direct_commit_message(target_repo, "同步 if_sport_ui 客户端更新")
+
+
+def commit_and_push_frontend_target(
+    target_repo: Path,
+    branch: str | None,
+    remote: str,
+    commit_message: str,
+    author_name: str,
+    author_email: str,
+    dry_run: bool,
+    repo_label: str,
+) -> None:
+    if not (target_repo / ".git").exists():
+        fail(f"{target_repo} is not a git repository")
+
+    active_branch = branch or "test"
+    ensure_remote(target_repo, remote)
+    if not dry_run:
+        ensure_branch(target_repo, active_branch, repo_label)
+
+    log(f"pulling latest {repo_label} branch: {remote}/{active_branch}")
+    run(["git", "pull", "--ff-only", remote, active_branch], cwd=target_repo, dry_run=dry_run)
+
+    if has_worktree_changes(target_repo):
+        if not commit_message:
+            commit_message = build_frontend_direct_commit_message(target_repo, f"同步 {repo_label} 前端更新")
+            log(f"generated commit message from local {repo_label} changes:")
+            print(commit_message)
+
+        run(["git", "add", "-A"], cwd=target_repo, dry_run=dry_run)
+        commit_squashed_changes(target_repo, commit_message, author_name, author_email, dry_run)
+    else:
+        log(f"no local {repo_label} changes to commit; pushing current branch anyway.")
+
+    push_sport_branch(target_repo, remote, active_branch, dry_run)
 
 
 def commit_and_push_client_target(
@@ -535,29 +579,16 @@ def commit_and_push_client_target(
     author_email: str,
     dry_run: bool,
 ) -> None:
-    if not (target_repo / ".git").exists():
-        fail(f"{target_repo} is not a git repository")
-
-    active_branch = branch or "test"
-    ensure_remote(target_repo, remote)
-    if not dry_run:
-        ensure_branch(target_repo, active_branch, "if_sport_ui")
-
-    log(f"pulling latest if_sport_ui branch: {remote}/{active_branch}")
-    run(["git", "pull", "--ff-only", remote, active_branch], cwd=target_repo, dry_run=dry_run)
-
-    if has_worktree_changes(target_repo):
-        if not commit_message:
-            commit_message = build_client_direct_commit_message(target_repo)
-            log("generated client commit message from local if_sport_ui changes:")
-            print(commit_message)
-
-        run(["git", "add", "-A"], cwd=target_repo, dry_run=dry_run)
-        commit_squashed_changes(target_repo, commit_message, author_name, author_email, dry_run)
-    else:
-        log("no local if_sport_ui changes to commit; pushing current branch anyway.")
-
-    push_sport_branch(target_repo, remote, active_branch, dry_run)
+    commit_and_push_frontend_target(
+        target_repo,
+        branch,
+        remote,
+        commit_message,
+        author_name,
+        author_email,
+        dry_run,
+        "if_sport_ui",
+    )
 
 
 def sync_ty_client_to_if_sport_ui(
@@ -1258,14 +1289,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "command",
         nargs="?",
-        choices=["deploy", "sync", "report"],
-        help="Optional positional mode. Example: deploy_ty.py sync client",
+        choices=["deploy", "sync", "report", "sport", "admin", "all"],
+        help="Optional positional mode or sync target. Examples: deploy_ty.py sync sport, deploy_ty.py admin",
     )
     parser.add_argument(
         "target",
         nargs="?",
-        choices=["sport", "client", "all"],
-        help="Optional sync target. Example: deploy_ty.py sync client",
+        choices=["sport", "admin", "all"],
+        help="Optional sync target. Example: deploy_ty.py sync sport",
     )
     parser.add_argument("--repo", type=Path, default=Path(os.environ.get("SPORT_REPO", DEFAULT_REPO)))
     parser.add_argument("--remote", default=os.environ.get("SPORT_REMOTE", "origin"))
@@ -1280,10 +1311,23 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sport-push-remote", default=os.environ.get("SPORT_PUSH_REMOTE", DEFAULT_SPORT_PUSH_REMOTE))
     parser.add_argument(
         "--sync-target",
-        choices=["sport", "client", "all"],
+        choices=["sport", "admin", "all"],
         default=os.environ.get("SPORT_SYNC_TARGET", "sport"),
-        help="sync target: sport = ty_sport -> sport/system-ui; client = ty_client_test -> if_sport_ui; all = sport then client",
+        help="sync target: sport = if_sport_ui; admin = if_admin_ui; all = admin then sport",
     )
+    parser.add_argument(
+        "--sport-target-repo",
+        type=Path,
+        default=Path(os.environ.get("IF_SPORT_UI_REPO", DEFAULT_SPORT_TARGET_REPO)),
+        help="Target repo for sync sport. Default: if_sport_ui.",
+    )
+    parser.add_argument(
+        "--admin-target-repo",
+        type=Path,
+        default=Path(os.environ.get("IF_ADMIN_UI_REPO", DEFAULT_ADMIN_TARGET_REPO)),
+        help="Target repo for sync admin. Default: if_admin_ui.",
+    )
+    parser.add_argument("--frontend-remote", default=os.environ.get("FRONTEND_REMOTE", DEFAULT_FRONTEND_REMOTE))
     parser.add_argument(
         "--client-source-repo",
         type=Path,
@@ -1313,6 +1357,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--vpn-timeout", type=int, default=int(os.environ.get("VPN_TIMEOUT", "120")))
     parser.add_argument("--jenkins-url", default=os.environ.get("JENKINS_URL", DEFAULT_JENKINS))
     parser.add_argument("--job", default=os.environ.get("JENKINS_JOB", DEFAULT_JOB))
+    parser.add_argument("--sport-job", default=os.environ.get("JENKINS_SPORT_JOB", DEFAULT_SPORT_JOB))
+    parser.add_argument("--admin-job", default=os.environ.get("JENKINS_ADMIN_JOB", DEFAULT_ADMIN_JOB))
     parser.add_argument("--job-url", default=os.environ.get("JENKINS_JOB_URL"))
     parser.add_argument(
         "--trigger",
@@ -1337,7 +1383,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--report-stdout", action="store_true", help="Print report to stdout instead of writing a file.")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
-    if args.command:
+    if args.command in {"sport", "admin", "all"}:
+        args.mode = "sync"
+        args.sync_target = args.command
+    elif args.command:
         args.mode = args.command
     if args.target:
         args.sync_target = args.target
@@ -1348,7 +1397,7 @@ def choose_mode(mode: str) -> str:
     if mode != "prompt":
         return mode
     try:
-        value = input("部署模式：直接按 Enter=开启 CI/CD 部署；输入 sync=同步 ty_sport 到 sport、push 后部署；输入 report=生成 Ayea 工作内容总结：").strip()
+        value = input("部署模式：直接按 Enter=开启 CI/CD 部署；输入 sync=同步前端仓库并部署；输入 report=生成 Ayea 工作内容总结：").strip()
     except EOFError:
         value = ""
     if not value:
@@ -1364,7 +1413,7 @@ def main() -> None:
     mode = choose_mode(args.mode)
 
     if mode == "report":
-        report_targets = ["sport", "client"] if args.sync_target == "all" else [args.sync_target]
+        report_targets = ["admin", "sport"] if args.sync_target == "all" else [args.sync_target]
         sport_report_repo = args.report_repo or DEFAULT_REPORT_REPO
         generate_interface_progress_report(
             report_targets,
@@ -1377,17 +1426,21 @@ def main() -> None:
         )
         return
 
-    sync_targets = ["sport", "client"] if args.sync_target == "all" else [args.sync_target]
+    sync_targets = ["admin", "sport"] if args.sync_target == "all" else [args.sync_target]
     if args.job_url:
         target_jobs = [job_url(args.jenkins_url, args.job, args.job_url)]
     elif mode == "sync":
         target_jobs = []
+        if "admin" in sync_targets:
+            target_jobs.append(job_url(args.jenkins_url, args.admin_job, None))
         if "sport" in sync_targets:
-            target_jobs.append(job_url(args.jenkins_url, args.job, None))
-        if "client" in sync_targets:
-            target_jobs.append(job_url(args.jenkins_url, DEFAULT_CLIENT_JOB, None))
+            target_jobs.append(job_url(args.jenkins_url, args.sport_job, None))
     else:
-        target_jobs = [job_url(args.jenkins_url, args.job, None)]
+        target_jobs = []
+        if "admin" in sync_targets:
+            target_jobs.append(job_url(args.jenkins_url, args.admin_job, None))
+        if "sport" in sync_targets:
+            target_jobs.append(job_url(args.jenkins_url, args.sport_job, None))
 
     if not args.no_vpn:
         ensure_vpn_ready(
@@ -1398,31 +1451,28 @@ def main() -> None:
             args.dry_run,
         )
 
-    if mode == "sync" and "sport" in sync_targets:
-        pull_ty_sport_worktree((args.report_repo or DEFAULT_REPORT_REPO).expanduser(), args.branch, args.dry_run)
-        commit_message = resolve_sync_commit_message(args)
-        sync_ty_sport_to_sport(
-            args.repo.expanduser(),
-            (args.report_repo or DEFAULT_REPORT_REPO).expanduser(),
+    if mode == "sync" and "admin" in sync_targets:
+        commit_and_push_frontend_target(
+            args.admin_target_repo.expanduser(),
             args.branch,
-            args.ty_sport_remote,
-            args.sport_push_remote,
-            commit_message,
-            args.sync_author_name,
-            args.sync_author_email,
-            args.dry_run,
-        )
-
-    if mode == "sync" and "client" in sync_targets:
-        sync_ty_client_to_if_sport_ui(
-            args.client_source_repo.expanduser(),
-            args.client_target_repo.expanduser(),
-            args.branch,
-            args.client_remote,
+            args.frontend_remote,
             args.commit_message,
             args.sync_author_name,
             args.sync_author_email,
             args.dry_run,
+            "if_admin_ui",
+        )
+
+    if mode == "sync" and "sport" in sync_targets:
+        commit_and_push_frontend_target(
+            args.sport_target_repo.expanduser(),
+            args.branch,
+            args.frontend_remote,
+            args.commit_message,
+            args.sync_author_name,
+            args.sync_author_email,
+            args.dry_run,
+            "if_sport_ui",
         )
 
     if mode != "sync" and not args.no_pull:
