@@ -151,7 +151,7 @@ APK_TARGETS = {
         repo2=Path("/Users/oncechen/IdeaProjects/site-dolphin"),
         apk_name="94chat.apk",
         urls=("https://94chat-3.equgou.com/Android/apk/94chat.apk",),
-        push_tag=False,
+        push_tag=True,
         update_when_unchanged=True,
         asset_version_files=("index.html", "agreement.html", "support.html"),
     ),
