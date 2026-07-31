@@ -14,7 +14,7 @@ REPO_PATH_2 = "/Applications/XAMPP/xamppfiles/htdocs/site-dolphin"
 APK_NAME = "94chat.apk"
 
 URLS = [
-    "https://94chat-2.equgou.com/Android/apk/94chat.apk"
+    "https://94chat-3.equgou.com/Android/apk/94chat.apk"
 ]
 
 # 关闭 insecure warning
