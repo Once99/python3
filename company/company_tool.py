@@ -297,7 +297,7 @@ def commit_tracked_changes(repo_path: Path, target_name: str) -> bool:
         log(f"ℹ️ {repo_path} 没有可提交的已跟踪修改")
         return False
 
-    message = f"{datetime.now():%Y-%m-%d} update {target_name} site"
+    message = f"{datetime.now():%Y-%m-%d} 更新 {target_name} 站点"
     run_cmd(repo_path, ["git", "commit", "-m", message])
     log(f"✅ {repo_path} 已提交：{message}")
     return True
@@ -323,7 +323,7 @@ def git_pull_secondary_clone(repo_path: Path, target_name: str) -> None:
     if has_tracked_changes(repo_path):
         status = run_cmd(repo_path, ["git", "status", "--short"], check=False)
         log(f"⚠️ {repo_path} 是同远端预览目录，检测到本地修改，先 stash 再 pull：\n{status}")
-        message = f"auto backup before {target_name} pull {datetime.now():%Y%m%d%H%M%S}"
+        message = f"{target_name} 拉取前自动备份 {datetime.now():%Y%m%d%H%M%S}"
         run_cmd(repo_path, ["git", "stash", "push", "-m", message])
 
     git_pull_safe(repo_path)
@@ -847,7 +847,7 @@ def git_commit_push(repo_path: Path, files_to_add: list[str], version: str) -> b
     if not repo_has_staged_changes(repo_path):
         log(f"⚠️ {repo_path} 无变更，跳过提交")
         return False
-    message = f"{datetime.now():%Y-%m-%d} update apk {version}"
+    message = f"{datetime.now():%Y-%m-%d} 更新 APK {version}"
     run_cmd(repo_path, ["git", "commit", "-m", message])
     run_cmd(repo_path, ["git", "push"])
     log(f"✅ {repo_path} push 完成：{message}")
